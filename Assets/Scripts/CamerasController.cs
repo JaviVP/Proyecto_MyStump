@@ -95,6 +95,13 @@ public class CamerasController : MonoBehaviour
         ActivateCamera(mainCamera);
     }
 
+    public void ActivateCenital()
+    {
+
+        ActivateCamera(topDownCamera);
+        isTopDownActive = true;
+    }
+
     public CinemachineCamera GetActiveCamera()
     {
         return activeCamera;
