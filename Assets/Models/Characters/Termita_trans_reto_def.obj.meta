@@ -3,7 +3,17 @@ guid: 08ac7651e88da4449a17af768ea6b2ab
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: termita_retopolo_polySurface44polySurface46Mat
+    second: {fileID: 2100000, guid: 97a06bb1ada01d54b96efb56de4d1e70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: termita_retopolo_polySurface45polySurface44Mat
+    second: {fileID: 2100000, guid: 54f480fb67c35e44ca80abbdbc8e4249, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
