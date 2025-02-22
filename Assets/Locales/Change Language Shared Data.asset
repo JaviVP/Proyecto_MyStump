@@ -20,15 +20,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5940874571776
-    m_Key: New Entry 1
+    m_Key: Music
     m_Metadata:
       m_Items: []
   - m_Id: 6167450873856
-    m_Key: New Entry
+    m_Key: English
     m_Metadata:
       m_Items: []
   - m_Id: 6300062183424
-    m_Key: New Entry 2
+    m_Key: MainMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504807301672960
+    m_Key: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 505323226230784
+    m_Key: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 510310450819072
+    m_Key: New Entry
     m_Metadata:
       m_Items: []
   m_Metadata:

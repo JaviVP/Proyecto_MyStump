@@ -22,6 +22,26 @@ MonoBehaviour:
     m_Localized: Settings
     m_Metadata:
       m_Items: []
+  - m_Id: 5940874571776
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6167450873856
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6300062183424
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504807301672960
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 505323226230784
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
