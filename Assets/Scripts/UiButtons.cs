@@ -13,22 +13,29 @@ public class UiButtons : MonoBehaviour
     public void PlayButton()
     {
 
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
 
     }
     public void SettingsButton()
     {
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
 
     }
     public void CreditsButon()
     {
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
 
     }
     public void ReturnMenuButton()
+    {
+
+        SceneManager.LoadScene(1);
+
+    }
+
+    public void LoadHub()
     {
 
         SceneManager.LoadScene(1);
@@ -48,4 +55,6 @@ public class UiButtons : MonoBehaviour
         Time.timeScale = 1.0f;
 
     }
+
+
 }

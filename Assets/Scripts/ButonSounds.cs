@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ButonSounds : MonoBehaviour
 {
-    public int soundID = 1; // Por defecto usa el primer sonido
+    [SerializeField] private int soundID = 1; // Por defecto usa el primer sonido
 
     void Start()
     {
