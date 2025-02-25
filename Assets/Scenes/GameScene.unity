@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 578215141}
   - component: {fileID: 578215140}
   - component: {fileID: 578215139}
+  - component: {fileID: 578215142}
   m_Layer: 5
   m_Name: CloseSettings
   m_TagString: Untagged
@@ -883,6 +884,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578215137}
   m_CullTransparentMesh: 1
+--- !u!114 &578215142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578215137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134ff3561c6049e41a23a656cbf06d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundID: 2
 --- !u!1 &629744589
 GameObject:
   m_ObjectHideFlags: 0
@@ -3113,6 +3127,7 @@ MonoBehaviour:
   audioSource: {fileID: 2072765999}
   sound1: {fileID: 8300000, guid: 9cadb3b492bd5ed44ace0ad0a9b7e47c, type: 3}
   sound2: {fileID: 8300000, guid: e104d15d417848c4fafa7b52aa056921, type: 3}
+  backGroundMusic: {fileID: 8300000, guid: c00023450472f1142b56a80fe21a02fd, type: 3}
 --- !u!82 &2072765999
 AudioSource:
   m_ObjectHideFlags: 0

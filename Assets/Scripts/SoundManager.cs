@@ -1,12 +1,19 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    public AudioSource audioSource;
-    public AudioClip sound1;
-    public AudioClip sound2;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip sound1;
+    [SerializeField] private AudioClip sound2;
+    [SerializeField] private AudioClip backGroundMusic;
 
+    private void Start()
+    {
+        audioSource.clip = backGroundMusic;
+        audioSource.Play();
+    }
     void Awake()
     {
         if (instance == null)
