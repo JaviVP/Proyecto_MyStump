@@ -72,8 +72,8 @@ public class MainCamera : MonoBehaviour
                 Vector2 delta = touch.deltaPosition * moveSpeed;
 
                 Vector3 newPosition = transform.position;
-                newPosition.x += delta.x * 0.01f; // Invertido para que se mueva correctamente
-                newPosition.z += delta.y * 0.01f; // Invertido para que se mueva correctamente
+                newPosition.x -= delta.x * 0.01f;
+                newPosition.z -= delta.y * 0.01f; 
 
                 // Aplicar límites
                 newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
