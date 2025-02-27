@@ -32,6 +32,20 @@ public class HexGrid : MonoBehaviour
             }
         }
     }
+    public void ClearHexGrid()
+    {
+        for (int q = -gridRadius; q <= gridRadius; q++)
+        {
+            for (int r = -gridRadius; r <= gridRadius; r++)
+            {
+                if (Mathf.Abs(q + r) > gridRadius) continue;
+
+                HexTile hex = GetHexTile(new Vector2Int(q, r));
+                hex.SetState(HexState.Neutral);
+                
+            }
+        }
+    }
 
     private Vector3 AxialToWorld(int q, int r)
     {

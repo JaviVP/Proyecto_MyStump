@@ -3,6 +3,9 @@ using UnityEngine;
 public class HexGameManager : MonoBehaviour
 {
     private Camera mainCamera;
+    [SerializeField]
+    private HexGrid grid;
+
 
     void Start()
     {
@@ -19,6 +22,7 @@ public class HexGameManager : MonoBehaviour
                 HexTile clickedTile = hit.collider.GetComponent<HexTile>();
                 if (clickedTile != null)
                 {
+                    grid.ClearHexGrid();
                     clickedTile.SetState(HexState.Ants); // Debug: Capture for Ants
                 }
             }
