@@ -10,6 +10,7 @@ public class UiButtons : MonoBehaviour
     [SerializeField] private GameObject resetText;
     private bool touchEnabled = true;
 
+    private Button[] buttons;
     public static UiButtons Instance { get; private set; }
     private void Awake()
     {
@@ -25,6 +26,17 @@ public class UiButtons : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1.0f;
+
+        buttons = FindObjectsOfType<Button>();
+
+        foreach (Button button in buttons)
+        {
+            // Verificar si el botón ya tiene el script, si no, añadirlo
+            if (button.GetComponent<ButtonPressEffect>() == null)
+            {
+                button.gameObject.AddComponent<ButtonPressEffect>();
+            }
+        }
     }
     public void PlayButton()
     {
