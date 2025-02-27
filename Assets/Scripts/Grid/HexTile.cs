@@ -35,4 +35,14 @@ public class HexTile : MonoBehaviour
                 break;
         }
     }
+
+    public void HighlightTile(Color highlightColor)
+    {
+        tileRenderer.material.color = highlightColor;
+    }
+
+    public void ResetTileColor()
+    {
+        UpdateTileAppearance(); // Restore default color based on state
+    }
 }

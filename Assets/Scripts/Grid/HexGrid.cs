@@ -78,4 +78,18 @@ public class HexGrid : MonoBehaviour
     {
         return hexMap.TryGetValue(coords, out HexTile tile) ? tile : null;
     }
+
+    public List<HexTile> GetHexLine(Vector2Int startPos, Vector2Int direction)
+    {
+        List<HexTile> lineTiles = new List<HexTile>();
+        Vector2Int currentPos = startPos;
+
+        while (hexMap.ContainsKey(currentPos + direction))
+        {
+            currentPos += direction;
+            if (hexMap[currentPos].state != HexState.Neutral) break; // Stop at an obstacle
+            lineTiles.Add(hexMap[currentPos]);
+        }
+        return lineTiles;
+    }
 }
