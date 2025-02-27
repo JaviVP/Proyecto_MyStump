@@ -12,11 +12,25 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private float displayTime;  // Tiempo que los créditos se mostrarán
     [SerializeField] private float moveSpeed;  // Velocidad de desplazamiento hacia arriba
     [SerializeField] private float fastMoveSpeedMultiplier = 2f;  // Factor multiplicador para mover más rápido cuando se mantiene presionado
+    [SerializeField] private float heightOffset;  // Factor multiplicador para mover más rápido cuando se mantiene presionado
 
     private CanvasGroup creditsCanvasGroup;
     private RectTransform creditsRectTransform;
     private bool isTouching = false;  // Para controlar si el usuario está manteniendo presionado
 
+    public static CreditsManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
         creditsCanvasGroup = creditsPanel.GetComponent<CanvasGroup>();
@@ -46,9 +60,10 @@ public class CreditsManager : MonoBehaviour
         // Ocultar el menú de ajustes
         settingsMenu.SetActive(false);
 
+        
         // Activar el panel de créditos
         creditsPanel.SetActive(true);
-
+        
         // Restablecer la posición Y del panel de créditos fuera de la pantalla
         creditsRectTransform.anchoredPosition = new Vector2(creditsRectTransform.anchoredPosition.x, -Screen.height);
 
@@ -99,13 +114,19 @@ public class CreditsManager : MonoBehaviour
             float currentMoveSpeed = isTouching ? moveSpeed * fastMoveSpeedMultiplier : moveSpeed;
             creditsRectTransform.anchoredPosition += new Vector2(0, currentMoveSpeed * Time.deltaTime);
 
+            // Comprobar si los créditos han salido completamente de la pantalla
+            if (creditsRectTransform.anchoredPosition.y > Screen.height + heightOffset)
+            {
+                creditsPanel.SetActive(false); // Desactivar el panel de créditos
+                settingsMenu.SetActive(true);  // Activar el menú de ajustes
+                yield break;  // Salir de la coroutine inmediatamente
+            }
+
             yield return null;
         }
 
-        // Al terminar el fade-out, desactivar el panel de créditos
+        // Si no salieron de la pantalla antes, realizar el fade-out completo
         creditsPanel.SetActive(false);
-
-        // Reactivar el menú de ajustes
         settingsMenu.SetActive(true);
     }
 }
