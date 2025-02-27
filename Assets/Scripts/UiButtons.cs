@@ -67,6 +67,7 @@ public class UiButtons : MonoBehaviour
         touchEnabled = true;
     }
 
+
     public void GameFinish()
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
