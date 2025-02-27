@@ -10,6 +10,10 @@ public class HexGrid : MonoBehaviour
     private const float HEX_WIDTH = 1.732f; // sqrt(3)
     private const float HEX_HEIGHT = 2f;
 
+
+    [SerializeField]
+    private Vector2[] terraMalla;
+
     void Start()
     {
         GenerateHexGrid();
@@ -45,6 +49,22 @@ public class HexGrid : MonoBehaviour
                 
             }
         }
+    }
+
+    public void CreateTerraMallaProve()  //Testing
+    {
+
+           for (int i=0; i< terraMalla.Length; i++)
+           {
+                HexTile hex = GetHexTile(new Vector2Int(Mathf.FloorToInt(terraMalla[i].x), Mathf.FloorToInt(terraMalla[i].y)));
+                if (hex!=null)
+                {
+                    hex.SetState(HexState.Ants);
+                }
+                
+            }
+
+
     }
 
     private Vector3 AxialToWorld(int q, int r)
