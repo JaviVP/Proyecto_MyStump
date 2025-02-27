@@ -24,10 +24,15 @@ public class MainCamera : MonoBehaviour
 
     void Update()
     {
-        MoveCameraPC();   // Movimiento con mouse
-        MoveCameraTouch(); // Movimiento con táctil
-        ZoomCameraTouch();
+        // Movimiento con mouse
         ZoomCamera();
+        MoveCameraPC();
+        // Movimiento con táctil
+
+        if (UiButtons.Instance.TouchesEnabled() == true) {
+            MoveCameraTouch();
+            ZoomCameraTouch();
+        }
     }
 
     void MoveCameraPC()

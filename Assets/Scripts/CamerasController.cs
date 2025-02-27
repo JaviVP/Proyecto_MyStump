@@ -97,14 +97,12 @@ public class CamerasController : MonoBehaviour
 
     public void ActivateCenital()
     {
-
         ActivateCamera(topDownCamera);
         isTopDownActive = true;
     }
 
     public void ActivatePerspective()
     {
-
         ActivateCamera(mainCamera);
         isTopDownActive = false;
     }
