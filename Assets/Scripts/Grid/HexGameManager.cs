@@ -11,6 +11,7 @@ public class HexGameManager : MonoBehaviour
     {
         mainCamera = Camera.main;
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+        hexGrid.CreateTerraMallaProve(); 
     }
 
     void Update()
