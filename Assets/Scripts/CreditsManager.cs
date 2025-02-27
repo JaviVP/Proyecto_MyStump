@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System.Collections; 
+using System.Collections;
 
 public class CreditsManager : MonoBehaviour
 {
@@ -11,15 +11,34 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private float fadeOutDuration;  // Duración del fade-out
     [SerializeField] private float displayTime;  // Tiempo que los créditos se mostrarán
     [SerializeField] private float moveSpeed;  // Velocidad de desplazamiento hacia arriba
+    [SerializeField] private float fastMoveSpeedMultiplier = 2f;  // Factor multiplicador para mover más rápido cuando se mantiene presionado
 
     private CanvasGroup creditsCanvasGroup;
     private RectTransform creditsRectTransform;
+    private bool isTouching = false;  // Para controlar si el usuario está manteniendo presionado
 
     void Start()
     {
         creditsCanvasGroup = creditsPanel.GetComponent<CanvasGroup>();
         creditsRectTransform = creditsPanel.GetComponent<RectTransform>();
         creditsPanel.SetActive(false);  // Asegúrate de que el panel de créditos esté oculto al inicio
+    }
+
+    void Update()
+    {
+        // Detectar si el jugador mantiene presionada la pantalla
+        if (Input.touchCount > 0)  // Para dispositivos táctiles
+        {
+            isTouching = true;
+        }
+        else if (Input.GetMouseButton(0))  // Para PC (clic del ratón)
+        {
+            isTouching = true;
+        }
+        else
+        {
+            isTouching = false;
+        }
     }
 
     public void ShowCredits()
@@ -50,8 +69,9 @@ public class CreditsManager : MonoBehaviour
             // Fade-in (aumentando alpha de 0 a 1)
             creditsCanvasGroup.alpha = Mathf.Clamp01(elapsedTime / fadeInDuration);
 
-            // Mover los créditos hacia arriba
-            creditsRectTransform.anchoredPosition += new Vector2(0, moveSpeed * Time.deltaTime);
+            // Mover los créditos hacia arriba, ajustando la velocidad si se está tocando la pantalla
+            float currentMoveSpeed = isTouching ? moveSpeed * fastMoveSpeedMultiplier : moveSpeed;
+            creditsRectTransform.anchoredPosition += new Vector2(0, currentMoveSpeed * Time.deltaTime);
 
             yield return null;
         }
@@ -75,8 +95,9 @@ public class CreditsManager : MonoBehaviour
             // Fade-out (disminuyendo alpha de 1 a 0)
             creditsCanvasGroup.alpha = Mathf.Clamp01(1f - (elapsedTime / fadeOutDuration));
 
-            // Mover los créditos hacia arriba
-            creditsRectTransform.anchoredPosition += new Vector2(0, moveSpeed * Time.deltaTime);
+            // Mover los créditos hacia arriba, ajustando la velocidad si se está tocando la pantalla
+            float currentMoveSpeed = isTouching ? moveSpeed * fastMoveSpeedMultiplier : moveSpeed;
+            creditsRectTransform.anchoredPosition += new Vector2(0, currentMoveSpeed * Time.deltaTime);
 
             yield return null;
         }
