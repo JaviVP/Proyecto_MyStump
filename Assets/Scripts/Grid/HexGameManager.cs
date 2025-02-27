@@ -4,38 +4,13 @@ using System.Collections.Generic;
 public class HexGameManager : MonoBehaviour
 {
     private Camera mainCamera;
-<<<<<<< Updated upstream
-    [SerializeField]
-    private HexGrid grid;
-
-    public static HexGameManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-=======
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
->>>>>>> Stashed changes
 
     void Start()
     {
         mainCamera = Camera.main;
-<<<<<<< Updated upstream
-        grid.CreateTerraMallaProve();
-=======
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
->>>>>>> Stashed changes
     }
 
     void Update()
@@ -48,13 +23,8 @@ public class HexGameManager : MonoBehaviour
                 HexTile clickedTile = hit.collider.GetComponent<HexTile>();
                 if (clickedTile != null)
                 {
-<<<<<<< Updated upstream
-                    grid.ClearHexGrid();
-                    clickedTile.SetState(HexState.Ants); // Debug: Capture for Ants
-=======
                     ClearHighlights(); // Clear previous highlights
                     ShowHexLines(clickedTile);
->>>>>>> Stashed changes
                 }
             }
         }
