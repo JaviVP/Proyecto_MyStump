@@ -13,23 +13,56 @@ public class MainCamera : MonoBehaviour
     [SerializeField] private float minZ = -10f;       // Límite mínimo del eje Z
     [SerializeField] private float maxZ = 10f;        // Límite máximo del eje Z
 
+    private CinemachineBrain brain;   // Referencia a Cinemachine Brain
     private CinemachineCamera virtualCamera;
     private Vector2 lastTouchPosition;
     private bool isTouching = false;
 
+    // Nueva variable para bloquear las entradas táctiles durante la transición
+    private bool disableTouchInputDuringTransition = false;
+
+    public static MainCamera Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
+        brain = Camera.main.GetComponent<CinemachineBrain>();
         virtualCamera = GetComponent<CinemachineCamera>();
     }
 
     void Update()
     {
+        // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
+        if (brain.IsBlending)
+        {
+            disableTouchInputDuringTransition = true;
+        }
+        else
+        {
+            disableTouchInputDuringTransition = false;
+        }
+
+        // Si las entradas táctiles están bloqueadas, no procesamos el movimiento táctil
+        if (disableTouchInputDuringTransition)
+            return;
+
         // Movimiento con mouse
         ZoomCamera();
         MoveCameraPC();
-        // Movimiento con táctil
 
-        if (UiButtons.Instance.TouchesEnabled() == true) {
+        // Movimiento con táctil solo si está habilitado
+        if (UiButtons.Instance.TouchesEnabled() == true)
+        {
             MoveCameraTouch();
             ZoomCameraTouch();
         }
@@ -78,7 +111,7 @@ public class MainCamera : MonoBehaviour
 
                 Vector3 newPosition = transform.position;
                 newPosition.x -= delta.x * 0.01f;
-                newPosition.z -= delta.y * 0.01f; 
+                newPosition.z -= delta.y * 0.01f;
 
                 // Aplicar límites
                 newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
@@ -97,9 +130,6 @@ public class MainCamera : MonoBehaviour
 
     void ZoomCameraTouch()
     {
-        // Control del zoom con la rueda del ratón
-
-
         // Zoom en móviles con gesto de "pinza"
         if (Input.touchCount == 2)
         {
@@ -136,6 +166,14 @@ public class MainCamera : MonoBehaviour
             lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
             virtualCamera.Lens = lens;
         }
+
+    }
+
+   public void CameraTransitionCheck()
+    {
+
+
+
 
     }
 }
