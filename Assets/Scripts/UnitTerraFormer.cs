@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Runner : Unit
+public class UnitTerraFormer : Unit
 {
     public override void move()
     {

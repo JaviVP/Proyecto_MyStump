@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Panchulina : Unit
+public class UnitRunner : Unit
 {
     public override void move()
     {
