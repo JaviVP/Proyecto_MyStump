@@ -68,6 +68,8 @@ public class CamerasController : MonoBehaviour
         if (activeCamera == mainCamera && currentZoom == perspectiveThreshold && !isTopDownActive)
         {
             Debug.Log("Activo camara cenital");
+            mainCamera.transform.position = initialMainPosition;
+            mainCamera.transform.rotation = initialMainRotation;
             mainCamera.Lens.FieldOfView = 60.0f;
             ActivateCamera(topDownCamera);
             isTopDownActive = true;
@@ -75,6 +77,8 @@ public class CamerasController : MonoBehaviour
         }
         else if (activeCamera == topDownCamera && currentZoom == topDownThreshold && isTopDownActive)
         {
+            topDownCamera.transform.position = initialTopPosition;
+            topDownCamera.transform.rotation = initialTopRotation;
             topDownCamera.Lens.FieldOfView = 28.0f;
             ActivateCamera(mainCamera);
             isTopDownActive = false;

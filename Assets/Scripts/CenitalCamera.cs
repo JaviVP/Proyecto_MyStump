@@ -8,15 +8,32 @@ public class CamaraCenital : MonoBehaviour
     [SerializeField] private float maxZoom = 40f;    // Zoom máximo
 
     private CinemachineCamera TopcinemachineCamera;  // Referencia a la cámara de Cinemachine
+    private CinemachineBrain brain;   // Referencia a Cinemachine Brain
 
+    private bool disableTouchInputDuringTransition = false;
     void Start()
     {
+        brain = Camera.main.GetComponent<CinemachineBrain>();
         TopcinemachineCamera = GetComponent<CinemachineCamera>(); // Obtener la cámara Cinemachine
     }
 
     void Update()
     {
-        if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera)
+        // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
+        if (brain.IsBlending)
+        {
+            disableTouchInputDuringTransition = true;
+        }
+        else
+        {
+            disableTouchInputDuringTransition = false;
+        }
+
+        // Si las entradas táctiles están bloqueadas, no procesamos el movimiento táctil
+        if (disableTouchInputDuringTransition)
+            return;
+
+        if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera && UiButtons.Instance.TouchesEnabled() == true)
         {
             ZoomCamera();
         }

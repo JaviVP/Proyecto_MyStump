@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.02
 --- !u!222 &911046445
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1753,6 +1753,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 0}
+  wonText: {fileID: 0}
+  resetText: {fileID: 0}
 --- !u!4 &2043520951
 Transform:
   m_ObjectHideFlags: 0

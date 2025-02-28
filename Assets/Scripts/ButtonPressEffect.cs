@@ -6,8 +6,8 @@ using TMPro;
 public class ButtonPressEffect : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Color normalColor = Color.white;  // Color normal del texto
-    [SerializeField] private Color pressedColor = Color.red;   // Color del texto cuando está presionado
-             
+    [SerializeField] private Color pressedColor = new Color(231f / 255f, 203f / 255f, 51f / 255f); // Color del texto cuando está presionado
+
 
     private TextMeshProUGUI buttonText;   // Referencia al texto del botón
 

@@ -169,11 +169,5 @@ public class MainCamera : MonoBehaviour
 
     }
 
-   public void CameraTransitionCheck()
-    {
-
-
-
-
-    }
+  
 }
