@@ -20,6 +20,7 @@ public class HexGameManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Screen.safeArea);
         // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
         if (brain.IsBlending)
         {
@@ -34,7 +35,7 @@ public class HexGameManager : MonoBehaviour
         if (disableTouchInputDuringTransition)
             return;
         //PC
-        // RaycastPC();
+        // RaycastPC(); ACTIVAR LA FUNCION TAMBIÉN
         //Tablet
         if (UiButtons.Instance.TouchesEnabled() == true)
         {
@@ -76,6 +77,7 @@ public class HexGameManager : MonoBehaviour
         highlightedTiles.Clear();
     }
 
+/*
     private void RaycastPC()
     {
         if (Input.GetMouseButtonDown(0))
@@ -93,6 +95,7 @@ public class HexGameManager : MonoBehaviour
         }
 
     }
+*/
 
     private void RaycastTablet()
     {
