@@ -16,6 +16,10 @@ public class HexGrid : MonoBehaviour
     private const float HEX_WIDTH = 1.732f; // sqrt(3)
     private const float HEX_HEIGHT = 2f;
 
+    [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
+    [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
+
+
 
 
     void Start()
@@ -36,7 +40,7 @@ public class HexGrid : MonoBehaviour
                 GameObject hexObj = Instantiate(hexPrefab, worldPos, Quaternion.identity, transform);
                 HexTile hexTile = hexObj.GetComponent<HexTile>();
                 hexTile.axialCoords = new Vector2Int(q, r);
-                Debug.Log(q+"-"+ r);
+                //Debug.Log(q+","+ r); //Coords
                 hexMap[new Vector2Int(q, r)] = hexTile;
                 units[new Vector2Int(q, r)] = null ;
             }
@@ -44,73 +48,26 @@ public class HexGrid : MonoBehaviour
     }
     public void GenerateUnits()
     {
+        foreach (UnitPlacement placement in antPlacements)
+        {
+            PlaceUnit(placement, HexState.Ants, unitsAntsPrefabs);
+        }
+        foreach (UnitPlacement placement in termitePlacements)
+        {
+            PlaceUnit(placement, HexState.Termites, unitsTermitePrefabs);
+        }
+    }
 
-        //Termites
-        Vector2Int vector2Int = new Vector2Int(1,3);
-        Unit unitTermiteRunner = new UnitRunner();
-        unitTermiteRunner.UnitRenderer = unitsTermitePrefabs[0];
-        unitTermiteRunner.AxialCoords = vector2Int;
-        unitTermiteRunner.UnitRenderer.transform.position= AxialToWorld(vector2Int.x,vector2Int.y);
-        units[vector2Int] = unitTermiteRunner;
-        HexTile hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Termites);
+    private void PlaceUnit(UnitPlacement placement, HexState team, GameObject[] unitPrefabs)
+    {
+        if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
 
+        GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], AxialToWorld(placement.position.x, placement.position.y), Quaternion.identity);
+        Unit unit = unitObj.GetComponent<Unit>();
+        unit.AxialCoords = placement.position;
 
-
-        vector2Int = new Vector2Int(-2, 3);
-        Unit unitTermitTerraformer = new UnitTerraFormer();
-        unitTermitTerraformer.UnitRenderer = unitsTermitePrefabs[1];
-        unitTermitTerraformer.AxialCoords = vector2Int;
-        unitTermitTerraformer.UnitRenderer.transform.position = AxialToWorld(vector2Int.x, vector2Int.y);
-        units[vector2Int] = unitTermitTerraformer;
-        hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Termites);
-
-
-        vector2Int = new Vector2Int(-1, 1);
-        Unit unitTermitPanchulina= new UnitPanchulina();
-        unitTermitPanchulina.UnitRenderer = unitsTermitePrefabs[2];
-        unitTermitPanchulina.AxialCoords = vector2Int;
-        unitTermitPanchulina.UnitRenderer.transform.position = AxialToWorld(vector2Int.x, vector2Int.y);
-        units[vector2Int] = unitTermitPanchulina;
-        hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Termites);
-
-        //Ants
-
-        vector2Int = new Vector2Int(0, 0);
-        Unit unitAntRunner = new UnitRunner();
-        unitAntRunner.UnitRenderer = unitsAntsPrefabs[0];
-        unitAntRunner.AxialCoords = vector2Int;
-        unitAntRunner.UnitRenderer.transform.position = AxialToWorld(vector2Int.x, vector2Int.y);
-        units[vector2Int] = unitAntRunner;
-        hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Ants);
-
-        vector2Int = new Vector2Int(-1, 2);
-        Unit unitAntTerraformer = new UnitTerraFormer();
-        unitAntTerraformer.UnitRenderer = unitsAntsPrefabs[1];
-        unitAntTerraformer.AxialCoords = vector2Int;
-        unitAntTerraformer.UnitRenderer.transform.position = AxialToWorld(vector2Int.x, vector2Int.y);
-        units[vector2Int] = unitAntTerraformer;
-        hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Ants);
-
-
-        vector2Int = new Vector2Int(-1, 1);
-        Unit unitAntPanchulina = new UnitPanchulina();
-        unitAntPanchulina.UnitRenderer = unitsAntsPrefabs[2];
-        unitAntPanchulina.AxialCoords = vector2Int;
-        unitAntPanchulina.UnitRenderer.transform.position = AxialToWorld(vector2Int.x, vector2Int.y);
-        units[vector2Int] = unitAntPanchulina;
-        hex = GetHexTile(vector2Int);
-        hex.SetState(HexState.Ants);
-
-
-
-
-
-
+        units[placement.position] = unit;
+        hexMap[placement.position].SetState(team);
     }
 
     private void Update()
@@ -147,6 +104,8 @@ public class HexGrid : MonoBehaviour
         }
     }
 
+
+    /*
     public void CreateTerraMallaProve()  //Testing
     {
 
@@ -170,9 +129,14 @@ public class HexGrid : MonoBehaviour
                 break;
             }
         }
-
+    
 
     }
+
+
+    */
+
+
 
     private Vector3 AxialToWorld(int q, int r)
     {

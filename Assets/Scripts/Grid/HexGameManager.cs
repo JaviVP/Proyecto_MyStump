@@ -15,12 +15,12 @@ public class HexGameManager : MonoBehaviour
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
-        hexGrid.CreateTerraMallaProve(); 
+        //hexGrid.CreateTerraMallaProve(); 
     }
 
     void Update()
     {
-        Debug.Log(Screen.safeArea);
+        //Debug.Log(Screen.safeArea);
         // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
         if (brain.IsBlending)
         {
