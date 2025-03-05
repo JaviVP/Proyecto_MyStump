@@ -6,8 +6,8 @@ public class CamerasController : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera mainCamera;       // Cámara principal del juego
     [SerializeField] private CinemachineCamera topDownCamera;    // Cámara cenital
-    [SerializeField] private float perspectiveThreshold = 65f;   // Umbral de zoom para activar la cenital
-    [SerializeField] private float topDownThreshold = 25f;       // Umbral para volver a la principal
+    [SerializeField] private float perspectiveThreshold;   // Umbral de zoom para activar la cenital
+    [SerializeField] private float topDownThreshold;       // Umbral para volver a la principal
 
     private CinemachineCamera activeCamera;
     private bool isTopDownActive = false;
@@ -79,7 +79,7 @@ public class CamerasController : MonoBehaviour
         {
             topDownCamera.transform.position = initialTopPosition;
             topDownCamera.transform.rotation = initialTopRotation;
-            topDownCamera.Lens.FieldOfView = 28.0f;
+            topDownCamera.Lens.FieldOfView = 60.0f;
             ActivateCamera(mainCamera);
             isTopDownActive = false;
           
@@ -94,7 +94,7 @@ public class CamerasController : MonoBehaviour
 
         topDownCamera.transform.position = initialTopPosition;
         topDownCamera.transform.rotation = initialTopRotation;
-        topDownCamera.Lens.FieldOfView = 28.0f;
+        topDownCamera.Lens.FieldOfView = 60.0f;
 
         ActivateCamera(mainCamera);
     }
