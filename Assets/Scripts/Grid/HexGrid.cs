@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -24,12 +24,16 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("HexGrid Start() is running...");
         GenerateHexGrid();
+        Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
         GenerateUnits();
     }
 
     private void GenerateHexGrid()
     {
+        Debug.Log("Generating Hex Grid...");
+
         for (int q = -gridRadius; q <= gridRadius; q++)
         {
             for (int r = -gridRadius; r <= gridRadius; r++)
@@ -39,13 +43,21 @@ public class HexGrid : MonoBehaviour
                 Vector3 worldPos = AxialToWorld(q, r);
                 GameObject hexObj = Instantiate(hexPrefab, worldPos, Quaternion.identity, transform);
                 HexTile hexTile = hexObj.GetComponent<HexTile>();
+
+                if (hexTile == null)
+                {
+                    Debug.LogError("❌ HexTile component is missing on instantiated prefab!");
+                    return;
+                }
+
                 hexTile.axialCoords = new Vector2Int(q, r);
-                //Debug.Log(q+","+ r); //Coords
                 hexMap[new Vector2Int(q, r)] = hexTile;
-                units[new Vector2Int(q, r)] = null ;
             }
         }
+
+        Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
     }
+
     public void GenerateUnits()
     {
         foreach (UnitPlacement placement in antPlacements)
@@ -137,8 +149,9 @@ public class HexGrid : MonoBehaviour
     */
 
 
+    
 
-    private Vector3 AxialToWorld(int q, int r)
+    public Vector3 AxialToWorld(int q, int r)
     {
         float x = HEX_WIDTH * (q + r / 2f);
         float z = HEX_HEIGHT * (r * 0.75f);
@@ -163,4 +176,129 @@ public class HexGrid : MonoBehaviour
         }
         return lineTiles;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    /// 
+    /// Some things for Debugger UI
+    /// 
+
+
+
+    // Find all the positions
+    public List<Vector2Int> GetAllHexPositions()
+    {
+        if (hexMap == null)
+        {
+            Debug.LogError("❌ HexMap is NULL! Check if GenerateHexGrid() runs.");
+            return new List<Vector2Int>();
+        }
+
+        Debug.Log("✅ HexGrid contains " + hexMap.Count + " hex tiles.");
+        return new List<Vector2Int>(hexMap.Keys);
+    }
+
+
+    // Find the existance of a tile
+    public bool HasTile(Vector2Int pos)
+    {
+        return hexMap.ContainsKey(pos);
+    }
+
+    //Set Units
+    public int GetNextUnitIndex(Vector2Int pos, HexState team)
+    {
+        if (!units.ContainsKey(pos) || units[pos] == null)
+            return 1; // Start with the first unit
+
+        int currentIndex = GetUnitIndex(units[pos]);
+        return (currentIndex % 3) + 1; // Cycle through 1 → 2 → 3 → 1
+    }
+
+
+    //Positions
+    public void SetUnitAt(Vector2Int pos, int unitIndex, HexState team)
+    {
+        if (!hexMap.ContainsKey(pos)) return;
+
+        // Remove existing unit if setting to neutral
+        if (unitIndex == 0)
+        {
+            if (units.ContainsKey(pos) && units[pos] != null)
+                Destroy(units[pos].gameObject);
+
+            units[pos] = null;
+            hexMap[pos].SetState(HexState.Neutral);
+            return;
+        }
+
+        GameObject prefab;
+        Unit newUnit;
+
+        // Select correct prefab and create the unit dynamically
+        if (team == HexState.Ants)
+        {
+            prefab = unitsAntsPrefabs[unitIndex - 1];
+        }
+        else
+        {
+            prefab = unitsTermitePrefabs[unitIndex - 1];
+        }
+
+        GameObject unitObj = Instantiate(prefab, AxialToWorld(pos.x, pos.y), Quaternion.identity);
+
+        // Manually add the correct unit script based on unitIndex
+        if (unitIndex == 1) newUnit = unitObj.AddComponent<UnitRunner>();
+        else if (unitIndex == 2) newUnit = unitObj.AddComponent<UnitTerraFormer>();
+        else newUnit = unitObj.AddComponent<UnitPanchulina>();
+
+        newUnit.AxialCoords = pos;
+        units[pos] = newUnit;
+        hexMap[pos].SetState(team);
+    }
+
+
+    //All Units
+    public Dictionary<Vector2Int, Unit> GetAllUnits()
+    {
+        return units;
+    }
+
+    public int GetUnitIndex(Unit unit)
+    {
+        if (unit == null) return 0; // No unit = Neutral
+
+        if (unit is UnitRunner) return 1;
+        if (unit is UnitTerraFormer) return 2;
+        if (unit is UnitPanchulina) return 3;
+
+        return 0; // Default to Neutral if unknown
+    }
+
+
+
+    public int GetUnitIndexFromColor(Color color)
+    {
+        Color[] antColors = { Color.red, new Color(0.8f, 0, 0), new Color(0.6f, 0, 0), Color.white };
+        Color[] termiteColors = { new Color(1, 0.5f, 0), new Color(0.8f, 0.4f, 0), new Color(0.6f, 0.3f, 0), Color.white };
+
+        for (int i = 0; i < antColors.Length; i++)
+        {
+            if (color == antColors[i]) return i;
+            if (color == termiteColors[i]) return i;
+        }
+        return -1; // Not found
+    }
+
+
+
 }
