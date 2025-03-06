@@ -26,9 +26,9 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("HexGrid Start() is running...");
+        //Debug.Log("HexGrid Start() is running...");
         GenerateHexGrid();
-        Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
+        //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
         GenerateUnits();
         //Testing
         TerraFormerTilesProves();
@@ -50,7 +50,7 @@ public class HexGrid : MonoBehaviour
 
     private void GenerateHexGrid()
     {
-        Debug.Log("Generating Hex Grid...");
+        //Debug.Log("Generating Hex Grid...");
 
         for (int q = -gridRadius; q <= gridRadius; q++)
         {
@@ -73,7 +73,7 @@ public class HexGrid : MonoBehaviour
             }
         }
 
-        Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
+        //Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
     }
 
     public List<HexTile> GetHexTileTerraFormar(Vector2Int coords)
@@ -221,6 +221,16 @@ public class HexGrid : MonoBehaviour
 
         return inRange;
     }
+
+    //Eliminate unit after movement
+    public void UpdateUnitPosition(Vector2Int oldPos, Vector2Int newPos, Unit unit)
+    {
+        if (units.ContainsKey(oldPos))
+            units[oldPos] = null; // Remove unit from old position
+
+        units[newPos] = unit; // Place unit in new position
+    }
+
 
     private int GetHexDistance(Vector2Int a, Vector2Int b)
     {
