@@ -57,8 +57,8 @@ public class MainCamera : MonoBehaviour
             return;
 
         // Movimiento con mouse
-        ZoomCamera();
-        MoveCameraPC();
+       // ZoomCamera();
+       // MoveCameraPC();
 
         // Movimiento con táctil solo si está habilitado
         if (UiButtons.Instance.TouchesEnabled() == true)

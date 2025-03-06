@@ -44,15 +44,18 @@ public class CreditsManager : MonoBehaviour
         if (Input.touchCount > 0)  // Para dispositivos táctiles
         {
             isTouching = true;
-        }
-        else if (Input.GetMouseButton(0))  // Para PC (clic del ratón)
-        {
-            isTouching = true;
-        }
-        else
+        }else
         {
             isTouching = false;
         }
+
+        /*if (Input.GetMouseButton(0))  // Para PC (clic del ratón)
+        {
+            isTouching = true;
+        }
+        */
+
+
     }
 
     public void ShowCredits()

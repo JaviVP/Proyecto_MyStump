@@ -19,6 +19,7 @@ public class CamaraCenital : MonoBehaviour
 
     void Update()
     {
+        //ZoomCameraPC();
         // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
         if (brain.IsBlending)
         {
@@ -40,20 +41,26 @@ public class CamaraCenital : MonoBehaviour
 
     }
 
-    void ZoomCamera()
+    private void ZoomCameraPC()
     {
         if (TopcinemachineCamera == null) return;
-
-        // Control del zoom con la rueda del ratón
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         if (scrollInput != 0f)
         {
             LensSettings lens = TopcinemachineCamera.Lens;
             lens.FieldOfView -= scrollInput * zoomSpeed;
             lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
-            TopcinemachineCamera.Lens = lens; // Aplicar cambios
+            TopcinemachineCamera.Lens = lens; 
         }
 
+
+    }
+    void ZoomCamera()
+    {
+        if (TopcinemachineCamera == null) return;
+
+        
+       
 
         if (Input.touchCount == 2)
         {
@@ -74,4 +81,6 @@ public class CamaraCenital : MonoBehaviour
             TopcinemachineCamera.Lens = lens; // Aplicar cambios
         }
     }
+
+    
 }
