@@ -9,19 +9,64 @@ public class UnitTerraFormer : Unit
     {
         throw new System.NotImplementedException();
     }
-
+    
     public override void OnSelected()
     {
-        List<HexTile> tiles = hexGrid.GetTilesWithinRange(this.AxialCoords, 1);
-        if (tiles.Count > 0)
+        List<HexTile> tilesSelected = null; //
+        List<HexTile> tilesCheck = null; //
+        tilesSelected = new List<HexTile>();
+        tilesCheck = new List<HexTile>();
+        tilesCheck.Add(hexGrid.GetHexTile(this.AxialCoords));
+        int contador = 100;
+        while (tilesCheck.Count > 0 && contador >0)
         {
-            for (int i = 0; i < tiles.Count; i++)
+            List<HexTile> tiles = hexGrid.GetTilesWithinRange(tilesCheck[0].axialCoords, 1);
+            tilesCheck.RemoveAt(0);
+            contador--;
+            if (tiles.Count > 0)
             {
-                //Pruebas
-                tiles[i].tileRenderer.material.color = Color.yellow;
-            }
+                for (int i = 0; i < tiles.Count; i++)
+                {
+                    if (tiles[i].state == HexState.Termites && hexGrid.GetUnitInTile(tiles[i].axialCoords) == null)
+                    {
+                        //tiles[i].HighlightTile(Color.yellow);
+                        if (!tilesCheck.Contains(tiles[i]))
+                        {
+                            tilesCheck.Add(tiles[i]);
+                        }
+                        if (!tilesSelected.Contains(tiles[i]))
+                        {
+                            tilesSelected.Add(tiles[i]);
+                        }
 
+
+
+
+
+
+                    }
+                    else
+                    {
+                        tiles[i].HighlightTile(Color.magenta);
+                    }
+
+                }
+
+            }
         }
+        if (tilesSelected.Count > 0)
+        {
+            for (int i = 0; i < tilesSelected.Count; i++)
+            {
+                tilesSelected[i].HighlightTile(Color.yellow);
+            }
+        }
+
+
+
+
+
+        
     }
 
 
