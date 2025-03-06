@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -112,22 +109,7 @@ public class HexGrid : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Vector2Int newPos = new Vector2Int(-2, 2);
-            Unit unit = units[new Vector2Int(1, 3)];
-            units[new Vector2Int(1, 3)] = null;
-            units[newPos] = unit;
-            unit.UnitRenderer.transform.position= AxialToWorld(newPos.x,newPos.y);
-
-            HexTile hex = GetHexTile(new Vector2Int(1, 3));
-            hex.SetState(HexState.Neutral);
-
-
-            hex = GetHexTile(newPos);
-            hex.SetState(HexState.Termites);
-
-        }
+       
     }
     public void ClearHexGrid()
     {
@@ -144,6 +126,28 @@ public class HexGrid : MonoBehaviour
         }
     }
 
+    private void MoveTroop()
+    {
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Vector2Int newPos = new Vector2Int(-2, 2);
+            Unit unit = units[new Vector2Int(1, 3)];
+            units[new Vector2Int(1, 3)] = null;
+            units[newPos] = unit;
+            unit.UnitRenderer.transform.position = AxialToWorld(newPos.x, newPos.y);
+
+            HexTile hex = GetHexTile(new Vector2Int(1, 3));
+            hex.SetState(HexState.Neutral);
+
+
+            hex = GetHexTile(newPos);
+            hex.SetState(HexState.Termites);
+
+        }
+
+
+    }
 
     /*
     public void CreateTerraMallaProve()  //Testing

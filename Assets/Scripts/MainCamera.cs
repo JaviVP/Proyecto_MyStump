@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
+
 public class MainCamera : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0.1f;  // Sensibilidad del movimiento

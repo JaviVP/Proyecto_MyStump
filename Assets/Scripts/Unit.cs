@@ -10,7 +10,7 @@ public abstract class Unit : MonoBehaviour
     private float speed;
 
 
-    private bool isMoving = false;
+    //private bool isMoving = false;
 
     public Vector2Int AxialCoords { get => axialCoords; set => axialCoords = value; }
     public GameObject UnitRenderer { get => unitRenderer; set => unitRenderer = value; }

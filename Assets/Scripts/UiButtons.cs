@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+
 public class UiButtons : MonoBehaviour
 {
 
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
+    
+
     private bool touchEnabled = true;
 
     private Button[] buttons;
@@ -38,6 +42,8 @@ public class UiButtons : MonoBehaviour
             }
         }
     }
+
+   
     public void PlayButton()
     {
 
@@ -108,4 +114,7 @@ public class UiButtons : MonoBehaviour
     {
         return touchEnabled;
     }
+
+   
+
 }
