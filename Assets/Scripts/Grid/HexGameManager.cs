@@ -8,6 +8,9 @@ public class HexGameManager : MonoBehaviour
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
 
+    private List<HexTile> terraFormTiles = new List<HexTile>();
+
+
     // Nueva variable para bloquear las entradas táctiles durante la transición
     private bool disableTouchInputDuringTransition = false;
     void Start()
@@ -68,6 +71,8 @@ public class HexGameManager : MonoBehaviour
         }
     }
 
+    
+
 
     private void ClearHighlights()
     {
@@ -123,14 +128,20 @@ public class HexGameManager : MonoBehaviour
                         ShowHexLines(clickedTile); // Mostrar líneas del hexágono
                                                    //Check if there's some unit in this hextile
                         unit= hexGrid.GetUnitInTile(clickedTile.axialCoords);
-                        if (hexGrid.GetUnitIndex(unit)==1) //Runner
+                        if (hexGrid.GetUnitIndex(unit) == 1) //Runner
                         {
 
                         }
                         else if (hexGrid.GetUnitIndex(unit) == 2) //TerraFormer
                         {
                             Debug.Log("Soy un terraformer");
+                            terraFormTiles.Clear();
+                            terraFormTiles = hexGrid.GetHexTileTerraFormar(clickedTile.axialCoords);
+
+
+
                         }
+}
                         else if (hexGrid.GetUnitIndex(unit) == 3) //Panchulina
                         {
 
@@ -142,4 +153,5 @@ public class HexGameManager : MonoBehaviour
         }
 
     }
-}
+
+
