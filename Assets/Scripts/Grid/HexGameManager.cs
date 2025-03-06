@@ -68,6 +68,7 @@ public class HexGameManager : MonoBehaviour
         }
     }
 
+
     private void ClearHighlights()
     {
         foreach (HexTile tile in highlightedTiles)
@@ -113,11 +114,28 @@ public class HexGameManager : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+                    Debug.Log(clickedTile.axialCoords);
+                    Unit unit = null;
 
                     if (clickedTile != null)
                     {
                         ClearHighlights(); // Limpiar los resaltados previos
                         ShowHexLines(clickedTile); // Mostrar líneas del hexágono
+                                                   //Check if there's some unit in this hextile
+                        unit= hexGrid.GetUnitInTile(clickedTile.axialCoords);
+                        if (hexGrid.GetUnitIndex(unit)==1) //Runner
+                        {
+
+                        }
+                        else if (hexGrid.GetUnitIndex(unit) == 2) //TerraFormer
+                        {
+                            Debug.Log("Soy un terraformer");
+                        }
+                        else if (hexGrid.GetUnitIndex(unit) == 3) //Panchulina
+                        {
+
+                        }
+
                     }
                 }
             }

@@ -75,6 +75,7 @@ public class HexGrid : MonoBehaviour
         if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
 
         GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], AxialToWorld(placement.position.x, placement.position.y), Quaternion.identity);
+        //unitObj.name = unitPrefabs[(int)placement.unitType - 1].name;
         Unit unit = unitObj.GetComponent<Unit>();
         unit.AxialCoords = placement.position;
 
@@ -162,7 +163,10 @@ public class HexGrid : MonoBehaviour
     {
         return hexMap.TryGetValue(coords, out HexTile tile) ? tile : null;
     }
-
+    public Unit GetUnitInTile(Vector2Int coords)
+    {
+        return units.TryGetValue(coords, out Unit unit) ? unit : null;
+    }
     public List<HexTile> GetHexLine(Vector2Int startPos, Vector2Int direction)
     {
         List<HexTile> lineTiles = new List<HexTile>();
