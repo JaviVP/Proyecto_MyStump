@@ -136,7 +136,8 @@ public class HexGameManager : MonoBehaviour
                         {
                             Debug.Log("Soy un terraformer");
                             terraFormTiles.Clear();
-                            terraFormTiles = hexGrid.GetHexTileTerraFormar(clickedTile.axialCoords);
+
+                            //hexGrid.GetHexTileTerraFormer(clickedTile.axialCoords);
 
 
 
