@@ -16,8 +16,8 @@ public abstract class Unit : MonoBehaviour
     public GameObject UnitRenderer { get => unitRenderer; set => unitRenderer = value; }
     public bool UsedPreviusTurn { get => usedPreviusTurn; set => usedPreviusTurn = value; }
 
-    public abstract void move();
-
+    public abstract void Move();
+    public abstract void OnSelected();
     public void CaptureTiles()
     {
         //implementation 
