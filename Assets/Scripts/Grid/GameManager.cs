@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
 
     public static GameManager Instance { get; private set; }
+    public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
 
     private void Awake()
     {
@@ -22,7 +23,10 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject); // Prevent multiple instances
+            return;
         }
+
+        DontDestroyOnLoad(gameObject); // Persist across scenes if needed
     }
 
     // Nueva variable para bloquear las entradas táctiles durante la transición
@@ -31,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
-        hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+        HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
         //hexGrid.CreateTerraMallaProve(); 
     }
 
@@ -60,6 +64,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
+
     private void ShowHexLines(HexTile centerTile)
     {
         Vector2Int[] hexDirections = {
@@ -69,7 +83,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Vector2Int direction in hexDirections)
         {
-            List<HexTile> lineTiles = hexGrid.GetHexLine(centerTile.axialCoords, direction);
+            List<HexTile> lineTiles = HexGrid.GetHexLine(centerTile.axialCoords, direction);
             for (int i = 0; i < lineTiles.Count; i++)
             {
                 if (i == lineTiles.Count - 1)
@@ -141,12 +155,12 @@ public class GameManager : MonoBehaviour
                         //ClearHighlights(); // Limpiar los resaltados previos
                         //ShowHexLines(clickedTile); // Mostrar líneas del hexágono
                                                    //Check if there's some unit in this hextile
-                        unit= hexGrid.GetUnitInTile(clickedTile.axialCoords);
-                        if (hexGrid.GetUnitIndex(unit) == 1) //Runner
+                        unit= HexGrid.GetUnitInTile(clickedTile.axialCoords);
+                        if (HexGrid.GetUnitIndex(unit) == 1) //Runner
                         {
 
                         }
-                        else if (hexGrid.GetUnitIndex(unit) == 2) //TerraFormer
+                        else if (HexGrid.GetUnitIndex(unit) == 2) //TerraFormer
                         {
                             Debug.Log("Soy un terraformer");
                             terraFormTiles.Clear();
@@ -157,7 +171,7 @@ public class GameManager : MonoBehaviour
 
                         }
 }
-                        else if (hexGrid.GetUnitIndex(unit) == 3) //Panchulina
+                        else if (HexGrid.GetUnitIndex(unit) == 3) //Panchulina
                         {
 
                         }
