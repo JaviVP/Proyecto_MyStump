@@ -1446,9 +1446,9 @@ MonoBehaviour:
   - position: {x: 3, y: 0}
     unitType: 1
   - position: {x: 3, y: 1}
-    unitType: 1
+    unitType: 2
   - position: {x: 4, y: -1}
-    unitType: 1
+    unitType: 3
   termitePlacements:
   - position: {x: -3, y: 0}
     unitType: 1
@@ -2831,7 +2831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1372081984
 MonoBehaviour:
   m_ObjectHideFlags: 0

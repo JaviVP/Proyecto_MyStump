@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-public class HexGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -124,8 +124,8 @@ public class HexGameManager : MonoBehaviour
 
                     if (clickedTile != null)
                     {
-                        ClearHighlights(); // Limpiar los resaltados previos
-                        ShowHexLines(clickedTile); // Mostrar líneas del hexágono
+                        //ClearHighlights(); // Limpiar los resaltados previos
+                        //ShowHexLines(clickedTile); // Mostrar líneas del hexágono
                                                    //Check if there's some unit in this hextile
                         unit= hexGrid.GetUnitInTile(clickedTile.axialCoords);
                         if (hexGrid.GetUnitIndex(unit) == 1) //Runner
@@ -136,7 +136,7 @@ public class HexGameManager : MonoBehaviour
                         {
                             Debug.Log("Soy un terraformer");
                             terraFormTiles.Clear();
-
+                            unit.OnSelected();
                             //hexGrid.GetHexTileTerraFormer(clickedTile.axialCoords);
 
 

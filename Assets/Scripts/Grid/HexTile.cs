@@ -6,7 +6,7 @@ public class HexTile : MonoBehaviour
 {
     public Vector2Int axialCoords;
     public HexState state = HexState.Neutral;
-    private Renderer tileRenderer;
+    public Renderer tileRenderer;
 
     private void Awake()
     {
