@@ -182,6 +182,27 @@ public class HexGrid : MonoBehaviour
     }
 
 
+    //Look for tiles around
+    public List<HexTile> GetTilesWithinRange(Vector2Int start, int range)
+    {
+        List<HexTile> inRange = new List<HexTile>();
+
+        foreach (var tile in hexMap.Values)
+        {
+            int distance = GetHexDistance(start, tile.axialCoords);
+            if (distance <= range)
+            {
+                inRange.Add(tile);
+            }
+        }
+
+        return inRange;
+    }
+
+    private int GetHexDistance(Vector2Int a, Vector2Int b)
+    {
+        return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.x + a.y - b.x - b.y)) / 2;
+    }
 
 
 
@@ -238,29 +259,26 @@ public class HexGrid : MonoBehaviour
         if (unitIndex == 0)
         {
             if (units.ContainsKey(pos) && units[pos] != null)
-                Destroy(units[pos].gameObject);
+            {
+                Destroy(units[pos].gameObject); // Destroy existing unit
+            }
 
             units[pos] = null;
             hexMap[pos].SetState(HexState.Neutral);
             return;
         }
 
-        GameObject prefab;
-        Unit newUnit;
-
-        // Select correct prefab and create the unit dynamically
-        if (team == HexState.Ants)
+        // Ensure we're only affecting the clicked tile
+        if (units.ContainsKey(pos) && units[pos] != null)
         {
-            prefab = unitsAntsPrefabs[unitIndex - 1];
-        }
-        else
-        {
-            prefab = unitsTermitePrefabs[unitIndex - 1];
+            Destroy(units[pos].gameObject); // Destroy old unit before adding a new one
         }
 
+        GameObject prefab = (team == HexState.Ants) ? unitsAntsPrefabs[unitIndex - 1] : unitsTermitePrefabs[unitIndex - 1];
         GameObject unitObj = Instantiate(prefab, AxialToWorld(pos.x, pos.y), Quaternion.identity);
 
-        // Manually add the correct unit script based on unitIndex
+        // Add the correct unit script dynamically
+        Unit newUnit = null;
         if (unitIndex == 1) newUnit = unitObj.AddComponent<UnitRunner>();
         else if (unitIndex == 2) newUnit = unitObj.AddComponent<UnitTerraFormer>();
         else newUnit = unitObj.AddComponent<UnitPanchulina>();
@@ -269,6 +287,7 @@ public class HexGrid : MonoBehaviour
         units[pos] = newUnit;
         hexMap[pos].SetState(team);
     }
+
 
 
     //All Units
@@ -301,6 +320,15 @@ public class HexGrid : MonoBehaviour
             if (color == termiteColors[i]) return i;
         }
         return -1; // Not found
+    }
+
+    public void ClearUnitAt(Vector2Int pos)
+    {
+        if (!units.ContainsKey(pos) || units[pos] == null) return;
+
+        Destroy(units[pos].gameObject); // Destroy the old unit
+        units[pos] = null; // Remove unit reference
+        hexMap[pos].SetState(HexState.Neutral); // Reset the tile ownership
     }
 
 

@@ -29,27 +29,19 @@ public class HexGridUI : MonoBehaviour
     {
         Debug.Log("Generating Button Grid...");
 
-        if (hexGrid == null)
-        {
-            Debug.LogError("❌ HexGrid reference is missing in HexGridUI!");
-            return;
-        }
-
-        List<Vector2Int> allPositions = hexGrid.GetAllHexPositions();
-        if (allPositions == null || allPositions.Count == 0)
-        {
-            Debug.LogError("❌ HexGrid has no hex positions! Check if the grid is generated properly.");
-            return;
-        }
-
-        foreach (Vector2Int pos in allPositions)
+        foreach (Vector2Int pos in hexGrid.GetAllHexPositions())
         {
             Debug.Log("✅ Creating button at position: " + pos);
+
+            // Convert world position to UI space
             Vector3 worldPos = hexGrid.AxialToWorld(pos.x, pos.y);
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-            GameObject buttonObj = Instantiate(hexButtonPrefab, worldPos, Quaternion.identity, canvasParent);
+            // Create button inside the canvas
+            GameObject buttonObj = Instantiate(hexButtonPrefab, canvasParent);
+            buttonObj.transform.position = screenPos; // Convert to screen space
+
             Button hexButton = buttonObj.GetComponent<Button>();
-
             if (hexButton == null)
             {
                 Debug.LogError("❌ Button component missing on prefab!");
@@ -62,6 +54,7 @@ public class HexGridUI : MonoBehaviour
 
         Debug.Log("✅ Button grid generation completed.");
     }
+
 
 
 
@@ -84,11 +77,20 @@ public class HexGridUI : MonoBehaviour
     {
         if (!hexGrid.HasTile(pos)) return;
 
+        // Get the next unit type for this specific tile
         int nextUnitIndex = hexGrid.GetNextUnitIndex(pos, team);
+
+        // Remove the previous unit before placing a new one
+        hexGrid.ClearUnitAt(pos);
+
+        // Place the new unit at the clicked tile
         hexGrid.SetUnitAt(pos, nextUnitIndex, team);
 
+        // Update UI button color for this specific tile
         UpdateButtonColor(pos, team, nextUnitIndex);
     }
+
+
 
     private void UpdateButtonColor(Vector2Int pos, HexState team, int index)
     {
