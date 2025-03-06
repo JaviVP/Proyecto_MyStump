@@ -11,6 +11,20 @@ public class GameManager : MonoBehaviour
     private List<HexTile> terraFormTiles = new List<HexTile>();
 
 
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Prevent multiple instances
+        }
+    }
+
     // Nueva variable para bloquear las entradas táctiles durante la transición
     private bool disableTouchInputDuringTransition = false;
     void Start()
