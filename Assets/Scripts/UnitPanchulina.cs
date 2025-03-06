@@ -7,9 +7,9 @@ public class UnitPanchulina : Unit
         throw new System.NotImplementedException();
     }
 
-    public override void push()
+    public  void push()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

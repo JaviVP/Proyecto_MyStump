@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -28,6 +30,22 @@ public class HexGrid : MonoBehaviour
         GenerateHexGrid();
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
         GenerateUnits();
+        //Testing
+        TerraFormerTilesProves();
+    }
+
+    private void TerraFormerTilesProves()
+    {
+        hexMap[new Vector2Int(-3,1)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(-2, 1)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(-1, 1)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(-2, 0)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(-1, 1)].SetState(HexState.Termites);
+
+        hexMap[new Vector2Int(2, -2)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(2, -1)].SetState(HexState.Termites);
+        hexMap[new Vector2Int(2, 0)].SetState(HexState.Termites);
+
     }
 
     private void GenerateHexGrid()
@@ -56,6 +74,11 @@ public class HexGrid : MonoBehaviour
         }
 
         //Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
+    }
+
+    public List<HexTile> GetHexTileTerraFormar(Vector2Int coords)
+    {
+        return null;
     }
 
     public void GenerateUnits()
