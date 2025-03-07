@@ -20,6 +20,7 @@ public class UnitTerraFormer : Unit
         int contador = 100;
         while (tilesCheck.Count > 0 && contador >0)
         {
+
             List<HexTile> tiles = hexGrid.GetTilesWithinRange(tilesCheck[0].axialCoords, 1);
             tilesCheck.RemoveAt(0);
             contador--;
@@ -27,8 +28,18 @@ public class UnitTerraFormer : Unit
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
+                    if (contador==99 && tiles[i].state == HexState.Neutral)
+                    {
+                        if (!tilesSelected.Contains(tiles[i]))
+                        {
+                            tilesSelected.Add(tiles[i]);
+                        }
+                      
+                    }
+
                     if (tiles[i].state == HexState.Termites && hexGrid.GetUnitInTile(tiles[i].axialCoords) == null)
                     {
+
                         //tiles[i].HighlightTile(Color.yellow);
                         if (!tilesCheck.Contains(tiles[i]))
                         {
