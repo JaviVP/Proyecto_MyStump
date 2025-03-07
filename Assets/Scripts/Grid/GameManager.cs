@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 public class GameManager : MonoBehaviour
 {
+    public enum Team { Ants, Termites }
     private CinemachineBrain brain;
     private Camera mainCamera;
     private HexGrid hexGrid;
@@ -13,6 +14,24 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
 
+    private Unit selectedUnit = null;
+
+    /// 
+    /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
+    /// 
+    private Team currentTurn = Team.Ants; // Start with Ants' turn
+    /// 
+    /// ESTA LINEA
+    /// 
+
+    ///
+    /// Para que es lo de abajo???
+    ///
+    private HashSet<Unit> movedUnits = new HashSet<Unit>(); // Track units that have moved
+    ///
+    /// Comptobar mas tarde
+    ///
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,11 +40,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // Prevent multiple instances
+            Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject); // Persist across scenes if needed
+        DontDestroyOnLoad(gameObject);
     }
 
     // Nueva variable para bloquear las entradas táctiles durante la transición
@@ -73,6 +92,34 @@ public class GameManager : MonoBehaviour
     }
 
 
+
+
+    /*
+        private void RaycastPC()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+                    if (clickedTile != null)
+                    {
+                        ClearHighlights(); // Clear previous highlights
+                        ShowHexLines(clickedTile);
+                    }
+                }
+            }
+
+        }
+    */
+
+
+    /// 
+    /// PASAR AL HEXGRID
+    /// 
+
+
     private void ShowHexLines(HexTile centerTile)
     {
         Vector2Int[] hexDirections = {
@@ -98,9 +145,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
-
-
     private void ClearHighlights()
     {
         foreach (HexTile tile in highlightedTiles)
@@ -110,25 +154,10 @@ public class GameManager : MonoBehaviour
         highlightedTiles.Clear();
     }
 
-/*
-    private void RaycastPC()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                HexTile clickedTile = hit.collider.GetComponent<HexTile>();
-                if (clickedTile != null)
-                {
-                    ClearHighlights(); // Clear previous highlights
-                    ShowHexLines(clickedTile);
-                }
-            }
-        }
+    /// 
+    /// HASTA AQUI
+    /// 
 
-    }
-*/
 
     private void RaycastTablet()
     {
@@ -146,33 +175,56 @@ public class GameManager : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+                    Unit clickedUnit = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
                     Debug.Log(clickedTile.axialCoords);
-                    Unit unit = null;
 
-                    if (clickedTile != null)
+                    if (GameManager.Instance.selectedUnit == null)
                     {
-                        //ClearHighlights(); // Limpiar los resaltados previos
-                        
-                        unit= HexGrid.GetUnitInTile(clickedTile.axialCoords);
-                        if (HexGrid.GetUnitIndex(unit) == 1) //Runner
-                        {
-
-                        }
-                        else if (HexGrid.GetUnitIndex(unit) == 2) //TerraFormer
-                        {
-                            unit.OnSelected();
-                        }
-}
-                        else if (HexGrid.GetUnitIndex(unit) == 3) //Panchulina
-                        {
-
-                        }
-
+                        // Select the unit if it belongs to the current turn team
+                        GameManager.Instance.SelectUnit(clickedUnit);
                     }
+                    else
+                    {
+                        // Move the selected unit
+                        GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                    }
+
                 }
             }
         }
-
     }
+
+    public void SelectUnit(Unit unit)
+    {
+        if (unit == null || movedUnits.Contains(unit) || unit.Team != currentTurn) return;
+
+        selectedUnit = unit;
+        selectedUnit.OnSelected();
+        Debug.Log($"Selected {unit.GetType().Name} for {unit.Team}");
+    }
+
+    public void MoveSelectedUnit(Vector2Int targetPosition)
+    {
+        if (selectedUnit == null) return;
+
+        selectedUnit.Move(targetPosition);
+        movedUnits.Add(selectedUnit); // Mark unit as moved
+        selectedUnit = null;
+
+        CheckTurnEnd();
+    }
+
+    private void CheckTurnEnd()
+    {
+        // If all units have moved, switch turn
+        if (movedUnits.Count >= 3) // Since each team has 3 units
+        {
+            movedUnits.Clear();
+            currentTurn = (currentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+            Debug.Log($"Turn switched to {currentTurn}");
+        }
+    }
+
+}
 
 

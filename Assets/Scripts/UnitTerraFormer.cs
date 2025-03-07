@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitTerraFormer : Unit
 {
     private HexGrid hexGrid;
-    public override void Move()
+    public override void Move(Vector2Int targetPosition)
     {
         throw new System.NotImplementedException();
     }

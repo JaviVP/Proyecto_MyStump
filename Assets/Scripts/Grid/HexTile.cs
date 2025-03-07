@@ -22,6 +22,7 @@ public class HexTile : MonoBehaviour
 
     private void UpdateTileAppearance()
     {
+
         switch (state)
         {
             case HexState.Ants:

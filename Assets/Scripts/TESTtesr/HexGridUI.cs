@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class HexGridUI : MonoBehaviour
 {
+    /*
     public GameObject hexButtonPrefab;
     public Transform canvasParent;  // Assign the UI Canvas in the Inspector
     public HexGrid hexGrid;
@@ -145,6 +146,6 @@ public class HexGridUI : MonoBehaviour
         return termiteColors[index];
     }
 
-
+    */
 
 }

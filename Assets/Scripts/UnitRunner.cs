@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnitRunner : Unit
 {
-    public override void Move()
+    public override void Move(Vector2Int targetPosition)
     {
         throw new System.NotImplementedException();
     }

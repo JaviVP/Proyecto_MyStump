@@ -86,15 +86,15 @@ public class HexGrid : MonoBehaviour
     {
         foreach (UnitPlacement placement in antPlacements)
         {
-            PlaceUnit(placement, HexState.Ants, unitsAntsPrefabs);
+            PlaceUnit(placement, HexState.Ants, GameManager.Team.Ants, unitsAntsPrefabs);
         }
         foreach (UnitPlacement placement in termitePlacements)
         {
-            PlaceUnit(placement, HexState.Termites, unitsTermitePrefabs);
+            PlaceUnit(placement, HexState.Termites, GameManager.Team.Termites, unitsTermitePrefabs);
         }
     }
 
-    private void PlaceUnit(UnitPlacement placement, HexState team, GameObject[] unitPrefabs)
+    private void PlaceUnit(UnitPlacement placement, HexState owning, GameManager.Team team ,GameObject[] unitPrefabs)
     {
         if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
 
@@ -102,9 +102,10 @@ public class HexGrid : MonoBehaviour
         //unitObj.name = unitPrefabs[(int)placement.unitType - 1].name;
         Unit unit = unitObj.GetComponent<Unit>();
         unit.AxialCoords = placement.position;
+        unit.Team = team;
 
         units[placement.position] = unit;
-        hexMap[placement.position].SetState(team);
+        hexMap[placement.position].SetState(owning);
     }
 
     private void Update()
@@ -251,7 +252,7 @@ public class HexGrid : MonoBehaviour
 
 
 
-
+    /*
 
 
     /// 
@@ -372,6 +373,6 @@ public class HexGrid : MonoBehaviour
         hexMap[pos].SetState(HexState.Neutral); // Reset the tile ownership
     }
 
-
+    */
 
 }
