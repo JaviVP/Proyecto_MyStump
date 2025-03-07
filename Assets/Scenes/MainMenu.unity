@@ -870,6 +870,7 @@ GameObject:
   - component: {fileID: 2043520951}
   - component: {fileID: 2043520950}
   - component: {fileID: 2043520952}
+  - component: {fileID: 2043520953}
   m_Layer: 0
   m_Name: Aumulador
   m_TagString: Untagged
@@ -917,6 +918,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d29b3be75b018b545b1b5311f61d4ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2043520953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043520949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712c964fc385c31478251d632010a8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2081994156
