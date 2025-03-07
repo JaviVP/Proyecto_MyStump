@@ -152,8 +152,7 @@ public class GameManager : MonoBehaviour
                     if (clickedTile != null)
                     {
                         //ClearHighlights(); // Limpiar los resaltados previos
-                        //ShowHexLines(clickedTile); // Mostrar líneas del hexágono
-                                                   //Check if there's some unit in this hextile
+                        
                         unit= HexGrid.GetUnitInTile(clickedTile.axialCoords);
                         if (HexGrid.GetUnitIndex(unit) == 1) //Runner
                         {
@@ -161,13 +160,7 @@ public class GameManager : MonoBehaviour
                         }
                         else if (HexGrid.GetUnitIndex(unit) == 2) //TerraFormer
                         {
-                            Debug.Log("Soy un terraformer");
-                            
                             unit.OnSelected();
-                            //hexGrid.GetHexTileTerraFormer(clickedTile.axialCoords);
-
-
-
                         }
 }
                         else if (HexGrid.GetUnitIndex(unit) == 3) //Panchulina
