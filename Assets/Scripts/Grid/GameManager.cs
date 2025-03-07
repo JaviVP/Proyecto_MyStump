@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
 
-    private List<HexTile> terraFormTiles = new List<HexTile>();
 
 
     public static GameManager Instance { get; private set; }
@@ -163,7 +162,7 @@ public class GameManager : MonoBehaviour
                         else if (HexGrid.GetUnitIndex(unit) == 2) //TerraFormer
                         {
                             Debug.Log("Soy un terraformer");
-                            terraFormTiles.Clear();
+                            
                             unit.OnSelected();
                             //hexGrid.GetHexTileTerraFormer(clickedTile.axialCoords);
 
