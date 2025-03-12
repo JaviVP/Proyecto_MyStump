@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public enum HexState { Neutral, Ants, Termites }
 
+public enum HexState { Neutral, Ants, Termites }
 public class HexTile : MonoBehaviour
 {
     public Vector2Int axialCoords;
     public HexState state = HexState.Neutral;
-    public Renderer tileRenderer;
+    private Renderer tileRenderer;
+
+    [SerializeField] private Material highlightMaterial; // Assign in Inspector
+
+    private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
     private void Awake()
     {
@@ -22,28 +26,30 @@ public class HexTile : MonoBehaviour
 
     private void UpdateTileAppearance()
     {
-
+        Color tileColor;
         switch (state)
         {
             case HexState.Ants:
-                tileRenderer.material.color = Color.red;
+                tileColor = Color.red;
                 break;
             case HexState.Termites:
-                tileRenderer.material.color = Color.green;
+                tileColor = Color.green;
                 break;
             default:
-                tileRenderer.material.color = Color.grey;
+                tileColor = Color.grey;
                 break;
         }
+        tileRenderer.material.color = tileColor;
     }
 
-    public void HighlightTile(Color highlightColor)
+    public void HighlightTile()
     {
-        tileRenderer.material.color = highlightColor;
+        tileRenderer.material = highlightMaterial; // Apply the highlight shader
+        highlightMaterial.SetColor(ColorProperty, new Color(1f, 1f, 0f, 1f)); // Set highlight color (yellow)
     }
 
     public void ResetTileColor()
     {
-        UpdateTileAppearance(); // Restore default color based on state
+        UpdateTileAppearance(); // Restore original tile material
     }
 }

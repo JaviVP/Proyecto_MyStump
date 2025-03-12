@@ -127,59 +127,7 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    private void MoveTroop()
-    {
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Vector2Int newPos = new Vector2Int(-2, 2);
-            Unit unit = units[new Vector2Int(1, 3)];
-            units[new Vector2Int(1, 3)] = null;
-            units[newPos] = unit;
-            unit.UnitRenderer.transform.position = AxialToWorld(newPos.x, newPos.y);
-
-            HexTile hex = GetHexTile(new Vector2Int(1, 3));
-            hex.SetState(HexState.Neutral);
-
-
-            hex = GetHexTile(newPos);
-            hex.SetState(HexState.Termites);
-
-        }
-
-
-    }
-
-    /*
-    public void CreateTerraMallaProve()  //Testing
-    {
-
-        int contador = 0;
-        for (int q = -gridRadius; q <= gridRadius; q++)
-        {
-            for (int r = -gridRadius; r <= gridRadius; r++)
-            {
-                
-                if (Mathf.Abs(q + r) > gridRadius) continue;
-                if (contador >=1 )
-                {
-                    HexTile hex = GetHexTile(new Vector2Int(q, r));
-                    hex.SetState(HexState.Termites);
-                }
-
-            }
-            contador++;
-            if (contador ==2)
-            {
-                break;
-            }
-        }
-    
-
-    }
-
-
-    */
 
 
     
@@ -195,10 +143,14 @@ public class HexGrid : MonoBehaviour
     {
         return hexMap.TryGetValue(coords, out HexTile tile) ? tile : null;
     }
+
+
     public Unit GetUnitInTile(Vector2Int coords)
     {
         return units.TryGetValue(coords, out Unit unit) ? unit : null;
     }
+
+
     public List<HexTile> GetHexLine(Vector2Int startPos, Vector2Int direction)
     {
         List<HexTile> lineTiles = new List<HexTile>();

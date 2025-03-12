@@ -14,6 +14,6 @@ public class FrameRate : MonoBehaviour
     void Update()
     {
         frames.text = "Fps: " + Mathf.RoundToInt(1.0f / Time.deltaTime);
-        Debug.Log("FPS: " + (1.0f / Time.deltaTime));
+        //Debug.Log("FPS: " + (1.0f / Time.deltaTime));
     }
 }

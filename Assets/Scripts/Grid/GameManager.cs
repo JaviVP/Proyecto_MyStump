@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
     /// 
-    private Team currentTurn = Team.Ants; // Start with Ants' turn
+    private Team currentTurn = Team.Termites; // Start with Ants' turn
     /// 
     /// ESTA LINEA
     /// 
@@ -120,39 +120,7 @@ public class GameManager : MonoBehaviour
     /// 
 
 
-    private void ShowHexLines(HexTile centerTile)
-    {
-        Vector2Int[] hexDirections = {
-            new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
-            new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
-        };
-
-        foreach (Vector2Int direction in hexDirections)
-        {
-            List<HexTile> lineTiles = HexGrid.GetHexLine(centerTile.axialCoords, direction);
-            for (int i = 0; i < lineTiles.Count; i++)
-            {
-                if (i == lineTiles.Count - 1)
-                {
-                    lineTiles[i].HighlightTile(Color.red); // Last tile before an obstacle
-                }
-                else
-                {
-                    lineTiles[i].HighlightTile(Color.green); // Normal path
-                }
-                highlightedTiles.Add(lineTiles[i]);
-            }
-        }
-    }
-
-    private void ClearHighlights()
-    {
-        foreach (HexTile tile in highlightedTiles)
-        {
-            tile.ResetTileColor();
-        }
-        highlightedTiles.Clear();
-    }
+    
 
     /// 
     /// HASTA AQUI
@@ -182,6 +150,7 @@ public class GameManager : MonoBehaviour
                     {
                         // Select the unit if it belongs to the current turn team
                         GameManager.Instance.SelectUnit(clickedUnit);
+                        Debug.Log("Selected Unit:" + clickedUnit);
                     }
                     else
                     {

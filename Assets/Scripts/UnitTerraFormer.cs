@@ -9,76 +9,43 @@ public class UnitTerraFormer : Unit
     {
         throw new System.NotImplementedException();
     }
-    
+
     public override void OnSelected()
     {
-        List<HexTile> tilesSelected = null; //
-        List<HexTile> tilesCheck = null; //
-        tilesSelected = new List<HexTile>();
-        tilesCheck = new List<HexTile>();
-        tilesCheck.Add(hexGrid.GetHexTile(this.AxialCoords));
-        int contador = 100;
-        while (tilesCheck.Count > 0 && contador >0)
-        {
+        Queue<HexTile> tilesCheck = new Queue<HexTile>();
+        HashSet<HexTile> tilesSelected = new HashSet<HexTile>();
 
-            List<HexTile> tiles = hexGrid.GetTilesWithinRange(tilesCheck[0].axialCoords, 1);
-            tilesCheck.RemoveAt(0);
-            contador--;
-            if (tiles.Count > 0)
+        tilesCheck.Enqueue(hexGrid.GetHexTile(AxialCoords));
+        int limit = 100;
+
+        while (tilesCheck.Count > 0 && limit-- > 0)
+        {
+            HexTile currentTile = tilesCheck.Dequeue();
+            List<HexTile> adjacentTiles = hexGrid.GetTilesWithinRange(currentTile.axialCoords, 1);
+
+            foreach (HexTile tile in adjacentTiles)
             {
-                for (int i = 0; i < tiles.Count; i++)
+                if (tile.state == HexState.Neutral && tilesSelected.Count == 0)
                 {
-                    if (contador==99 && tiles[i].state == HexState.Neutral)
-                    {
-                        if (!tilesSelected.Contains(tiles[i]))
-                        {
-                            tilesSelected.Add(tiles[i]);
-                        }
-                      
-                    }
-
-                    if (tiles[i].state == HexState.Termites && hexGrid.GetUnitInTile(tiles[i].axialCoords) == null)
-                    {
-
-                        //tiles[i].HighlightTile(Color.yellow);
-                        if (!tilesCheck.Contains(tiles[i]))
-                        {
-                            tilesCheck.Add(tiles[i]);
-                        }
-                        if (!tilesSelected.Contains(tiles[i]))
-                        {
-                            tilesSelected.Add(tiles[i]);
-                        }
-
-
-
-
-
-
-                    }
-                    else
-                    {
-                        tiles[i].HighlightTile(Color.magenta);
-                    }
-
+                    tilesSelected.Add(tile);
                 }
-
+                else if (tile.state == HexState.Termites && hexGrid.GetUnitInTile(tile.axialCoords) == null)
+                {
+                    if (!tilesSelected.Contains(tile))
+                    {
+                        tilesSelected.Add(tile);
+                        tilesCheck.Enqueue(tile);
+                    }
+                }
             }
         }
-        if (tilesSelected.Count > 0)
+
+        foreach (HexTile tile in tilesSelected)
         {
-            for (int i = 0; i < tilesSelected.Count; i++)
-            {
-                tilesSelected[i].HighlightTile(Color.yellow);
-            }
+            tile.HighlightTile();
         }
-
-
-
-
-
-        
     }
+
 
 
 
