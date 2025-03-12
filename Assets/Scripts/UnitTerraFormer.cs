@@ -1,19 +1,37 @@
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitTerraFormer : Unit
 {
     private HexGrid hexGrid;
+    private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
+
     public override void Move(Vector2Int targetPosition)
     {
-        throw new System.NotImplementedException();
+        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+
+        // ✅ 1️ Ensure target tile is valid for movement
+        if (targetTile == null || !validMoveTiles.Contains(targetTile)) return;
+
+        // ✅ 2️ Move the unit to the new position
+        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+        AxialCoords = targetPosition;
+        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+
+        // ✅ 3️ Convert enemy tiles to Terraformer's team when stepping on them
+        if (targetTile.state != HexState.Neutral && targetTile.state != this.Team)
+        {
+            targetTile.SetState(this.Team); // Instead of neutral, now converts to Terraformer’s team
+        }
+
+        // ✅ 4️ Clear highlights after moving
+        ClearHighlights();
     }
 
     public override void OnSelected()
     {
         Queue<HexTile> tilesCheck = new Queue<HexTile>();
-        HashSet<HexTile> tilesSelected = new HashSet<HexTile>();
+        validMoveTiles.Clear(); // Clear previous selections
 
         tilesCheck.Enqueue(hexGrid.GetHexTile(AxialCoords));
         int limit = 100;
@@ -25,34 +43,38 @@ public class UnitTerraFormer : Unit
 
             foreach (HexTile tile in adjacentTiles)
             {
-                if (tile.state == HexState.Neutral && tilesSelected.Count == 0)
+                if (tile.state == HexState.Neutral && validMoveTiles.Count == 0)
                 {
-                    tilesSelected.Add(tile);
+                    validMoveTiles.Add(tile);
                 }
-                else if (tile.state == HexState.Termites && hexGrid.GetUnitInTile(tile.axialCoords) == null)
+                else if (tile.state == this.Team && hexGrid.GetUnitInTile(tile.axialCoords) == null)
                 {
-                    if (!tilesSelected.Contains(tile))
+                    if (!validMoveTiles.Contains(tile))
                     {
-                        tilesSelected.Add(tile);
+                        validMoveTiles.Add(tile);
                         tilesCheck.Enqueue(tile);
                     }
                 }
             }
         }
 
-        foreach (HexTile tile in tilesSelected)
+        foreach (HexTile tile in validMoveTiles)
         {
             tile.HighlightTile();
         }
     }
 
+    private void ClearHighlights()
+    {
+        foreach (HexTile tile in validMoveTiles)
+        {
+            tile.ResetTileColor();
+        }
+        validMoveTiles.Clear();
+    }
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
     }
-
 }
