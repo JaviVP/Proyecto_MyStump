@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static GameManager;
 
 public class HexGrid : MonoBehaviour
 {
@@ -46,6 +47,10 @@ public class HexGrid : MonoBehaviour
         hexMap[new Vector2Int(2, -2)].SetState(HexState.Termites);
         hexMap[new Vector2Int(2, -1)].SetState(HexState.Termites);
         hexMap[new Vector2Int(2, 0)].SetState(HexState.Termites);
+
+        hexMap[new Vector2Int(1, 1)].SetState(HexState.Ants);
+        hexMap[new Vector2Int(0, 1)].SetState(HexState.Ants);
+        hexMap[new Vector2Int(-1, 2)].SetState(HexState.Ants);
 
     }
 
@@ -200,6 +205,30 @@ public class HexGrid : MonoBehaviour
 
 
 
+
+    public static class EnumHelper
+    {
+        public static Team? ConvertToTeam(HexState state) // Return nullable Team
+        {
+            return state switch
+            {
+                HexState.Ants => Team.Ants,
+                HexState.Termites => Team.Termites,
+                HexState.Neutral => null, // ✅ Return null instead of throwing an error
+                _ => throw new System.ArgumentException("Invalid HexState value."),
+            };
+        }
+
+        public static HexState ConvertToHexState(Team team)
+        {
+            return team switch
+            {
+                Team.Ants => HexState.Ants,
+                Team.Termites => HexState.Termites,
+                _ => throw new System.ArgumentException("Invalid Team value."),
+            };
+        }
+    }
 
 
 

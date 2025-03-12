@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
     /// 
-    private Team currentTurn = Team.Termites; // Start with Ants' turn
+    private Team currentTurn = Team.Ants; // Start with Ants' turn
     /// 
     /// ESTA LINEA
     /// 
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
                     {
                         // Select the unit if it belongs to the current turn team
                         GameManager.Instance.SelectUnit(clickedUnit);
-                        Debug.Log("Selected Unit:" + clickedUnit);
+                        Debug.Log("click:" + clickedUnit);
                     }
                     else
                     {

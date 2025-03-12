@@ -25,7 +25,7 @@ public abstract class Unit : MonoBehaviour
         //implementation 
     }
 
-    public abstract void ClearHighlights();
+    
 
 
 

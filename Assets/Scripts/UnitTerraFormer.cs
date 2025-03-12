@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
+using static HexGrid;
 
 public class UnitTerraFormer : Unit
 {
@@ -10,21 +12,18 @@ public class UnitTerraFormer : Unit
     {
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
 
-        // ✅ 1️ Ensure target tile is valid for movement
+        // ✅ 1️⃣ Ensure target tile is valid for movement
         if (targetTile == null || !validMoveTiles.Contains(targetTile)) return;
 
-        // ✅ 2️ Move the unit to the new position
+        // ✅ 2️⃣ Move the unit to the new position
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
         AxialCoords = targetPosition;
         transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
-        // ✅ 3️ Convert enemy tiles to Terraformer's team when stepping on them
-        if (targetTile.state != HexState.Neutral && targetTile.state != this.Team)
-        {
-            targetTile.SetState(this.Team); // Instead of neutral, now converts to Terraformer’s team
-        }
+        // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
+        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
-        // ✅ 4️ Clear highlights after moving
+        // ✅ 4️⃣ Clear highlights after moving
         ClearHighlights();
     }
 
@@ -33,7 +32,9 @@ public class UnitTerraFormer : Unit
         Queue<HexTile> tilesCheck = new Queue<HexTile>();
         validMoveTiles.Clear(); // Clear previous selections
 
-        tilesCheck.Enqueue(hexGrid.GetHexTile(AxialCoords));
+        HexTile startTile = hexGrid.GetHexTile(AxialCoords);
+        tilesCheck.Enqueue(startTile);
+
         int limit = 100;
 
         while (tilesCheck.Count > 0 && limit-- > 0)
@@ -43,26 +44,36 @@ public class UnitTerraFormer : Unit
 
             foreach (HexTile tile in adjacentTiles)
             {
-                if (tile.state == HexState.Neutral && validMoveTiles.Count == 0)
+                Team? tileTeam = EnumHelper.ConvertToTeam(tile.state);
+
+                // ✅ 1️⃣ Can move to adjacent unoccupied tiles (Neutral or Enemy)
+                if (tile.state == HexState.Neutral || (tileTeam.HasValue && tileTeam.Value != this.Team))
                 {
-                    validMoveTiles.Add(tile);
+                    if (!validMoveTiles.Contains(tile) && hexGrid.GetUnitInTile(tile.axialCoords) == null)
+                    {
+                        validMoveTiles.Add(tile);
+                    }
                 }
-                else if (tile.state == this.Team && hexGrid.GetUnitInTile(tile.axialCoords) == null)
+
+                // ✅ 2️⃣ Can move freely within **connected** tiles of its own team
+                else if (tileTeam.HasValue && tileTeam.Value == this.Team && hexGrid.GetUnitInTile(tile.axialCoords) == null)
                 {
                     if (!validMoveTiles.Contains(tile))
                     {
                         validMoveTiles.Add(tile);
-                        tilesCheck.Enqueue(tile);
+                        tilesCheck.Enqueue(tile); // Continue checking connected tiles
                     }
                 }
             }
         }
 
+        // ✅ 3️⃣ Highlight valid move tiles
         foreach (HexTile tile in validMoveTiles)
         {
             tile.HighlightTile();
         }
     }
+
 
     private void ClearHighlights()
     {
