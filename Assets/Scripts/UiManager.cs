@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class UiButtons : MonoBehaviour
+public class UiManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject settingsPanel;
@@ -15,7 +15,7 @@ public class UiButtons : MonoBehaviour
     private bool touchEnabled = true;
 
     private Button[] buttons;
-    public static UiButtons Instance { get; private set; }
+    public static UiManager Instance { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)

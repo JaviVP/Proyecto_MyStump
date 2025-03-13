@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         //PC
         // RaycastPC(); ACTIVAR LA FUNCION TAMBIÉN
         //Tablet
-        if (UiButtons.Instance.TouchesEnabled() == true)
+        if (UiManager.Instance.TouchesEnabled() == true)
         {
             RaycastTablet();
         }

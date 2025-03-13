@@ -32,7 +32,7 @@ public class MatchController : MonoBehaviour
 
     private void UpdateTouchStatus()
     {
-        touchStatusText.text = "Touch Enabled: " + (UiButtons.Instance.TouchesEnabled() ? "ON" : "OFF");
+        touchStatusText.text = "Touch Enabled: " + (UiManager.Instance.TouchesEnabled() ? "ON" : "OFF");
         touchStatus.text = "Touches: " + Input.touchCount;
     }
 }

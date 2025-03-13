@@ -62,7 +62,7 @@ public class MainCamera : MonoBehaviour
        // MoveCameraPC();
 
         // Movimiento con táctil solo si está habilitado
-        if (UiButtons.Instance.TouchesEnabled() == true)
+        if (UiManager.Instance.TouchesEnabled() == true)
         {
             MoveCameraTouch();
             ZoomCameraTouch();

@@ -34,7 +34,7 @@ public class CamaraCenital : MonoBehaviour
         if (disableTouchInputDuringTransition)
             return;
 
-        if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera && UiButtons.Instance.TouchesEnabled() == true)
+        if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera && UiManager.Instance.TouchesEnabled() == true)
         {
             ZoomCamera();
         }
