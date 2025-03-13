@@ -2859,6 +2859,7 @@ GameObject:
   - component: {fileID: 2141196475}
   - component: {fileID: 2141196474}
   - component: {fileID: 2141196476}
+  - component: {fileID: 2141196477}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2916,6 +2917,14 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!81 &2141196477
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141196472}
+  m_Enabled: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
     }
 
     // Nueva variable para bloquear las entradas táctiles durante la transición
