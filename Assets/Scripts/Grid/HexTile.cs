@@ -9,6 +9,7 @@ public class HexTile : MonoBehaviour
     private Renderer tileRenderer;
 
     [SerializeField] private Material highlightMaterial; // Assign in Inspector
+    private Material baseMaterial;
 
     private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
@@ -16,6 +17,7 @@ public class HexTile : MonoBehaviour
     {
         tileRenderer = GetComponent<Renderer>();
         UpdateTileAppearance();
+        baseMaterial = GetComponent<Material>();
     }
 
     public void SetState(HexState newState)
@@ -50,6 +52,7 @@ public class HexTile : MonoBehaviour
 
     public void ResetTileColor()
     {
+        tileRenderer.material = baseMaterial;
         UpdateTileAppearance(); // Restore original tile material
     }
 }

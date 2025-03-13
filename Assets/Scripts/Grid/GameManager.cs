@@ -176,17 +176,21 @@ public class GameManager : MonoBehaviour
     {
         if (selectedUnit == null) return;
 
-        selectedUnit.Move(targetPosition);
-        movedUnits.Add(selectedUnit); // Mark unit as moved
+        if (selectedUnit.Move(targetPosition))
+        {
+            movedUnits.Add(selectedUnit); // Mark unit as moved
+
+            CheckTurnEnd();
+        }
+
         selectedUnit = null;
 
-        CheckTurnEnd();
     }
 
     private void CheckTurnEnd()
     {
         // If all units have moved, switch turn
-        if (movedUnits.Count >= 3) // Since each team has 3 units
+        if (movedUnits.Count >= 1) // Since each team has 1 units
         {
             movedUnits.Clear();
             currentTurn = (currentTurn == Team.Ants) ? Team.Termites : Team.Ants;

@@ -4,7 +4,7 @@ public class UnitRunner : Unit
 {
    
 
-    public override void Move(Vector2Int targetPosition)
+    public override bool Move(Vector2Int targetPosition)
     {
         throw new System.NotImplementedException();
     }

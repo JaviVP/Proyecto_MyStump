@@ -18,7 +18,7 @@ public abstract class Unit : MonoBehaviour
     public bool UsedPreviusTurn { get => usedPreviusTurn; set => usedPreviusTurn = value; }
     public GameManager.Team Team { get => team; set => team = value; }
 
-    public abstract void Move(Vector2Int targetPosition);
+    public abstract bool Move(Vector2Int targetPosition);
     public abstract void OnSelected();
     public void CaptureTiles()
     {

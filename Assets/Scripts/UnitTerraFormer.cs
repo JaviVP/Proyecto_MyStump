@@ -8,12 +8,16 @@ public class UnitTerraFormer : Unit
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
 
-    public override void Move(Vector2Int targetPosition)
+    public override bool Move(Vector2Int targetPosition)
     {
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
 
         // ✅ 1️⃣ Ensure target tile is valid for movement
-        if (targetTile == null || !validMoveTiles.Contains(targetTile)) return;
+        if (targetTile == null || !validMoveTiles.Contains(targetTile))
+        {
+            ClearHighlights();
+            return false;
+        }
 
         // ✅ 2️⃣ Move the unit to the new position
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
@@ -25,6 +29,7 @@ public class UnitTerraFormer : Unit
 
         // ✅ 4️⃣ Clear highlights after moving
         ClearHighlights();
+        return true;
     }
 
     public override void OnSelected()
@@ -37,8 +42,9 @@ public class UnitTerraFormer : Unit
 
         int limit = 100;
 
-        while (tilesCheck.Count > 0 && limit-- > 0)
+        while (tilesCheck.Count > 0 && limit > 0)
         {
+            limit--;
             HexTile currentTile = tilesCheck.Dequeue();
             List<HexTile> adjacentTiles = hexGrid.GetTilesWithinRange(currentTile.axialCoords, 1);
 
@@ -47,7 +53,7 @@ public class UnitTerraFormer : Unit
                 Team? tileTeam = EnumHelper.ConvertToTeam(tile.state);
 
                 // ✅ 1️⃣ Can move to adjacent unoccupied tiles (Neutral or Enemy)
-                if (tile.state == HexState.Neutral || (tileTeam.HasValue && tileTeam.Value != this.Team))
+                if ((tile.state == HexState.Neutral || (tileTeam.HasValue && tileTeam.Value != this.Team)) && limit == 99)
                 {
                     if (!validMoveTiles.Contains(tile) && hexGrid.GetUnitInTile(tile.axialCoords) == null)
                     {
