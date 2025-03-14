@@ -730,7 +730,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: CloseSettings
         m_Mode: 1
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: CloseSettings
         m_Mode: 1
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: OpenSettings
         m_Mode: 1
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: GameFinish
         m_Mode: 1
@@ -1854,8 +1854,8 @@ GameObject:
   - component: {fileID: 3568563448201970485}
   - component: {fileID: 673507756120528238}
   - component: {fileID: 6639292348360768940}
-  - component: {fileID: 3398356484731531289}
   - component: {fileID: 2359393300878530666}
+  - component: {fileID: 2700939670207090097}
   m_Layer: 0
   m_Name: PrefabScripts
   m_TagString: Untagged
@@ -1906,7 +1906,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29b3be75b018b545b1b5311f61d4ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3398356484731531289
+--- !u!114 &2359393300878530666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581508870328776574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712c964fc385c31478251d632010a8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames: {fileID: 2731602898599403560}
+--- !u!114 &2700939670207090097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1922,19 +1935,6 @@ MonoBehaviour:
   wonText: {fileID: 8859866188747084865}
   resetText: {fileID: 7542505378354072402}
   turnUI: {fileID: 2412147261977018400}
---- !u!114 &2359393300878530666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4581508870328776574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 712c964fc385c31478251d632010a8b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frames: {fileID: 2731602898599403560}
 --- !u!1 &4659851409533111413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2587,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: LoadHub
         m_Mode: 1
@@ -2937,7 +2937,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3398356484731531289}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
         m_MethodName: ResetGamePref
         m_Mode: 1
