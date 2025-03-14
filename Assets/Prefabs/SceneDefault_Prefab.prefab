@@ -730,8 +730,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: CloseSettings
         m_Mode: 1
         m_Arguments:
@@ -821,8 +821,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2695652219301854625}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3420201, y: -0, z: -0, w: 0.9396927}
-  m_LocalPosition: {x: -1.8042364, y: 5.8090906, z: -7.9824686}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1.8042364, y: 12.309091, z: 2.0175312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -947,7 +947,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 1
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -1076,8 +1076,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: CloseSettings
         m_Mode: 1
         m_Arguments:
@@ -1222,8 +1222,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: OpenSettings
         m_Mode: 1
         m_Arguments:
@@ -1448,8 +1448,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: GameFinish
         m_Mode: 1
         m_Arguments:
@@ -2587,8 +2587,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: LoadHub
         m_Mode: 1
         m_Arguments:
@@ -2937,8 +2937,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
+      - m_Target: {fileID: 2700939670207090097}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: ResetGamePref
         m_Mode: 1
         m_Arguments:
