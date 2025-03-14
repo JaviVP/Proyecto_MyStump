@@ -8,29 +8,12 @@ public class UnitTerraFormer : Unit
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
 
-    public override bool Move(Vector2Int targetPosition)
+
+    private void Start()
     {
-        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
-
-        // ✅ 1️⃣ Ensure target tile is valid for movement
-        if (targetTile == null || !validMoveTiles.Contains(targetTile))
-        {
-            ClearHighlights();
-            return false;
-        }
-
-        // ✅ 2️⃣ Move the unit to the new position
-        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-        AxialCoords = targetPosition;
-        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
-
-        // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
-        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
-
-        // ✅ 4️⃣ Clear highlights after moving
-        ClearHighlights();
-        return true;
+        hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
     }
+
 
     public override void OnSelected()
     {
@@ -80,8 +63,7 @@ public class UnitTerraFormer : Unit
         }
     }
 
-
-    private void ClearHighlights()
+    public override void ClearHighlights()
     {
         foreach (HexTile tile in validMoveTiles)
         {
@@ -90,8 +72,30 @@ public class UnitTerraFormer : Unit
         validMoveTiles.Clear();
     }
 
-    private void Start()
+
+    public override bool Move(Vector2Int targetPosition)
     {
-        hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+
+        // ✅ 1️⃣ Ensure target tile is valid for movement
+        if (targetTile == null || !validMoveTiles.Contains(targetTile))
+        {
+            ClearHighlights();
+            return false;
+        }
+
+        // ✅ 2️⃣ Move the unit to the new position
+        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+        AxialCoords = targetPosition;
+        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+
+        // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
+        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+
+        // ✅ 4️⃣ Clear highlights after moving
+        ClearHighlights();
+        return true;
     }
+
+    
 }

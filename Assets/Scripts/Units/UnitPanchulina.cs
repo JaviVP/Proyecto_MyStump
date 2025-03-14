@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class UnitPanchulina : Unit
 {
-    
+    public override void ClearHighlights()
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override bool Move(Vector2Int targetPosition)
     {

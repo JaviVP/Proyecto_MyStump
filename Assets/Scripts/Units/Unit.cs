@@ -20,6 +20,8 @@ public abstract class Unit : MonoBehaviour
 
     public abstract bool Move(Vector2Int targetPosition);
     public abstract void OnSelected();
+
+    public abstract void ClearHighlights();
     public void CaptureTiles()
     {
         //implementation 

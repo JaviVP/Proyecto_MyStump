@@ -46,7 +46,7 @@ public class HexGrid : MonoBehaviour
         hexMap[new Vector2Int(1, -2)].SetState(HexState.Termites);
         hexMap[new Vector2Int(2, -2)].SetState(HexState.Termites);
         hexMap[new Vector2Int(2, -1)].SetState(HexState.Termites);
-        hexMap[new Vector2Int(2, 0)].SetState(HexState.Termites);
+        //hexMap[new Vector2Int(2, 0)].SetState(HexState.Termites);
 
         hexMap[new Vector2Int(1, 1)].SetState(HexState.Ants);
         hexMap[new Vector2Int(0, 1)].SetState(HexState.Ants);
