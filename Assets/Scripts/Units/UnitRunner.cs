@@ -78,8 +78,44 @@ public class UnitRunner : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-        throw new System.NotImplementedException();
+        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+        if (targetTile == null || !validMoveTiles.Contains(targetTile))
+        {
+            ClearHighlights();
+            return false;
+        } // ❌ Invalid move
+
+        Vector2Int direction = new Vector2Int(
+            Mathf.Clamp(targetPosition.x - AxialCoords.x, -1, 1),
+            Mathf.Clamp(targetPosition.y - AxialCoords.y, -1, 1)
+        );
+
+        Vector2Int currentPos = AxialCoords;
+
+        // ✅ Paint only the path traveled
+        while (currentPos != targetPosition)
+        {
+            currentPos += direction;
+            HexTile tile = hexGrid.GetHexTile(currentPos);
+            if (tile != null)
+            {
+                tile.SetState(EnumHelper.ConvertToHexState(this.Team)); // ✅ Paint tile
+            }
+        }
+
+        // ✅ Update unit position
+        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+        AxialCoords = targetPosition;
+        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+
+        ClearHighlights(); // ✅ Remove movement highlights
+
+        return true; // ✅ Movement successful
     }
 
-    
+
+
+
+
+
 }
