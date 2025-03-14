@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
-    
+    [SerializeField] private GameObject turnUI;
 
     private bool touchEnabled = true;
 
@@ -113,6 +113,11 @@ public class UiManager : MonoBehaviour
     public bool TouchesEnabled()
     {
         return touchEnabled;
+    }
+
+    public void UpdateUiTurn(string content)
+    {
+        turnUI.GetComponent<TMP_Text>().text = content;
     }
 
    

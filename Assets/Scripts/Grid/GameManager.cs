@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using System.Runtime.InteropServices.WindowsRuntime;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 public class GameManager : MonoBehaviour
 {
     public enum Team { Ants, Termites }
@@ -9,10 +11,15 @@ public class GameManager : MonoBehaviour
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
 
-
+    //Limit of turns
+    private float limitTurns;
+    private int numberAntsTiles; //At the end of the match, number of ants tiles
+    private int numberTermitesTiles; //At the end of the match, number of termites tiles
+    private int totalTiles;  //total number of tiles in the grid
 
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
+    public float LimitTurns { get => limitTurns; set => limitTurns = value; }
 
     private Unit selectedUnit = null;
 
@@ -51,10 +58,13 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
+        limitTurns = 10;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
         //hexGrid.CreateTerraMallaProve(); 
+        HexState result = CheckMoreColorTiles();
+        UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns+"\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
     }
 
     void Update()
@@ -187,6 +197,27 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    private HexState CheckMoreColorTiles()
+    {
+        numberAntsTiles = hexGrid.GetCountStateTiles(HexState.Ants);
+        totalTiles= hexGrid.totalNumberOfTiles()- hexGrid.CountNeutralTiles();
+        numberTermitesTiles = totalTiles - numberAntsTiles;
+        if (numberAntsTiles > numberTermitesTiles)
+        {
+            return HexState.Ants;
+        }
+        else if (numberAntsTiles < numberTermitesTiles)
+        {
+            return HexState.Termites;
+        }
+        else
+        {
+            return HexState.Neutral;
+        }
+
+
+    }
     private void CheckTurnEnd()
     {
         // If all units have moved, switch turn
@@ -194,7 +225,33 @@ public class GameManager : MonoBehaviour
         {
             movedUnits.Clear();
             currentTurn = (currentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-            Debug.Log($"Turn switched to {currentTurn}");
+            limitTurns--;
+            if (limitTurns <= 0)
+            {
+                string winner = "";
+                HexState result= CheckMoreColorTiles();
+                if (result == HexState.Neutral)
+                {
+                    winner = "EMPATE";
+                }
+                else
+                {
+                    winner = result.ToString();
+                }
+                
+                UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:"+  winner.ToString()+ "\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
+                
+
+            }
+            else
+            {
+                HexState result = CheckMoreColorTiles();
+                Debug.Log($"Turn switched to {currentTurn}");
+                UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+            }
+
+
         }
     }
 

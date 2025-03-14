@@ -117,6 +117,46 @@ public class HexGrid : MonoBehaviour
     {
        
     }
+
+    public int CountNeutralTiles()
+    {
+        int count = 0;
+        foreach (var hexTile in hexMap.Values)
+        {
+            if (hexTile.state == HexState.Neutral)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    public int totalNumberOfTiles()
+    {
+        return hexMap.Count;
+    }
+
+       
+    public int GetCountStateTiles(HexState st)
+    {
+        int counter = 0;
+        for (int q = -gridRadius; q <= gridRadius; q++)
+        {
+            for (int r = -gridRadius; r <= gridRadius; r++)
+            {
+                if (Mathf.Abs(q + r) > gridRadius) continue;
+
+                HexTile hex = GetHexTile(new Vector2Int(q, r));
+
+                if (hex.state==st)
+                {
+                    counter++;
+                }
+                
+            }
+        }
+        return counter;
+    }
+
     public void ClearHexGrid()
     {
         for (int q = -gridRadius; q <= gridRadius; q++)
