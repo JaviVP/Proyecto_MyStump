@@ -22,10 +22,7 @@ public abstract class Unit : MonoBehaviour
     public abstract void OnSelected();
 
     public abstract void ClearHighlights();
-    public void CaptureTiles()
-    {
-        //implementation 
-    }
+    
 
     
 
