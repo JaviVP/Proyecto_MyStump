@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
+    [SerializeField] private GameObject turnUI;
     [SerializeField] private GameObject antHighlight;
     [SerializeField] private GameObject termHighlight;
     [SerializeField] private TextMeshProUGUI antTiles;
@@ -19,6 +20,7 @@ public class UiManager : MonoBehaviour
     private Button[] buttons;
 
     public static UiManager Instance { get; private set; }
+    public bool TouchEnabled { get => touchEnabled; set => touchEnabled = value; }
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1.0f;
-
+        TouchEnabled = true;
         // Corrección de método obsoleto
         buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -49,10 +51,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        UpdateTiles();
-    }
+   
 
     public void PlayButton()
     {
@@ -83,14 +82,14 @@ public class UiManager : MonoBehaviour
     {
         settingsPanel.SetActive(true);
         Time.timeScale = 0.0f;
-        touchEnabled = false;
+        TouchEnabled = false;
     }
 
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
         Time.timeScale = 1.0f;
-        touchEnabled = true;
+        TouchEnabled = true;
     }
 
     public void GameFinish()
@@ -119,10 +118,10 @@ public class UiManager : MonoBehaviour
 
     public bool TouchesEnabled()
     {
-        return touchEnabled;
+        return TouchEnabled;
     }
 
-    private void UpdateTiles()
+    public void UpdateTiles()
     {
         antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
         termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
@@ -138,4 +137,10 @@ public class UiManager : MonoBehaviour
             termHighlight.GetComponent<Image>().enabled = true;
         }
     }
+
+    public void UpdateUiTurn(string content)
+    {
+        turnUI.GetComponent<TMP_Text>().text = content;
+    }
+
 }

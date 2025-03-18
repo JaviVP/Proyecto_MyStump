@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject endPanel;
     public enum Team { Ants, Termites }
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour
         {
             RaycastTablet();
         }
+
+        UiManager.Instance.UpdateTiles();
     }
 
 
@@ -256,13 +259,16 @@ public class GameManager : MonoBehaviour
                 HexState result = CheckMoreColorTiles();
                 if (result == HexState.Neutral)
                 {
-                    winner = "EMPATE";
+                    winner = "Draw";
                 }
                 else
                 {
                     winner = result.ToString();
                 }
 
+                endPanel.SetActive(true);
+                UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+                UiManager.Instance.TouchEnabled = false;
                 //FIN DE PARTIDA
                 //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
@@ -295,28 +301,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public int AntTurn()
-    {
 
-        if (CurrentTurn == Team.Ants)
-        {
-            turnAnts = 1;
-        }
-
-        return turnAnts;
-
-    }
-    public int TermTurn()
-    {
-
-        if (CurrentTurn == Team.Termites)
-        {
-            turnTerm = 0;
-        }
-
-        return turnTerm;
-
-    }
 
 }
 
