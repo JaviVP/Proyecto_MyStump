@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
 using static HexGrid;
@@ -106,11 +107,32 @@ public class UnitRunner : Unit
         // ✅ Update unit position
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
         AxialCoords = targetPosition;
-        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+        //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
         ClearHighlights(); // ✅ Remove movement highlights
-
+        StartCoroutine(Animation(targetPosition));
         return true; // ✅ Movement successful
+    }
+
+    IEnumerator Animation(Vector2Int targetPos)
+    {
+        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
+        float speed = 10.0f;
+        //float minDistance = 0.2f;
+        transform.LookAt(endPos);
+
+        while (true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+            yield return new WaitForSeconds(0.05f);
+            if (Vector3.Distance(transform.position, endPos) < 0.2f)
+            {
+                break;
+            }
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
     }
 
 
