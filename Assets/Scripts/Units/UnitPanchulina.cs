@@ -26,8 +26,11 @@ public class UnitPanchulina : Unit
         {
             if (hexGrid.GetUnitInTile(tile.axialCoords) == null) // ✅ Ensure tile is empty
             {
-                validMoveTiles.Add(tile);
-                tile.HighlightTile();
+                if (!firstMove)
+                {
+                    validMoveTiles.Add(tile);
+                    tile.HighlightTile();
+                }
             }
         }
     }
@@ -53,6 +56,7 @@ public class UnitPanchulina : Unit
             targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
             ClearHighlights();
 
+            
 
             List<HexTile> secondMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
@@ -67,6 +71,7 @@ public class UnitPanchulina : Unit
                 {
 
                 }
+
                 else if (EnumHelper.ConvertToTeam(tile.state) != this.Team)
                 {
                     Vector2Int pushPos = tile.axialCoords + (tile.axialCoords - AxialCoords);
@@ -90,7 +95,8 @@ public class UnitPanchulina : Unit
                         break;
                     }
                 }
-            }
+            
+            } 
             firstMove = true;
         }
         else
@@ -98,17 +104,19 @@ public class UnitPanchulina : Unit
             HexTile targetTile = hexGrid.GetHexTile(targetPosition);
             if (targetTile == null || !validMoveTiles.Contains(targetTile))
             {
-                ClearHighlights();
                 return false; // ❌ Invalid move
             }
+            else
+            {
 
-            // ✅ First Move: Move normally
-            hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-            AxialCoords = targetPosition;
-            transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
-            targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
-            ClearHighlights();
-            firstMove = false;
+                // ✅ First Move: Move normally
+                hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+                AxialCoords = targetPosition;
+                transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+                targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+                //ClearHighlights();
+                firstMove = false;
+            }
         }
 
         //ClearHighlights(); // ✅ Remove highlights after movement
