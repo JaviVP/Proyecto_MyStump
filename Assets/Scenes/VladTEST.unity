@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9f916212a1e144ab898266aa3b05aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hexSpacing: 1.05
   gridRadius: 4
   hexPrefab: {fileID: 721174842306475911, guid: 95bf4348297bfe54b93ac9724024aa6f, type: 3}
   unitsTermitePrefabs:

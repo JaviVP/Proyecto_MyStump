@@ -5,6 +5,7 @@ using static GameManager;
 
 public class HexGrid : MonoBehaviour
 {
+    [SerializeField] private float hexSpacing = 1f;
     [SerializeField] private int gridRadius = 3; // Set in Inspector
     [SerializeField] private GameObject hexPrefab;
     private Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
@@ -19,7 +20,7 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
     [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
 
-
+   
 
 
     void Start()
@@ -58,8 +59,6 @@ public class HexGrid : MonoBehaviour
 
     private void GenerateHexGrid()
     {
-        //Debug.Log("Generating Hex Grid...");
-
         for (int q = -gridRadius; q <= gridRadius; q++)
         {
             for (int r = -gridRadius; r <= gridRadius; r++)
@@ -72,7 +71,7 @@ public class HexGrid : MonoBehaviour
 
                 if (hexTile == null)
                 {
-                    Debug.LogError("❌ HexTile component is missing on instantiated prefab!");
+                    //Debug.LogError("❌ HexTile component is missing on instantiated prefab!");
                     return;
                 }
 
@@ -83,6 +82,22 @@ public class HexGrid : MonoBehaviour
 
         //Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
     }
+
+    public Vector3 AxialToWorld(int q, int r)
+    {
+        // Para hexágonos FLAT-TOPPED (lado plano arriba)
+        float x = hexSpacing * (Mathf.Sqrt(3f) * q + Mathf.Sqrt(3f) / 2f * r);
+        float z = hexSpacing * (3f / 2f * r);
+        return new Vector3(x, 0f, z);
+    }
+    /*
+    public Vector3 AxialToWorld(int q, int r)
+    {
+        float x = HEX_WIDTH * (q + r / 2f);
+        float z = HEX_HEIGHT * (r * 0.75f);
+        return new Vector3(x, 0, z);
+    }
+    */
 
     public List<HexTile> GetHexTileTerraFormar(Vector2Int coords)
     {
@@ -179,12 +194,7 @@ public class HexGrid : MonoBehaviour
 
     
 
-    public Vector3 AxialToWorld(int q, int r)
-    {
-        float x = HEX_WIDTH * (q + r / 2f);
-        float z = HEX_HEIGHT * (r * 0.75f);
-        return new Vector3(x, 0, z);
-    }
+   
 
     public HexTile GetHexTile(Vector2Int coords)
     {

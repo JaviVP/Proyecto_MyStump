@@ -11,14 +11,18 @@ public class HexTile : MonoBehaviour
 
     [SerializeField] private Material highlightMaterial; // Assign in Inspector
     [SerializeField] private Material baseMaterial;
+    [SerializeField] private Material antTiles;
+    [SerializeField] private Material termTiles;
 
-    private static readonly int ColorProperty = Shader.PropertyToID("_Color");
+
+
+    //private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
     private void Awake()
     {
         tileRenderer = GetComponent<Renderer>();
         UpdateTileAppearance();
-        baseMaterial = GetComponent<Material>();
+        //baseMaterial = GetComponent<Material>();
     }
 
     public void SetState(HexState newState)
@@ -32,20 +36,21 @@ public class HexTile : MonoBehaviour
     }
     private void UpdateTileAppearance()
     {
-        Color tileColor;
+       
+
         switch (state)
         {
             case HexState.Ants:
-                tileColor = Color.red;
+                tileRenderer.material = antTiles;
                 break;
             case HexState.Termites:
-                tileColor = Color.green;
+                tileRenderer.material = termTiles;
                 break;
             default:
-                tileColor = Color.grey;
+                tileRenderer.material = baseMaterial;
                 break;
         }
-        tileRenderer.material.color = tileColor;
+        
     }
 
     public void HighlightTile()
