@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
-
+    private int turnAnts;
+    private int turnTerm;
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public float LimitTurns { get => limitTurns; set => limitTurns = value; }
@@ -262,6 +263,43 @@ public class GameManager : MonoBehaviour
 
 
         }
+    }
+
+    public int NumberOfAntTiles()
+    {
+
+        return numberAntsTiles;
+
+    }
+
+    public int NumberOfTermTiles()
+    {
+
+        return numberTermitesTiles;
+
+    }
+
+    public int AntTurn()
+    {
+
+        if(currentTurn == Team.Ants)
+        {
+           turnAnts = 1;
+        }
+
+        return turnAnts;
+
+    }
+    public int TermTurn()
+    {
+
+        if (currentTurn == Team.Termites)
+        {
+            turnTerm = 0;
+        }
+
+        return turnTerm;
+
     }
 
 }

@@ -43,7 +43,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 510310450819072
-    m_Localized: "Dominaci\xF3"
+    m_Localized: Campionat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9038041674412032
+    m_Localized: "Partida R\xE0pida"
     m_Metadata:
       m_Items: []
   references:
