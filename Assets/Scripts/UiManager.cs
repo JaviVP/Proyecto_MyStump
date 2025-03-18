@@ -66,6 +66,11 @@ public class UiManager : MonoBehaviour
 
     public void ChampionshipButton()
     {
+        //SceneManager.LoadScene(5);
+    }
+
+    public void TutorialScene()
+    {
         SceneManager.LoadScene(5);
     }
 
