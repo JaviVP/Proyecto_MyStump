@@ -103,7 +103,7 @@ public class UnitTerraFormer : Unit
     {
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x,targetPos.y);
         float speed = 10.0f;
-        float minDistance = 0.2f;
+        //float minDistance = 0.2f;
         transform.LookAt(endPos);
 
         while(true)

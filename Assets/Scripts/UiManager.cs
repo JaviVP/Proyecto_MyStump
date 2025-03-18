@@ -10,7 +10,6 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
-    [SerializeField] private GameObject turnUI;
     [SerializeField] private GameObject antHighlight;
     [SerializeField] private GameObject termHighlight;
     [SerializeField] private TextMeshProUGUI antTiles;
@@ -57,6 +56,13 @@ public class UiManager : MonoBehaviour
     {
 
         SceneManager.LoadScene(4);
+
+    }
+
+    public void ChampionshipButton()
+    {
+
+        SceneManager.LoadScene(5);
 
     }
     public void SettingsButton()
@@ -124,10 +130,7 @@ public class UiManager : MonoBehaviour
         return touchEnabled;
     }
 
-    public void UpdateUiTurn(string content)
-    {
-        turnUI.GetComponent<TMP_Text>().text = content;
-    }
+   
 
    private void UpdateTiles()
     {
@@ -135,15 +138,15 @@ public class UiManager : MonoBehaviour
         antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
         termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
 
-        if(GameManager.Instance.AntTurn() == 1)
+        if(GameManager.Instance.CurrentTurn== GameManager.Team.Ants)
         {
-            antHighlight.SetActive(true);
-            termHighlight.SetActive(false);
+            antHighlight.gameObject.GetComponent<Image>().enabled = true;
+            termHighlight.gameObject.GetComponent<Image>().enabled = false;
         }
-        else if (GameManager.Instance.TermTurn() == 0)
+        else
         {
-            antHighlight.SetActive(false);
-            termHighlight.SetActive(true);
+            antHighlight.gameObject.GetComponent<Image>().enabled = false; 
+            termHighlight.gameObject.GetComponent<Image>().enabled = true; 
 
         }
 
