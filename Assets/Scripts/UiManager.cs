@@ -6,7 +6,6 @@ using TMPro;
 
 public class UiManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
@@ -18,7 +17,9 @@ public class UiManager : MonoBehaviour
     private bool touchEnabled = true;
 
     private Button[] buttons;
+
     public static UiManager Instance { get; private set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,11 +31,13 @@ public class UiManager : MonoBehaviour
             Instance = this;
         }
     }
+
     private void Start()
     {
         Time.timeScale = 1.0f;
 
-        buttons = FindObjectsOfType<Button>();
+        // Corrección de método obsoleto
+        buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         foreach (Button button in buttons)
         {
@@ -45,45 +48,35 @@ public class UiManager : MonoBehaviour
             }
         }
     }
+
     private void Update()
     {
         UpdateTiles();
-
     }
-
 
     public void PlayButton()
     {
-
         SceneManager.LoadScene(4);
-
     }
 
     public void ChampionshipButton()
     {
-
         SceneManager.LoadScene(5);
-
     }
+
     public void SettingsButton()
     {
-
         SceneManager.LoadScene(3);
-
     }
 
     public void ReturnMenuButton()
     {
-
         SceneManager.LoadScene(1);
-
     }
 
     public void LoadHub()
     {
-
         SceneManager.LoadScene(1);
-
     }
 
     public void OpenSettings()
@@ -100,7 +93,6 @@ public class UiManager : MonoBehaviour
         touchEnabled = true;
     }
 
-
     public void GameFinish()
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
@@ -108,6 +100,7 @@ public class UiManager : MonoBehaviour
         wonText.SetActive(true);
         StartCoroutine(DeactivateTextAfterDelay(2f));
     }
+
     public void ResetGamePref()
     {
         PlayerPrefs.SetInt("FINISHGAME", 1);
@@ -115,7 +108,6 @@ public class UiManager : MonoBehaviour
         resetText.SetActive(true);
         StartCoroutine(DeactivateTextAfterDelay(2f));
     }
-
 
     private IEnumerator DeactivateTextAfterDelay(float delay)
     {
@@ -130,26 +122,20 @@ public class UiManager : MonoBehaviour
         return touchEnabled;
     }
 
-   
-
-   private void UpdateTiles()
+    private void UpdateTiles()
     {
-
         antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
         termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
 
-        if(GameManager.Instance.CurrentTurn== GameManager.Team.Ants)
+        if (GameManager.Instance.CurrentTurn == GameManager.Team.Ants)
         {
-            antHighlight.gameObject.GetComponent<Image>().enabled = true;
-            termHighlight.gameObject.GetComponent<Image>().enabled = false;
+            antHighlight.GetComponent<Image>().enabled = true;
+            termHighlight.GetComponent<Image>().enabled = false;
         }
         else
         {
-            antHighlight.gameObject.GetComponent<Image>().enabled = false; 
-            termHighlight.gameObject.GetComponent<Image>().enabled = true; 
-
+            antHighlight.GetComponent<Image>().enabled = false;
+            termHighlight.GetComponent<Image>().enabled = true;
         }
-
     }
-
 }
