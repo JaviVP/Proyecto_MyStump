@@ -6,7 +6,7 @@ public class UnitPanchulina : Unit
 {
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
-    private bool firstMove;
+    public bool hasMoved = false;
 
 
     private void Start()
@@ -36,6 +36,7 @@ public class UnitPanchulina : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
+        Debug.Log(hasMoved);
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
@@ -43,12 +44,28 @@ public class UnitPanchulina : Unit
             return false; // ❌ Invalid move
         }
 
+        if (!hasMoved)
+        {
+            hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+            AxialCoords = targetPosition;
+            transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+            targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+            ClearHighlights();
+
+            hasMoved = true;
+
+            Debug.Log(hasMoved);
+        }
         // ✅ First Move: Move normally
-        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-        AxialCoords = targetPosition;
-        transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
-        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
-        ClearHighlights() ;
+        
+
+        else if (hasMoved)
+        {
+            hasMoved = false;
+        }
+
+        
+        /*
 
         List<HexTile> secondMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
@@ -88,7 +105,9 @@ public class UnitPanchulina : Unit
             }
         }
 
-        //ClearHighlights(); // ✅ Remove highlights after movement
+        */
+
+        ClearHighlights(); // ✅ Remove highlights after movement
         return true;
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
 using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
+using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public enum Team { Ants, Termites }
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public float LimitTurns { get => limitTurns; set => limitTurns = value; }
+    public Team CurrentTurn { get => currentTurn; set => currentTurn = value; }
 
     private Unit selectedUnit = null;
 
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
         //hexGrid.CreateTerraMallaProve(); 
         HexState result = CheckMoreColorTiles();
-        UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns+"\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
+        //UiManager.Instance.UpdateUiTurn("Current Turn: " + CurrentTurn + "\nLimitTurns:" + limitTurns+"\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
     }
 
     void Update()
@@ -161,11 +163,8 @@ public class GameManager : MonoBehaviour
                     {
                         // Select the unit if it belongs to the current turn team
                         GameManager.Instance.SelectUnit(clickedUnit);
-                        Debug.Log("click:" + clickedUnit);
-                    } else if (selectedUnit is UnitPanchulina)
-                    {
-
-                    }
+                        
+                    } 
                     else
                     {
                         // Move the selected unit
@@ -179,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     public void SelectUnit(Unit unit)
     {
-        if (unit == null || movedUnits.Contains(unit) || unit.Team != currentTurn)
+        if (unit == null || movedUnits.Contains(unit) || unit.Team != CurrentTurn)
         {
             return;
         }
@@ -230,11 +229,19 @@ public class GameManager : MonoBehaviour
     }
     private void CheckTurnEnd()
     {
+        Debug.Log("Unit is panchulina: " + (selectedUnit is UnitPanchulina));
+        Debug.Log("Has moved" + (selectedUnit is UnitPanchulina panchulina1 && panchulina1.hasMoved));
+
+        if (selectedUnit is UnitPanchulina panchulina && panchulina.hasMoved)
+        {
+            Instance.SelectUnit(selectedUnit);
+        }
+
         // If all units have moved, switch turn
-        if (movedUnits.Count >= 1) // Since each team has 1 units
+        else if (movedUnits.Count >= 1) // Since each team has 1 units
         {
             movedUnits.Clear();
-            currentTurn = (currentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+            CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
             limitTurns--;
             if (limitTurns <= 0)
             {
@@ -249,15 +256,15 @@ public class GameManager : MonoBehaviour
                     winner = result.ToString();
                 }
                 
-                UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:"+  winner.ToString()+ "\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
+                //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:"+  winner.ToString()+ "\nAnts Tiles: "+ numberAntsTiles+ "\nTermites Tiles:"+ numberTermitesTiles+ "\nTotal Tiles: "+ totalTiles);
                 
 
             }
             else
             {
                 HexState result = CheckMoreColorTiles();
-                Debug.Log($"Turn switched to {currentTurn}");
-                UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+                Debug.Log($"Turn switched to {CurrentTurn}");
+                //UiManager.Instance.UpdateUiTurn("Current Turn: " + CurrentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
             }
 
@@ -279,28 +286,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public int AntTurn()
-    {
-
-        if(currentTurn == Team.Ants)
-        {
-           turnAnts = 1;
-        }
-
-        return turnAnts;
-
-    }
-    public int TermTurn()
-    {
-
-        if (currentTurn == Team.Termites)
-        {
-            turnTerm = 0;
-        }
-
-        return turnTerm;
-
-    }
+  
 
 }
 
