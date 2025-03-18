@@ -365,7 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e10ac74b44a4e4b80d6527444765da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0
 --- !u!1001 &811015686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -602,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470757407828173346, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -109
+      value: -118
       objectReference: {fileID: 0}
     - target: {fileID: 9033322989555338103, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_Name
@@ -1061,7 +1060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e10ac74b44a4e4b80d6527444765da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -263,12 +263,14 @@ public class GameManager : MonoBehaviour
                     winner = result.ToString();
                 }
 
+                //FIN DE PARTIDA
                 //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
 
             }
             else
             {
+                
                 HexState result = CheckMoreColorTiles();
                 Debug.Log($"Turn switched to {CurrentTurn}");
                 //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
