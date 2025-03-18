@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
-    private int turnAnts;
-    private int turnTerm;
+   
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public float LimitTurns { get => limitTurns; set => limitTurns = value; }
@@ -61,7 +60,7 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
-        limitTurns = 10;
+        limitTurns = 20;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
@@ -253,6 +252,7 @@ public class GameManager : MonoBehaviour
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
             limitTurns--;
+            UiManager.Instance.UpdateScroll();
             if (limitTurns <= 0)
             {
                 string winner = "";
