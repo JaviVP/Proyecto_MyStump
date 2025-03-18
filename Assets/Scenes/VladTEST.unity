@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &297871908 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2731602898599403560, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-  m_PrefabInstance: {fileID: 1346016986}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,34 +579,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2359393300878530666, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: frames
-      value: 
-      objectReference: {fileID: 297871908}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsAntsPrefabs.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1278084736}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsAntsPrefabs.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1506223265}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsAntsPrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 549638893}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsTermitePrefabs.Array.data[0]'
-      value: 
-      objectReference: {fileID: 433997642}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsTermitePrefabs.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1599535812}
-    - target: {fileID: 5841790632028101911, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      propertyPath: 'unitsTermitePrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1916103405}
+    - target: {fileID: 5470757407828173346, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470757407828173346, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470757407828173346, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -114
+      objectReference: {fileID: 0}
     - target: {fileID: 9033322989555338103, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_Name
       value: SceneDefault_Prefab

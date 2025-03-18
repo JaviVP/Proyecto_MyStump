@@ -272,8 +272,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2043520950}
-        m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: ChampionshipButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2181,7 +2181,10 @@ MonoBehaviour:
   settingsPanel: {fileID: 0}
   wonText: {fileID: 0}
   resetText: {fileID: 0}
-  turnUI: {fileID: 0}
+  antHighlight: {fileID: 0}
+  termHighlight: {fileID: 0}
+  antTiles: {fileID: 0}
+  termTiles: {fileID: 0}
 --- !u!4 &2043520951
 Transform:
   m_ObjectHideFlags: 0
