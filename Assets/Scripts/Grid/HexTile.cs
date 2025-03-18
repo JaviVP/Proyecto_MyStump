@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public enum HexState { Neutral, Ants, Termites }
@@ -25,7 +26,10 @@ public class HexTile : MonoBehaviour
         state = newState;
         UpdateTileAppearance();
     }
-
+    public void ChangeColor(Color c)
+    {
+        tileRenderer.material.color = c;
+    }
     private void UpdateTileAppearance()
     {
         Color tileColor;

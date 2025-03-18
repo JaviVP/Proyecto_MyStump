@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static GameManager;
 using static HexGrid;
 
@@ -95,18 +97,30 @@ public class UnitTerraFormer : Unit
 
         // ✅ 4️⃣ Clear highlights after moving
         ClearHighlights();
+
+
         StartCoroutine(Animation(targetPosition));
         return true;
     }
 
     IEnumerator Animation(Vector2Int targetPos)
     {
-        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x,targetPos.y);
+        List<HexTile> way= FindPath(AxialCoords, targetPos);
+        if (way != null)
+        {
+            for (int i = 0; i < way.Count; i++)
+            {
+                HexTile tile = way[i];
+                tile.ChangeColor(Color.black);
+            }
+        }
+
+        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
         float speed = 10.0f;
         //float minDistance = 0.2f;
         transform.LookAt(endPos);
 
-        while(true)
+        while (true)
         {
             transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
             yield return new WaitForSeconds(0.05f);
@@ -120,5 +134,81 @@ public class UnitTerraFormer : Unit
 
     }
 
-    
+
+    public List<HexTile> FindPath(Vector2Int start, Vector2Int target)
+    {
+        if (hexGrid.GetHexTile(start) == null || !hexGrid.GetHexTile(target) == null)
+        {
+            return new List<HexTile>(); // Return empty if start or target is invalid
+        }
+        HexTile startTile = hexGrid.GetHexTile(start);
+        HexTile targetTile = hexGrid.GetHexTile(target);
+
+        Queue<HexTile> queue = new Queue<HexTile>();
+        HashSet<HexTile> visited = new HashSet<HexTile>();
+        Dictionary<HexTile, HexTile> cameFrom = new Dictionary<HexTile, HexTile>();
+
+        queue.Enqueue(startTile);
+        visited.Add(startTile);
+
+        while (queue.Count > 0)
+        {
+            HexTile current = queue.Dequeue();
+
+            if (current.axialCoords == target)
+            {
+                return ReconstructPath(cameFrom, current);
+            }
+
+            foreach (HexTile neighbor in GetNeighbors(current))
+            {
+                if (!validMoveTiles.Contains(neighbor) || visited.Contains(neighbor))
+                {
+                    continue; // Ignore non-walkable or already visited nodes
+                }
+
+                visited.Add(neighbor);
+                queue.Enqueue(neighbor);
+                cameFrom[neighbor] = current; // Record the path
+            }
+        }
+        return new List<HexTile>();
+
+
+    }
+
+    private List<HexTile> GetNeighbors(HexTile tile)
+    {
+        List<HexTile> neighbors = new List<HexTile>();
+        Vector2Int[] directions = {
+            new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
+            new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
+        };
+
+        foreach (var direction in directions)
+        {
+            Vector2Int neighborPosition = tile.axialCoords + direction;
+            HexTile ntile= hexGrid.GetHexTile(neighborPosition);
+            //If the tile is in the list of validMoveTiles
+            if (!validMoveTiles.Contains(ntile))
+            {
+                neighbors.Add(ntile);
+            }
+        }
+
+        return neighbors;
+    }
+    private List<HexTile> ReconstructPath(Dictionary<HexTile, HexTile> cameFrom, HexTile current)
+    {
+        List<HexTile> totalPath = new List<HexTile> { current };
+
+        while (cameFrom.ContainsKey(current))
+        {
+            current = cameFrom[current];
+            totalPath.Add(current);
+        }
+
+        totalPath.Reverse(); // Reverse the path to get it from start to target
+        return totalPath;
+    }
 }
