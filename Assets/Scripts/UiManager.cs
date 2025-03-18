@@ -11,6 +11,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
     [SerializeField] private GameObject turnUI;
+    [SerializeField] private GameObject antHighlight;
+    [SerializeField] private GameObject termHighlight;
     [SerializeField] private TextMeshProUGUI antTiles;
     [SerializeField] private TextMeshProUGUI termTiles;
 
@@ -132,6 +134,18 @@ public class UiManager : MonoBehaviour
 
         antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
         termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
+
+        if(GameManager.Instance.AntTurn() == 1)
+        {
+            antHighlight.SetActive(true);
+            termHighlight.SetActive(false);
+        }
+        else if (GameManager.Instance.TermTurn() == 0)
+        {
+            antHighlight.SetActive(false);
+            termHighlight.SetActive(true);
+
+        }
 
     }
 
