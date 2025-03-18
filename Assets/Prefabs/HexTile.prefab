@@ -124,4 +124,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoords: {x: 0, y: 0}
   state: 0
-  highlightMaterial: {fileID: 2100000, guid: 772bd00d1a5786747a3a334fce82f069, type: 2}
+  highlightMaterial: {fileID: -876546973899608171, guid: 17962f810e512b742a492c4a20bdb3f3, type: 3}
+  baseMaterial: {fileID: 0}

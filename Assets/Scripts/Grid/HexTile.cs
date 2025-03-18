@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public enum HexState { Neutral, Ants, Termites }
@@ -9,7 +10,7 @@ public class HexTile : MonoBehaviour
     private Renderer tileRenderer;
 
     [SerializeField] private Material highlightMaterial; // Assign in Inspector
-    private Material baseMaterial;
+    [SerializeField] private Material baseMaterial;
 
     private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
@@ -25,7 +26,10 @@ public class HexTile : MonoBehaviour
         state = newState;
         UpdateTileAppearance();
     }
-
+    public void ChangeColor(Color c)
+    {
+        tileRenderer.material.color = c;
+    }
     private void UpdateTileAppearance()
     {
         Color tileColor;
@@ -46,13 +50,33 @@ public class HexTile : MonoBehaviour
 
     public void HighlightTile()
     {
-        tileRenderer.material = highlightMaterial; // Apply the highlight shader
-        highlightMaterial.SetColor(ColorProperty, new Color(1f, 1f, 0f, 1f)); // Set highlight color (yellow)
+
+
+        //tileRenderer.material = highlightMaterial; // Apply the highlight shader
+        //highlightMaterial.SetColor(ColorProperty, new Color(1f, 1f, 0f, 1f)); // Set highlight color (yellow)
+        var materials = tileRenderer.materials;
+        Material[] newMaterials = new Material[materials.Length + 1];
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            newMaterials[i] = materials[i];
+        }
+        newMaterials[newMaterials.Length - 1] = highlightMaterial;
+
+        tileRenderer.materials = newMaterials;
+
     }
 
     public void ResetTileColor()
     {
-        tileRenderer.material = baseMaterial;
+        //tileRenderer.material = baseMaterial;
+        var materials = tileRenderer.materials;
+        if (materials.Length > 1)
+        {
+            tileRenderer.materials = new Material[] { materials[0] };
+        }
+       
+
         UpdateTileAppearance(); // Restore original tile material
     }
 }
