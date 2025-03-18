@@ -6,8 +6,9 @@ public class UnitPanchulina : Unit
 {
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
-    public bool hasMoved = false;
+    private bool firstMove;
 
+    public bool FirstMove { get => firstMove; set => firstMove = value; }
 
     private void Start()
     {
@@ -36,78 +37,81 @@ public class UnitPanchulina : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-        Debug.Log(hasMoved);
-        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
-        if (targetTile == null || !validMoveTiles.Contains(targetTile))
+        if (!FirstMove)
         {
-            ClearHighlights();
-            return false; // ❌ Invalid move
-        }
+            HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+            if (targetTile == null || !validMoveTiles.Contains(targetTile))
+            {
+                ClearHighlights();
+                return false; // ❌ Invalid move
+            }
 
-        if (!hasMoved)
-        {
+            // ✅ First Move: Move normally
             hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
             AxialCoords = targetPosition;
             transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
             targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
             ClearHighlights();
 
-            hasMoved = true;
 
-            Debug.Log(hasMoved);
-        }
-        // ✅ First Move: Move normally
-        
+            List<HexTile> secondMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
-        else if (hasMoved)
-        {
-            hasMoved = false;
-        }
-
-        
-        /*
-
-        List<HexTile> secondMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
-
-        foreach (HexTile tile in secondMoveOptions)
-        {
-            Unit enemyUnit = hexGrid.GetUnitInTile(tile.axialCoords);
-
-
-            validMoveTiles.Add(tile);
-            tile.HighlightTile();
-            if (enemyUnit == null)
+            foreach (HexTile tile in secondMoveOptions)
             {
-                
-            }
-            else if (EnumHelper.ConvertToTeam(tile.state) != this.Team)
-            {
-                Vector2Int pushPos = tile.axialCoords + (tile.axialCoords - AxialCoords);
-                HexTile pushTile = hexGrid.GetHexTile(pushPos);
+                Unit enemyUnit = hexGrid.GetUnitInTile(tile.axialCoords);
 
-                if (pushTile != null && hexGrid.GetUnitInTile(pushPos) == null)
+
+                validMoveTiles.Add(tile);
+                tile.HighlightTile();
+                if (enemyUnit == null)
                 {
-                    // ✅ Push enemy forward
-                    hexGrid.UpdateUnitPosition(tile.axialCoords, pushPos, enemyUnit);
-                    enemyUnit.AxialCoords = pushPos;
-                    enemyUnit.transform.position = hexGrid.AxialToWorld(pushPos.x, pushPos.y);
 
-                    // ✅ Convert pushed tiles to Panchulinas’ team
-                    tile.SetState(EnumHelper.ConvertToHexState(this.Team));
-                    pushTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+                }
+                else if (EnumHelper.ConvertToTeam(tile.state) != this.Team)
+                {
+                    Vector2Int pushPos = tile.axialCoords + (tile.axialCoords - AxialCoords);
+                    HexTile pushTile = hexGrid.GetHexTile(pushPos);
 
-                    // ✅ Move Panchulinas into enemy's original position
-                    hexGrid.UpdateUnitPosition(AxialCoords, tile.axialCoords, this);
-                    AxialCoords = tile.axialCoords;
-                    transform.position = hexGrid.AxialToWorld(tile.axialCoords.x, tile.axialCoords.y);
-                    break;
+                    if (pushTile != null && hexGrid.GetUnitInTile(pushPos) == null)
+                    {
+                        // ✅ Push enemy forward
+                        hexGrid.UpdateUnitPosition(tile.axialCoords, pushPos, enemyUnit);
+                        enemyUnit.AxialCoords = pushPos;
+                        enemyUnit.transform.position = hexGrid.AxialToWorld(pushPos.x, pushPos.y);
+
+                        // ✅ Convert pushed tiles to Panchulinas’ team
+                        tile.SetState(EnumHelper.ConvertToHexState(this.Team));
+                        pushTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+
+                        // ✅ Move Panchulinas into enemy's original position
+                        hexGrid.UpdateUnitPosition(AxialCoords, tile.axialCoords, this);
+                        AxialCoords = tile.axialCoords;
+                        transform.position = hexGrid.AxialToWorld(tile.axialCoords.x, tile.axialCoords.y);
+                        break;
+                    }
                 }
             }
+            firstMove = true;
+        }
+        else
+        {
+            HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+            if (targetTile == null || !validMoveTiles.Contains(targetTile))
+            {
+                ClearHighlights();
+                return false; // ❌ Invalid move
+            }
+
+            // ✅ First Move: Move normally
+            hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+            AxialCoords = targetPosition;
+            transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+            targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+            ClearHighlights();
+            firstMove = false;
         }
 
-        */
-
-        ClearHighlights(); // ✅ Remove highlights after movement
+        //ClearHighlights(); // ✅ Remove highlights after movement
         return true;
     }
 
