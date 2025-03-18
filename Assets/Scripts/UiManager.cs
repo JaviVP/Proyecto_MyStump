@@ -11,6 +11,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject wonText;
     [SerializeField] private GameObject resetText;
     [SerializeField] private GameObject turnUI;
+    [SerializeField] private TextMeshProUGUI antTiles;
+    [SerializeField] private TextMeshProUGUI termTiles;
 
     private bool touchEnabled = true;
 
@@ -42,8 +44,13 @@ public class UiManager : MonoBehaviour
             }
         }
     }
+    private void Update()
+    {
+        UpdateTiles();
 
-   
+    }
+
+
     public void PlayButton()
     {
 
@@ -120,6 +127,12 @@ public class UiManager : MonoBehaviour
         turnUI.GetComponent<TMP_Text>().text = content;
     }
 
-   
+   private void UpdateTiles()
+    {
+
+        antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
+        termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
+
+    }
 
 }

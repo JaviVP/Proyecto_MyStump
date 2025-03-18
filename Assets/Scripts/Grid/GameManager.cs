@@ -255,6 +255,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int NumberOfAntTiles()
+    {
+
+        return numberAntsTiles;
+
+    }
+
+    public int NumberOfTermTiles()
+    {
+
+        return numberTermitesTiles;
+
+    }
+
 }
 
 
