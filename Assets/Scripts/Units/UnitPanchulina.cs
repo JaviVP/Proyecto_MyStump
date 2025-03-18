@@ -6,6 +6,7 @@ public class UnitPanchulina : Unit
 {
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
+    private bool firstMove;
 
 
     private void Start()
@@ -32,62 +33,65 @@ public class UnitPanchulina : Unit
 
 
 
+
     public override bool Move(Vector2Int targetPosition)
     {
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
-        if (targetTile == null || !validMoveTiles.Contains(targetTile)) return false; // ❌ Invalid move
+        if (targetTile == null || !validMoveTiles.Contains(targetTile))
+        {
+            ClearHighlights();
+            return false; // ❌ Invalid move
+        }
 
         // ✅ First Move: Move normally
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
         AxialCoords = targetPosition;
         transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+        ClearHighlights() ;
 
-        // ✅ Second Move: Show new move options
-        validMoveTiles.Clear();
-        Vector2Int[] directions = {
-        new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
-        new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
-    };
+        List<HexTile> secondMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
-        foreach (Vector2Int direction in directions)
+        foreach (HexTile tile in secondMoveOptions)
         {
-            Vector2Int secondMovePos = AxialCoords + direction;
-            HexTile secondMoveTile = hexGrid.GetHexTile(secondMovePos);
-            Unit enemyUnit = hexGrid.GetUnitInTile(secondMovePos);
+            Unit enemyUnit = hexGrid.GetUnitInTile(tile.axialCoords);
 
-            if (secondMoveTile != null && enemyUnit == null)
+
+            validMoveTiles.Add(tile);
+            tile.HighlightTile();
+            if (enemyUnit == null)
             {
-                validMoveTiles.Add(secondMoveTile);
-                secondMoveTile.HighlightTile();
+                
             }
-            else if (enemyUnit != null && EnumHelper.ConvertToTeam(secondMoveTile.state) != this.Team)
+            else if (EnumHelper.ConvertToTeam(tile.state) != this.Team)
             {
-                Vector2Int pushPos = secondMovePos + direction;
+                Vector2Int pushPos = tile.axialCoords + (tile.axialCoords - AxialCoords);
                 HexTile pushTile = hexGrid.GetHexTile(pushPos);
 
                 if (pushTile != null && hexGrid.GetUnitInTile(pushPos) == null)
                 {
                     // ✅ Push enemy forward
-                    hexGrid.UpdateUnitPosition(secondMovePos, pushPos, enemyUnit);
+                    hexGrid.UpdateUnitPosition(tile.axialCoords, pushPos, enemyUnit);
                     enemyUnit.AxialCoords = pushPos;
                     enemyUnit.transform.position = hexGrid.AxialToWorld(pushPos.x, pushPos.y);
 
                     // ✅ Convert pushed tiles to Panchulinas’ team
-                    secondMoveTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+                    tile.SetState(EnumHelper.ConvertToHexState(this.Team));
                     pushTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
                     // ✅ Move Panchulinas into enemy's original position
-                    hexGrid.UpdateUnitPosition(AxialCoords, secondMovePos, this);
-                    AxialCoords = secondMovePos;
-                    transform.position = hexGrid.AxialToWorld(secondMovePos.x, secondMovePos.y);
+                    hexGrid.UpdateUnitPosition(AxialCoords, tile.axialCoords, this);
+                    AxialCoords = tile.axialCoords;
+                    transform.position = hexGrid.AxialToWorld(tile.axialCoords.x, tile.axialCoords.y);
                     break;
                 }
             }
         }
 
-        ClearHighlights(); // ✅ Remove highlights after movement
+        //ClearHighlights(); // ✅ Remove highlights after movement
         return true;
     }
+
 
 
 

@@ -156,11 +156,14 @@ public class GameManager : MonoBehaviour
                     Unit clickedUnit = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
                     Debug.Log(clickedTile.axialCoords);
 
-                    if (GameManager.Instance.selectedUnit == null)
+                    if (selectedUnit == null)
                     {
                         // Select the unit if it belongs to the current turn team
                         GameManager.Instance.SelectUnit(clickedUnit);
                         Debug.Log("click:" + clickedUnit);
+                    } else if (selectedUnit is UnitPanchulina)
+                    {
+
                     }
                     else
                     {
@@ -175,7 +178,10 @@ public class GameManager : MonoBehaviour
 
     public void SelectUnit(Unit unit)
     {
-        if (unit == null || movedUnits.Contains(unit) || unit.Team != currentTurn) return;
+        if (unit == null || movedUnits.Contains(unit) || unit.Team != currentTurn)
+        {
+            return;
+        }
 
         selectedUnit = unit;
         selectedUnit.OnSelected();
@@ -184,7 +190,10 @@ public class GameManager : MonoBehaviour
 
     public void MoveSelectedUnit(Vector2Int targetPosition)
     {
-        if (selectedUnit == null) return;
+        if (selectedUnit == null)
+        {
+            return;
+        }
 
         if (selectedUnit.Move(targetPosition))
         {
