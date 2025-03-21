@@ -79,6 +79,7 @@ public class UnitRunner : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
+        
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
@@ -118,21 +119,34 @@ public class UnitRunner : Unit
     {
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
         float speed = 10.0f;
-        //float minDistance = 0.2f;
+
+        // Establecemos la rotación de la unidad hacia la posición final
         transform.LookAt(endPos);
 
+        // Mantenemos la componente Y fija en 1.1 durante el movimiento
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+            // Movemos la unidad en dirección al objetivo, manteniendo la Y fija
+            Vector3 currentPos = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+
+            // Fijamos la componente Y a 1.1
+            currentPos.y = 0.1f;
+
+            // Actualizamos la posición de la unidad
+            transform.position = currentPos;
+
+            // Esperamos un pequeño intervalo antes de continuar
             yield return new WaitForSeconds(0.05f);
+
+            // Verificamos si hemos llegado a la posición final
             if (Vector3.Distance(transform.position, endPos) < 0.2f)
             {
                 break;
             }
         }
 
+        // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(2.0f);
-
     }
 
 
