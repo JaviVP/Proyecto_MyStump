@@ -14,12 +14,14 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject termHighlight;
     [SerializeField] private TextMeshProUGUI antTiles;
     [SerializeField] private TextMeshProUGUI termTiles;
-    [SerializeField] private GameObject turnScroll;
+    [SerializeField] private GameObject turnScrollAnts;
+    [SerializeField] private GameObject turnScrollTerm;
 
     private bool touchEnabled = true;
 
     private Button[] buttons;
-    private Slider scrollSlider;
+    private Slider scrollSliderAnts;
+    private Slider scrollSliderTerm;
     public static UiManager Instance { get; private set; }
     public bool TouchEnabled { get => touchEnabled; set => touchEnabled = value; }
 
@@ -37,7 +39,8 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        scrollSlider = turnScroll.GetComponent<Slider>();
+        scrollSliderAnts = turnScrollAnts.GetComponent<Slider>();
+        scrollSliderTerm = turnScrollTerm.GetComponent<Slider>();
         Time.timeScale = 1.0f;
         TouchEnabled = true;
         // Corrección de método obsoleto
@@ -55,8 +58,15 @@ public class UiManager : MonoBehaviour
 
     public void UpdateScroll()
     {
-        
-        scrollSlider.value = GameManager.Instance.LimitTurns;
+        if (GameManager.Instance.CurrentTurn == GameManager.Team.Termites)
+        {
+            scrollSliderAnts.value = GameManager.Instance.LimitTurns;
+        }
+        else
+        {
+            scrollSliderTerm.value = GameManager.Instance.LimitTurns;
+
+        }
     }
 
     public void PlayButton()
