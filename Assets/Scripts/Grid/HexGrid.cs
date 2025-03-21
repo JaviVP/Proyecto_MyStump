@@ -48,7 +48,7 @@ public class HexGrid : MonoBehaviour
         hexMap[new Vector2Int(2, -2)].SetState(HexState.Termites);
         hexMap[new Vector2Int(2, -1)].SetState(HexState.Termites);
 
-
+       
 
 
         hexMap[new Vector2Int(1, 1)].SetState(HexState.Ants);
@@ -116,12 +116,32 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    private void PlaceUnit(UnitPlacement placement, HexState owning, GameManager.Team team ,GameObject[] unitPrefabs)
+    private void PlaceUnit(UnitPlacement placement, HexState owning, GameManager.Team team, GameObject[] unitPrefabs)
     {
         if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
 
-        GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], AxialToWorld(placement.position.x, placement.position.y), Quaternion.identity);
-        //unitObj.name = unitPrefabs[(int)placement.unitType - 1].name;
+        // Obtén la posición en el mundo usando AxialToWorld
+        Vector3 worldPosition = AxialToWorld(placement.position.x, placement.position.y);
+
+        // Añadir el offset en el eje Y
+        worldPosition.y += 0.1f;
+
+        // Definir la rotación inicial (sin rotación, Quaternion.identity)
+        Quaternion rotation = Quaternion.identity;
+
+        // Asignar una rotación extra dependiendo del equipo
+        if (team == GameManager.Team.Termites)
+        {
+            rotation = Quaternion.Euler(0, 90, 0);  // 90 grados en Y para las termitas
+        }
+        else if (team == GameManager.Team.Ants)
+        {
+            rotation = Quaternion.Euler(0, -90, 0);  // -90 grados en Y para las hormigas
+        }
+
+        // Instanciar la unidad con la rotación ajustada
+        GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], worldPosition, rotation);
+
         Unit unit = unitObj.GetComponent<Unit>();
         unit.AxialCoords = placement.position;
         unit.Team = team;
