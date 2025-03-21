@@ -10,6 +10,7 @@ public class UnitTerraFormer : Unit
 {
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
+    private HashSet<HexTile> validMoveTilesAnimation = new HashSet<HexTile>(); // Store valid move tiles
 
 
     private void Start()
@@ -72,14 +73,15 @@ public class UnitTerraFormer : Unit
         {
             tile.ResetTileColor();
         }
-        validMoveTiles.Clear();
+        //validMoveTiles.Clear();
     }
 
 
     public override bool Move(Vector2Int targetPosition)
     {
-        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
 
+        HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+       
         // ✅ 1️⃣ Ensure target tile is valid for movement
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
@@ -89,7 +91,7 @@ public class UnitTerraFormer : Unit
 
         // ✅ 2️⃣ Move the unit to the new position
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-        AxialCoords = targetPosition;
+        //AxialCoords = targetPosition;
         //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
         // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
@@ -105,28 +107,36 @@ public class UnitTerraFormer : Unit
 
     IEnumerator Animation(Vector2Int targetPos)
     {
+        
         List<HexTile> way= FindPath(AxialCoords, targetPos);
         if (way != null)
         {
             for (int i = 0; i < way.Count; i++)
             {
                 HexTile tile = way[i];
-                tile.ChangeColor(Color.black);
+                //tile.ChangeColor(Color.blue);
             }
         }
 
-        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
+        
         float speed = 10.0f;
         //float minDistance = 0.2f;
-        transform.LookAt(endPos);
-
+        
+        int counter = 0;
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+            Vector3 endPos = hexGrid.AxialToWorld(way[counter].axialCoords.x, way[counter].axialCoords.y);
+            transform.LookAt(endPos);
+            transform.position = Vector3.MoveTowards(transform.position, endPos , speed * Time.deltaTime);
             yield return new WaitForSeconds(0.05f);
             if (Vector3.Distance(transform.position, endPos) < 0.2f)
             {
-                break;
+                
+                if (counter >= way.Count - 1)
+                {
+                    break;
+                }
+                counter++;
             }
         }
 
@@ -141,6 +151,7 @@ public class UnitTerraFormer : Unit
         {
             return new List<HexTile>(); // Return empty if start or target is invalid
         }
+        
         HexTile startTile = hexGrid.GetHexTile(start);
         HexTile targetTile = hexGrid.GetHexTile(target);
 
@@ -150,26 +161,40 @@ public class UnitTerraFormer : Unit
 
         queue.Enqueue(startTile);
         visited.Add(startTile);
-
+        
         while (queue.Count > 0)
         {
             HexTile current = queue.Dequeue();
-
+            if (current==null)
+            {
+               
+                continue;
+                
+            }
+            //current.ChangeColor(Color.black);
+            
             if (current.axialCoords == target)
             {
+                Debug.Log("-- Find it  --");
                 return ReconstructPath(cameFrom, current);
             }
-
+            
             foreach (HexTile neighbor in GetNeighbors(current))
             {
-                if (!validMoveTiles.Contains(neighbor) || visited.Contains(neighbor))
+            
+                
+                if ( visited.Contains(neighbor) || !validMoveTiles.Contains(neighbor))
                 {
                     continue; // Ignore non-walkable or already visited nodes
                 }
-
-                visited.Add(neighbor);
-                queue.Enqueue(neighbor);
-                cameFrom[neighbor] = current; // Record the path
+            
+                if (neighbor != null)
+                {
+                    
+                    visited.Add(neighbor);
+                    queue.Enqueue(neighbor);
+                    cameFrom[neighbor] = current; // Record the path
+                }
             }
         }
         return new List<HexTile>();
@@ -190,9 +215,11 @@ public class UnitTerraFormer : Unit
             Vector2Int neighborPosition = tile.axialCoords + direction;
             HexTile ntile= hexGrid.GetHexTile(neighborPosition);
             //If the tile is in the list of validMoveTiles
+
+            neighbors.Add(ntile);
             if (!validMoveTiles.Contains(ntile))
             {
-                neighbors.Add(ntile);
+                
             }
         }
 
