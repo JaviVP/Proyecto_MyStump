@@ -132,7 +132,8 @@ public class UnitTerraFormer : Unit
             yield return new WaitForSeconds(0.05f);
             if (Vector3.Distance(transform.position, endPos) < 0.2f)
             {
-                
+
+               
                 if (counter >= way.Count - 1)
                 {
                     break;
@@ -172,18 +173,18 @@ public class UnitTerraFormer : Unit
                 continue;
                 
             }
-            //current.ChangeColor(Color.black);
+           
             
             if (current.axialCoords == target)
             {
                 Debug.Log("-- Find it  --");
+
                 return ReconstructPath(cameFrom, current);
             }
             
             foreach (HexTile neighbor in GetNeighbors(current))
             {
             
-                
                 if ( visited.Contains(neighbor) || !validMoveTiles.Contains(neighbor))
                 {
                     continue; // Ignore non-walkable or already visited nodes
@@ -194,6 +195,7 @@ public class UnitTerraFormer : Unit
                     
                     visited.Add(neighbor);
                     queue.Enqueue(neighbor);
+                    current.ChangeColor(Color.green);
                     cameFrom[neighbor] = current; // Record the path
                 }
             }
@@ -218,10 +220,7 @@ public class UnitTerraFormer : Unit
             //If the tile is in the list of validMoveTiles
 
             neighbors.Add(ntile);
-            if (!validMoveTiles.Contains(ntile))
-            {
-                
-            }
+            
         }
 
         return neighbors;
