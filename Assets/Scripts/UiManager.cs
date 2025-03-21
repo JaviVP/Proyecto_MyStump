@@ -74,11 +74,18 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
+    public void NameSelector()
+    {
+        SceneManager.LoadScene(8);
+    }
     public void ChampionshipButton()
     {
-        //SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
-
+    public void ScoreBoardScene()
+    {
+        SceneManager.LoadScene(7);
+    }
     public void TutorialScene()
     {
         SceneManager.LoadScene(5);
