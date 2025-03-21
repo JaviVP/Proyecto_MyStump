@@ -166,22 +166,25 @@ public class GameManager : MonoBehaviour
                         GameManager.Instance.SelectUnit(clickedUnit);
                         // Debug.Log("click:" + clickedUnit);
                     }
+                    
                     else if (selectedUnit is UnitPanchulina)
                     {
-
-
                         UnitPanchulina up = (UnitPanchulina)selectedUnit;
-                        Debug.Log("Panchulina:" + up.FirstMove);
+                        //Debug.Log("Panchulina:" + up.FirstMove);
                         if (!up.FirstMove)
                         {
-                            selectedUnit.Move(clickedTile.axialCoords);
+                            if (!selectedUnit.Move(clickedTile.axialCoords))
+                            {
+                                selectedUnit = null;
+                            }
                         }
                         else
                         {
                             GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                         }
-                        Debug.Log("hola caracola");
+                        //Debug.Log("hola caracola");
                     }
+                    
                     else
                     {
                         // Move the selected unit
