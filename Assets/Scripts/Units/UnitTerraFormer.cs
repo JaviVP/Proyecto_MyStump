@@ -108,42 +108,55 @@ public class UnitTerraFormer : Unit
 
     IEnumerator Animation(Vector2Int targetPos)
     {
-        
-        List<HexTile> way= FindPath(AxialCoords, targetPos);
+        List<HexTile> way = FindPath(AxialCoords, targetPos);
         if (way != null)
         {
             for (int i = 0; i < way.Count; i++)
             {
                 HexTile tile = way[i];
-                //tile.ChangeColor(Color.blue);
+                //tile.ChangeColor(Color.blue); // Si deseas cambiar el color de las baldosas, lo puedes hacer aquí.
             }
         }
 
-        
         float speed = 10.0f;
-        //float minDistance = 0.2f;
-        
         int counter = 0;
+
         while (true)
         {
+            // Convertimos la posición axial a la posición en el mundo
             Vector3 endPos = hexGrid.AxialToWorld(way[counter].axialCoords.x, way[counter].axialCoords.y);
+
+            // Mantenemos la componente Y fija en 1.1
+            endPos.y = 0.1f; // Offset en Y durante toda la animación
+
+            // Hacemos que la unidad mire hacia la nueva posición
             transform.LookAt(endPos);
-            transform.position = Vector3.MoveTowards(transform.position, endPos , speed * Time.deltaTime);
+
+            // Movemos la unidad hacia la nueva posición
+            transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+
+            // Esperamos un corto tiempo para el siguiente paso
             yield return new WaitForSeconds(0.05f);
+
+            // Verificamos si la unidad ha llegado a la posición final
             if (Vector3.Distance(transform.position, endPos) < 0.2f)
             {
-
-               
+                // Si ya ha llegado al final de la lista de tiles, terminamos la animación
                 if (counter >= way.Count - 1)
                 {
                     break;
                 }
+
+                // De lo contrario, continuamos al siguiente tile
                 counter++;
             }
         }
-        AxialCoords = targetPos;
-        yield return new WaitForSeconds(2.0f);
 
+        // Actualizamos las coordenadas del juego
+        AxialCoords = targetPos;
+
+        // Esperamos un poco después de la animación
+        yield return new WaitForSeconds(2.0f);
     }
 
 
@@ -195,7 +208,7 @@ public class UnitTerraFormer : Unit
                     
                     visited.Add(neighbor);
                     queue.Enqueue(neighbor);
-                    current.ChangeColor(Color.green);
+                    //current.ChangeColor(Color.green);
                     cameFrom[neighbor] = current; // Record the path
                 }
             }
