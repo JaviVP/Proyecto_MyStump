@@ -11,11 +11,8 @@ public class ScoreboardManager : MonoBehaviour
     [SerializeField] private GameObject scoreEntryPrefab;   // Prefab para cada entrada
     [SerializeField] private int maxEntries = 10;           // Top 10
 
-    private const string NameListKey = "AllPlayerNames";
-
     private void Start()
     {
-        
         if (scoreboardContainer == null)
         {
             Debug.LogError("Scoreboard container is not assigned!");
@@ -43,8 +40,9 @@ public class ScoreboardManager : MonoBehaviour
 
         foreach (string playerName in playerNames)
         {
-            Debug.Log("Jugador guardado: " + playerName);  // Muestra cada nombre guardado
+            Debug.Log("Jugador guardado: " + playerName);  // Mostrar cada nombre guardado
         }
+
         // Lista para almacenar las estadísticas de todos los jugadores
         List<PlayerStats> allStats = new List<PlayerStats>();
 
@@ -54,7 +52,6 @@ public class ScoreboardManager : MonoBehaviour
             {
                 PlayerStats stats = LoadStatsForPlayer(playerName);
                 allStats.Add(stats); // Guardamos las estadísticas del jugador
-
             }
             catch (Exception e)
             {
@@ -62,7 +59,7 @@ public class ScoreboardManager : MonoBehaviour
             }
         }
 
-        // Ordenar las estadísticas por "PartidasGanadas" (o cualquier otra métrica)
+        // Ordenar por partidas ganadas y limitar al top 10
         allStats = allStats.OrderByDescending(stat => stat.PartidasGanadas).Take(maxEntries).ToList();
 
         // Limpiar el contenedor de scoreboard
@@ -71,9 +68,12 @@ public class ScoreboardManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // Instanciar las entradas para los primeros 10 jugadores
-        foreach (PlayerStats stats in allStats)
+        // Instanciar las entradas con número de ranking
+        for (int i = 0; i < allStats.Count; i++)
         {
+            PlayerStats stats = allStats[i];
+            int rank = i + 1; // Top 1, Top 2...
+
             GameObject scoreEntry = Instantiate(scoreEntryPrefab, scoreboardContainer);
             ScoreEntryUI entryUI = scoreEntry.GetComponent<ScoreEntryUI>();
 
@@ -83,8 +83,8 @@ public class ScoreboardManager : MonoBehaviour
                 continue;
             }
 
-            // Configurar la entrada del scoreboard
-            entryUI.SetupEntry(stats.Nombre, stats.PartidasGanadas, stats.HormigasEliminadas, stats.TermitasEliminadas, stats.ParcelasHormigas, stats.ParcelasTermitas);
+            // Ahora incluye el número de ranking
+            entryUI.SetupEntry(rank, stats.Nombre, stats.PartidasGanadas, stats.HormigasEliminadas, stats.TermitasEliminadas, stats.ParcelasHormigas, stats.ParcelasTermitas);
         }
     }
 
@@ -99,14 +99,12 @@ public class ScoreboardManager : MonoBehaviour
 
     private PlayerStats LoadStatsForPlayer(string name)
     {
-        // Si no existen estadísticas guardadas para este jugador, las inicializamos a cero
         int partidasGanadas = PlayerPrefs.GetInt($"PartidasGanadas_{name}", 0);
         int hormigasEliminadas = PlayerPrefs.GetInt($"HormigasEliminadas_{name}", 0);
         int termitasEliminadas = PlayerPrefs.GetInt($"TermitasEliminadas_{name}", 0);
         int parcelasHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{name}", 0);
         int parcelasTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{name}", 0);
 
-        // Devolver las estadísticas
         return new PlayerStats
         {
             Nombre = name,
@@ -117,11 +115,8 @@ public class ScoreboardManager : MonoBehaviour
             ParcelasTermitas = parcelasTermitas
         };
     }
-
-
 }
 
-// Clase auxiliar para guardar los datos de cada jugador
 [System.Serializable]
 public class PlayerStats
 {

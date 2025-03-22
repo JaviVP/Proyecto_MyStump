@@ -80,6 +80,9 @@ public class UiManager : MonoBehaviour
     }
     public void ChampionshipButton()
     {
+        int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3);
+        Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
+
         SceneManager.LoadScene(6);
     }
     public void ScoreBoardScene()
@@ -170,5 +173,7 @@ public class UiManager : MonoBehaviour
     {
         turnUI.GetComponent<TMP_Text>().text = content;
     }
+
+
 
 }

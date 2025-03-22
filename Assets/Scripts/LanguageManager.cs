@@ -55,7 +55,7 @@ public class LanguageManager : MonoBehaviour
             LocalizationSettings.SelectedLocale = newLocale;
             PlayerPrefs.SetInt(LANGUAGE_KEY, currentLanguageIndex);
             PlayerPrefs.Save();
-            Debug.Log("Idioma cambiado a: " + newLocale.LocaleName);
+            //Debug.Log("Idioma cambiado a: " + newLocale.LocaleName);
         }
         else
         {
