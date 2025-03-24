@@ -31,27 +31,32 @@ public class UnitPanchulina : Unit
         {
             Unit unitOnTile = hexGrid.GetUnitInTile(tile.axialCoords);
 
-            if (tile.state == HexState.Neutral || tile.state == EnumHelper.ConvertToHexState(this.Team)) // ✅ Ensure tile is of its team
+            // ✅ Check if tile is neutral, team-owned, OR occupied by an enemy
+            bool isFriendlyOrNeutral = (tile.state == HexState.Neutral || tile.state == EnumHelper.ConvertToHexState(this.Team));
+            bool isEnemyTile = (unitOnTile != null && unitOnTile.Team != this.Team);
+
+            if (!firstMove && isFriendlyOrNeutral && unitOnTile == null)
             {
-                
-                if (!firstMove && unitOnTile == null)
+                // ✅ First move - can move onto empty friendly or neutral tiles
+                validMoveTiles.Add(tile);
+                tile.HighlightTile();
+            }
+            else if (firstMove)
+            {
+                // ✅ Second move - allow movement onto empty tiles AND highlight enemies
+                if (isFriendlyOrNeutral && unitOnTile == null)
                 {
                     validMoveTiles.Add(tile);
                     tile.HighlightTile();
                 }
-                else if (firstMove && unitOnTile == null)
+                else if (isEnemyTile) // ✅ Enemy tile is now considered separately
                 {
                     validMoveTiles.Add(tile);
                     tile.HighlightTile();
-                    if (unitOnTile != null && unitOnTile.Team != this.Team)
-                    {
-                        validMoveTiles.Add(tile);
-                        tile.HighlightTile();
-                    }
-                    
                 }
             }
         }
+
     }
 
 
@@ -165,24 +170,28 @@ public class UnitPanchulina : Unit
             ClearHighlights();
             firstMove = true;
             OnSelected();
+
         }
         else
         {
             if (targetTile == null || !validMoveTiles.Contains(targetTile))
             {
-                //return false; // ❌ Invalid move
+                return false; // ❌ Invalid move
                 
+                
+            } else
+            {
+                // ✅ First Move: Move normally
+                hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+                AxialCoords = targetPosition;
+                transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+
+                targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+
+                ClearHighlights();
+                firstMove = false;
+
             }
-            
-            // ✅ First Move: Move normally
-            hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-            AxialCoords = targetPosition;
-            transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
-
-            targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
-
-            ClearHighlights();
-            firstMove = false;
             
         }
         return true;

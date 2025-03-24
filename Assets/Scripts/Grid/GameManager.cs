@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         // DontDestroyOnLoad(gameObject);
     }
 
-    // Nueva variable para bloquear las entradas t·ctiles durante la transiciÛn
+    // Nueva variable para bloquear las entradas t√°ctiles durante la transici√≥n
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //Debug.Log(Screen.safeArea);
-        // Comprobamos si est· en transiciÛn (si es true, desactivamos las entradas t·ctiles)
+        // Comprobamos si est√° en transici√≥n (si es true, desactivamos las entradas t√°ctiles)
         if (brain.IsBlending)
         {
             disableTouchInputDuringTransition = true;
@@ -82,11 +82,11 @@ public class GameManager : MonoBehaviour
             disableTouchInputDuringTransition = false;
         }
 
-        // Si las entradas t·ctiles est·n bloqueadas, no procesamos el movimiento t·ctil
+        // Si las entradas t√°ctiles est√°n bloqueadas, no procesamos el movimiento t√°ctil
         if (disableTouchInputDuringTransition)
             return;
         //PC
-        // RaycastPC(); ACTIVAR LA FUNCION TAMBI…N
+        // RaycastPC(); ACTIVAR LA FUNCION TAMBI√âN
         //Tablet
         if (UiManager.Instance.TouchesEnabled() == true)
         {
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
                 // Convertimos las coordenadas del toque en un rayo
                 Ray ray = mainCamera.ScreenPointToRay(touch.position);
 
-                // Comprobamos si el rayo colisiona con alg˙n objeto
+                // Comprobamos si el rayo colisiona con alg√∫n objeto
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     HexTile clickedTile = hit.collider.GetComponent<HexTile>();
@@ -210,21 +210,23 @@ public class GameManager : MonoBehaviour
 
     public void MoveSelectedUnit(Vector2Int targetPosition)
     {
-        if (selectedUnit == null)
+        if (selectedUnit == null) return;
+
+        bool moveSuccess = selectedUnit.Move(targetPosition);
+
+        if (moveSuccess)
         {
-            return;
+            movedUnits.Add(selectedUnit); // ‚úÖ Mark unit as moved
+
+            // ‚úÖ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
+            if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
+            {
+                selectedUnit = null;
+                CheckTurnEnd();
+            }
         }
-
-        if (selectedUnit.Move(targetPosition))
-        {
-            movedUnits.Add(selectedUnit); // Mark unit as moved
-
-            CheckTurnEnd();
-        }
-
-        selectedUnit = null;
-
     }
+
 
 
     private HexState CheckMoreColorTiles()
