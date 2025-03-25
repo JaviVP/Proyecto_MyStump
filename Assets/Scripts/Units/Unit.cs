@@ -1,5 +1,8 @@
+using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -23,9 +26,32 @@ public abstract class Unit : MonoBehaviour
     public abstract void OnSelected();
 
     public abstract void ClearHighlights();
-    
 
-    
+    public void Update()
+    {
+        Debug.Log(GetComponent<Unit>());
+        string[] partes = GetComponent<Unit>().ToString().Split("(");
+        if (partes.Length > 0 )
+        {
+            if (partes[0].Contains("Panchulina"))
+            {
+                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Pan";
+            }
+            else if (partes[0].Contains("Terra"))
+            {
+                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Terra";
+            }
+            else
+            {
+                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Runner";
+            }
+            //transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = partes[0];
+            transform.GetChild(0).transform.LookAt(new Vector3(0,0,25.0f));
+        }
+    }
+
+
+
 
 
 
