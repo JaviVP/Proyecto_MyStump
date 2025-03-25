@@ -17,6 +17,9 @@ public class UnitTerraFormer : Unit
     private void Start()
     {
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+       
+
+
     }
 
 
@@ -162,6 +165,9 @@ public class UnitTerraFormer : Unit
 
     public List<HexTile> FindPath(Vector2Int start, Vector2Int target)
     {
+        
+
+
         if (hexGrid.GetHexTile(start) == null || !hexGrid.GetHexTile(target) == null)
         {
             return new List<HexTile>(); // Return empty if start or target is invalid
@@ -205,11 +211,19 @@ public class UnitTerraFormer : Unit
             
                 if (neighbor != null)
                 {
+                    //With the same color
+
                     
-                    visited.Add(neighbor);
-                    queue.Enqueue(neighbor);
-                    //current.ChangeColor(Color.green);
-                    cameFrom[neighbor] = current; // Record the path
+                    Debug.Log("Team: "+ this.Team+ "-->estado: "+neighbor.state);
+                    if (this.Team.ToString()==neighbor.state.ToString())
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue(neighbor);
+
+                        cameFrom[neighbor] = current; // Record the path
+                    }
+
+                    
                 }
             }
         }
