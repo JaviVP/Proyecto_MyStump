@@ -33,20 +33,23 @@ public abstract class Unit : MonoBehaviour
         string[] partes = GetComponent<Unit>().ToString().Split("(");
         if (partes.Length > 0 )
         {
-            if (partes[0].Contains("Panchulina"))
+            if (transform.GetChild(0).gameObject.GetComponent<TMP_Text>())
             {
-                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Pan";
+                if (partes[0].Contains("Panchulina"))
+                {
+                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Pan";
+                }
+                else if (partes[0].Contains("Terra"))
+                {
+                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Terra";
+                }
+                else
+                {
+                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Runner";
+                }
+                //transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = partes[0];
+                transform.GetChild(0).transform.LookAt(new Vector3(0, 0, 25.0f));
             }
-            else if (partes[0].Contains("Terra"))
-            {
-                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Terra";
-            }
-            else
-            {
-                transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Runner";
-            }
-            //transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = partes[0];
-            transform.GetChild(0).transform.LookAt(new Vector3(0,0,25.0f));
         }
     }
 
