@@ -210,21 +210,29 @@ public class GameManager : MonoBehaviour
 
     public void MoveSelectedUnit(Vector2Int targetPosition)
     {
-        if (selectedUnit == null) return;
+        if (selectedUnit == null)
+        {
+            return;
+        }
 
-        bool moveSuccess = selectedUnit.Move(targetPosition);
+        //bool moveSuccess = selectedUnit.Move(targetPosition);
 
-        if (moveSuccess)
+        if (selectedUnit.Move(targetPosition))
         {
             movedUnits.Add(selectedUnit); // ✅ Mark unit as moved
 
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
-                selectedUnit = null;
+                
                 CheckTurnEnd();
             }
         }
+        if (!(selectedUnit is UnitPanchulina))
+        {
+            selectedUnit = null;
+        }
+        
     }
 
 
