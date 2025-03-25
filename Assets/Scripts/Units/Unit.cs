@@ -11,6 +11,7 @@ public abstract class Unit : MonoBehaviour
     private GameManager.Team team;
 
 
+
     //private bool isMoving = false;
 
     public Vector2Int AxialCoords { get => axialCoords; set => axialCoords = value; }
