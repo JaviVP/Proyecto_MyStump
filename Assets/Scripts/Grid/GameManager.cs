@@ -141,75 +141,80 @@ public class GameManager : MonoBehaviour
     /// 
 
 
+    private Vector2 touchStartPos; // Stores where the touch began
+    private bool isDragging = false; // Detects if the player is dragging
+
     private void RaycastTablet()
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);  // Tomamos el primer toque
+            Touch touch = Input.GetTouch(0);
 
-            // Solo procesamos el toque al comenzar (TouchPhase.Began)
-            if (touch.phase == TouchPhase.Began)
+            switch (touch.phase)
             {
-                // Convertimos las coordenadas del toque en un rayo
-                Ray ray = mainCamera.ScreenPointToRay(touch.position);
+                case TouchPhase.Began:
+                    touchStartPos = touch.position;
+                    isDragging = false; // Reset dragging flag
+                    break;
 
-                // Comprobamos si el rayo colisiona con algún objeto
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-
-                    HexTile clickedTile = null;
-                    clickedTile = hit.collider.GetComponent<HexTile>();
-                    if (clickedTile == null && hit.collider.transform.root.GetComponent<Unit>())
+                case TouchPhase.Moved:
+                    if (Vector2.Distance(touch.position, touchStartPos) > 10f) // 10 pixels threshold
                     {
-                        float x = hit.collider.transform.root.transform.position.x;
-                        float z = hit.collider.transform.root.transform.position.z;
-                        Vector2Int pos = hexGrid.WorldToAxial(x, z);
-                        clickedTile = hexGrid.GetHexTile(pos);
-
+                        isDragging = true; // Set dragging flag if moved significantly
                     }
-                    if (clickedTile == null) return;
-                    //Update selected Unit on the hexGrid
-                    //HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+                    break;
 
+                case TouchPhase.Ended:
+                    if (isDragging) return; // If dragging occurred, ignore selection
 
-                    Unit clickedUnit = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
-                    //Debug.Log(clickedTile.axialCoords);
-
-                    if (selectedUnit == null)
+                    Ray ray = mainCamera.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(ray, out RaycastHit hit))
                     {
-                        // Select the unit if it belongs to the current turn team
-                        GameManager.Instance.SelectUnit(clickedUnit);
-                        // Debug.Log("click:" + clickedUnit);
-                    }
-                    
-                    else if (selectedUnit is UnitPanchulina)
-                    {
-                        UnitPanchulina up = (UnitPanchulina)selectedUnit;
-                        //Debug.Log("Panchulina:" + up.FirstMove);
-                        if (!up.FirstMove)
+                        HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+
+                        // If no tile was clicked, check if a unit was clicked
+                        if (clickedTile == null)
                         {
-                            if (!selectedUnit.Move(clickedTile.axialCoords))
+                            Unit clickedUnit = hit.collider.GetComponentInParent<Unit>();
+                            if (clickedUnit != null)
                             {
-                                selectedUnit = null;
+                                clickedTile = hexGrid.GetHexTile(clickedUnit.AxialCoords);
+                            }
+                        }
+
+                        if (clickedTile == null) return;
+
+                        Unit clickedUnitOnTile = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
+
+                        if (selectedUnit == null)
+                        {
+                            GameManager.Instance.SelectUnit(clickedUnitOnTile);
+                        }
+                        else if (selectedUnit is UnitPanchulina panchulinas)
+                        {
+                            if (!panchulinas.FirstMove)
+                            {
+                                if (!selectedUnit.Move(clickedTile.axialCoords))
+                                {
+                                    selectedUnit = null;
+                                }
+                            }
+                            else
+                            {
+                                GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                             }
                         }
                         else
                         {
                             GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                         }
-                        //Debug.Log("hola caracola");
                     }
-                    
-                    else
-                    {
-                        // Move the selected unit
-                        GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
-                    }
-
-                }
+                    break;
             }
         }
     }
+
+
 
     public void SelectUnit(Unit unit)
     {
