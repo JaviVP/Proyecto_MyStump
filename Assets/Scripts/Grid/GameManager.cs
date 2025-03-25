@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     private Camera mainCamera;
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
+    private bool lockTiles = false;
+
 
     //Limit of turns
     private float limitTurns;
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public float LimitTurns { get => limitTurns; set => limitTurns = value; }
     public Team CurrentTurn { get => currentTurn; set => currentTurn = value; }
+    public bool DisableTouchInputDuringTransition { get => disableTouchInputDuringTransition; set => disableTouchInputDuringTransition = value; }
+    public bool LockTiles { get => lockTiles; set => lockTiles = value; }
 
     private Unit selectedUnit = null;
 
@@ -66,6 +71,7 @@ public class GameManager : MonoBehaviour
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
         //hexGrid.CreateTerraMallaProve(); 
         HexState result = CheckMoreColorTiles();
+        hexGrid.SelectTeam(Team.Ants);
         //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
     }
 
@@ -75,15 +81,15 @@ public class GameManager : MonoBehaviour
         // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
         if (brain.IsBlending)
         {
-            disableTouchInputDuringTransition = true;
+            DisableTouchInputDuringTransition = true;
         }
         else
         {
-            disableTouchInputDuringTransition = false;
+            DisableTouchInputDuringTransition = false;
         }
 
         // Si las entradas táctiles están bloqueadas, no procesamos el movimiento táctil
-        if (disableTouchInputDuringTransition)
+        if (DisableTouchInputDuringTransition)
             return;
         //PC
         // RaycastPC(); ACTIVAR LA FUNCION TAMBIÉN
@@ -146,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     private void RaycastTablet()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !lockTiles)
         {
             Touch touch = Input.GetTouch(0);
 

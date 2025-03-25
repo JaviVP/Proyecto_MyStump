@@ -104,7 +104,7 @@ public class UnitTerraFormer : Unit
         // ✅ 4️⃣ Clear highlights after moving
         ClearHighlights();
 
-
+        GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
         return true;
     }
@@ -159,7 +159,8 @@ public class UnitTerraFormer : Unit
         AxialCoords = targetPos;
 
         // Esperamos un poco después de la animación
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.Instance.LockTiles = false;
     }
 
 
