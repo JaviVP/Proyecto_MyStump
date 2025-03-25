@@ -164,7 +164,6 @@ public class UnitPanchulina : Unit
             hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
             AxialCoords = targetPosition;
             transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
-
             targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
             ClearHighlights();
@@ -177,9 +176,8 @@ public class UnitPanchulina : Unit
             if (targetTile == null || !validMoveTiles.Contains(targetTile))
             {
                 return false; // ❌ Invalid move
-                
-                
-            } else
+            } 
+            else
             {
                 // ✅ First Move: Move normally
                 hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
@@ -206,6 +204,13 @@ public class UnitPanchulina : Unit
         }
         validMoveTiles.Clear();
     }
+
+
+
+
+
+
+
 
 
 }
