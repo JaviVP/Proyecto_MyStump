@@ -156,7 +156,22 @@ public class GameManager : MonoBehaviour
                 // Comprobamos si el rayo colisiona con algún objeto
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+
+                    HexTile clickedTile = null;
+                    clickedTile = hit.collider.GetComponent<HexTile>();
+                    if (clickedTile == null && hit.collider.transform.root.GetComponent<Unit>())
+                    {
+                        float x = hit.collider.transform.root.transform.position.x;
+                        float z = hit.collider.transform.root.transform.position.z;
+                        Vector2Int pos = hexGrid.WorldToAxial(x, z);
+                        clickedTile = hexGrid.GetHexTile(pos);
+
+                    }
+                    if (clickedTile == null) return;
+                    //Update selected Unit on the hexGrid
+                    //HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+
+
                     Unit clickedUnit = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
                     //Debug.Log(clickedTile.axialCoords);
 

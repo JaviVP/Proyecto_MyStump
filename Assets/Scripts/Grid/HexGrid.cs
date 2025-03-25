@@ -90,6 +90,19 @@ public class HexGrid : MonoBehaviour
         float z = hexSpacing * (3f / 2f * r);
         return new Vector3(x, 0f, z);
     }
+    public Vector2Int WorldToAxial(float x, float z)
+    {
+        // Primero, calculamos el valor de r
+        float r = (2f / 3f) * (z / hexSpacing);
+
+        // Luego, calculamos el valor de q
+        float q = (x / (hexSpacing * Mathf.Sqrt(3f))) - (r / 2f);
+
+        // Convertimos q y r a enteros y los devolvemos como Vector2Int
+        return new Vector2Int(Mathf.RoundToInt(q), Mathf.RoundToInt(r));
+    }
+
+
     /*
     public Vector3 AxialToWorld(int q, int r)
     {
