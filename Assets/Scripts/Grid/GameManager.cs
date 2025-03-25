@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
-        limitTurns = 20;
+        limitTurns = 10;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid

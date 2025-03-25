@@ -37,6 +37,7 @@ public class CamaraCenital : MonoBehaviour
         if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera && UiManager.Instance.TouchesEnabled() == true)
         {
             ZoomCamera();
+           
         }
 
     }
