@@ -29,7 +29,7 @@ public abstract class Unit : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(GetComponent<Unit>());
+        
         string[] partes = GetComponent<Unit>().ToString().Split("(");
         if (partes.Length > 0 )
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static GameManager;
@@ -32,7 +33,52 @@ public class HexGrid : MonoBehaviour
         //Testing
         //TerraFormerTilesProves();
     }
+    public void SelectTeam(Team team)
+    {
+        Debug.Log("Desmarco");
+        foreach (Vector2Int pos in units.Keys)
+        {
+            
+            Unit unit = GetUnitInTile(pos);
+            if (unit != null && unit.UnitRenderer!=null)
+            {
+                Debug.Log("V:" + unit.AxialCoords + " T:" + unit.Team.ToString() + " G:" + unit.UnitRenderer.name);
+                for (int i=0; i< unit.UnitRenderer.transform.childCount; i++)
+                {
+                    
+                    if (unit.UnitRenderer.transform.GetChild(i).GetComponent<MeshRenderer>())
+                    {
+                        if (unit.Team == team)
+                        {
+                            Color c;
+                            if (team== Team.Ants)
+                            {
+                                c = Color.red;
+                            }
+                            else
+                            {
+                                c = Color.yellow;
+                            }
+                            unit.UnitRenderer.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = c ;
+                        }
+                        else
+                        {
+                            unit.UnitRenderer.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.gray;
+                        }
+                        
+                    }
 
+                }
+                
+               
+                
+                
+            }
+            // 'unit' represents the current 'Unit' object in the dictionary
+            //Console.WriteLine(unit); // or any other action you want to perform with the unit
+        }
+
+    }
     private void TerraFormerTilesProves()
     {
         hexMap[new Vector2Int(-3,1)].SetState(HexState.Termites);
@@ -156,6 +202,7 @@ public class HexGrid : MonoBehaviour
         GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], worldPosition, rotation);
 
         Unit unit = unitObj.GetComponent<Unit>();
+        unit.UnitRenderer = unitObj;
         unit.AxialCoords = placement.position;
         unit.Team = team;
 

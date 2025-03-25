@@ -284,6 +284,21 @@ public class GameManager : MonoBehaviour
         {
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+
+            if (CurrentTurn == Team.Ants)
+            {
+                hexGrid.SelectTeam(Team.Ants);
+                   
+            }
+            else if (CurrentTurn == Team.Termites)
+            {
+
+                hexGrid.SelectTeam(Team.Termites);
+               
+
+            }
+
+
             limitTurns--;
             UiManager.Instance.UpdateScroll();
             if (limitTurns <= 0)
