@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
        
-        limitTurns = 6;
+        limitTurns = 20;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
@@ -314,17 +314,18 @@ public class GameManager : MonoBehaviour
                 if (result == HexState.Neutral)
                 {
                     winner = "Draw";
+                    UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
                 }
                 else
                 {
                     winner = result.ToString();
                     inputPanel.SetActive(true);
+                    UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
 
-                  
                 }
                
                 endPanel.SetActive(true);
-                UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+                
                 UiManager.Instance.TouchEnabled = false;
                 //FIN DE PARTIDA
                 //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);

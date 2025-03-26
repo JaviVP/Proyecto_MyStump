@@ -107,6 +107,7 @@ public class NameSelector : MonoBehaviour
         Debug.Log(PlayerPrefs.GetInt($"ParcelasTermitas_{newName}"));
         ShowMessage("¡Nombre asignado!");
         inputPanel.SetActive(false);
+        text1.enabled = true;
         StartCoroutine(CloseKeyboard());
         
     }
