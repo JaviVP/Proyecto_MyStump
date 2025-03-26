@@ -306,7 +306,7 @@ RectTransform:
   m_LocalScale: {x: 1.2799999, y: 1.2799999, z: 1.2799999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1346016987}
+  m_Father: {fileID: 973643678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -442,7 +442,7 @@ RectTransform:
   m_LocalScale: {x: 1.2799999, y: 1.2799999, z: 1.2799999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1346016987}
+  m_Father: {fileID: 973643678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -896,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPanel: {fileID: 1213203145}
+  inputPanel: {fileID: 973643677}
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
@@ -924,10 +925,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField1: {fileID: 1741762326}
+  inputPanel: {fileID: 973643677}
   text1: {fileID: 166846793}
   changeNameButton1: {fileID: 997638628}
   messageText: {fileID: 194161455}
   messageDuration: 2
+  playerStats:
+    Nombre: 
+    PartidasGanadas: 0
+    HormigasEliminadas: 0
+    TermitasEliminadas: 0
+    ParcelasHormigas: 0
+    ParcelasTermitas: 0
 --- !u!1 &549638893 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 946011559241503479, guid: 8d208aeaacf379a419714c7df32d4e04, type: 3}
@@ -1189,6 +1198,45 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3632783591857271886, guid: 08ac7651e88da4449a17af768ea6b2ab, type: 3}
+--- !u!1 &973643677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973643678}
+  m_Layer: 5
+  m_Name: WinnerName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &973643678
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973643677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 166846792}
+  - {fileID: 1741762325}
+  - {fileID: 997638627}
+  - {fileID: 194161454}
+  m_Father: {fileID: 1346016987}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &975575362 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3401714237330972916, guid: 8d208aeaacf379a419714c7df32d4e04, type: 3}
@@ -1248,7 +1296,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1869709740}
-  m_Father: {fileID: 1346016987}
+  m_Father: {fileID: 973643678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1570,16 +1618,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7830615857797347323, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 166846792}
-    - targetCorrespondingSourceObject: {fileID: 7830615857797347323, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1741762325}
-    - targetCorrespondingSourceObject: {fileID: 7830615857797347323, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 997638627}
-    - targetCorrespondingSourceObject: {fileID: 7830615857797347323, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 194161454}
+      addedObject: {fileID: 973643678}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
 --- !u!224 &1346016987 stripped
@@ -1962,7 +2001,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1780845156}
-  m_Father: {fileID: 1346016987}
+  m_Father: {fileID: 973643678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

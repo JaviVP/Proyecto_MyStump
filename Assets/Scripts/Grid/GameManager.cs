@@ -7,6 +7,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject endPanel;
+    [SerializeField] private GameObject inputPanel;
     public enum Team { Ants, Termites }
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
-   
+    private string winner = "";
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public float LimitTurns { get => limitTurns; set => limitTurns = value; }
@@ -65,7 +66,8 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
-        limitTurns = 10;
+       
+        limitTurns = 6;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
@@ -220,8 +222,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     public void SelectUnit(Unit unit)
     {
         if (unit == null || movedUnits.Contains(unit) || unit.Team != CurrentTurn)
@@ -309,7 +309,7 @@ public class GameManager : MonoBehaviour
             UiManager.Instance.UpdateScroll();
             if (limitTurns <= 0)
             {
-                string winner = "";
+                
                 HexState result = CheckMoreColorTiles();
                 if (result == HexState.Neutral)
                 {
@@ -318,8 +318,11 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     winner = result.ToString();
-                }
+                    inputPanel.SetActive(true);
 
+                  
+                }
+               
                 endPanel.SetActive(true);
                 UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
                 UiManager.Instance.TouchEnabled = false;
@@ -341,6 +344,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public string Winner()
+    {
+
+        return winner;
+    }
     public int NumberOfAntTiles()
     {
 

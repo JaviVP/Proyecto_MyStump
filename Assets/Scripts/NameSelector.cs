@@ -8,6 +8,7 @@ public class NameSelector : MonoBehaviour
 {
     [Header("Inputs")]
     [SerializeField] private TMP_InputField inputField1;
+    [SerializeField] private GameObject inputPanel;
 
     [Header("Textos Jugador")]
     [SerializeField] private TextMeshProUGUI text1;
@@ -23,8 +24,16 @@ public class NameSelector : MonoBehaviour
     private const int MaxNameLength = 12;
     private readonly string[] forbiddenCharacters = { "@", "#", "$", "%", "&", "*", "!", "?" };
 
+    private int partidasGanadas;
+    private int partidasTotales;
+    private int tilesHormigas;
+    private int tilesTotalesHormigas;
+    private int tilesTermitas;
+    private int tilesTotalesTermitas;
+    public PlayerStats playerStats;
     void Start()
     {
+        playerStats = new PlayerStats();
         LoadNames();
 
         changeNameButton1.onClick.AddListener(() => AttemptNameChange(1));
@@ -71,9 +80,35 @@ public class NameSelector : MonoBehaviour
 
         PlayerPrefs.SetString("PlayerName1", newName);
         text1.text = newName;
+        partidasGanadas++;
+        partidasTotales = PlayerPrefs.GetInt($"PartidasGanadas_{newName}");
+        partidasTotales += partidasGanadas;
+        PlayerPrefs.SetInt($"PartidasGanadas_{newName}", partidasTotales);
 
+        if (GameManager.Instance.Winner() == "Ants")
+        {
+            tilesHormigas = GameManager.Instance.NumberOfAntTiles();
+            tilesTotalesHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{newName}");
+            tilesTotalesHormigas += tilesHormigas;
+            PlayerPrefs.SetInt($"ParcelasHormigas_{newName}",tilesTotalesHormigas);
+        }
+        else if (GameManager.Instance.Winner() == "Termites")
+        {
+            tilesTermitas = GameManager.Instance.NumberOfTermTiles();
+            tilesTotalesTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{newName}");
+            tilesTotalesTermitas += tilesTermitas;
+            PlayerPrefs.SetInt($"ParcelasTermitas_{newName}", tilesTotalesTermitas);
+        }
+        else 
+        { 
+        }
+        Debug.Log(PlayerPrefs.GetInt($"PartidasGanadas_{newName}"));
+        Debug.Log(PlayerPrefs.GetInt($"ParcelasHormigas_{newName}"));
+        Debug.Log(PlayerPrefs.GetInt($"ParcelasTermitas_{newName}"));
         ShowMessage("¡Nombre asignado!");
+        inputPanel.SetActive(false);
         StartCoroutine(CloseKeyboard());
+        
     }
 
     private bool IsNameValid(string name)

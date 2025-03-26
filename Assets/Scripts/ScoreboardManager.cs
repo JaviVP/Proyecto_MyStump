@@ -99,11 +99,11 @@ public class ScoreboardManager : MonoBehaviour
 
     private PlayerStats LoadStatsForPlayer(string name)
     {
-        int partidasGanadas = PlayerPrefs.GetInt($"PartidasGanadas_{name}", 0);
-        int hormigasEliminadas = PlayerPrefs.GetInt($"HormigasEliminadas_{name}", 0);
-        int termitasEliminadas = PlayerPrefs.GetInt($"TermitasEliminadas_{name}", 0);
-        int parcelasHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{name}", 0);
-        int parcelasTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{name}", 0);
+        int partidasGanadas = PlayerPrefs.GetInt($"PartidasGanadas_{name}");
+        int hormigasEliminadas = PlayerPrefs.GetInt($"HormigasEliminadas_{name}");
+        int termitasEliminadas = PlayerPrefs.GetInt($"TermitasEliminadas_{name}");
+        int parcelasHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{name}");
+        int parcelasTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{name}");
 
         return new PlayerStats
         {
