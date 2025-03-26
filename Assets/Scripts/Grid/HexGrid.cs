@@ -336,7 +336,10 @@ public class HexGrid : MonoBehaviour
     }
 
 
-
+    public bool HasTile(Vector2Int pos)
+    {
+        return hexMap.ContainsKey(pos);
+    }
 
     public static class EnumHelper
     {
@@ -361,131 +364,4 @@ public class HexGrid : MonoBehaviour
             };
         }
     }
-
-
-
-
-    /*
-
-
-    /// 
-    /// Some things for Debugger UI
-    /// 
-
-
-
-    // Find all the positions
-    public List<Vector2Int> GetAllHexPositions()
-    {
-        if (hexMap == null)
-        {
-            Debug.LogError("❌ HexMap is NULL! Check if GenerateHexGrid() runs.");
-            return new List<Vector2Int>();
-        }
-
-        Debug.Log("✅ HexGrid contains " + hexMap.Count + " hex tiles.");
-        return new List<Vector2Int>(hexMap.Keys);
-    }
-
-
-    // Find the existance of a tile
-    public bool HasTile(Vector2Int pos)
-    {
-        return hexMap.ContainsKey(pos);
-    }
-
-    //Set Units
-    public int GetNextUnitIndex(Vector2Int pos, HexState team)
-    {
-        if (!units.ContainsKey(pos) || units[pos] == null)
-            return 1; // Start with the first unit
-
-        int currentIndex = GetUnitIndex(units[pos]);
-        return (currentIndex % 3) + 1; // Cycle through 1 → 2 → 3 → 1
-    }
-
-
-    //Positions
-    public void SetUnitAt(Vector2Int pos, int unitIndex, HexState team)
-    {
-        if (!hexMap.ContainsKey(pos)) return;
-
-        // Remove existing unit if setting to neutral
-        if (unitIndex == 0)
-        {
-            if (units.ContainsKey(pos) && units[pos] != null)
-            {
-                Destroy(units[pos].gameObject); // Destroy existing unit
-            }
-
-            units[pos] = null;
-            hexMap[pos].SetState(HexState.Neutral);
-            return;
-        }
-
-        // Ensure we're only affecting the clicked tile
-        if (units.ContainsKey(pos) && units[pos] != null)
-        {
-            Destroy(units[pos].gameObject); // Destroy old unit before adding a new one
-        }
-
-        GameObject prefab = (team == HexState.Ants) ? unitsAntsPrefabs[unitIndex - 1] : unitsTermitePrefabs[unitIndex - 1];
-        GameObject unitObj = Instantiate(prefab, AxialToWorld(pos.x, pos.y), Quaternion.identity);
-
-        // Add the correct unit script dynamically
-        Unit newUnit = null;
-        if (unitIndex == 1) newUnit = unitObj.AddComponent<UnitRunner>();
-        else if (unitIndex == 2) newUnit = unitObj.AddComponent<UnitTerraFormer>();
-        else newUnit = unitObj.AddComponent<UnitPanchulina>();
-
-        newUnit.AxialCoords = pos;
-        units[pos] = newUnit;
-        hexMap[pos].SetState(team);
-    }
-    //
-
-
-    //All Units
-    public Dictionary<Vector2Int, Unit> GetAllUnits()
-    {
-        return units;
-    }
-
-    public int GetUnitIndex(Unit unit)
-    {
-        if (unit == null) return 0; // No unit = Neutral
-
-        if (unit is UnitRunner) return 1;
-        if (unit is UnitTerraFormer) return 2;
-        if (unit is UnitPanchulina) return 3;
-
-        return 0; // Default to Neutral if unknown
-    }
-
-
-
-    public int GetUnitIndexFromColor(Color color)
-    {
-        Color[] antColors = { Color.red, new Color(0.8f, 0, 0), new Color(0.6f, 0, 0), Color.white };
-        Color[] termiteColors = { new Color(1, 0.5f, 0), new Color(0.8f, 0.4f, 0), new Color(0.6f, 0.3f, 0), Color.white };
-
-        for (int i = 0; i < antColors.Length; i++)
-        {
-            if (color == antColors[i]) return i;
-            if (color == termiteColors[i]) return i;
-        }
-        return -1; // Not found
-    }
-
-    public void ClearUnitAt(Vector2Int pos)
-    {
-        if (!units.ContainsKey(pos) || units[pos] == null) return;
-
-        Destroy(units[pos].gameObject); // Destroy the old unit
-        units[pos] = null; // Remove unit reference
-        hexMap[pos].SetState(HexState.Neutral); // Reset the tile ownership
-    }
-
-    */
-
 }

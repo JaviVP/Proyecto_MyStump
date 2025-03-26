@@ -179,6 +179,13 @@ public class UnitPanchulina : Unit
             } 
             else
             {
+
+                Unit enemyUnit = hexGrid.GetUnitInTile(targetTile.axialCoords);
+                if (enemyUnit != null && enemyUnit.Team != this.Team)
+                {
+                    PushEnemy(enemyUnit, targetTile.axialCoords);
+                }
+
                 // ✅ First Move: Move normally
                 hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
                 AxialCoords = targetPosition;
@@ -194,6 +201,51 @@ public class UnitPanchulina : Unit
         }
         return true;
     }
+
+
+    private void PushEnemy(Unit enemy, Vector2Int enemyPosition)
+    {
+        Vector2Int direction = new Vector2Int(
+            Mathf.Clamp(enemyPosition.x - AxialCoords.x, -1, 1),
+            Mathf.Clamp(enemyPosition.y - AxialCoords.y, -1, 1)
+        );
+
+        Vector2Int nextPos = enemyPosition + direction;
+        Vector2Int lastValidPos = enemyPosition; // Store last valid enemy position
+
+        // ✅ Move the enemy until it hits an obstacle
+        while (hexGrid.HasTile(nextPos) && hexGrid.GetUnitInTile(nextPos) == null)
+        {
+            HexTile tile = hexGrid.GetHexTile(nextPos);
+
+            /// Actualizar para cuando hayan obstaculos 
+
+            /*
+            // ❌ Stop if the tile is an obstacle
+            if (tile.state != HexState.Neutral && EnumHelper.ConvertToTeam(tile.state) != this.Team)
+            {
+                break;
+            }
+            */
+            // ✅ Paint tile to Panchulinas’ team
+            tile.SetState(EnumHelper.ConvertToHexState(this.Team));
+
+            lastValidPos = nextPos; // ✅ Save last valid push position
+            nextPos += direction;
+        }
+
+        // ✅ Move enemy to its final pushed position
+        hexGrid.UpdateUnitPosition(enemy.AxialCoords, lastValidPos, enemy);
+        enemy.AxialCoords = lastValidPos;
+        enemy.transform.position = hexGrid.AxialToWorld(lastValidPos.x, lastValidPos.y);
+
+        // ✅ Restore enemy’s color on final position
+        HexTile finalTile = hexGrid.GetHexTile(lastValidPos);
+        finalTile.SetState(EnumHelper.ConvertToHexState(enemy.Team)); // ✅ Keep the enemy’s color
+    }
+
+
+
 
     public override void ClearHighlights()
     {

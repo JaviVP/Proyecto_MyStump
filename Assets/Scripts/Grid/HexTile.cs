@@ -25,6 +25,8 @@ public class HexTile : MonoBehaviour
         //baseMaterial = GetComponent<Material>();
     }
 
+
+
     public void SetState(HexState newState)
     {
         state = newState;
