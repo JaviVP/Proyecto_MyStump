@@ -201,7 +201,7 @@ public class UnitPanchulina : Unit
         while (true)
         {
             // Movemos la unidad en dirección al objetivo, manteniendo la Y fija
-            Vector3 currentPos = Vector3.MoveTowards(enemyUnit.transform.position, endPos, speed * Time.deltaTime);
+            Vector3 currentPos = Vector3.MoveTowards(enemyUnit.transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
 
             // Fijamos la componente Y a 1.1
             currentPos.y = 0.1f;
