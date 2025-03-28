@@ -368,7 +368,7 @@ public class GameManager : MonoBehaviour
             {
                 if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 0 || PlayerPrefs.GetInt("TermCount") == 0)
                 {
-                    if (PlayerPrefs.GetInt("AntCount")== 0) { winner = "Termites"; }
+                    if (PlayerPrefs.GetInt("AntCount") == 0) { winner = "Termites"; }
                     else if (PlayerPrefs.GetInt("TermCount") == 0) { winner = "Ants"; }
                     HexState result = CheckMoreColorTiles();
 
@@ -393,7 +393,7 @@ public class GameManager : MonoBehaviour
                         //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
                 }
-                else
+                else 
                 {
 
                     HexState result = CheckMoreColorTiles();

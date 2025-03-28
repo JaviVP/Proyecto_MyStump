@@ -30,9 +30,10 @@ public class HexGrid : MonoBehaviour
     {
         termiteUnitsCount = GetNumberOfGameObjects(unitsTermitePrefabs);  // Obtiene el número de unidades en el array de termitas
         antUnitsCount = GetNumberOfGameObjects(unitsAntsPrefabs);  // Obtiene el número de unidades en el array de hormigas
-
-        Debug.Log("Número de unidades de termitas: " + termiteUnitsCount);
-        Debug.Log("Número de unidades de hormigas: " + antUnitsCount);
+        PlayerPrefs.SetInt("TermCount",termiteUnitsCount);
+        PlayerPrefs.SetInt("AntCount", antUnitsCount);
+        Debug.Log("Número de unidades de termitas: " + PlayerPrefs.GetInt("TermCount"));
+        Debug.Log("Número de unidades de hormigas: " + PlayerPrefs.GetInt("AntCount"));
         //Debug.Log("HexGrid Start() is running...");
         GenerateHexGrid();
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
