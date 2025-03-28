@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static HexGrid;
 
@@ -7,7 +9,7 @@ public class UnitPanchulina : Unit
     private HexGrid hexGrid;
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
     private bool firstMove;
-
+    private Unit enemyUnit;
 
     public bool FirstMove { get => firstMove; set => firstMove = value; }
 
@@ -180,7 +182,7 @@ public class UnitPanchulina : Unit
             else
             {
 
-                Unit enemyUnit = hexGrid.GetUnitInTile(targetTile.axialCoords);
+                enemyUnit = hexGrid.GetUnitInTile(targetTile.axialCoords);
                 if (enemyUnit != null && enemyUnit.Team != this.Team)
                 {
                     PushEnemy(enemyUnit, targetTile.axialCoords);
@@ -237,11 +239,17 @@ public class UnitPanchulina : Unit
         // ✅ Move enemy to its final pushed position
         hexGrid.UpdateUnitPosition(enemy.AxialCoords, lastValidPos, enemy);
         enemy.AxialCoords = lastValidPos;
-        enemy.transform.position = hexGrid.AxialToWorld(lastValidPos.x, lastValidPos.y);
+        //enemy.transform.position = hexGrid.AxialToWorld(lastValidPos.x, lastValidPos.y);
+
 
         // ✅ Restore enemy’s color on final position
         HexTile finalTile = hexGrid.GetHexTile(lastValidPos);
         finalTile.SetState(EnumHelper.ConvertToHexState(enemy.Team)); // ✅ Keep the enemy’s color
+
+
+        GameManager.Instance.LockTiles = true;
+        StartCoroutine(Animation(lastValidPos));
+
     }
 
 
@@ -255,6 +263,41 @@ public class UnitPanchulina : Unit
             tile.ResetTileColor();
         }
         validMoveTiles.Clear();
+    }
+
+    IEnumerator Animation(Vector2Int targetPos)
+    {
+        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
+        float speed = 10.0f;
+
+        // Establecemos la rotación de la unidad hacia la posición final
+        enemyUnit.transform.LookAt(endPos);
+
+        // Mantenemos la componente Y fija en 1.1 durante el movimiento
+        while (true)
+        {
+            // Movemos la unidad en dirección al objetivo, manteniendo la Y fija
+            Vector3 currentPos = Vector3.MoveTowards(enemyUnit.transform.position, endPos, speed * Time.deltaTime);
+
+            // Fijamos la componente Y a 1.1
+            currentPos.y = 0.1f;
+
+            // Actualizamos la posición de la unidad
+            enemyUnit.transform.position = currentPos;
+
+            // Esperamos un pequeño intervalo antes de continuar
+            yield return new WaitForSeconds(0.05f);
+
+            // Verificamos si hemos llegado a la posición final
+            if (Vector3.Distance(enemyUnit.transform.position, endPos) < 0.2f)
+            {
+                break;
+            }
+        }
+
+        // Esperamos un poco después de la animación si es necesario
+        yield return new WaitForSeconds(0.1f);
+        GameManager.Instance.LockTiles = false;
     }
 
 
