@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPanel: {fileID: 1213203145}
+  inputPanel: {fileID: 1917223922}
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
@@ -2195,6 +2196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e10ac74b44a4e4b80d6527444765da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1917223922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2304312675885837649, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+  m_PrefabInstance: {fileID: 1346016986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1919450083
 GameObject:
   m_ObjectHideFlags: 0

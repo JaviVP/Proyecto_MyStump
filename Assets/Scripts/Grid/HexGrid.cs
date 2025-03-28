@@ -44,25 +44,26 @@ public class HexGrid : MonoBehaviour
             {
                 if (unit.Team==team)
                 {
-                    int contador = 0;
+                    int contador = 1;
                     List<HexTile> neighbor = GetTilesWithinRange(unit.AxialCoords, 1);
                     if (neighbor != null)
                     {
                         foreach (HexTile neighborTile in neighbor)
                         {
+
                             //neighborTile.ChangeColor(Color.blue);
                             if (neighborTile.state!=HexState.Neutral && EnumHelper.ConvertToTeam(neighborTile.state) !=team)
                             {
                                 contador++;
                             }
                         }
-                        Debug.Log("-->"+ contador);
+                        Debug.Log("-->"+ contador+ "--" + neighbor.Count);
                         if (contador == neighbor.Count)
                         {
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
                             unit.UnitRenderer.SetActive(false);
-                            units.Remove(pos);
+                            //units.Remove(pos);
 
                         }
                     }
