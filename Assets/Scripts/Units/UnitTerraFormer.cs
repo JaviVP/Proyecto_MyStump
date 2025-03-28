@@ -136,7 +136,7 @@ public class UnitTerraFormer : Unit
             transform.LookAt(endPos);
 
             // Movemos la unidad hacia la nueva posición
-            transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
 
             // Esperamos un corto tiempo para el siguiente paso
             yield return new WaitForSeconds(0.05f);

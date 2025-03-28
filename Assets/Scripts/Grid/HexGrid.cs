@@ -63,6 +63,8 @@ public class HexGrid : MonoBehaviour
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
                             unit.UnitRenderer.SetActive(false);
+                            HexTile tile = GetHexTile(pos);
+                            tile.state = HexState.Neutral;
                             //units.Remove(pos);
 
                         }

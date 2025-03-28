@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject inputPanel;
+
+    [SerializeField] private float animationSpeed;
+
     public enum Team { Ants, Termites }
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     public Team CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public bool DisableTouchInputDuringTransition { get => disableTouchInputDuringTransition; set => disableTouchInputDuringTransition = value; }
     public bool LockTiles { get => lockTiles; set => lockTiles = value; }
+    public float AnimationSpeed { get => animationSpeed; set => animationSpeed = value; }
 
     private Unit selectedUnit = null;
 
