@@ -507,6 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 1917223922}
+  animationSpeed: 20
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
