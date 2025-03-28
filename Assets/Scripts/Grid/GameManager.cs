@@ -366,10 +366,12 @@ public class GameManager : MonoBehaviour
             }
             else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
             {
-                if (limitTurns <= 0)
+                if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 0 || PlayerPrefs.GetInt("TermCount") == 0)
                 {
-
+                    if (PlayerPrefs.GetInt("AntCount")== 0) { winner = "Termites"; }
+                    else if (PlayerPrefs.GetInt("TermCount") == 0) { winner = "Ants"; }
                     HexState result = CheckMoreColorTiles();
+
                     if (result == HexState.Neutral)
                     {
                         winner = "Draw";
