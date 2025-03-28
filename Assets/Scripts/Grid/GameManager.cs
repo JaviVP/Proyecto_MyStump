@@ -218,7 +218,10 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                            if (clickedTile != null)
+                            {
+                                GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                            }
                         }
                     }
                     break;

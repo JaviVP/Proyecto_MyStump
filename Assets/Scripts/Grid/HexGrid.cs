@@ -36,9 +36,11 @@ public class HexGrid : MonoBehaviour
 
     public void CheckDestroyUnity(Team team)
     {
+        List<Vector2Int> destroyUnits= new List<Vector2Int>();
+
         foreach (Vector2Int pos in units.Keys)
         {
-
+            if (pos == null) continue;
             Unit unit = GetUnitInTile(pos);
             if (unit != null && unit.UnitRenderer != null)
             {
@@ -63,9 +65,11 @@ public class HexGrid : MonoBehaviour
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
                             unit.UnitRenderer.SetActive(false);
+                            unit.AxialCoords = new Vector2Int(1000, 1000);
                             HexTile tile = GetHexTile(pos);
-                            tile.state = HexState.Neutral;
-                            //units.Remove(pos);
+                            
+                            destroyUnits.Add(pos);
+                           
 
                         }
                     }
@@ -74,7 +78,12 @@ public class HexGrid : MonoBehaviour
                 }
                 
             }
+           
 
+        }
+        foreach (Vector2Int v in destroyUnits)
+        {
+            units.Remove(v);
         }
     }
 

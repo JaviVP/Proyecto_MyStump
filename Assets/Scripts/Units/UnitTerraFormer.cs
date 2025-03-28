@@ -57,6 +57,7 @@ public class UnitTerraFormer : Unit
                 {
                     if (!validMoveTiles.Contains(tile))
                     {
+                        //tile.ChangeColor(Color.black);
                         validMoveTiles.Add(tile);
                         tilesCheck.Enqueue(tile); // Continue checking connected tiles
                     }
