@@ -259,6 +259,7 @@ public class GameManager : MonoBehaviour
             {
                 
                 CheckTurnEnd();
+                selectedUnit = null;
             }
         }
         if (!(selectedUnit is UnitPanchulina))
