@@ -31,7 +31,7 @@ public class HexGrid : MonoBehaviour
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
         GenerateUnits();
         //Testing
-        TerraFormerTilesProves();
+       // TerraFormerTilesProves();
     }
 
     public void CheckDestroyUnity(Team team)
