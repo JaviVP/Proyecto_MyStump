@@ -294,15 +294,17 @@ public class GameManager : MonoBehaviour
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
-                   
+                hexGrid.CheckDestroyUnity(Team.Ants);
             }
             else if (CurrentTurn == Team.Termites)
             {
 
                 hexGrid.SelectTeam(Team.Termites);
-               
+                hexGrid.CheckDestroyUnity(Team.Termites);
+
 
             }
+            
 
 
             limitTurns--;

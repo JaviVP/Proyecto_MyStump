@@ -31,8 +31,50 @@ public class HexGrid : MonoBehaviour
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
         GenerateUnits();
         //Testing
-        //TerraFormerTilesProves();
+        TerraFormerTilesProves();
     }
+
+    public void CheckDestroyUnity(Team team)
+    {
+        foreach (Vector2Int pos in units.Keys)
+        {
+
+            Unit unit = GetUnitInTile(pos);
+            if (unit != null && unit.UnitRenderer != null)
+            {
+                if (unit.Team==team)
+                {
+                    int contador = 0;
+                    List<HexTile> neighbor = GetTilesWithinRange(unit.AxialCoords, 1);
+                    if (neighbor != null)
+                    {
+                        foreach (HexTile neighborTile in neighbor)
+                        {
+                            //neighborTile.ChangeColor(Color.blue);
+                            if (neighborTile.state!=HexState.Neutral && EnumHelper.ConvertToTeam(neighborTile.state) !=team)
+                            {
+                                contador++;
+                            }
+                        }
+                        Debug.Log("-->"+ contador);
+                        if (contador == neighbor.Count)
+                        {
+                            //Destruyo la unidad
+                            Debug.Log("---Destruyo la unidad---");
+                            unit.UnitRenderer.SetActive(false);
+                            units.Remove(pos);
+
+                        }
+                    }
+
+                    
+                }
+                
+            }
+
+        }
+    }
+
     public void SelectTeam(Team team)
     {
         Debug.Log("Desmarco");
@@ -42,7 +84,7 @@ public class HexGrid : MonoBehaviour
             Unit unit = GetUnitInTile(pos);
             if (unit != null && unit.UnitRenderer!=null)
             {
-                Debug.Log("V:" + unit.AxialCoords + " T:" + unit.Team.ToString() + " G:" + unit.UnitRenderer.name);
+                //Debug.Log("V:" + unit.AxialCoords + " T:" + unit.Team.ToString() + " G:" + unit.UnitRenderer.name);
                 for (int i=0; i< unit.UnitRenderer.transform.childCount; i++)
                 {
                     

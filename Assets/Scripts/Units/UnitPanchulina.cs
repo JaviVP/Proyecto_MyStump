@@ -271,7 +271,7 @@ public class UnitPanchulina : Unit
         float speed = 10.0f;
 
         // Establecemos la rotación de la unidad hacia la posición final
-        enemyUnit.transform.LookAt(endPos);
+        enemyUnit.transform.LookAt(this.gameObject.transform.position);
 
         // Mantenemos la componente Y fija en 1.1 durante el movimiento
         while (true)
