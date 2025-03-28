@@ -39,6 +39,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+
         scrollSliderAnts = turnScrollAnts.GetComponent<Slider>();
         scrollSliderTerm = turnScrollTerm.GetComponent<Slider>();
         Time.timeScale = 1.0f;
@@ -71,6 +72,7 @@ public class UiManager : MonoBehaviour
 
     public void PlayButton()
     {
+        PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(4);
     }
 
@@ -80,6 +82,7 @@ public class UiManager : MonoBehaviour
     }
     public void ChampionshipButton()
     {
+        PlayerPrefs.SetInt("ModoCampeonato", 1);
         int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3);
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
 
@@ -91,6 +94,7 @@ public class UiManager : MonoBehaviour
     }
     public void TutorialScene()
     {
+        PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(5);
     }
 

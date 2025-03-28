@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System;
 
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject endPanel;
@@ -17,10 +18,10 @@ public class GameManager : MonoBehaviour
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
     private bool lockTiles = false;
-
+    private int partidasSeleccionadas;
 
     //Limit of turns
-    private float limitTurns;
+    [SerializeField] private float limitTurns;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
@@ -317,7 +318,9 @@ public class GameManager : MonoBehaviour
 
             limitTurns--;
             UiManager.Instance.UpdateScroll();
-            if (limitTurns <= 0)
+            if(PlayerPrefs.GetInt("ModoCampeonato") == 1) {
+                partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
+                if (limitTurns <= 0 && partidasSeleccionadas != 0 )
             {
                 
                 HexState result = CheckMoreColorTiles();
@@ -325,21 +328,30 @@ public class GameManager : MonoBehaviour
                 {
                     winner = "Draw";
                     UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
-                }
+                        partidasSeleccionadas--;
+                        PlayerPrefs.SetInt("NumeroPartidasCampeonato",partidasSeleccionadas);
+                        Debug.Log(PlayerPrefs.GetInt("NumeroPartidasCampeonato"));
+                        endPanel.SetActive(true);
+                    }
                 else
                 {
                     winner = result.ToString();
                     inputPanel.SetActive(true);
                     UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+                        partidasSeleccionadas--;
+                        PlayerPrefs.SetInt("NumeroPartidasCampeonato", partidasSeleccionadas);
+                        Debug.Log(PlayerPrefs.GetInt("NumeroPartidasCampeonato"));
+                        endPanel.SetActive(true);
+                    }
+                    if (partidasSeleccionadas == 0)
+                    {
+                        PlayerPrefs.SetInt("ModoCampeonato", 0);
+                        
 
-                }
-               
-                endPanel.SetActive(true);
-                
-                UiManager.Instance.TouchEnabled = false;
-                //FIN DE PARTIDA
-                //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
+                        UiManager.Instance.TouchEnabled = false;
+                        //FIN DE PARTIDA
+                        //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+                    }
 
             }
             else
@@ -351,7 +363,45 @@ public class GameManager : MonoBehaviour
 
             }
 
+            }
+            else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
+            {
+                if (limitTurns <= 0)
+                {
 
+                    HexState result = CheckMoreColorTiles();
+                    if (result == HexState.Neutral)
+                    {
+                        winner = "Draw";
+                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
+                       
+                    }
+                    else
+                    {
+                        winner = result.ToString();
+                        inputPanel.SetActive(true);
+                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+               
+
+                    }        
+                        endPanel.SetActive(true);
+
+                        UiManager.Instance.TouchEnabled = false;
+                        //FIN DE PARTIDA
+                        //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+                }
+                else
+                {
+
+                    HexState result = CheckMoreColorTiles();
+                    Debug.Log($"Turn switched to {CurrentTurn}");
+                    //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+                }
+
+
+            }
         }
     }
 

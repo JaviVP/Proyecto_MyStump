@@ -4,13 +4,18 @@ using TMPro;
 public class ChampionshipGameSelector : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI partidasText;  // Muestra el número de partidas
+ // Muestra el número de partidas
     private int[] allowedOptions = { 3, 5, 7, 9 };          // Opciones posibles
     private int currentIndex = 0;                          // Inicia en 3 partidas (índice 0)
 
+
+
     private void Start()
     {
+
         UpdateDisplay();  // Mostrar valor inicial al arrancar
     }
+
 
     public void IncreaseGames()
     {
@@ -31,6 +36,7 @@ public class ChampionshipGameSelector : MonoBehaviour
         PlayerPrefs.SetInt("NumeroPartidasCampeonato", selectedNumber);  // Guardar selección
         Debug.Log($"Partidas seleccionadas: {selectedNumber}");
     }
+
 
     // Si quieres acceder desde otro script:
     public int GetSelectedNumber()

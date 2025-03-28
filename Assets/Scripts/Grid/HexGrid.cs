@@ -21,11 +21,18 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
     [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
 
-   
-
+    private int antsKilled;
+    private int termsKilled;
+    private int termiteUnitsCount;
+    private int antUnitsCount;
 
     void Start()
     {
+        termiteUnitsCount = GetNumberOfGameObjects(unitsTermitePrefabs);  // Obtiene el número de unidades en el array de termitas
+        antUnitsCount = GetNumberOfGameObjects(unitsAntsPrefabs);  // Obtiene el número de unidades en el array de hormigas
+
+        Debug.Log("Número de unidades de termitas: " + termiteUnitsCount);
+        Debug.Log("Número de unidades de hormigas: " + antUnitsCount);
         //Debug.Log("HexGrid Start() is running...");
         GenerateHexGrid();
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
@@ -33,6 +40,16 @@ public class HexGrid : MonoBehaviour
         //Testing
        // TerraFormerTilesProves();
     }
+
+
+
+     private int GetNumberOfGameObjects(GameObject[] unitsArray)
+        
+    {
+            return unitsArray.Length;  
+        
+    }
+
 
     public void CheckDestroyUnity(Team team)
     {
@@ -69,7 +86,25 @@ public class HexGrid : MonoBehaviour
                             HexTile tile = GetHexTile(pos);
                             
                             destroyUnits.Add(pos);
-                           
+                          if(unit.Team == Team.Ants)
+                            {
+                                antsKilled = PlayerPrefs.GetInt("AntsKilled");
+                                antsKilled += 1;
+                                PlayerPrefs.SetInt("AntsKilled", antsKilled);
+                                antUnitsCount--;
+                                PlayerPrefs.SetInt("AntCount", antUnitsCount);
+
+                            }
+                            else if (unit.Team == Team.Termites)
+                            {
+
+                                termsKilled = PlayerPrefs.GetInt("TermsKilled");
+                                termsKilled += 1;                  
+                                PlayerPrefs.SetInt("TermsKilled", termsKilled);
+                                termiteUnitsCount--;
+                                PlayerPrefs.SetInt("TermCount", termiteUnitsCount);
+                            }
+                            
 
                         }
                     }
@@ -84,6 +119,8 @@ public class HexGrid : MonoBehaviour
         foreach (Vector2Int v in destroyUnits)
         {
             units.Remove(v);
+
+
         }
     }
 

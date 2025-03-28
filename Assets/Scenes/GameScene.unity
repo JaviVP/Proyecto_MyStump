@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9f916212a1e144ab898266aa3b05aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexSpacing: 1
+  hexSpacing: 1.05
   gridRadius: 4
   hexPrefab: {fileID: 721174842306475911, guid: 95bf4348297bfe54b93ac9724024aa6f, type: 3}
   unitsTermitePrefabs:
@@ -331,6 +331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 973643677}
+  animationSpeed: 20
+  limitTurns: 0
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
@@ -803,6 +805,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2304312675885837649, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3594177935415511384, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -814,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 9033322989555338103, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_Name
       value: SceneDefault_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041817785664543875, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

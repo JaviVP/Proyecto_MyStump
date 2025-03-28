@@ -30,6 +30,7 @@ public class NameSelector : MonoBehaviour
     private int tilesTotalesHormigas;
     private int tilesTermitas;
     private int tilesTotalesTermitas;
+
     public PlayerStats playerStats;
     void Start()
     {
@@ -91,6 +92,8 @@ public class NameSelector : MonoBehaviour
             tilesTotalesHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{newName}");
             tilesTotalesHormigas += tilesHormigas;
             PlayerPrefs.SetInt($"ParcelasHormigas_{newName}",tilesTotalesHormigas);
+            PlayerPrefs.SetInt($"TermitasEliminadas_{newName}", PlayerPrefs.GetInt("TermsKilled") );
+
         }
         else if (GameManager.Instance.Winner() == "Termites")
         {
@@ -98,6 +101,7 @@ public class NameSelector : MonoBehaviour
             tilesTotalesTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{newName}");
             tilesTotalesTermitas += tilesTermitas;
             PlayerPrefs.SetInt($"ParcelasTermitas_{newName}", tilesTotalesTermitas);
+            PlayerPrefs.SetInt($"HormigasEliminadas_{newName}", PlayerPrefs.GetInt("AntsKilled"));
         }
         else 
         { 
@@ -105,6 +109,7 @@ public class NameSelector : MonoBehaviour
         Debug.Log(PlayerPrefs.GetInt($"PartidasGanadas_{newName}"));
         Debug.Log(PlayerPrefs.GetInt($"ParcelasHormigas_{newName}"));
         Debug.Log(PlayerPrefs.GetInt($"ParcelasTermitas_{newName}"));
+        Debug.Log(PlayerPrefs.GetInt($"TermitasEliminadas_{newName}"));
         ShowMessage("¡Nombre asignado!");
         inputPanel.SetActive(false);
         text1.enabled = true;
@@ -183,6 +188,7 @@ public class NameSelector : MonoBehaviour
         }
     }
 
+    
     private IEnumerator CloseKeyboard()
     {
         yield return new WaitForSeconds(0.1f);
