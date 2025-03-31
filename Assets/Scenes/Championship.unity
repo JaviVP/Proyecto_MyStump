@@ -332,6 +332,7 @@ MonoBehaviour:
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 1346016987}
   animationSpeed: 20
+  limitTurns: 40
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0

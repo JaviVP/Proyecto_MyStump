@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
     /// 
-    private Team currentTurn = Team.Ants; // Start with Ants' turn
+    private Team currentTurn = Team.Termites; // Start with Ants' turn
     /// 
     /// ESTA LINEA
     /// 
@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
        
-        limitTurns = 20;
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
