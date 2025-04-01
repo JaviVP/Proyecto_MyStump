@@ -371,7 +371,7 @@ public class HexGrid : MonoBehaviour
 
                 HexTile hex = GetHexTile(new Vector2Int(q, r));
 
-                if (hex.state==st)
+                if (hex!=null && hex.state==st)
                 {
                     counter++;
                 }
