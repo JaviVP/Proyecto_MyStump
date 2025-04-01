@@ -112,7 +112,12 @@ public class HexGrid : MonoBehaviour
                                 /// se tendra que actualizar
 
                                 Debug.Log($"Base destroyed! {team} loses.");
-                                //DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+<<<<<<< Updated upstream
+                                Instance.DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+
+=======
+                                DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+>>>>>>> Stashed changes
                                 return;
                             }
 
@@ -336,6 +341,8 @@ public class HexGrid : MonoBehaviour
         units[placement.position] = unit;
         hexMap[placement.position].SetState(owning);
     }
+
+
 
     private void Update()
     {

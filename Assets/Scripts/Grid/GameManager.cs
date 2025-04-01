@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
 
     private Vector2 touchStartPos; // Stores where the touch began
     private bool isDragging = false; // Detects if the player is dragging
+    private bool gameOver;
 
     private void RaycastTablet()
     {
@@ -305,9 +306,18 @@ public class GameManager : MonoBehaviour
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
 
+            hexGrid.SelectTeam(CurrentTurn);
+            hexGrid.CheckDestroyUnity(CurrentTurn);
+            /// Lo de arriba es lo mismo
+            /// que lo de abajo pero
+            /// mas organizado. Si algo
+            /// no funciona comentar lo 
+            /// de arriba y descomentar
+            /// lo de abajo
+            /// 
+            if (gameOver) return; // Stop further execution if game ended
 
-
-
+            /*
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
@@ -324,7 +334,7 @@ public class GameManager : MonoBehaviour
 
             }
             
-
+            */
 
             limitTurns--;
             UiManager.Instance.UpdateScroll();
@@ -416,6 +426,21 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    /// Actualizar para mas tarde
+    /// Declarar Victoria
+    public void DeclareWinner(Team winner)
+    {
+        gameOver = true;
+        Debug.Log($"Game Over! {winner} wins!");
+
+        inputPanel.SetActive(true);
+        endPanel.SetActive(true);
+        UiManager.Instance.UpdateUiTurn($"Result: {winner} won");
+        UiManager.Instance.TouchEnabled = false;
+    }
+
+
 
     public string Winner()
     {
