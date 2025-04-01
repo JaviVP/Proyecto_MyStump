@@ -19,13 +19,27 @@ public class GameManager : MonoBehaviour
     private HexGrid hexGrid;
     private List<HexTile> highlightedTiles = new List<HexTile>();
     private bool lockTiles = false;
-    private int partidasSeleccionadas;
-    private int totalPartidasCampeonato;
+    
+    public int totalPartidasCampeonato { get; private set; }
+    public int partidasSeleccionadas
+    {
+        get { return PlayerPrefs.GetInt("NumeroRondasCampeonato", totalPartidasCampeonato); }
+        set { PlayerPrefs.SetInt("NumeroRondasCampeonato", value); }
+    }
     private string player1;
     private string player2;
     private int player1RoundsWon;
     private int player2RoundsWon;
     private int neededWins;
+
+    private int totalAntsTiles1;
+    private int totalAntsTiles2;
+    private int totalTermTiles1;
+    private int totalTermTiles2;
+    private int totalRoundsWon1;
+    private int totalRoundsWon2;
+
+
     //Limit of turns
     [SerializeField] private float limitTurns;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
@@ -77,6 +91,12 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
+        totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
+        if (!PlayerPrefs.HasKey("NumeroRondasCampeonato"))
+        {
+            partidasSeleccionadas = totalPartidasCampeonato; 
+        }
+
         player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
@@ -166,7 +186,7 @@ public class GameManager : MonoBehaviour
 
     private Vector2 touchStartPos; // Stores where the touch began
     private bool isDragging = false; // Detects if the player is dragging
-    private bool gameOver = false;
+    private bool gameOver;
 
     private void RaycastTablet()
     {
@@ -349,9 +369,8 @@ public class GameManager : MonoBehaviour
             UiManager.Instance.UpdateScroll();
             if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
             {
-                totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
-                partidasSeleccionadas = PlayerPrefs.GetInt("NumeroRondasCampeonato");
-                partidasSeleccionadas = totalPartidasCampeonato;
+                
+                
                 if (limitTurns <= 0 && partidasSeleccionadas != 0)
                 {
 
@@ -363,7 +382,8 @@ public class GameManager : MonoBehaviour
                         partidasSeleccionadas--;
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
-                        if (gameOver == false) { endPanel.SetActive(true); } else { endPanel.SetActive(false); }
+                        CheckRounds();
+                        if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
                     }
                     else
                     {
@@ -373,9 +393,10 @@ public class GameManager : MonoBehaviour
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         AddWins();
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
-                        if (gameOver == false) { endPanel.SetActive(true); } else { endPanel.SetActive(false); }
+                        CheckRounds();
+                        if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
                     }
-                    CheckRounds();
+                    
                     //FIN DE PARTIDA
                     //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
@@ -489,7 +510,7 @@ public class GameManager : MonoBehaviour
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
         }
-        else if (player1RoundsWon == player2RoundsWon)
+        else if (player1RoundsWon >= neededWins && player2RoundsWon >= neededWins)
         {
             Debug.Log("Result = Draw");
             PlayerPrefs.SetInt("ModoCampeonato", 0);
@@ -505,7 +526,11 @@ public class GameManager : MonoBehaviour
         if (winner == "Termites")
         {
             player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");
+            totalAntsTiles1 = PlayerPrefs.GetInt($"ParcelasHormigas_{player1}");
+            totalTermTiles1 = PlayerPrefs.GetInt($"ParcelasTermitas_{player1}");          
             player1RoundsWon++;
+            totalRoundsWon1 = PlayerPrefs.GetInt($"PartidasGanadas_{player1}");
+            totalRoundsWon1 += player1RoundsWon;
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
 
@@ -513,7 +538,11 @@ public class GameManager : MonoBehaviour
         else if (winner == "Ants")
         {
             player2RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player2}");
+            totalAntsTiles2 = PlayerPrefs.GetInt($"ParcelasHormigas_{player2}");
+            totalTermTiles2 = PlayerPrefs.GetInt($"ParcelasTermitas_{player2}");
             player2RoundsWon++;
+            totalRoundsWon2 = PlayerPrefs.GetInt($"PartidasGanadas_{player2}");
+            totalRoundsWon2 += player2RoundsWon;
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
         }
@@ -523,7 +552,15 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    public void UpdatePlayerStats()
+    { 
+        totalAntsTiles1 += numberAntsTiles;
+        totalAntsTiles2 += numberAntsTiles;
+        totalTermTiles1 += numberTermitesTiles;
+        totalTermTiles2 += numberTermitesTiles;
+        GameStatsChampionship.Instance.SetPlayerStats(player1, totalRoundsWon1, player1RoundsWon, totalAntsTiles1, totalTermTiles1, PlayerPrefs.GetInt("AntsKilled"), PlayerPrefs.GetInt("TermsKilled"));
+        GameStatsChampionship.Instance.SetPlayerStats(player2, totalRoundsWon2, player2RoundsWon, totalAntsTiles2, totalTermTiles2, PlayerPrefs.GetInt("AntsKilled"), PlayerPrefs.GetInt("TermsKilled"));
+    }
 
 }
 

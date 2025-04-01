@@ -88,6 +88,7 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt("ModoCampeonato", 1);
         PlayerPrefs.SetInt($"RondasGanadas_{player1}", 0);
         PlayerPrefs.SetInt($"RondasGanadas_{player2}", 0);
+        PlayerPrefs.DeleteKey("NumeroRondasCampeonato");
         int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3); 
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
         SceneManager.LoadScene(5);
