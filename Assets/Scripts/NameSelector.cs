@@ -31,10 +31,10 @@ public class NameSelector : MonoBehaviour
     private int tilesTermitas;
     private int tilesTotalesTermitas;
 
-    public PlayerStats playerStats;
+    
     void Start()
     {
-        playerStats = new PlayerStats();
+       
         LoadNames();
 
         changeNameButton1.onClick.AddListener(() => AttemptNameChange(1));

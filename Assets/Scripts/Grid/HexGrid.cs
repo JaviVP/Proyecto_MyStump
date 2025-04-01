@@ -374,7 +374,7 @@ public class HexGrid : MonoBehaviour
 
                 HexTile hex = GetHexTile(new Vector2Int(q, r));
 
-                if (hex.state==st)
+                if (hex!=null && hex.state==st)
                 {
                     counter++;
                 }
@@ -432,6 +432,35 @@ public class HexGrid : MonoBehaviour
         return lineTiles;
     }
 
+    public List<HexTile> GetTilesWithinRange(Vector2Int start, int rangeA, int rangeB)
+    {
+        List<HexTile> inRange = new List<HexTile>();
+        int minRange = rangeA - 1;
+        if (minRange < 0)
+        {
+            minRange = 0;
+            
+            inRange.Add(GetHexTile(start));
+        }
+        List<HexTile> outRange = GetTilesWithinRange(start, minRange);
+
+
+        
+
+        foreach (var tile in hexMap.Values)
+        {
+            int distance = GetHexDistance(start, tile.axialCoords);
+            if (distance <= rangeB)
+            {
+                if (!outRange.Contains(tile))
+                {
+                    inRange.Add(tile);
+                }
+            }
+        }
+
+        return inRange;
+    }
 
     //Look for tiles around
     public List<HexTile> GetTilesWithinRange(Vector2Int start, int range)

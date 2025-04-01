@@ -85,9 +85,9 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt("ModoCampeonato", 1);
         int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3);
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
-
         SceneManager.LoadScene(5);
     }
+   
     public void ScoreBoardScene()
     {
         SceneManager.LoadScene(6);
