@@ -112,8 +112,12 @@ public class HexGrid : MonoBehaviour
                                 /// se tendra que actualizar
 
                                 Debug.Log($"Base destroyed! {team} loses.");
+<<<<<<< Updated upstream
                                 Instance.DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
 
+=======
+                                DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+>>>>>>> Stashed changes
                                 return;
                             }
 
