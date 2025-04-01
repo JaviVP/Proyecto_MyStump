@@ -104,6 +104,19 @@ public class HexGrid : MonoBehaviour
                         {
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
+
+                            if (unit is UnitBase)
+                            {
+                                /// Si habran mas jugadores en el 
+                                /// posible futuro, este codigo
+                                /// se tendra que actualizar
+
+                                Debug.Log($"Base destroyed! {team} loses.");
+                                DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+                                return;
+                            }
+
+
                             unit.UnitRenderer.SetActive(false);
                             unit.AxialCoords = new Vector2Int(1000, 1000);
                             HexTile tile = GetHexTile(pos);
