@@ -91,6 +91,10 @@ public class UnitPanchulina : Unit
             transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
             targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
+            Debug.Log("Check Unity to destroy");
+            hexGrid.CheckDestroyUnity(GameManager.Team.Ants);
+            hexGrid.CheckDestroyUnity(GameManager.Team.Termites);
+
             ClearHighlights();
             firstMove = true;
             OnSelected();
@@ -120,6 +124,7 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
+              
 
             }
             
