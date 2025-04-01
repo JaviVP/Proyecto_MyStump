@@ -315,7 +315,6 @@ public class GameManager : MonoBehaviour
             /// de arriba y descomentar
             /// lo de abajo
             /// 
-            if (gameOver) return; // Stop further execution if game ended
 
             /*
             if (CurrentTurn == Team.Ants)
@@ -386,6 +385,8 @@ public class GameManager : MonoBehaviour
             }
             else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
             {
+                if (gameOver) return; // Stop further execution if game ended
+
                 if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 1 || PlayerPrefs.GetInt("TermCount") == 1)
                 {
                     if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; }
