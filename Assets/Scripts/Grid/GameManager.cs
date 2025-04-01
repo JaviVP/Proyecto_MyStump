@@ -20,7 +20,12 @@ public class GameManager : MonoBehaviour
     private List<HexTile> highlightedTiles = new List<HexTile>();
     private bool lockTiles = false;
     private int partidasSeleccionadas;
-
+    private int totalPartidasCampeonato;
+    private string player1;
+    private string player2;
+    private int player1RoundsWon;
+    private int player2RoundsWon;
+    private int neededWins;
     //Limit of turns
     [SerializeField] private float limitTurns;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
@@ -72,7 +77,11 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
-       
+        player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
+        player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
+        Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
+        Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
+
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
         HexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
@@ -157,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     private Vector2 touchStartPos; // Stores where the touch began
     private bool isDragging = false; // Detects if the player is dragging
-    private bool gameOver;
+    private bool gameOver = false;
 
     private void RaycastTablet()
     {
@@ -222,12 +231,12 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             //Error code
-                            
+
                             if (clickedTile != null)
                             {
                                 GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                             }
-                            
+
                         }
                     }
                     break;
@@ -263,7 +272,7 @@ public class GameManager : MonoBehaviour
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
-                
+
                 CheckTurnEnd();
                 selectedUnit = null;
             }
@@ -272,7 +281,7 @@ public class GameManager : MonoBehaviour
         {
             selectedUnit = null;
         }
-        
+
     }
 
 
@@ -316,6 +325,7 @@ public class GameManager : MonoBehaviour
             /// lo de abajo
             /// 
 
+
             /*
             if (CurrentTurn == Team.Ants)
             {
@@ -337,56 +347,53 @@ public class GameManager : MonoBehaviour
 
             limitTurns--;
             UiManager.Instance.UpdateScroll();
-            if(PlayerPrefs.GetInt("ModoCampeonato") == 1) {
-                partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
-                if (limitTurns <= 0 && partidasSeleccionadas != 0 )
+            if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
             {
-                
-                HexState result = CheckMoreColorTiles();
-                if (result == HexState.Neutral)
+                totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
+                partidasSeleccionadas = PlayerPrefs.GetInt("NumeroRondasCampeonato");
+                partidasSeleccionadas = totalPartidasCampeonato;
+                if (limitTurns <= 0 && partidasSeleccionadas != 0)
                 {
-                    winner = "Draw";
-                    UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
+
+                    HexState result = CheckMoreColorTiles();
+                    if (result == HexState.Neutral)
+                    {
+                        winner = "Draw";
+                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
                         partidasSeleccionadas--;
-                        PlayerPrefs.SetInt("NumeroPartidasCampeonato",partidasSeleccionadas);
-                        Debug.Log(PlayerPrefs.GetInt("NumeroPartidasCampeonato"));
-                        endPanel.SetActive(true);
+                        PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
+                        Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
+                        if (gameOver == false) { endPanel.SetActive(true); } else { endPanel.SetActive(false); }
                     }
+                    else
+                    {
+                        winner = result.ToString();
+                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+                        partidasSeleccionadas--;
+                        PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
+                        AddWins();
+                        Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
+                        if (gameOver == false) { endPanel.SetActive(true); } else { endPanel.SetActive(false); }
+                    }
+                    CheckRounds();
+                    //FIN DE PARTIDA
+                    //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+
+                }
                 else
                 {
-                    winner = result.ToString();
-                    inputPanel.SetActive(true);
-                    UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
-                        partidasSeleccionadas--;
-                        PlayerPrefs.SetInt("NumeroPartidasCampeonato", partidasSeleccionadas);
-                        Debug.Log(PlayerPrefs.GetInt("NumeroPartidasCampeonato"));
-                        endPanel.SetActive(true);
-                    }
-                    if (partidasSeleccionadas == 0)
-                    {
-                        PlayerPrefs.SetInt("ModoCampeonato", 0);
-                        
 
-                        UiManager.Instance.TouchEnabled = false;
-                        //FIN DE PARTIDA
-                        //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-                    }
+                    HexState result = CheckMoreColorTiles();
+                    Debug.Log($"Turn switched to {CurrentTurn}");
+                    //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
-            }
-            else
-            {
-                
-                HexState result = CheckMoreColorTiles();
-                Debug.Log($"Turn switched to {CurrentTurn}");
-                //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
-            }
+                }
 
             }
             else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
             {
                 if (gameOver) return; // Stop further execution if game ended
-
                 if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 1 || PlayerPrefs.GetInt("TermCount") == 1)
                 {
                     if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; }
@@ -397,24 +404,24 @@ public class GameManager : MonoBehaviour
                     {
                         winner = "Draw";
                         UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
-                       
+
                     }
                     else
                     {
                         winner = result.ToString();
                         inputPanel.SetActive(true);
                         UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
-               
 
-                    }        
-                        endPanel.SetActive(true);
 
-                        UiManager.Instance.TouchEnabled = false;
-                        //FIN DE PARTIDA
-                        //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+                    }
+                    endPanel.SetActive(true);
+
+                    UiManager.Instance.TouchEnabled = false;
+                    //FIN DE PARTIDA
+                    //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
 
                 }
-                else 
+                else
                 {
 
                     HexState result = CheckMoreColorTiles();
@@ -461,7 +468,61 @@ public class GameManager : MonoBehaviour
         return numberTermitesTiles;
 
     }
+    private void CheckRounds()
+    {
+        neededWins = totalPartidasCampeonato / 2 + 1;
+        if (player1RoundsWon >= neededWins)
+        {
+            Debug.Log(player1 + " has won championship");
 
+            PlayerPrefs.SetInt("ModoCampeonato", 0);
+            inputPanel.SetActive(true);
+            UiManager.Instance.TouchEnabled = false;
+            gameOver = true;
+        }
+        else if (player2RoundsWon >= neededWins)
+        {
+            Debug.Log(player2 + " has won championship");
+
+            PlayerPrefs.SetInt("ModoCampeonato", 0);
+            inputPanel.SetActive(true);
+            UiManager.Instance.TouchEnabled = false;
+            gameOver = true;
+        }
+        else if (player1RoundsWon == player2RoundsWon)
+        {
+            Debug.Log("Result = Draw");
+            PlayerPrefs.SetInt("ModoCampeonato", 0);
+            inputPanel.SetActive(true);
+            UiManager.Instance.TouchEnabled = false;
+            gameOver = true;
+        }
+    }
+
+    private void AddWins()
+    {
+
+        if (winner == "Termites")
+        {
+            player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");
+            player1RoundsWon++;
+            PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
+            Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
+
+        }
+        else if (winner == "Ants")
+        {
+            player2RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player2}");
+            player2RoundsWon++;
+            PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
+            Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
+        }
+        else
+        {
+
+        }
+
+    }
 
 
 }

@@ -68,7 +68,7 @@ public class GameStatsChampionship : MonoBehaviour
     public void SetPlayerStats(string playerName, int gamesWon, int roundsWon, int tilesAnts, int tilesTermites, int antsKilled, int termitesKilled)
     {
         PlayerPrefs.SetInt($"PartidasGanadas_{playerName}", gamesWon);
-        PlayerPrefs.SetInt($"PartidasGanadas_{playerName}", roundsWon);
+        PlayerPrefs.SetInt($"RondasGanadas_{playerName}", roundsWon);
         PlayerPrefs.SetInt($"ParcelasHormigas_{playerName}", tilesAnts);
         PlayerPrefs.SetInt($"ParcelasTermitas_{playerName}", tilesTermites);
         PlayerPrefs.SetInt($"HormigasEliminadas_{playerName}", antsKilled);
@@ -82,12 +82,10 @@ public class GameStatsChampionship : MonoBehaviour
     }
 
     public void NextRoundChampionship()
-    {
-        
-        SetPlayerStats(player1,gamesWon1,roundsWon1,tilesAnts1,tilesTermites1,antsKilled1,termitesKilled1);
-        SetPlayerStats(player2,gamesWon2,roundsWon2,tilesAnts2,tilesTermites2,antsKilled2,termitesKilled2);
-        Debug.Log(GetPlayerStat(player1));
-        Debug.Log(GetPlayerStat(player2));
+    { 
+
         SceneManager.LoadScene(5);
     }
+
+   
 }

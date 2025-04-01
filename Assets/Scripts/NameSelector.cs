@@ -83,6 +83,7 @@ public class NameSelector : MonoBehaviour
         text1.text = newName;
         partidasGanadas++;
         partidasTotales = PlayerPrefs.GetInt($"PartidasGanadas_{newName}");
+        
         partidasTotales += partidasGanadas;
         PlayerPrefs.SetInt($"PartidasGanadas_{newName}", partidasTotales);
 

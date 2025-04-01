@@ -22,6 +22,8 @@ public class UiManager : MonoBehaviour
     private Button[] buttons;
     private Slider scrollSliderAnts;
     private Slider scrollSliderTerm;
+    private string player1;
+    private string player2;
     public static UiManager Instance { get; private set; }
     public bool TouchEnabled { get => touchEnabled; set => touchEnabled = value; }
 
@@ -39,7 +41,8 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-
+        player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
+        player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         scrollSliderAnts = turnScrollAnts.GetComponent<Slider>();
         scrollSliderTerm = turnScrollTerm.GetComponent<Slider>();
         Time.timeScale = 1.0f;
@@ -83,7 +86,9 @@ public class UiManager : MonoBehaviour
     public void ChampionshipButton()
     {
         PlayerPrefs.SetInt("ModoCampeonato", 1);
-        int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3);
+        PlayerPrefs.SetInt($"RondasGanadas_{player1}", 0);
+        PlayerPrefs.SetInt($"RondasGanadas_{player2}", 0);
+        int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3); 
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
         SceneManager.LoadScene(5);
     }
@@ -105,11 +110,13 @@ public class UiManager : MonoBehaviour
 
     public void ReturnMenuButton()
     {
+        PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(1);
     }
 
     public void LoadHub()
     {
+        PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(1);
     }
 
