@@ -14,13 +14,15 @@ public class HexTile : MonoBehaviour
     [SerializeField] private Material antTiles;
     [SerializeField] private Material termTiles;
 
+    public Renderer TileRenderer { get => tileRenderer; set => tileRenderer = value; }
+
 
 
     //private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
     private void Awake()
     {
-        tileRenderer = GetComponent<Renderer>();
+        TileRenderer = GetComponent<Renderer>();
         UpdateTileAppearance();
         //baseMaterial = GetComponent<Material>();
     }
@@ -34,7 +36,7 @@ public class HexTile : MonoBehaviour
     }
     public void ChangeColor(Color c)
     {
-        tileRenderer.material.color = c;
+        TileRenderer.material.color = c;
     }
     private void UpdateTileAppearance()
     {
@@ -42,13 +44,13 @@ public class HexTile : MonoBehaviour
         switch (state)
         {
             case HexState.Ants:
-                tileRenderer.material = antTiles;
+                TileRenderer.material = antTiles;
                 break;
             case HexState.Termites:
-                tileRenderer.material = termTiles;
+                TileRenderer.material = termTiles;
                 break;
             default:
-                tileRenderer.material = baseMaterial;
+                TileRenderer.material = baseMaterial;
                 break;
         }
         
@@ -60,7 +62,7 @@ public class HexTile : MonoBehaviour
 
         //tileRenderer.material = highlightMaterial; // Apply the highlight shader
         //highlightMaterial.SetColor(ColorProperty, new Color(1f, 1f, 0f, 1f)); // Set highlight color (yellow)
-        var materials = tileRenderer.materials;
+        var materials = TileRenderer.materials;
         Material[] newMaterials = new Material[materials.Length + 1];
 
         for (int i = 0; i < materials.Length; i++)
@@ -69,17 +71,17 @@ public class HexTile : MonoBehaviour
         }
         newMaterials[newMaterials.Length - 1] = highlightMaterial;
 
-        tileRenderer.materials = newMaterials;
+        TileRenderer.materials = newMaterials;
 
     }
 
     public void ResetTileColor()
     {
         //tileRenderer.material = baseMaterial;
-        var materials = tileRenderer.materials;
+        var materials = TileRenderer.materials;
         if (materials.Length > 1)
         {
-            tileRenderer.materials = new Material[] { materials[0] };
+            TileRenderer.materials = new Material[] { materials[0] };
         }
        
 

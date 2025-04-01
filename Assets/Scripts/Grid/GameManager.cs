@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System;
+using static GameManager;
 
 
 public class GameManager : MonoBehaviour
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         HexState result = CheckMoreColorTiles();
         hexGrid.SelectTeam(Team.Ants);
         //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+        hexGrid.RemoveTile(new Vector2Int(0, 0));
     }
 
     void Update()
@@ -218,10 +220,13 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
+                            //Error code
+                            
                             if (clickedTile != null)
                             {
                                 GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                             }
+                            
                         }
                     }
                     break;
@@ -299,9 +304,15 @@ public class GameManager : MonoBehaviour
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
+
+
+
+
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
+               
+
                 hexGrid.CheckDestroyUnity(Team.Ants);
             }
             else if (CurrentTurn == Team.Termites)
@@ -365,10 +376,10 @@ public class GameManager : MonoBehaviour
             }
             else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
             {
-                if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 0 || PlayerPrefs.GetInt("TermCount") == 0)
+                if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 1 || PlayerPrefs.GetInt("TermCount") == 1)
                 {
-                    if (PlayerPrefs.GetInt("AntCount") == 0) { winner = "Termites"; }
-                    else if (PlayerPrefs.GetInt("TermCount") == 0) { winner = "Ants"; }
+                    if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; }
+                    else if (PlayerPrefs.GetInt("TermCount") == 1) { winner = "Ants"; }
                     HexState result = CheckMoreColorTiles();
 
                     if (result == HexState.Neutral)

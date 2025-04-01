@@ -10,6 +10,7 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private int gridRadius = 3; // Set in Inspector
     [SerializeField] private GameObject hexPrefab;
     private Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
+    private List<HexTile> InactiveTiles= new List<HexTile>();
     private Dictionary<Vector2Int, Unit> units = new Dictionary<Vector2Int, Unit>();
     [SerializeField]  private GameObject[] unitsTermitePrefabs;
     [SerializeField]  private GameObject[] unitsAntsPrefabs;
@@ -42,6 +43,14 @@ public class HexGrid : MonoBehaviour
        // TerraFormerTilesProves();
     }
 
+    public void RemoveTile(Vector2Int pos)
+    {
+        HexTile tile = GetHexTile(pos);
+        tile.TileRenderer.gameObject.SetActive(false);
+        hexMap.Remove(pos);
+        InactiveTiles.Add(tile);
+    }
+
 
 
      private int GetNumberOfGameObjects(GameObject[] unitsArray)
@@ -51,7 +60,20 @@ public class HexGrid : MonoBehaviour
         
     }
 
+    public int GetUnitsByType(Team team)
+    {
+        int i = 0;
+        foreach(Unit unit in units.Values)
+        {
+            if (unit.Team == team)
+            {
+                i++;
+            }
+        }
+        return i;
 
+       
+    }
     public void CheckDestroyUnity(Team team)
     {
         List<Vector2Int> destroyUnits= new List<Vector2Int>();
