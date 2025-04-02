@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 
 public class NameSelector2P : MonoBehaviour
 {
@@ -25,12 +27,16 @@ public class NameSelector2P : MonoBehaviour
 
     private const string NameListKey = "AllPlayerNames";
     private const int MaxNameLength = 12;
-    private readonly string[] forbiddenCharacters = { "@", "#", "$", "%", "&", "*", "!", "?" };
+    private readonly string[] forbiddenCharacters = { "@", "#", "$", "%", "&", "*", "!", "?", "+", "=", "/", "\\", "|", "<", ">", "(", ")", "{", "}", "[", "]", "^", "~", "`", "'", "\"", ":", ";", ",", "." };
 
     private void Start()
     {
+        LoadPlayerStats(); //Cargar estadisticas en consola
         LoadNames();
-
+        inputField1.text = "";
+        inputField2.text = "";
+        text1.text = "";
+        text2.text = "";
         // Asigna funciones a los botones
         changeNameButton1.onClick.AddListener(() => AttemptNameChange(1));
         changeNameButton2.onClick.AddListener(() => AttemptNameChange(2));
@@ -42,6 +48,7 @@ public class NameSelector2P : MonoBehaviour
 
     private void LoadNames()
     {
+
         if (PlayerPrefs.HasKey("PlayerName1"))
         {
             text1.text = PlayerPrefs.GetString("PlayerName1");
@@ -53,6 +60,7 @@ public class NameSelector2P : MonoBehaviour
             text2.text = PlayerPrefs.GetString("PlayerName2");
             inputField2.text = text2.text;
         }
+
     }
 
     private void AttemptNameChange(int playerNumber)
@@ -137,4 +145,74 @@ public class NameSelector2P : MonoBehaviour
     {
         PlayerPrefs.SetString(NameListKey, string.Join(";", allNames));
     }
+    
+    private void LoadPlayerStats()
+    {
+        List<string> playerNames = GetAllSavedNames();
+
+        foreach (string playerName in playerNames)
+        {
+            Debug.Log("Jugador guardado: " + playerName);  // Mostrar cada nombre guardado
+        }
+
+        List<PlayerStats> allStats = new List<PlayerStats>();
+
+        foreach (string playerName in playerNames)
+        {
+            try
+            {
+                PlayerStats stats = LoadStatsForPlayer(playerName);
+                allStats.Add(stats); // Guardamos las estadísticas del jugador
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error loading stats for player {playerName}: {e.Message}");
+            }
+        }
+        for (int i = 0; i < allStats.Count; i++)
+        {
+            PlayerStats stats = allStats[i];
+            int rank = i + 1; // Top 1, Top 2...
+
+          
+
+           
+
+            // Ahora incluye el número de ranking
+           SetupEntry(rank, stats.Nombre, stats.PartidasGanadas, stats.HormigasEliminadas, stats.TermitasEliminadas, stats.ParcelasHormigas, stats.ParcelasTermitas);
+        }
+
+
+    }
+    private PlayerStats LoadStatsForPlayer(string name)
+    {
+        int partidasGanadas = PlayerPrefs.GetInt($"PartidasGanadas_{name}");
+        int hormigasEliminadas = PlayerPrefs.GetInt($"HormigasEliminadas_{name}");
+        int termitasEliminadas = PlayerPrefs.GetInt($"TermitasEliminadas_{name}");
+        int parcelasHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{name}");
+        int parcelasTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{name}");
+
+        return new PlayerStats
+        {
+            Nombre = name,
+            PartidasGanadas = partidasGanadas,
+            HormigasEliminadas = hormigasEliminadas,
+            TermitasEliminadas = termitasEliminadas,
+            ParcelasHormigas = parcelasHormigas,
+            ParcelasTermitas = parcelasTermitas
+        };
+    }
+
+    private void SetupEntry(int rank, string playerName, int partidasGanadas, int hormigasEliminadas, int termitasEliminadas, int parcelasHormigas, int parcelasTermitas)
+    {
+        string statsMessage = $"{rank}. {playerName} - " +
+                              $"Partidas: {partidasGanadas}, " +
+                              $"Hormigas eliminadas: {hormigasEliminadas}, " +
+                              $"Termitas eliminadas: {termitasEliminadas}, " +
+                              $"Parcelas Hormigas: {parcelasHormigas}, " +
+                              $"Parcelas Termitas: {parcelasTermitas}";
+
+        Debug.Log(statsMessage);
+    }
+
 }

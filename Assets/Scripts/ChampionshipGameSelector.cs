@@ -12,7 +12,6 @@ public class ChampionshipGameSelector : MonoBehaviour
 
     private void Start()
     {
-
         UpdateDisplay();  // Mostrar valor inicial al arrancar
     }
 

@@ -4197,7 +4197,7 @@ MonoBehaviour:
   changeNameButton1: {fileID: 38412104}
   changeNameButton2: {fileID: 1982607905}
   messageText: {fileID: 1989998638}
-  messageDuration: 2
+  messageDuration: 1
 --- !u!1 &2081994156
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,26 @@
+=======================================================================================
+PlayerPrefs del juego
+=======================================================================================
+PlayerName1 -> String jugador1 Modo Campeonato
+PlayerName2 -> String jugador2 Modo Campeonato
+AllPlayerNames -> Lista de todos los nombres de los jugadores
+AntCount -> Int de las hormigas en escena
+TermCount -> Int de termitas en escena
+NumeroRondasCampeonato -> Int de las rondas restantes del campeonato (dinámico)
+NumeroPartidasCampeonato -> Int de las partidas seleccionadas para el campeonato
+ModoCampeonato -> Int que representa un bool para saber si estas en el Modo Campeonato
+AntsKilled -> Int del numero de hormigas eliminadas
+TermsKilled -> Int del numero de termitas eliminadas
+FINISHGAME -> Int que representa un bool para saber si has jugador una partida rápida
+selected_language -> Lista de los idiomas del juego
+MusicOn -> Int que representa un bool para saber si la musica esta encendida o no
+SFXOn -> Int que representa un bool para saber si los sfx están encendidos o no
+=======================================================================================
+PlayerPrefs que necesitan un nombre de la lista "AllPlayerNames"
+=======================================================================================
+$"PartidasGanadas_{name}" -> Int de partidas ganadas
+$"HormigasEliminadas_{name}" -> Int de hormigas eliminadas
+$"TermitasEliminadas_{name}" -> Int de termitas eliminadas
+$"ParcelasHormigas_{name}" -> Int de parcelas conquistadas por las hormigas
+$"ParcelasTermitas_{name}" -> Int de parcelas conquistadas por las termitas
+$"RondasGanadas_{name}" -> Int de rondas ganadas en el modo torneo

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+
+
 public class NameSelector : MonoBehaviour
 {
     [Header("Inputs")]
@@ -18,7 +20,7 @@ public class NameSelector : MonoBehaviour
 
     [Header("Mensajes")]
     [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private float messageDuration = 2f;
+    [SerializeField] private float messageDuration = 1f;
 
     private const string NameListKey = "AllPlayerNames";
     private const int MaxNameLength = 12;
@@ -34,8 +36,10 @@ public class NameSelector : MonoBehaviour
     
     void Start()
     {
-       
+    
         LoadNames();
+        inputField1.text = "";
+        
 
         changeNameButton1.onClick.AddListener(() => AttemptNameChange(1));
         inputField1.onEndEdit.AddListener(delegate { AttemptNameChange(1); });
@@ -187,12 +191,13 @@ public class NameSelector : MonoBehaviour
         {
             AttemptNameChange(1);
         }
-    }
-
-    
+    }    
     private IEnumerator CloseKeyboard()
     {
         yield return new WaitForSeconds(0.1f);
         inputField1.DeactivateInputField();
     }
+
+   
+
 }
