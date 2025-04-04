@@ -395,10 +395,10 @@ public class GameManager : MonoBehaviour
             if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
             {
 
-
-                if (limitTurns <= 0 && partidasSeleccionadas != 0 || PlayerPrefs.GetInt("AntCount") == 1 || PlayerPrefs.GetInt("TermCount") == 1)
+                WinCondition();
+                if (limitTurns <= 0 && partidasSeleccionadas != 0)
                 {
-                    WinCondition();
+                  
                     HexState result = CheckMoreColorTiles();
                     if (result == HexState.Neutral)
                     {
