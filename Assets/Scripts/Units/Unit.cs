@@ -31,26 +31,35 @@ public abstract class Unit : MonoBehaviour
     {
         
         string[] partes = GetComponent<Unit>().ToString().Split("(");
-        if (partes.Length > 0 )
+        if (partes.Length > 0 && transform.childCount > 0)
         {
-            if (transform.GetChild(0).gameObject.GetComponent<TMP_Text>())
+            TMP_Text label = transform.GetChild(0).GetComponent<TMP_Text>();
+
+            if (label != null)
             {
                 if (partes[0].Contains("Panchulina"))
                 {
-                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Pan";
+                    label.text = "Pan";
                 }
                 else if (partes[0].Contains("Terra"))
                 {
-                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Terra";
+                    label.text = "Terra";
+                }
+                else if (partes[0].Contains("Runner"))
+                {
+                    label.text = "Runner";
                 }
                 else
                 {
-                    transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "Runner";
+                    // Do nothing or optionally clear the text
+                    // label.text = "";
                 }
-                //transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = partes[0];
-                transform.GetChild(0).transform.LookAt(new Vector3(0, 0, 25.0f));
+
+                // Optional: only LookAt if we changed the text
+                label.transform.LookAt(new Vector3(0, 0, 25.0f));
             }
         }
+
     }
 
 

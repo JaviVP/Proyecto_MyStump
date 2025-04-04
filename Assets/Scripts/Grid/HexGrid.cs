@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static GameManager;
@@ -22,6 +23,17 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
     [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
 
+
+    /// BASE
+
+    [SerializeField] private bool useCustomBaseCoordinates = false;
+    [SerializeField] private Vector2Int termiteBaseCoords;
+    [SerializeField] private Vector2Int antBaseCoords;
+    [SerializeField] private GameObject baseTermitePrefab;
+    [SerializeField] private GameObject baseAntPrefab;
+
+
+
     private int antsKilled;
     private int termsKilled;
     private int termiteUnitsCount;
@@ -38,6 +50,7 @@ public class HexGrid : MonoBehaviour
         //Debug.Log("HexGrid Start() is running...");
         GenerateHexGrid();
         //Debug.Log("HexGrid has generated " + hexMap.Count + " hex tiles.");
+        SpawnBases();
         GenerateUnits();
         //Testing
        // TerraFormerTilesProves();
@@ -105,21 +118,7 @@ public class HexGrid : MonoBehaviour
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
 
-                            if (unit is UnitBase)
-                            {
-                                /// Si habran mas jugadores en el 
-                                /// posible futuro, este codigo
-                                /// se tendra que actualizar
-
-                                Debug.Log($"Base destroyed! {team} loses.");
-
-                                Instance.DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
-
-
-                  
-
-                                return;
-                            }
+                            
 
 
                             unit.UnitRenderer.SetActive(false);
@@ -129,21 +128,50 @@ public class HexGrid : MonoBehaviour
                             destroyUnits.Add(pos);
                           if(unit.Team == Team.Ants)
                             {
-                                antsKilled = PlayerPrefs.GetInt("AntsKilled");
-                                antsKilled += 1;
-                                PlayerPrefs.SetInt("AntsKilled", antsKilled);
-                                antUnitsCount--;
-                                PlayerPrefs.SetInt("AntCount", antUnitsCount);
+                                if (unit is UnitBase)
+                                {
+                                    /// Si habran mas jugadores en el 
+                                    /// posible futuro, este codigo
+                                    /// se tendra que actualizar
+
+                                    Debug.Log($"Base destroyed! {team} loses.");
+
+                                    //Instance.DeclareWinner(team == Team.Ants ? Team.Termites : Team.Ants);
+
+                                    PlayerPrefs.SetInt("AntCount", 1);
+
+
+
+                                }
+                                else
+                                {
+                                    antsKilled = PlayerPrefs.GetInt("AntsKilled");
+                                    antsKilled += 1;
+                                    PlayerPrefs.SetInt("AntsKilled", antsKilled);
+                                    antUnitsCount--;
+                                    PlayerPrefs.SetInt("AntCount", antUnitsCount);
+                                }
+                                
 
                             }
                             else if (unit.Team == Team.Termites)
                             {
+                                if (unit is UnitBase)
+                                { 
+                                    Debug.Log($"Base destroyed! {team} loses.");
 
-                                termsKilled = PlayerPrefs.GetInt("TermsKilled");
-                                termsKilled += 1;                  
-                                PlayerPrefs.SetInt("TermsKilled", termsKilled);
-                                termiteUnitsCount--;
-                                PlayerPrefs.SetInt("TermCount", termiteUnitsCount);
+                                    PlayerPrefs.SetInt("TermCount", 1);
+
+                                }
+                                else
+                                {
+                                    termsKilled = PlayerPrefs.GetInt("TermsKilled");
+                                    termsKilled += 1;
+                                    PlayerPrefs.SetInt("TermsKilled", termsKilled);
+                                    termiteUnitsCount--;
+                                    PlayerPrefs.SetInt("TermCount", termiteUnitsCount);
+                                }
+                                
                             }
                             
 
@@ -307,6 +335,8 @@ public class HexGrid : MonoBehaviour
         }
     }
 
+
+    //Regular unit Spawning
     private void PlaceUnit(UnitPlacement placement, HexState owning, GameManager.Team team, GameObject[] unitPrefabs)
     {
         if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
@@ -340,6 +370,58 @@ public class HexGrid : MonoBehaviour
 
         units[placement.position] = unit;
         hexMap[placement.position].SetState(owning);
+    }
+
+
+    //Base unit Spawning
+    public void PlaceUnit(Vector2Int position, HexState owning, GameManager.Team team, GameObject unitPrefab)
+    {
+        if (!hexMap.ContainsKey(position)) return;
+
+        Vector3 worldPosition = AxialToWorld(position.x, position.y);
+        worldPosition.y += 0.1f;
+
+        Quaternion rotation = Quaternion.identity;
+        if (team == GameManager.Team.Termites)
+            rotation = Quaternion.Euler(0, 90, 0);
+        else if (team == GameManager.Team.Ants)
+            rotation = Quaternion.Euler(0, -90, 0);
+
+        GameObject unitObj = Instantiate(unitPrefab, worldPosition, rotation);
+
+        Unit unit = unitObj.GetComponent<Unit>();
+        unit.UnitRenderer = unitObj;
+        unit.AxialCoords = position;
+        unit.Team = team;
+
+        units[position] = unit;
+        hexMap[position].SetState(owning);
+    }
+
+
+
+    private void SpawnBases()
+    {
+        Vector2Int termiteSpawn;
+        Vector2Int antSpawn;
+
+        if (useCustomBaseCoordinates)
+        {
+            termiteSpawn = termiteBaseCoords;
+            antSpawn = antBaseCoords;
+        }
+        else
+        {
+            // Get leftmost for termites, rightmost for ants
+            termiteSpawn = GetLeftmostHex();
+            antSpawn = GetRightmostHex();
+        }
+
+
+        PlaceUnit(termiteSpawn, HexState.Termites, Team.Termites, baseTermitePrefab);
+        PlaceUnit(antSpawn, HexState.Ants, Team.Ants, baseAntPrefab);
+
+
     }
 
 
@@ -406,9 +488,44 @@ public class HexGrid : MonoBehaviour
 
 
 
-    
+    private Vector2Int GetLeftmostHex()
+    {
+        Vector2Int leftmost = Vector2Int.zero;
+        float minX = float.MaxValue;
 
-   
+        foreach (var kvp in hexMap)
+        {
+            Vector3 worldPos = AxialToWorld(kvp.Key.x, kvp.Key.y);
+            if (worldPos.x < minX)
+            {
+                minX = worldPos.x;
+                leftmost = kvp.Key;
+            }
+        }
+
+        return leftmost;
+    }
+
+    private Vector2Int GetRightmostHex()
+    {
+        Vector2Int rightmost = Vector2Int.zero;
+        float maxX = float.MinValue;
+
+        foreach (var kvp in hexMap)
+        {
+            Vector3 worldPos = AxialToWorld(kvp.Key.x, kvp.Key.y);
+            if (worldPos.x > maxX)
+            {
+                maxX = worldPos.x;
+                rightmost = kvp.Key;
+            }
+        }
+
+        return rightmost;
+    }
+
+
+
 
     public HexTile GetHexTile(Vector2Int coords)
     {

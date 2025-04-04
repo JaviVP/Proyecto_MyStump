@@ -7,4 +7,4 @@ public class UnitPlacement
     public UnitType unitType;  // Enum to select unit type
 }
 
-public enum UnitType { None, Runner, Terraformer, Punchulina }  // Unit types
+public enum UnitType { None, Runner, Terraformer, Punchulina, Base }  // Unit types
