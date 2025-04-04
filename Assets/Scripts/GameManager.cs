@@ -435,43 +435,60 @@ public class GameManager : MonoBehaviour
             }
             else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
             {
-                if (gameOver) return; // Stop further execution if game ended
-                if (limitTurns <= 0 || PlayerPrefs.GetInt("AntCount") == 1 || PlayerPrefs.GetInt("TermCount") == 1)
+                if (gameOver) return; // Stop if already over
+
+                // ✅ FIRST: Check if base has been destroyed (Term or Ant count = 1)
+                if (PlayerPrefs.GetInt("AntCount") == 1)
                 {
-                    
+                    winner = "Termites";
+                }
+                else if (PlayerPrefs.GetInt("TermCount") == 1)
+                {
+                    winner = "Ants";
+                }
+
+                // ✅ If a winner was found through base kill, stop here
+                if (!string.IsNullOrEmpty(winner))
+                {
+                    inputPanel.SetActive(true);
+                    UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
+                    endPanel.SetActive(true);
+                    UiManager.Instance.TouchEnabled = false;
+                    gameOver = true;
+                    return;
+                }
+
+                // ✅ SECOND: Check turn limit condition + tile control
+                if (limitTurns <= 0)
+                {
                     HexState result = CheckMoreColorTiles();
 
                     if (result == HexState.Neutral)
                     {
                         winner = "Draw";
-                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
+                        UiManager.Instance.UpdateUiTurn("Result: Draw");
                     }
                     else
                     {
-                        if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; }
-                        else if (PlayerPrefs.GetInt("TermCount") == 1) { winner = "Ants"; }
                         winner = result.ToString();
+                        UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
                         inputPanel.SetActive(true);
-                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+
                     }
+
                     endPanel.SetActive(true);
-
                     UiManager.Instance.TouchEnabled = false;
-                    //FIN DE PARTIDA
-                    //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
+                    gameOver = true;
                 }
                 else
                 {
-
+                    // Game continues – just update info or debug
                     HexState result = CheckMoreColorTiles();
                     Debug.Log($"Turn switched to {CurrentTurn}");
-                    //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
+                    // Optional: Update turn info here
                 }
-
-
             }
+
         }
     }
 
