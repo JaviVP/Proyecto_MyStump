@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
         Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
+    
 
         brain = Camera.main.GetComponent<CinemachineBrain>();
         mainCamera = Camera.main;
@@ -547,6 +548,7 @@ public class GameManager : MonoBehaviour
             player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");   
             player1RoundsWon++;
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
+            PlayerPrefs.SetInt($"PartidasGanadas_{player1}", player1RoundsWon);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
 
         }
@@ -555,6 +557,7 @@ public class GameManager : MonoBehaviour
             player2RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player2}");
             player2RoundsWon++;
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
+            PlayerPrefs.SetInt($"PartidasGanadas_{player2}", player2RoundsWon);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
         }
         else
@@ -571,8 +574,29 @@ public class GameManager : MonoBehaviour
 
     // REVISAR UPDATE DE ESTADISTICAS CAMPEONATO
     public void UpdatePlayerStats()
-    { 
-        
+    {
+        TilesAndKills();
+    }
+
+    private void TilesAndKills()
+    {
+        if (winner == "Termites" || winner == "Ants" || winner == "Draw")
+        {
+            actualTermTiles1 = numberTermitesTiles;
+            totalTermTiles1 = PlayerPrefs.GetInt($"ActualTermTiles_{player1}");
+            totalTermTiles1 += actualTermTiles1;
+            PlayerPrefs.SetInt($"ActualTermTiles_{player1}", totalTermTiles1);
+            PlayerPrefs.SetInt(($"ParcelasTermitas_{player1}"), PlayerPrefs.GetInt($"ParcelasTermitas_{player1}") + PlayerPrefs.GetInt($"ActualTermTiles_{player1}"));
+            actualAntTiles2 = numberAntsTiles;
+            totalAntTiles2 = PlayerPrefs.GetInt($"ActualAntTiles_{player2}");
+            totalAntTiles2 += actualAntTiles2;
+            PlayerPrefs.SetInt($"ActualAntTiles_{player2}", totalAntTiles2);
+            PlayerPrefs.SetInt($"ParcelasHormigas_{player2}", PlayerPrefs.GetInt($"ParcelasHormigas_{player2}") + PlayerPrefs.GetInt($"ActualAntTiles_{player2}"));            
+        }
+        Debug.Log("Parcelas Termitas p1 : " + PlayerPrefs.GetInt($"ParcelasTermitas_{player1}"));
+        Debug.Log("Parcelas Termitas p2 : " + PlayerPrefs.GetInt($"ParcelasTermitas_{player2}"));
+        Debug.Log("Parcelas Hormigas p1 : " + PlayerPrefs.GetInt($"ParcelasHormigas_{player1}"));
+        Debug.Log("Parcelas Hormigas p2 : " + PlayerPrefs.GetInt($"ParcelasHormigas_{player2}"));
     }
 
 }
