@@ -373,6 +373,11 @@ MonoBehaviour:
     unitType: 1
   - position: {x: -3, y: -1}
     unitType: 3
+  useCustomBaseCoordinates: 0
+  termiteBaseCoords: {x: 0, y: 0}
+  antBaseCoords: {x: 0, y: 0}
+  baseTermitePrefab: {fileID: 19013067013085495, guid: 51dac7402d502234496a396933c4ea57, type: 3}
+  baseAntPrefab: {fileID: 4540863871427009747, guid: 2ac1d0d9cf459364683682a3dcd7c730, type: 3}
 --- !u!114 &477943196
 MonoBehaviour:
   m_ObjectHideFlags: 0
