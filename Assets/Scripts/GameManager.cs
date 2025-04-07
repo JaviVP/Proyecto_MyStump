@@ -568,7 +568,7 @@ public class GameManager : MonoBehaviour
             player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");
             player1RoundsWon++;
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
-            PlayerPrefs.SetInt($"PartidasGanadas_{player1}", player1RoundsWon);
+            PlayerPrefs.SetInt($"PartidasGanadas_{player1}", PlayerPrefs.GetInt($"PartidasGanadas_{player1}") + player1RoundsWon);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
 
         }
@@ -577,7 +577,7 @@ public class GameManager : MonoBehaviour
             player2RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player2}");
             player2RoundsWon++;
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
-            PlayerPrefs.SetInt($"PartidasGanadas_{player2}", player2RoundsWon);
+            PlayerPrefs.SetInt($"PartidasGanadas_{player2}", PlayerPrefs.GetInt($"PartidasGanadas_{player2}") + player2RoundsWon);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
         }
         else
