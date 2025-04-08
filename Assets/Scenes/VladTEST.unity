@@ -297,29 +297,35 @@ MonoBehaviour:
   - {fileID: 433997642}
   - {fileID: 1599535812}
   - {fileID: 863960257}
+  TermiteRunnerPrefab: {fileID: 433997642}
+  TermiteTerraformerPrefab: {fileID: 1599535812}
+  TermitePanchulinasPrefab: {fileID: 863960257}
   unitsAntsPrefabs:
   - {fileID: 281791087005821463}
   - {fileID: 335240007}
   - {fileID: 1677003084}
-  antPlacements:
-  - position: {x: 3, y: 1}
-    unitType: 2
-  - position: {x: 3, y: 0}
-    unitType: 1
-  - position: {x: 4, y: -1}
-    unitType: 3
-  termitePlacements:
-  - position: {x: -4, y: 1}
-    unitType: 2
-  - position: {x: -3, y: 0}
-    unitType: 1
-  - position: {x: -3, y: -1}
-    unitType: 3
+  AntRunnerPrefab: {fileID: 281791087005821463}
+  AntTerraformerPrefab: {fileID: 335240007}
+  AntPanchulinasPrefab: {fileID: 1677003084}
   useCustomBaseCoordinates: 0
   termiteBaseCoords: {x: 0, y: 0}
   antBaseCoords: {x: 0, y: 0}
   baseTermitePrefab: {fileID: 1407054582}
   baseAntPrefab: {fileID: 1907193084}
+  antPlacements:
+  - position: {x: 3, y: 1}
+    unitType: 1
+  - position: {x: 3, y: 0}
+    unitType: 0
+  - position: {x: 4, y: -1}
+    unitType: 2
+  termitePlacements:
+  - position: {x: -4, y: 1}
+    unitType: 1
+  - position: {x: -3, y: 0}
+    unitType: 0
+  - position: {x: -3, y: -1}
+    unitType: 2
 --- !u!114 &477943196
 MonoBehaviour:
   m_ObjectHideFlags: 0

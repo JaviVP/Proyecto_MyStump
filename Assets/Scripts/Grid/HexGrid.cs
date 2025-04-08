@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static GameManager;
 
+
+public enum UnitType { Runner, Terraformer, Panchulina, Base }
+
 public class HexGrid : MonoBehaviour
 {
     [SerializeField] private float hexSpacing = 1f;
@@ -13,24 +16,42 @@ public class HexGrid : MonoBehaviour
     private Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
     private List<HexTile> InactiveTiles= new List<HexTile>();
     private Dictionary<Vector2Int, Unit> units = new Dictionary<Vector2Int, Unit>();
+
+    [Header("Termite Prefabs")]
     [SerializeField]  private GameObject[] unitsTermitePrefabs;
+    [SerializeField] private GameObject TermiteRunnerPrefab;
+    [SerializeField] private GameObject TermiteTerraformerPrefab;
+    [SerializeField] private GameObject TermitePanchulinasPrefab;
+
+
+    [Header("Ant Prefabs")]
     [SerializeField]  private GameObject[] unitsAntsPrefabs;
+    [SerializeField] private GameObject AntRunnerPrefab;
+    [SerializeField] private GameObject AntTerraformerPrefab;
+    [SerializeField] private GameObject AntPanchulinasPrefab;
 
-
-    private const float HEX_WIDTH = 1.732f; // sqrt(3)
-    private const float HEX_HEIGHT = 2f;
-
-    [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
-    [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
 
 
     /// BASE
-
+    [Header("Bases")]
     [SerializeField] private bool useCustomBaseCoordinates = false;
     [SerializeField] private Vector2Int termiteBaseCoords;
     [SerializeField] private Vector2Int antBaseCoords;
     [SerializeField] private GameObject baseTermitePrefab;
     [SerializeField] private GameObject baseAntPrefab;
+
+    private const float HEX_WIDTH = 1.732f; // sqrt(3)
+    private const float HEX_HEIGHT = 2f;
+
+
+
+    [Header("Manual Placement TEST (Or not)")]
+
+    [SerializeField] private List<UnitPlacement> antPlacements = new List<UnitPlacement>();
+    [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
+
+
+    
 
 
 
@@ -327,78 +348,71 @@ public class HexGrid : MonoBehaviour
     {
         foreach (UnitPlacement placement in antPlacements)
         {
-            PlaceUnit(placement, HexState.Ants, GameManager.Team.Ants, unitsAntsPrefabs);
+            SpawnUnit (placement.position, placement.unitType, Team.Ants, HexState.Ants);
         }
         foreach (UnitPlacement placement in termitePlacements)
         {
-            PlaceUnit(placement, HexState.Termites, GameManager.Team.Termites, unitsTermitePrefabs);
+            SpawnUnit (placement.position , placement.unitType, Team.Termites, HexState.Termites);
         }
     }
 
 
-    //Regular unit Spawning
-    private void PlaceUnit(UnitPlacement placement, HexState owning, GameManager.Team team, GameObject[] unitPrefabs)
-    {
-        if (!hexMap.ContainsKey(placement.position)) return;  // Prevent placing outside grid
+    
 
-        // Obtén la posición en el mundo usando AxialToWorld
-        Vector3 worldPosition = AxialToWorld(placement.position.x, placement.position.y);
-
-        // Añadir el offset en el eje Y
-        worldPosition.y += 0.1f;
-
-        // Definir la rotación inicial (sin rotación, Quaternion.identity)
-        Quaternion rotation = Quaternion.identity;
-
-        // Asignar una rotación extra dependiendo del equipo
-        if (team == GameManager.Team.Termites)
-        {
-            rotation = Quaternion.Euler(0, 90, 0);  // 90 grados en Y para las termitas
-        }
-        else if (team == GameManager.Team.Ants)
-        {
-            rotation = Quaternion.Euler(0, -90, 0);  // -90 grados en Y para las hormigas
-        }
-
-        // Instanciar la unidad con la rotación ajustada
-        GameObject unitObj = Instantiate(unitPrefabs[(int)placement.unitType - 1], worldPosition, rotation);
-
-        Unit unit = unitObj.GetComponent<Unit>();
-        unit.UnitRenderer = unitObj;
-        unit.AxialCoords = placement.position;
-        unit.Team = team;
-
-        units[placement.position] = unit;
-        hexMap[placement.position].SetState(owning);
-    }
-
-
-    //Base unit Spawning
-    public void PlaceUnit(Vector2Int position, HexState owning, GameManager.Team team, GameObject unitPrefab)
+    public void SpawnUnit(Vector2Int position, UnitType unitType, GameManager.Team team,  HexState owning)
     {
         if (!hexMap.ContainsKey(position)) return;
+
+        GameObject prefab = GetPrefabForTeamAndType(team, unitType);
+        if (prefab == null)
+        {
+            Debug.LogError($"Missing prefab for team {team} and unit type {unitType}");
+            return;
+        }
 
         Vector3 worldPosition = AxialToWorld(position.x, position.y);
         worldPosition.y += 0.1f;
 
-        Quaternion rotation = Quaternion.identity;
-        if (team == GameManager.Team.Termites)
-            rotation = Quaternion.Euler(0, 90, 0);
-        else if (team == GameManager.Team.Ants)
-            rotation = Quaternion.Euler(0, -90, 0);
+        Quaternion rotation = team == GameManager.Team.Termites
+            ? Quaternion.Euler(0, 90, 0)
+            : Quaternion.Euler(0, -90, 0);
 
-        GameObject unitObj = Instantiate(unitPrefab, worldPosition, rotation);
+        GameObject unitObj = Instantiate(prefab, worldPosition, rotation);
+
+        /// Para no instanciar
+        /*
+        GameObject unitObj = prefab;
+        unitObj.transform.position = worldPosition;
+        unitObj.transform.rotation = rotation;
+        */
 
         Unit unit = unitObj.GetComponent<Unit>();
         unit.UnitRenderer = unitObj;
         unit.AxialCoords = position;
         unit.Team = team;
+        //unit.UnitType = unitType;
 
         units[position] = unit;
         hexMap[position].SetState(owning);
     }
 
+    private GameObject GetPrefabForTeamAndType(GameManager.Team team, UnitType type)
+    {
+        return (team, type) switch
+        {
+            (GameManager.Team.Termites, UnitType.Runner) => TermiteRunnerPrefab,
+            (GameManager.Team.Termites, UnitType.Panchulina) => TermitePanchulinasPrefab,
+            (GameManager.Team.Termites, UnitType.Terraformer) => TermiteTerraformerPrefab,
+            (GameManager.Team.Termites, UnitType.Base) => baseTermitePrefab,
 
+            (GameManager.Team.Ants, UnitType.Runner) => AntRunnerPrefab,
+            (GameManager.Team.Ants, UnitType.Panchulina) => AntPanchulinasPrefab,
+            (GameManager.Team.Ants, UnitType.Terraformer) => AntTerraformerPrefab,
+            (GameManager.Team.Ants, UnitType.Base) => baseAntPrefab,
+
+            _ => null
+        };
+    }
 
     private void SpawnBases()
     {
@@ -418,10 +432,8 @@ public class HexGrid : MonoBehaviour
         }
 
 
-        PlaceUnit(termiteSpawn, HexState.Termites, Team.Termites, baseTermitePrefab);
-        PlaceUnit(antSpawn, HexState.Ants, Team.Ants, baseAntPrefab);
-
-
+        SpawnUnit(termiteSpawn, UnitType.Base, Team.Termites, HexState.Termites);
+        SpawnUnit(antSpawn, UnitType.Base, Team.Ants, HexState.Ants);
     }
 
 
