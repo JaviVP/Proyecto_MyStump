@@ -1,43 +1,49 @@
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
-
+using System;
+using System.Linq;
 public class HazardEventsManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private List<Hazard> hazardList= new List<Hazard>();
-    //private List<Hazard> hazardList = new List<Hazard>();
-
-    private void FillHazardList()
+    Dictionary<int, Hazard> hazardDictionary = new Dictionary<int, Hazard>();
+   
+   
+    public void ShuffleHazards()
     {
-        // Add different types of hazards to the list
-        hazardList.Add(new HazardSequiaExtrema());
-       
-        // You can add more hazards as needed
-        // hazardList.Add(new AnotherHazardType());
-    }
-    private void ShuffleHazardList()
-    {
-        for (int i = 0; i < hazardList.Count; i++)
+        List<Hazard> hazardList = new List<Hazard>
         {
-            int randomIndex = Random.Range(i, hazardList.Count);
-            // Swap the current element with the random element
-            Hazard temp = hazardList[i];
-            hazardList[i] = hazardList[randomIndex];
-            hazardList[randomIndex] = temp;
+            new HazardSequiaExtrema(),
+            new HazardSequiaExtrema(),
+
+
+        };
+
+        // Mezclar la lista de hazards
+        System.Random rng = new System.Random();
+        List<Hazard> shuffledHazards = hazardList.OrderBy(h => rng.Next()).ToList();
+
+        // Convertir la lista mezclada a un diccionario
+        Dictionary<int, Hazard> hazardDictionary = shuffledHazards.ToDictionary(h => h.Id, h => h);
+
+        // Mostrar el diccionario
+        foreach (var kvp in hazardDictionary)
+        {
+            Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value.Description}");
         }
     }
 
-    private Hazard GetRandomHazard()
+    public static Hazard GetHazardByKey(Dictionary<int, Hazard> hazardDictionary, int key)
     {
-        if (hazardList.Count > 0)
+        // Intenta obtener el hazard usando TryGetValue
+        if (hazardDictionary.TryGetValue(key, out Hazard hazard))
         {
-            // Return the first hazard from the shuffled list
-            return hazardList[0];
+            return hazard; // Retorna el hazard encontrado
         }
-        return null; // Return null if the list is empty
+        else
+        {
+            return null; // Retorna null si no se encuentra el hazard
+        }
     }
-
 
 
 }

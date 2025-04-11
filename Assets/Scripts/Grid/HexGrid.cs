@@ -656,4 +656,23 @@ public class HexGrid : MonoBehaviour
             };
         }
     }
+
+    public HexTile GetRandomHexTile()
+    {
+        // Ensure the dictionary is not empty
+        if (hexMap.Count == 0)
+        {
+            return null;  // Or handle accordingly
+        }
+
+        // Get a random index in the dictionary
+        System.Random random = new System.Random();
+        int randomIndex = random.Next(hexMap.Count);
+
+        // Get the key-value pair at that random index
+        Vector2Int randomKey = new List<Vector2Int>(hexMap.Keys)[randomIndex];
+        HexTile randomTile = hexMap[randomKey];
+
+        return randomTile;
+    }
 }
