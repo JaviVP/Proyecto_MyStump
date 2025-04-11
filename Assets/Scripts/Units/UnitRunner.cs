@@ -113,6 +113,7 @@ public class UnitRunner : Unit
         ClearHighlights(); // ✅ Remove movement highlights
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
+        
         return true; // ✅ Movement successful
     }
 
@@ -148,6 +149,7 @@ public class UnitRunner : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(0.1f);
+        SetCooldownVisual(true);
         GameManager.Instance.LockTiles = false;
     }
 

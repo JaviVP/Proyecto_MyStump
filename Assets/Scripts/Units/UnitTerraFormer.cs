@@ -107,6 +107,7 @@ public class UnitTerraFormer : Unit
 
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
+        
         return true;
     }
 
@@ -161,6 +162,7 @@ public class UnitTerraFormer : Unit
 
         // Esperamos un poco después de la animación
         yield return new WaitForSeconds(0.1f);
+        SetCooldownVisual(true);
         GameManager.Instance.LockTiles = false;
     }
 
