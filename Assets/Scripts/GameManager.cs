@@ -618,7 +618,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // REVISAR UPDATE DE ESTADISTICAS CAMPEONATO
+   
     public void UpdatePlayerStats()
     {
         TilesAndKills();
