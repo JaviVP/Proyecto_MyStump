@@ -518,8 +518,13 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!114 &477943198
 MonoBehaviour:
+=======
+--- !u!1 &535491830
+GameObject:
+>>>>>>> Stashed changes
 =======
 --- !u!1 &535491830
 GameObject:
@@ -529,6 +534,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 477943194}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -536,6 +542,8 @@ GameObject:
   m_Name: 
   m_EditorClassIdentifier: 
 =======
+=======
+>>>>>>> Stashed changes
   serializedVersion: 6
   m_Component:
   - component: {fileID: 535491831}
@@ -567,6 +575,9 @@ RectTransform:
   m_AnchoredPosition: {x: 252.2, y: 0}
   m_SizeDelta: {x: 500, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1001 &538929951
 PrefabInstance:

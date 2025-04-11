@@ -376,9 +376,13 @@ public class GameManager : MonoBehaviour
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
             Debug.Log("Current: " + currentTurn);
             this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
+=======
+            RefreshUnitsForTeam(CurrentTurn);
+>>>>>>> Stashed changes
 =======
             RefreshUnitsForTeam(CurrentTurn);
 >>>>>>> Stashed changes
