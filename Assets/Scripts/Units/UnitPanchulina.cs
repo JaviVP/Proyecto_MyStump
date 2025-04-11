@@ -120,7 +120,6 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
-                SetCooldownVisual(true);
 
             }
             
@@ -222,7 +221,6 @@ public class UnitPanchulina : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(0.1f);
-        
         GameManager.Instance.LockTiles = false;
     }
 
