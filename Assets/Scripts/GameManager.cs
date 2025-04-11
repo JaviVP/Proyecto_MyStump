@@ -295,7 +295,7 @@ public class GameManager : MonoBehaviour
 
     public void SelectUnit(Unit unit)
     {
-        if (unit == null || movedUnits.Contains(unit) || unit.Team != CurrentTurn)
+        if (unit == null || !unit.IsAvailableThisTurn() || unit.Team != CurrentTurn)
         {
             return;
         }
@@ -321,7 +321,8 @@ public class GameManager : MonoBehaviour
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
-
+                selectedUnit.MarkAsUsed(); // ✅ Apply cooldown
+                //movedUnits.Add(selectedUnit);
                 CheckTurnEnd();
                 selectedUnit = null;
             }
@@ -333,7 +334,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    private void RefreshUnitsForTeam(Team team)
+    {
+        foreach (var unit in hexGrid.GetAllUnits())
+        {
+            if (unit.Team == team)
+            {
+                unit.ReduceCooldown(); // ✅ Refresh cooldown
+            }
+        }
+    }
 
     private HexState CheckMoreColorTiles()
     {
@@ -365,6 +375,7 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("Current: " + currentTurn);
             this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
+            RefreshUnitsForTeam(CurrentTurn);
 
             hexGrid.SelectTeam(CurrentTurn);
             hexGrid.CheckDestroyUnity(CurrentTurn);
@@ -660,5 +671,6 @@ public class GameManager : MonoBehaviour
     }
 
 }
+
 
 

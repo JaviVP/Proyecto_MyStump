@@ -162,6 +162,7 @@ public class UnitTerraFormer : Unit
         // Esperamos un poco después de la animación
         yield return new WaitForSeconds(0.1f);
         GameManager.Instance.LockTiles = false;
+        SetCooldownVisual(true);
     }
 
 

@@ -108,6 +108,20 @@ public class HexGrid : MonoBehaviour
 
        
     }
+
+    public List<Unit> GetAllUnits()
+    {
+        List<Unit> allUnits = new List<Unit>();
+        foreach (var unit in units.Values)
+        {
+            if (unit != null)
+            {
+                allUnits.Add(unit);
+            }
+        }
+        return allUnits;
+    }
+
     public void CheckDestroyUnity(Team team)
     {
         List<Vector2Int> destroyUnits= new List<Vector2Int>();
