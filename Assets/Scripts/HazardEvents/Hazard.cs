@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Hazard : MonoBehaviour
+public abstract class Hazard
 {
     private int id;
     private string name = "";

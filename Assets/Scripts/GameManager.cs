@@ -8,6 +8,9 @@ using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
+
+
+
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject inputPanel;
 
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     //Limit of turns
     [SerializeField] private float limitTurns;
+    private float numericCurrentTurn=1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
@@ -123,8 +127,8 @@ public class GameManager : MonoBehaviour
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         PlayerPrefs.SetInt("TermsKilled", 0);
         PlayerPrefs.SetInt("AntsKilled", 0);
-        Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
-        Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
+       // Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
+        //Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
 
 
         brain = Camera.main.GetComponent<CinemachineBrain>();
@@ -359,6 +363,8 @@ public class GameManager : MonoBehaviour
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
+            Debug.Log("Current: " + currentTurn);
+            this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
 
             hexGrid.SelectTeam(CurrentTurn);
             hexGrid.CheckDestroyUnity(CurrentTurn);
@@ -389,7 +395,7 @@ public class GameManager : MonoBehaviour
             }
             
             */
-
+            numericCurrentTurn++;
             limitTurns--;
             UiManager.Instance.UpdateScroll();
             if (PlayerPrefs.GetInt("ModoCampeonato") == 1)

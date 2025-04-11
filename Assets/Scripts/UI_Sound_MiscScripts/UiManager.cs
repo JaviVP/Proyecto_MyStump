@@ -43,8 +43,8 @@ public class UiManager : MonoBehaviour
         
         player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
-        scrollSliderGeneral = turnScrollGeneral.GetComponent<Slider>();
-        turnText.text = scrollSliderGeneral.value.ToString();
+        if (turnScrollGeneral!=null && turnScrollGeneral.GetComponent<Slider>()) scrollSliderGeneral = turnScrollGeneral.GetComponent<Slider>();
+        if (turnText!=null) turnText.text = scrollSliderGeneral.value.ToString();
         Time.timeScale = 1.0f;
         TouchEnabled = true;
         // Corrección de método obsoleto

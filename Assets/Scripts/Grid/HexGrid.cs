@@ -216,7 +216,7 @@ public class HexGrid : MonoBehaviour
 
     public void SelectTeam(Team team)
     {
-        Debug.Log("Desmarco");
+       
         foreach (Vector2Int pos in units.Keys)
         {
             

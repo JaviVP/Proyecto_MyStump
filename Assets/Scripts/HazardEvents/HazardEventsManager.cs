@@ -5,44 +5,71 @@ using System.Linq;
 public class HazardEventsManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Dictionary<int, Hazard> hazardDictionary = new Dictionary<int, Hazard>();
+    Dictionary<int, EventHazard> hazardDictionary = new Dictionary<int, EventHazard>();
+
    
-   
+
+    private void Start()
+    {
+        ShuffleHazards();
+    }
     public void ShuffleHazards()
     {
         List<Hazard> hazardList = new List<Hazard>
         {
+            new HazardCarreteraFantasma(),
             new HazardSequiaExtrema(),
-            new HazardSequiaExtrema(),
-
-
+            new HazardDerramePetroleo(),
+            new HazardDisputaPorElCaucho(),
+            new HazardElPulsoDelRio(),
+            new HazardExpansionUrbana(),
+            new HazardMineriaMercurio(),
+            new HazardTormentaDelTropico()
         };
 
         // Mezclar la lista de hazards
         System.Random rng = new System.Random();
         List<Hazard> shuffledHazards = hazardList.OrderBy(h => rng.Next()).ToList();
-
-        // Convertir la lista mezclada a un diccionario
-        Dictionary<int, Hazard> hazardDictionary = shuffledHazards.ToDictionary(h => h.Id, h => h);
-
-        // Mostrar el diccionario
-        foreach (var kvp in hazardDictionary)
+        int turnCounter = 2;
+        int key = 0;
+        foreach (Hazard h in shuffledHazards)
         {
-            Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value.Description}");
+            EventHazard eh = new EventHazard();
+            eh.Hazard = h;
+            eh.Turn = turnCounter;
+            turnCounter+=2;
+            key++;
+            hazardDictionary.Add(key, eh);
+
+        }
+        // Mostrar el diccionario
+        foreach (var kvp in hazardDictionary.Values)
+        {
+            Console.WriteLine("Value:"+ kvp.Hazard.Description);
         }
     }
 
-    public static Hazard GetHazardByKey(Dictionary<int, Hazard> hazardDictionary, int key)
+    public void CheckHazardEvents(int turn)
     {
-        // Intenta obtener el hazard usando TryGetValue
-        if (hazardDictionary.TryGetValue(key, out Hazard hazard))
+        Hazard h = GetHazardByTurn(turn);
+        if (h!=null)
         {
-            return hazard; // Retorna el hazard encontrado
+            Debug.Log("Lanzo un Hazard ("+turn+")");
         }
-        else
+    }
+
+    public Hazard GetHazardByTurn(int turn)
+    {
+        Hazard h = null;
+        foreach (EventHazard kvp in hazardDictionary.Values)
         {
-            return null; // Retorna null si no se encuentra el hazard
+            if (kvp.Turn ==turn)
+            {
+                return kvp.Hazard;
+            }
+            //Console.WriteLine("Value:" + kvp.Hazard.Description);
         }
+        return h;
     }
 
 
