@@ -18,13 +18,14 @@ public class HazardEventsManager : MonoBehaviour
         List<Hazard> hazardList = new List<Hazard>
         {
             new HazardCarreteraFantasma(),
-            new HazardSequiaExtrema(),
+            new HazardCarreteraFantasma()
+            /*new HazardSequiaExtrema(),
             new HazardDerramePetroleo(),
             new HazardDisputaPorElCaucho(),
             new HazardElPulsoDelRio(),
             new HazardExpansionUrbana(),
             new HazardMineriaMercurio(),
-            new HazardTormentaDelTropico()
+            new HazardTormentaDelTropico()*/
         };
 
         // Mezclar la lista de hazards
@@ -54,7 +55,10 @@ public class HazardEventsManager : MonoBehaviour
         Hazard h = GetHazardByTurn(turn);
         if (h!=null)
         {
-            Debug.Log("Lanzo un Hazard ("+turn+")");
+            Debug.Log("Lanzo un Hazard ("+turn+")  Tipo: "+ h.GetType().ToString());
+            
+            h.Apply();
+            
         }
     }
 
