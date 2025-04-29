@@ -17,8 +17,11 @@ public class UnitPanchulina : Unit
     {
         firstMove = false;
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
     }
-
 
 
     public override void OnSelected()
@@ -76,6 +79,10 @@ public class UnitPanchulina : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Move");
+        }
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         if (!FirstMove)
         {
@@ -108,6 +115,10 @@ public class UnitPanchulina : Unit
                 enemyUnit = hexGrid.GetUnitInTile(targetTile.axialCoords);
                 if (enemyUnit != null && enemyUnit.Team != this.Team)
                 {
+                    if (GetComponent<Animator>())
+                    {
+                        PoseTransition("Push");
+                    }
                     PushEnemy(enemyUnit, targetTile.axialCoords);
                 }
 
@@ -120,11 +131,16 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
-                SetCooldownVisual(true);
+                //SetCooldownVisual(true);
             }
             
         }
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         return true;
+        
     }
 
 
@@ -171,7 +187,8 @@ public class UnitPanchulina : Unit
 
 
         GameManager.Instance.LockTiles = true;
-        StartCoroutine(Animation(lastValidPos));
+
+        StartCoroutine(EnemyDisplacement(lastValidPos));
 
     }
 
@@ -189,8 +206,17 @@ public class UnitPanchulina : Unit
     }
 
     
-    IEnumerator Animation(Vector2Int targetPos)
+    IEnumerator EnemyDisplacement(Vector2Int targetPos)
     {
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Punch");
+        }
+        if (enemyUnit.GetComponent<Animator>())
+        {
+            enemyUnit.PoseTransition("Push");
+        }
+
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
         float speed = 10.0f;
 
@@ -215,21 +241,28 @@ public class UnitPanchulina : Unit
             // Verificamos si hemos llegado a la posición final
             if (Vector3.Distance(enemyUnit.transform.position, endPos) < 0.2f)
             {
+                if (enemyUnit.GetComponent<Animator>())
+                {
+                    enemyUnit.PoseTransition("Crash");
+                    yield return new WaitForSeconds(0.4f);
+                    if (enemyUnit.GetComponent<Animator>())
+                    {
+                        enemyUnit.PoseTransition("Idle");
+                    }
+                }
+                
                 break;
             }
         }
 
         // Esperamos un poco después de la animación si es necesario
-        yield return new WaitForSeconds(0.1f);
-
+        yield return new WaitForSeconds(1.5f);
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         GameManager.Instance.LockTiles = false;
     }
-
-
-
-
-
-
 
 
 

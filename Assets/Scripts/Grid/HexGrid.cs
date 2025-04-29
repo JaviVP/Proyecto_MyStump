@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -153,10 +154,12 @@ public class HexGrid : MonoBehaviour
                             //Destruyo la unidad
                             Debug.Log("---Destruyo la unidad---");
 
-                            
 
 
-                            unit.UnitRenderer.SetActive(false);
+
+                           
+                            unit.PoseTransition("Die");
+                            StartCoroutine(DeleteUnit(unit));
                             unit.AxialCoords = new Vector2Int(1000, 1000);
                             HexTile tile = GetHexTile(pos);
                             
@@ -205,6 +208,7 @@ public class HexGrid : MonoBehaviour
                                     PlayerPrefs.SetInt("TermsKilled", termsKilled);
                                     termiteUnitsCount--;
                                     PlayerPrefs.SetInt("TermCount", termiteUnitsCount);
+                                  
                                 }
                                 
                             }
@@ -222,6 +226,7 @@ public class HexGrid : MonoBehaviour
         }
         foreach (Vector2Int v in destroyUnits)
         {
+            
             units.Remove(v);
 
 
@@ -688,5 +693,12 @@ public class HexGrid : MonoBehaviour
         HexTile randomTile = hexMap[randomKey];
 
         return randomTile;
+    }
+
+
+    IEnumerator DeleteUnit(Unit unit)
+    {
+        yield return new WaitForSeconds(1.5f);
+        unit.UnitRenderer.SetActive(false);
     }
 }

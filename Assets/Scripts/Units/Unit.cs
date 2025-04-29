@@ -28,7 +28,7 @@ public abstract class Unit : MonoBehaviour
 
     public abstract void ClearHighlights();
 
-
+    
     public bool IsAvailableThisTurn()
     {
         return TurnsUntilAvailable <= 0;
@@ -49,7 +49,7 @@ public abstract class Unit : MonoBehaviour
 
             if (TurnsUntilAvailable == 0)
             {
-                SetCooldownVisual(false);
+                //SetCooldownVisual(false);
             }
         }
     }
@@ -113,12 +113,13 @@ public abstract class Unit : MonoBehaviour
 
     }
 
+    public void PoseTransition(string transitionPose)
+    {
+
+        GetComponent<Animator>().Play(transitionPose);
 
 
-
-
-
-
+    }
 
 
 
