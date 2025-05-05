@@ -138,7 +138,9 @@ public class GameManager : MonoBehaviour
         HexState result = CheckMoreColorTiles();
         hexGrid.SelectTeam(Team.Ants);
         //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-        hexGrid.RemoveTile(new Vector2Int(0, 0));
+        
+        
+        //hexGrid.RemoveTile(new Vector2Int(0, 0));
     }
 
     void Update()

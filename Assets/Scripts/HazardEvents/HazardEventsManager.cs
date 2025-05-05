@@ -11,7 +11,7 @@ public class HazardEventsManager : MonoBehaviour
 
     private void Start()
     {
-        ShuffleHazards();
+        //ShuffleHazards();
     }
     public void ShuffleHazards()
     {
