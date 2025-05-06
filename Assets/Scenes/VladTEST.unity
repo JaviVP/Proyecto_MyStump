@@ -399,20 +399,8 @@ MonoBehaviour:
   antBaseCoords: {x: 0, y: 0}
   baseTermitePrefab: {fileID: 1407054582}
   baseAntPrefab: {fileID: 1907193084}
-  antPlacements:
-  - position: {x: 3, y: 1}
-    unitType: 1
-  - position: {x: 3, y: 0}
-    unitType: 0
-  - position: {x: 4, y: -1}
-    unitType: 2
-  termitePlacements:
-  - position: {x: -4, y: 1}
-    unitType: 1
-  - position: {x: -3, y: 0}
-    unitType: 0
-  - position: {x: -3, y: -1}
-    unitType: 2
+  antPlacements: []
+  termitePlacements: []
 --- !u!114 &477943196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +420,7 @@ MonoBehaviour:
   numRunners: 1
   numTerraformers: 1
   numPanchulinas: 1
+  isDraftPhase: 0
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
