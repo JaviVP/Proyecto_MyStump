@@ -17,7 +17,10 @@ public class UnitTerraFormer : Unit
     private void Start()
     {
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
-       
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
 
 
     }
@@ -84,9 +87,17 @@ public class UnitTerraFormer : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-
+      
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
-       
+        Vector2Int currentPos = AxialCoords;
+
+        if (currentPos != targetPosition)
+        {
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Long");
+            }
+        }
         // ✅ 1️⃣ Ensure target tile is valid for movement
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
@@ -107,6 +118,7 @@ public class UnitTerraFormer : Unit
 
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
+       
         return true;
     }
 
@@ -161,8 +173,13 @@ public class UnitTerraFormer : Unit
 
         // Esperamos un poco después de la animación
         yield return new WaitForSeconds(0.1f);
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         GameManager.Instance.LockTiles = false;
-        SetCooldownVisual(true);
+        GetComponent<MaterialAdder>().SetTransparency(0.1f);
+        //SetCooldownVisual(true);
     }
 
 
@@ -257,6 +274,10 @@ public class UnitTerraFormer : Unit
     }
     private List<HexTile> ReconstructPath(Dictionary<HexTile, HexTile> cameFrom, HexTile current)
     {
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Short");
+        }
         List<HexTile> totalPath = new List<HexTile> { current };
 
         while (cameFrom.ContainsKey(current))
@@ -266,6 +287,10 @@ public class UnitTerraFormer : Unit
         }
 
         totalPath.Reverse(); // Reverse the path to get it from start to target
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         return totalPath;
     }
 }

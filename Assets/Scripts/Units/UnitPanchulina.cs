@@ -10,11 +10,12 @@ public class UnitPanchulina : Unit
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
     private bool firstMove;
     private Unit enemyUnit;
-
+   
     public bool FirstMove { get => firstMove; set => firstMove = value; }
 
     private void Start()
     {
+       
         firstMove = false;
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
         if (GetComponent<Animator>())
@@ -79,11 +80,17 @@ public class UnitPanchulina : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-        if (GetComponent<Animator>())
-        {
-            PoseTransition("Move");
-        }
+       
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
+        Vector2Int currentPos = AxialCoords;
+
+        if (currentPos != targetPosition)
+        {
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Move");
+            }
+        }
         if (!FirstMove)
         {
             if (targetTile == null || !validMoveTiles.Contains(targetTile))
@@ -262,6 +269,7 @@ public class UnitPanchulina : Unit
             PoseTransition("Idle");
         }
         GameManager.Instance.LockTiles = false;
+        GetComponent<MaterialAdder>().SetTransparency(0.1f);
     }
 
 

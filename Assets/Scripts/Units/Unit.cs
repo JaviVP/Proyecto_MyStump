@@ -37,6 +37,7 @@ public abstract class Unit : MonoBehaviour
     public void MarkAsUsed()
     {
         TurnsUntilAvailable = 2;
+        GetComponent<MaterialAdder>().SetTransparency(0.1f);
         //SetCooldownVisual(true); 
     }
 
@@ -49,6 +50,7 @@ public abstract class Unit : MonoBehaviour
 
             if (TurnsUntilAvailable == 0)
             {
+                GetComponent<MaterialAdder>().SetTransparency(0.0f);
                 //SetCooldownVisual(false);
             }
         }

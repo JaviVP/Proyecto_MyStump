@@ -13,6 +13,11 @@ public class UnitRunner : Unit
     private void Start()
     {
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
+
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
     }
 
 
@@ -72,18 +77,23 @@ public class UnitRunner : Unit
         foreach (HexTile tile in validMoveTiles)
         {
             tile.ResetTileColor();
+           
         }
+        
         validMoveTiles.Clear();
     }
 
 
     public override bool Move(Vector2Int targetPosition)
     {
-        
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
             ClearHighlights();
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Idle");
+            }
             return false;
         } // ❌ Invalid move
 
@@ -94,6 +104,13 @@ public class UnitRunner : Unit
 
         Vector2Int currentPos = AxialCoords;
 
+        if (currentPos != targetPosition)
+        {
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Move");
+            }
+        }
         // ✅ Paint only the path traveled
         while (currentPos != targetPosition)
         {
@@ -113,6 +130,10 @@ public class UnitRunner : Unit
         ClearHighlights(); // ✅ Remove movement highlights
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         return true; // ✅ Movement successful
     }
 
@@ -148,8 +169,13 @@ public class UnitRunner : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(0.1f);
+        if (GetComponent<Animator>())
+        {
+            PoseTransition("Idle");
+        }
         GameManager.Instance.LockTiles = false;
-        SetCooldownVisual(true);
+        GetComponent<MaterialAdder>().SetTransparency(0.1f);
+        // SetCooldownVisual(true);
     }
 
 
