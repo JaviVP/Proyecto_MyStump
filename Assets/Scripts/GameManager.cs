@@ -4,6 +4,8 @@ using Unity.Cinemachine;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System;
 using static GameManager;
+using System.Linq;
+using NUnit.Framework;
 
 
 public class GameManager : MonoBehaviour
@@ -82,6 +84,17 @@ public class GameManager : MonoBehaviour
 
     private Unit selectedUnit = null;
 
+
+    [Header("Draft Unit Placement Config")]
+    public int numRunners = 2;
+    public int numTerraformers = 2;
+    public int numPanchulinas = 2;
+
+    private List<UnitType> unitDraftList = new List<UnitType>();
+    private int draftUnitIndex;
+    public bool isDraftPhase;
+
+
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
     /// 
@@ -108,6 +121,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
             return;
+            
         }
 
         // DontDestroyOnLoad(gameObject);
@@ -117,6 +131,8 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
+        draftUnitIndex = 0;
+        isDraftPhase = true;
         totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
         if (!PlayerPrefs.HasKey("NumeroRondasCampeonato"))
         {
@@ -141,6 +157,11 @@ public class GameManager : MonoBehaviour
         
         
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
+        GenerateUnitDraftList();
+        
+
+        /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
+        hexGrid.HighlightAndResetTeamHalf();
     }
 
     void Update()
@@ -221,6 +242,8 @@ public class GameManager : MonoBehaviour
 
     private void RaycastTablet()
     {
+        
+
         if (Input.touchCount > 0 && !lockTiles)
         {
             Touch touch = Input.GetTouch(0);
@@ -242,10 +265,14 @@ public class GameManager : MonoBehaviour
                 case TouchPhase.Ended:
                     if (isDragging) return; // If dragging occurred, ignore selection
 
+
+
+
                     Ray ray = mainCamera.ScreenPointToRay(touch.position);
                     if (Physics.Raycast(ray, out RaycastHit hit))
                     {
                         HexTile clickedTile = hit.collider.GetComponent<HexTile>();
+
 
                         // If no tile was clicked, check if a unit was clicked
                         if (clickedTile == null)
@@ -259,36 +286,80 @@ public class GameManager : MonoBehaviour
 
                         if (clickedTile == null) return;
 
-                        Unit clickedUnitOnTile = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
 
-                        if (selectedUnit == null)
+
+
+                        ///DRAFTING
+                        if (isDraftPhase)
                         {
-                            GameManager.Instance.SelectUnit(clickedUnitOnTile);
-                        }
-                        else if (selectedUnit is UnitPanchulina panchulinas)
-                        {
-                            if (!panchulinas.FirstMove)
+                            HexTile previousClickTile = clickedTile;
+                            Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
+                            if (currentTurn == Team.Ants)
                             {
-                                if (!selectedUnit.Move(clickedTile.axialCoords))
+                                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
                                 {
-                                    selectedUnit = null;
+
+                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                                    draftUnitIndex++;
+                                }
+                            }
+                            if (currentTurn == Team.Termites)
+                            {
+                                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
+                                {
+                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                                    
+                                }
+                            }
+                            //hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[0], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                            if (draftUnitIndex >= unitDraftList.Count)
+                            {
+                                isDraftPhase = false;
+                            }
+                            hexGrid.HighlightAndResetTeamHalf();
+                        }
+
+
+
+                        /// NORMAL GAMEPLAY
+                        else
+                        {
+                            Unit clickedUnitOnTile = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
+
+                            if (selectedUnit == null)
+                            {
+                                GameManager.Instance.SelectUnit(clickedUnitOnTile);
+                            }
+                            else if (selectedUnit is UnitPanchulina panchulinas)
+                            {
+                                if (!panchulinas.FirstMove)
+                                {
+                                    if (!selectedUnit.Move(clickedTile.axialCoords))
+                                    {
+                                        selectedUnit = null;
+                                    }
+                                }
+                                else
+                                {
+                                    GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                                 }
                             }
                             else
                             {
-                                GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                //Error code
+
+                                if (clickedTile != null)
+                                {
+                                    GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                }
+
                             }
                         }
-                        else
-                        {
-                            //Error code
 
-                            if (clickedTile != null)
-                            {
-                                GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
-                            }
 
-                        }
+                        
                     }
                     break;
             }
@@ -346,6 +417,47 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void GenerateUnitDraftList()
+    {
+        
+        for (int i = 0; i < numRunners; i++)
+            unitDraftList.Add(UnitType.Runner);
+
+        for (int i = 0; i < numTerraformers; i++)
+            unitDraftList.Add(UnitType.Terraformer);
+
+        for (int i = 0; i < numPanchulinas; i++)
+            unitDraftList.Add(UnitType.Panchulina);
+
+        // Failsafe: ensure at least one Runner if all are zero
+        if (unitDraftList.Count == 0)
+        {
+            Debug.LogWarning("No units selected in inspector. Adding one Runner as default.");
+            unitDraftList.Add(UnitType.Runner);
+        }
+
+        System.Random rng = new System.Random();
+
+        int n = unitDraftList.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            UnitType value = unitDraftList[k];
+            unitDraftList[k] = unitDraftList[n];
+            unitDraftList[n] = value;
+        }
+
+        Debug.Log("Shuffled list:");
+        foreach (var unit in unitDraftList)
+        {
+            Debug.Log(unit.ToString());
+        }
+    }
+
+    
+
 
     private HexState CheckMoreColorTiles()
     {

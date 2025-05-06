@@ -17,6 +17,8 @@ public class HexGrid : MonoBehaviour
     private Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
     private List<HexTile> InactiveTiles= new List<HexTile>();
     private Dictionary<Vector2Int, Unit> units = new Dictionary<Vector2Int, Unit>();
+    public List<HexTile> antDraftTiles = new List<HexTile>();
+    public List<HexTile> termiteDraftTiles = new List<HexTile>();
 
     [Header("Termite Prefabs")]
     [SerializeField]  private GameObject[] unitsTermitePrefabs;
@@ -326,6 +328,22 @@ public class HexGrid : MonoBehaviour
             }
         }
 
+        foreach (var kvp in hexMap)
+        {
+            Vector3 worldPos = kvp.Value.transform.position;
+            if (worldPos.x > 0.01)
+                antDraftTiles.Add(kvp.Value);
+            else if (worldPos.x < -0.01)
+                termiteDraftTiles.Add(kvp.Value);
+        }
+
+        /*
+        foreach (HexTile tile in antDraftTiles)
+        {
+            tile.HighlightTile();
+        }
+        */
+
         //Debug.Log("✅ Hex Grid Generation Completed! Total tiles: " + hexMap.Count);
     }
 
@@ -516,7 +534,44 @@ public class HexGrid : MonoBehaviour
         }
     }
 
+    public void HighlightAndResetTeamHalf()
+    {
+        foreach (HexTile tile in termiteDraftTiles)
+        {
+            tile.ResetTileColor();
+        }
+        
 
+        foreach (HexTile tile in antDraftTiles)
+        {
+            tile.ResetTileColor();
+        }
+        
+        if (GameManager.Instance.isDraftPhase)
+        {
+            if (GameManager.Instance.CurrentTurn == Team.Termites)
+            {
+                foreach (HexTile tile in termiteDraftTiles)
+                {
+                    if (!GetUnitInTile(tile.axialCoords))
+                    {
+                        tile.HighlightTile();
+                    }
+                }
+            }
+            else
+            {
+                foreach (HexTile tile in antDraftTiles)
+                {
+                    if (!GetUnitInTile(tile.axialCoords))
+                    {
+                        tile.HighlightTile();
+                    }
+                }
+            }
+        }
+        
+    }
 
 
     private Vector2Int GetLeftmostHex()
@@ -693,6 +748,15 @@ public class HexGrid : MonoBehaviour
         HexTile randomTile = hexMap[randomKey];
 
         return randomTile;
+    }
+
+    public void ResetColorAll()
+    {
+        foreach (HexTile tile in hexMap.Values)
+        {
+            tile.ResetTileColor();
+        }
+        
     }
 
 

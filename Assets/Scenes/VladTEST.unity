@@ -378,6 +378,8 @@ MonoBehaviour:
   hexSpacing: 1.05
   gridRadius: 4
   hexPrefab: {fileID: 721174842306475911, guid: 95bf4348297bfe54b93ac9724024aa6f, type: 3}
+  antDraftTiles: []
+  termiteDraftTiles: []
   unitsTermitePrefabs:
   - {fileID: 1550238002}
   - {fileID: 834818780}
@@ -427,6 +429,9 @@ MonoBehaviour:
   inputPanel: {fileID: 1917223922}
   animationSpeed: 20
   limitTurns: 40
+  numRunners: 1
+  numTerraformers: 1
+  numPanchulinas: 1
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 477943194}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.07}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
