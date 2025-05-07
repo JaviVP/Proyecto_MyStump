@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Random = UnityEngine.Random;
 public class HazardEventsManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,5 +77,49 @@ public class HazardEventsManager : MonoBehaviour
         return h;
     }
 
+
+    public void TurnAssignation()
+    {
+        /// Write those out ffrom here
+        int maxTurns = 40;
+        int basicProbability = 25;
+        int currentProbability = 25;
+        int maxProbability = 70;
+        int basicAdditive = 5;
+        int currentAdditive = 5;
+        int maxAdditive = 10;
+        int additiveAdditive = 2;
+        int additiveUsed = 0;
+
+
+
+        int rnd = Random.Range(1, 101);
+        if (rnd <= currentProbability)
+        {
+            //launch event code here
+            currentAdditive = basicAdditive;
+        }
+        else
+        {
+            currentProbability = currentProbability + currentAdditive;
+            additiveUsed++;
+            if (currentProbability >= maxProbability)
+            {
+                currentProbability = maxProbability;
+            }
+
+            if (additiveUsed >= 2)
+            {
+                currentAdditive = currentAdditive + additiveAdditive;
+                additiveUsed = 0;
+                additiveAdditive++;
+                if (currentAdditive >= maxAdditive)
+                {
+                    currentAdditive = maxAdditive;
+                }
+            }
+        }
+
+    }
 
 }
