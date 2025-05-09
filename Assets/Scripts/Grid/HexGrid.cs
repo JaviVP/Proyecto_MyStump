@@ -434,6 +434,29 @@ public class HexGrid : MonoBehaviour
         hexMap[position].SetState(owning);
     }
 
+    public void RemoveUnit(Vector2Int position)
+    {
+        if (!units.ContainsKey(position)) return;
+
+        Unit unit = units[position];
+
+        if (unit != null)
+        {
+            // Destroy the visual GameObject
+            Destroy(unit.UnitRenderer);
+        }
+
+        // Remove from the units dictionary
+        units.Remove(position);
+
+        // Optionally reset the hex tile's state (depends on your design)
+        if (hexMap.ContainsKey(position))
+        {
+            hexMap[position].SetState(HexState.Neutral);
+        }
+    }
+
+
     private GameObject GetPrefabForTeamAndType(GameManager.Team team, UnitType type)
     {
         return (team, type) switch
@@ -535,19 +558,8 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    public void HighlightAndResetTeamHalf()
+    public void ResetTeamHalfHighlights()
     {
-        foreach (HexTile tile in termiteDraftTiles)
-        {
-            tile.ResetTileColor();
-        }
-        
-
-        foreach (HexTile tile in antDraftTiles)
-        {
-            tile.ResetTileColor();
-        }
-        
         if (GameManager.Instance.isDraftPhase)
         {
             if (GameManager.Instance.CurrentTurn == Team.Termites)
@@ -572,6 +584,18 @@ public class HexGrid : MonoBehaviour
             }
         }
         
+    }
+    public void HighlightOne(HexTile tile)
+    {
+        tile.HighlightTile();
+    }
+
+    public void RemoveAllHighlights()
+    {
+        foreach (HexTile tile in hexMap.Values)
+        {
+            tile.ResetTileColor();
+        }
     }
 
 
