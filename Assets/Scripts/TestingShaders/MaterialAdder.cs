@@ -19,9 +19,9 @@ public class MaterialAdder : MonoBehaviour
         {
             foreach (Material mat in rend.materials)
             {
-                if (mat.HasProperty("_Transparency"))
+                if (mat.HasProperty("_DitherSize"))
                 {
-                    mat.SetFloat("_Transparency", value); // Cambiar transparencia
+                    mat.SetFloat("_DitherSize", value); // Cambiar transparencia
                 }
 
                 // Si el shader usa _Color, actualizamos el alpha también
