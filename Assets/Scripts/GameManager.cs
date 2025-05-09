@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inputPanel;
 
     [SerializeField] private float animationSpeed;
-
+    [SerializeField] private LogoController logos;
     public enum Team { Ants, Termites }
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -292,6 +292,7 @@ public class GameManager : MonoBehaviour
                         ///DRAFTING
                         if (isDraftPhase)
                         {
+                           
                             HexTile previousClickTile = clickedTile;
                             Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
                             if (currentTurn == Team.Ants)
@@ -300,6 +301,7 @@ public class GameManager : MonoBehaviour
                                 {
 
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                                    //logos.ColocarPieza();
                                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                                     draftUnitIndex++;
                                 }
@@ -309,6 +311,7 @@ public class GameManager : MonoBehaviour
                                 if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
                                 {
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                                    //logos.ColocarPieza();
                                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                                     
                                 }
