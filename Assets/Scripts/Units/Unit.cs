@@ -117,9 +117,10 @@ public abstract class Unit : MonoBehaviour
 
     public void PoseTransition(string transitionPose)
     {
-
-        GetComponent<Animator>().Play(transitionPose);
-
+        if (GetComponent<Animator>())
+        {
+            GetComponent<Animator>().Play(transitionPose);
+        }
 
     }
 

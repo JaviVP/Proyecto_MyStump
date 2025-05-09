@@ -301,7 +301,7 @@ public class GameManager : MonoBehaviour
                                 {
 
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    //logos.ColocarPieza();
+                                    logos.ColocarPieza();//Animacion Visual
                                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                                     draftUnitIndex++;
                                 }
@@ -311,7 +311,7 @@ public class GameManager : MonoBehaviour
                                 if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
                                 {
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    //logos.ColocarPieza();
+                                    logos.ColocarPieza();//Animacion Visual
                                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                                     
                                 }
