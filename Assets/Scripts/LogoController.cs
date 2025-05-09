@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LogoManager : MonoBehaviour
+public class LogoController : MonoBehaviour
 {
     public List<GameObject> logosTermitas; // De izquierda a derecha
     public List<GameObject> logosHormigas; // De derecha a izquierda

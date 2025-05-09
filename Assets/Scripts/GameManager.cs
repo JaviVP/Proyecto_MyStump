@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     private int totalTermsKilled1;
     private int totalTermsKilled2;
     //=====================================
-
+    
 
     //Limit of turns
     [SerializeField] private float limitTurns;
@@ -448,7 +448,7 @@ public class GameManager : MonoBehaviour
             unitDraftList[k] = unitDraftList[n];
             unitDraftList[n] = value;
         }
-
+        
         Debug.Log("Shuffled list:");
         foreach (var unit in unitDraftList)
         {

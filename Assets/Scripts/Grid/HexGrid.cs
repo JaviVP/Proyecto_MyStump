@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static GameManager;
@@ -54,8 +53,8 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private List<UnitPlacement> termitePlacements = new List<UnitPlacement>();
 
 
-    
 
+    
 
 
     private int antsKilled;
@@ -383,6 +382,8 @@ public class HexGrid : MonoBehaviour
 
     public void GenerateUnits()
     {
+        //aqui
+        
         foreach (UnitPlacement placement in antPlacements)
         {
             SpawnUnit (placement.position, placement.unitType, Team.Ants, HexState.Ants);
