@@ -178,7 +178,7 @@ public class UnitTerraFormer : Unit
             PoseTransition("Idle");
         }
         GameManager.Instance.LockTiles = false;
-        GetComponent<MaterialAdder>().SetTransparency(0.1f);
+      
         //SetCooldownVisual(true);
     }
 

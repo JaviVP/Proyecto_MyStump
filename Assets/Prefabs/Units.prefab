@@ -95,14 +95,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2488030354314210374, guid: 05e37531accd56548a137d142cba2cd8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2254984130029460344}
+      addedObject: {fileID: 2629838432514000974}
   m_SourcePrefab: {fileID: 100100000, guid: 05e37531accd56548a137d142cba2cd8, type: 3}
 --- !u!1 &2832732553465654069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2488030354314210374, guid: 05e37531accd56548a137d142cba2cd8, type: 3}
   m_PrefabInstance: {fileID: 416760345169282931}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2254984130029460344
+--- !u!114 &2629838432514000974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,10 +111,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2832732553465654069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 1
+  gameManager: {fileID: 0}
 --- !u!4 &3171716744627696015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3011943605376513788, guid: 05e37531accd56548a137d142cba2cd8, type: 3}
@@ -182,14 +187,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4270849285777262256, guid: e391256112dcb934f8301548980f4560, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2921161149598232697}
+      addedObject: {fileID: 3029270587374555024}
   m_SourcePrefab: {fileID: 100100000, guid: e391256112dcb934f8301548980f4560, type: 3}
 --- !u!1 &3978677934748274592 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4270849285777262256, guid: e391256112dcb934f8301548980f4560, type: 3}
   m_PrefabInstance: {fileID: 896779603688229136}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2921161149598232697
+--- !u!114 &3029270587374555024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,10 +203,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3978677934748274592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 1
+  gameManager: {fileID: 0}
 --- !u!4 &4358580833656460570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3462927680336059402, guid: e391256112dcb934f8301548980f4560, type: 3}
@@ -265,7 +275,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2509863041358054982, guid: c4c93640b8934c44ba791527dda551d9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4838378646813662444}
+      addedObject: {fileID: 7948183284709692609}
   m_SourcePrefab: {fileID: 100100000, guid: c4c93640b8934c44ba791527dda551d9, type: 3}
 --- !u!4 &3491949317831998120 stripped
 Transform:
@@ -277,7 +287,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2509863041358054982, guid: c4c93640b8934c44ba791527dda551d9, type: 3}
   m_PrefabInstance: {fileID: 1867558882738185812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4838378646813662444
+--- !u!114 &7948183284709692609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,10 +296,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4268908646508486674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 0
+  gameManager: {fileID: 0}
 --- !u!1001 &5770870910771044955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -348,7 +363,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2037121341422282041, guid: 0381f5e86997bb04c96aa4ae8e674f5e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 438869699688722935}
+      addedObject: {fileID: 8831498275321433139}
   m_SourcePrefab: {fileID: 100100000, guid: 0381f5e86997bb04c96aa4ae8e674f5e, type: 3}
 --- !u!4 &5123090012514246104 stripped
 Transform:
@@ -360,7 +375,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2037121341422282041, guid: 0381f5e86997bb04c96aa4ae8e674f5e, type: 3}
   m_PrefabInstance: {fileID: 5770870910771044955}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &438869699688722935
+--- !u!114 &8831498275321433139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,10 +384,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5499756704838125410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 1
+  gameManager: {fileID: 0}
 --- !u!1001 &6143997666849869020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -435,14 +455,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8369134135642450495, guid: d9cb2e72bb5a27e429724897851ed713, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4642186994918452013}
+      addedObject: {fileID: 2466712596935336010}
   m_SourcePrefab: {fileID: 100100000, guid: d9cb2e72bb5a27e429724897851ed713, type: 3}
 --- !u!1 &2406890828300166883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8369134135642450495, guid: d9cb2e72bb5a27e429724897851ed713, type: 3}
   m_PrefabInstance: {fileID: 6143997666849869020}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4642186994918452013
+--- !u!114 &2466712596935336010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -451,10 +471,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2406890828300166883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 0
+  gameManager: {fileID: 0}
 --- !u!4 &3039136830324374617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9182544469556211845, guid: d9cb2e72bb5a27e429724897851ed713, type: 3}
@@ -518,7 +543,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2260691981814076490, guid: 4d0b051d24cd0ac4ebb627bc7340926c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7990365767822670368}
+      addedObject: {fileID: 8080672537915274018}
   m_SourcePrefab: {fileID: 100100000, guid: 4d0b051d24cd0ac4ebb627bc7340926c, type: 3}
 --- !u!4 &7334845199434857902 stripped
 Transform:
@@ -530,7 +555,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2260691981814076490, guid: 4d0b051d24cd0ac4ebb627bc7340926c, type: 3}
   m_PrefabInstance: {fileID: 8205238654501745502}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7990365767822670368
+--- !u!114 &8080672537915274018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,7 +564,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7962727480265762580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7719efc52c4a840ba256f0a5e7e111, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce7119ab6f93384692ba14b3c38ea2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.5
+  shaderProperty: _Dithering
+  minValue: 1.1
+  maxValue: 1.8
+  speed: 1
+  myTeam: 0
+  gameManager: {fileID: 0}
