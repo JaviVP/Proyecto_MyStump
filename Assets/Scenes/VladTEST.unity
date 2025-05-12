@@ -317,11 +317,11 @@ MonoBehaviour:
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 1917223922}
   animationSpeed: 20
-  logos: {fileID: 598267197}
   limitTurns: 40
   numRunners: 1
   numTerraformers: 1
   numPanchulinas: 1
+  unitDraftList: 
   isDraftPhase: 0
 --- !u!4 &477943197
 Transform:
@@ -1563,7 +1563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7125394028044780942, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.04
+      value: 18.287
       objectReference: {fileID: 0}
     - target: {fileID: 7125394028044780942, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.y

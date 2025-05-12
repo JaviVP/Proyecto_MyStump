@@ -90,11 +90,12 @@ public class GameManager : MonoBehaviour
     public int numTerraformers = 2;
     public int numPanchulinas = 2;
 
-    private List<UnitType> unitDraftList = new List<UnitType>();
+    public List<UnitType> unitDraftList = new List<UnitType>();
     private int draftUnitIndex;
     public bool isDraftPhase;
 
     bool selected = false;
+    HexTile previousClickTile;
 
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
@@ -328,17 +329,51 @@ public class GameManager : MonoBehaviour
 
                         if (isDraftPhase)
                         {
-                            
-                            HexTile previousClickTile = clickedTile;
+                            //Debug.Log("Drafting");
+                            //Debug.Log("Tile: " + clickedTile);
+                            //Debug.Log("Tile Coord: " + clickedTile.axialCoords);
+
                             Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
                             if (currentTurn == Team.Ants)
                             {
 
-                                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
+                                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile) && !selected)
                                 {
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
                                     hexGrid.RemoveAllHighlights();
                                     hexGrid.HighlightOne(clickedTile);
+                                    selected = true;
+                                    previousClickTile = clickedTile;
+                                    return;
+                                }
+
+                                if (selected && unitOnTile != null && hexGrid.antDraftTiles.Contains(clickedTile))
+                                {
+                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                                    selected = false;
+                                    hexGrid.RemoveAllHighlights();
+                                    hexGrid.ResetTeamHalfHighlights();
+                                    previousClickTile = null;
+                                    draftUnitIndex++;
+                                }
+                                if (draftUnitIndex >= unitDraftList.Count)
+                                {
+                                    isDraftPhase = false;
+                                    hexGrid.RemoveAllHighlights();
+                                    hexGrid.ResetTeamHalfHighlights();
+                                }
+
+
+                                else
+                                {
+                                    if (previousClickTile != null)
+                                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
+
+                                    hexGrid.RemoveAllHighlights();
+                                    hexGrid.ResetTeamHalfHighlights();
+                                    selected = false;
+                                    previousClickTile = null;
+                                    return;
                                 }
                             }
                             if (currentTurn == Team.Termites)
@@ -346,11 +381,11 @@ public class GameManager : MonoBehaviour
                                 
                                 if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile) && !selected)
                                 {
-                                    Debug.Log("Placing UNIT");
                                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
                                     hexGrid.RemoveAllHighlights();
                                     hexGrid.HighlightOne(clickedTile);
                                     selected = true;
+                                    previousClickTile = clickedTile;
                                     return;
                                 }
                                 
@@ -362,11 +397,18 @@ public class GameManager : MonoBehaviour
                                     hexGrid.ResetTeamHalfHighlights();
                                     previousClickTile = null;
                                 }
-                                
+                                if (draftUnitIndex >= unitDraftList.Count)
+                                {
+                                    isDraftPhase = false;
+                                    hexGrid.RemoveAllHighlights();
+                                    hexGrid.ResetTeamHalfHighlights();
+                                }
+
                                 else
                                 {
-                                    Debug.Log("WHAT=????");
-                                    hexGrid.RemoveUnit(previousClickTile.axialCoords);
+                                    if (previousClickTile != null)
+                                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
+
                                     hexGrid.RemoveAllHighlights();
                                     hexGrid.ResetTeamHalfHighlights();
                                     selected = false;
@@ -375,12 +417,14 @@ public class GameManager : MonoBehaviour
                                 }
                                 
                             }
+                            /*
                             //hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[0], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
                             if (draftUnitIndex >= unitDraftList.Count)
                             {
                                 isDraftPhase = false;
                             }
                             //hexGrid.ResetTeamHalfHighlights();
+                            */
                         }
 
                         
