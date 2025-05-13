@@ -54,7 +54,7 @@ public class GameStatsChampionship : MonoBehaviour
     public void NextRoundChampionship()
     { 
 
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(4);
     }
 
    
