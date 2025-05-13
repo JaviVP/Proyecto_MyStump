@@ -12,7 +12,7 @@ public abstract class Unit : MonoBehaviour
     private GameObject unitRenderer;
     private float speed;
     private GameManager.Team team;
-
+   
 
 
     //private bool isMoving = false;
@@ -38,7 +38,7 @@ public abstract class Unit : MonoBehaviour
     {
         TurnsUntilAvailable = 2;
        
-        //SetCooldownVisual(true); 
+        SetCooldownVisual(true); 
     }
 
 
@@ -50,8 +50,9 @@ public abstract class Unit : MonoBehaviour
 
             if (TurnsUntilAvailable == 0)
             {
-               
-                //SetCooldownVisual(false);
+             
+                SetCooldownVisual(false);
+
             }
         }
     }
@@ -61,25 +62,21 @@ public abstract class Unit : MonoBehaviour
     {
         if (UnitRenderer == null) return;
 
-        if (isOnCooldown)
+        if (GetComponent<Animator>())
         {
-            UnitRenderer.transform.rotation = Quaternion.Euler(-90f, UnitRenderer.transform.rotation.eulerAngles.y, 0f);
-            Vector3 pos = transform.position;
-            pos.y += 0.5f;
-            //pos.x += 0.8f;
-            transform.position = pos;
+            PoseTransition(isOnCooldown ? "Die" : "Idle");
         }
 
-        else
+        // Aplicar o resetear dithering solo a esta unidad
+        DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
+
+        foreach (var dither in ditherEffects)
         {
-            UnitRenderer.transform.rotation = Quaternion.Euler(0f, UnitRenderer.transform.rotation.eulerAngles.y, 0f);
-            Vector3 pos = transform.position;
-            pos.y = 0.1f; // or whatever your normal Y height is
-            //pos.x = 0f;
-            transform.position = pos;
+            dither.ApplyDitherValue(isOnCooldown ? 1.2f : 2.0f);
         }
     }
 
+   
     public void Update()
     {
         

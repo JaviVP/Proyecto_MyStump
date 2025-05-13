@@ -69,7 +69,7 @@ public class LogoController : MonoBehaviour
         // 4. Ejecutar animación
         Animator anim = logoCercano.GetComponent<Animator>();
         anim.SetTrigger("Scale");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.2f);
 
         // 5. Desactivar logo
         logoCercano.SetActive(false);

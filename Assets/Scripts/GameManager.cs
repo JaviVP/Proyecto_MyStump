@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject inputPanel;
-
+    [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
 
     public enum Team { Ants, Termites }
-    [SerializeField] private LogoController logoController;
+    
     private CinemachineBrain brain;
     private Camera mainCamera;
     private HexGrid hexGrid;
@@ -761,6 +761,13 @@ public class GameManager : MonoBehaviour
     {
 
         return numberAntsTiles;
+
+    }
+
+    public bool DraftActive()
+    {
+
+        return isDraftPhase;
 
     }
 

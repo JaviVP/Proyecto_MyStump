@@ -174,8 +174,7 @@ public class UnitRunner : Unit
             PoseTransition("Idle");
         }
         GameManager.Instance.LockTiles = false;
-      
-        // SetCooldownVisual(true);
+        SetCooldownVisual(true);
     }
 
 

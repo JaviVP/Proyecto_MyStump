@@ -138,7 +138,7 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
-                //SetCooldownVisual(true);
+                SetCooldownVisual(true);
             }
             
         }
