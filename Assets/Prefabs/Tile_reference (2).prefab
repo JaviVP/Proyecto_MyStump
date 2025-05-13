@@ -103,7 +103,7 @@ MonoBehaviour:
   axialCoords: {x: 0, y: 0}
   state: 0
   highlightMaterial: {fileID: 2100000, guid: 4e9adb9840591d74b842beea8ada2dca, type: 2}
-  baseMaterial: {fileID: 2100000, guid: fc82f0f5fb5587547be0725e2d23ba1a, type: 2}
+  baseMaterial: {fileID: -5722369256595670588, guid: 7ef65363696bfb24082999b93d031195, type: 3}
   antTiles: {fileID: 2100000, guid: 176003b097b260f47b4041c1a3e8e8d3, type: 2}
   termTiles: {fileID: 2100000, guid: 601990d89a6f01046b27f13f118347ad, type: 2}
 --- !u!64 &6765061340761936991
