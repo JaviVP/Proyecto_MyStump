@@ -22,8 +22,8 @@ public class HexTile : MonoBehaviour
 
     private void Awake()
     {
-        TileRenderer = GetComponent<Renderer>();
-        UpdateTileAppearance();
+       TileRenderer = GetComponent<Renderer>();         
+       UpdateTileAppearance();
         //baseMaterial = GetComponent<Material>();
     }
 

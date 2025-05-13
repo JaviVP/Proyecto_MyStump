@@ -4,7 +4,8 @@ using static GameManager;
 public class DitherEffect : MonoBehaviour
 {
     [Header("Configuración Breath")]
-    [SerializeField] private string shaderProperty = "_Dithering"; // Parámetro correcto en el shader
+    [SerializeField] private string shaderProperty = "_Brigthness"; // Parámetro correcto en el shader
+    [SerializeField] private string shaderProperty2 = "_Dithering"; // Parámetro correcto en el shader
     [SerializeField] private float minValue = 1.1f;
     [SerializeField] private float maxValue = 1.8f;
     [SerializeField] private float speed = 1.0f;
@@ -30,7 +31,7 @@ public class DitherEffect : MonoBehaviour
     {
         if (gameManager == null) return;
 
-        if (gameManager.CurrentTurn != myTeam)
+        if (gameManager.CurrentTurn != myTeam && GameManager.Instance.DraftActive() != true)
         {
             // Breath effect solo cuando NO es su turno
             time += Time.deltaTime * speed;
@@ -39,16 +40,16 @@ public class DitherEffect : MonoBehaviour
             float midpoint = (maxValue + minValue) / 2f;
             float value = Mathf.Sin(time) * range + midpoint;
 
-            ApplyDitherValue(value);
+            ApplyBrigthnessValue(value);
         }
         else
         {
             // Valor fijo cuando es su turno
-            ApplyDitherValue(2.0f); // Default value activo
+            ApplyBrigthnessValue(0.09f); // Default value activo
         }
     }
 
-    private void ApplyDitherValue(float value)
+    private void ApplyBrigthnessValue(float value)
     {
         foreach (Renderer rend in renderers)
         {
@@ -57,6 +58,20 @@ public class DitherEffect : MonoBehaviour
                 if (mat.HasProperty(shaderProperty))
                 {
                     mat.SetFloat(shaderProperty, value);
+                }
+            }
+        }
+    }
+
+    public void ApplyDitherValue(float value)
+    {
+        foreach (Renderer rend in renderers)
+        {
+            foreach (Material mat in rend.materials)
+            {
+                if (mat.HasProperty(shaderProperty2))
+                {
+                    mat.SetFloat(shaderProperty2, value);
                 }
             }
         }

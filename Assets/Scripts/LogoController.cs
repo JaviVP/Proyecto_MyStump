@@ -5,10 +5,18 @@ using UnityEngine.UI;
 
 public class LogoController : MonoBehaviour
 {
-    public List<GameObject> logosTermitas; // De izquierda a derecha
-    public List<GameObject> logosHormigas; // De derecha a izquierda
-    public Transform centroPantalla;
-    public float moveDuration = 0.3f;
+    [SerializeField] private List<GameObject> logosTermitas; // De izquierda a derecha
+    [SerializeField] private List<GameObject> logosHormigas; // De derecha a izquierda
+    [SerializeField] private Transform centroPantalla;
+    [SerializeField] private float moveDuration = 0.3f;
+
+    [SerializeField] private Sprite runnerHormiga;
+    [SerializeField] private Sprite terraformerHormiga;
+    [SerializeField] private Sprite panchulinaHormiga;
+
+    [SerializeField] private Sprite runnerTermita;
+    [SerializeField] private Sprite terraformerTermita;
+    [SerializeField] private Sprite panchulinaTermita;
 
     private enum Turno { Termita, Hormiga }
     private Turno turnoActual = Turno.Termita;
@@ -61,7 +69,7 @@ public class LogoController : MonoBehaviour
         // 4. Ejecutar animación
         Animator anim = logoCercano.GetComponent<Animator>();
         anim.SetTrigger("Scale");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.2f);
 
         // 5. Desactivar logo
         logoCercano.SetActive(false);
@@ -178,5 +186,50 @@ public class LogoController : MonoBehaviour
 
         if (image != null) image.color = Color.white;
         if (sprite != null) sprite.color = Color.white;
+    }
+
+    public void AsignarSpritesPorTipo(List<UnitType> unidades)
+    {
+        for (int i = 0; i < unidades.Count; i++)
+        {
+            UnitType tipo = unidades[i];
+
+            // Asegurar que hay suficientes logos en ambas listas
+            if (i < logosHormigas.Count)
+            {
+                Sprite spriteHormiga = ObtenerSprite(tipo, true);
+                AsignarSpriteALogo(logosHormigas[i], spriteHormiga);
+            }
+
+            if (i < logosTermitas.Count)
+            {
+                Sprite spriteTermita = ObtenerSprite(tipo, false);
+                AsignarSpriteALogo(logosTermitas[i], spriteTermita);
+            }
+        }
+    }
+
+    private Sprite ObtenerSprite(UnitType tipo, bool esHormiga)
+    {
+        switch (tipo)
+        {
+            case UnitType.Runner: return esHormiga ? runnerHormiga : runnerTermita;
+            case UnitType.Terraformer: return esHormiga ? terraformerHormiga : terraformerTermita;
+            case UnitType.Panchulina: return esHormiga ? panchulinaHormiga : panchulinaTermita;
+            default: return null;
+        }
+    }
+
+
+    private void AsignarSpriteALogo(GameObject logo, Sprite nuevoSprite)
+    {
+        var image = logo.GetComponent<Image>();
+        var spriteRenderer = logo.GetComponent<SpriteRenderer>();
+
+        if (image != null)
+            image.sprite = nuevoSprite;
+
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = nuevoSprite;
     }
 }

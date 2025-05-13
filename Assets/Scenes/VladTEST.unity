@@ -341,13 +341,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.8433915, y: 0, z: 0, w: 0.53729963}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 115, y: 0, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexSpacing: 1.05
   gridRadius: 4
-  hexPrefab: {fileID: 721174842306475911, guid: 95bf4348297bfe54b93ac9724024aa6f, type: 3}
+  hexPrefab: {fileID: 4367521761334727852, guid: 7b350b87015e4ea49a6dfecf6d6d7b78, type: 3}
   antDraftTiles: []
   termiteDraftTiles: []
   unitsTermitePrefabs:
@@ -443,6 +443,7 @@ MonoBehaviour:
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 1917223922}
   animationSpeed: 20
+  logoController: {fileID: 598267197}
   limitTurns: 40
   numRunners: 1
   numTerraformers: 1
@@ -592,7 +593,13 @@ MonoBehaviour:
   - {fileID: 1156179504}
   - {fileID: 685361625}
   centroPantalla: {fileID: 1606525867}
-  moveDuration: 0.3
+  moveDuration: 0.1
+  runnerHormiga: {fileID: 21300000, guid: 473c49ba13efe6f479d58433b53b20a9, type: 3}
+  terraformerHormiga: {fileID: 21300000, guid: 04df313c416038845beaf8dc0021bf4a, type: 3}
+  panchulinaHormiga: {fileID: 21300000, guid: 82bab6cb7f1c081469d8172787830028, type: 3}
+  runnerTermita: {fileID: 21300000, guid: bb92d5b39b05bce4cbb0cb0aec0176cb, type: 3}
+  terraformerTermita: {fileID: 21300000, guid: 97b9102482cf64a418e819394e826f99, type: 3}
+  panchulinaTermita: {fileID: 21300000, guid: c9d8f53d4b837794ab3d70df9b8fb843, type: 3}
 --- !u!1 &643973479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,52 +1851,64 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     - target: {fileID: 5456612742016904336, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_Name
       value: Units
@@ -1936,52 +1955,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: maxValue
-      value: 1.8
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: minValue
-      value: 0.8
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: shaderProperty
+      value: _Brigthness
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

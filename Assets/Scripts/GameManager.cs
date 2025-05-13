@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject inputPanel;
-
+    [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
 
     public enum Team { Ants, Termites }
+    
     private CinemachineBrain brain;
     private Camera mainCamera;
     private HexGrid hexGrid;
@@ -159,7 +160,7 @@ public class GameManager : MonoBehaviour
         
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
         GenerateUnitDraftList();
-        
+        FindObjectOfType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
 
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
@@ -354,6 +355,8 @@ public class GameManager : MonoBehaviour
                                     hexGrid.ResetTeamHalfHighlights();
                                     previousClickTile = null;
                                     draftUnitIndex++;
+                                    logoController.ColocarPieza();
+                                   
                                 }
                                 if (draftUnitIndex >= unitDraftList.Count)
                                 {
@@ -395,6 +398,8 @@ public class GameManager : MonoBehaviour
                                     hexGrid.RemoveAllHighlights();
                                     hexGrid.ResetTeamHalfHighlights();
                                     previousClickTile = null;
+                                    logoController.ColocarPieza();
+
                                 }
                                 if (draftUnitIndex >= unitDraftList.Count)
                                 {
@@ -756,6 +761,13 @@ public class GameManager : MonoBehaviour
     {
 
         return numberAntsTiles;
+
+    }
+
+    public bool DraftActive()
+    {
+
+        return isDraftPhase;
 
     }
 

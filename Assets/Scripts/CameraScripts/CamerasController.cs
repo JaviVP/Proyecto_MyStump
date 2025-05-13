@@ -36,7 +36,7 @@ public class CamerasController : MonoBehaviour
         initialTopPosition = topDownCamera.transform.position;
         initialTopRotation = topDownCamera.transform.rotation;
 
-       ActivateCamera(mainCamera);
+       //ActivateCamera(mainCamera);
 
     }
 
