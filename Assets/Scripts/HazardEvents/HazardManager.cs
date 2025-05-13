@@ -8,7 +8,10 @@ public class HazardEventsManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Dictionary<int, EventHazard> hazardDictionary = new Dictionary<int, EventHazard>();
 
-   
+    [SerializeField]
+    private List<Hazard> hazardPool = new List<Hazard>();
+    Dictionary<int, List<Hazard>> hazardByTurn = new Dictionary<int, List<Hazard>>();
+
 
     private void Start()
     {
@@ -16,7 +19,7 @@ public class HazardEventsManager : MonoBehaviour
     }
     public void ShuffleHazards()
     {
-        List<Hazard> hazardList = new List<Hazard>
+        List<HazardOLD> hazardList = new List<HazardOLD>
         {
             new HazardCarreteraFantasma(),
             new HazardCarreteraFantasma()
@@ -31,10 +34,10 @@ public class HazardEventsManager : MonoBehaviour
 
         // Mezclar la lista de hazards
         System.Random rng = new System.Random();
-        List<Hazard> shuffledHazards = hazardList.OrderBy(h => rng.Next()).ToList();
+        List<HazardOLD> shuffledHazards = hazardList.OrderBy(h => rng.Next()).ToList();
         int turnCounter = 2;
         int key = 0;
-        foreach (Hazard h in shuffledHazards)
+        foreach (HazardOLD h in shuffledHazards)
         {
             EventHazard eh = new EventHazard();
             eh.Hazard = h;
@@ -53,7 +56,7 @@ public class HazardEventsManager : MonoBehaviour
 
     public void CheckHazardEvents(int turn)
     {
-        Hazard h = GetHazardByTurn(turn);
+        HazardOLD h = GetHazardByTurn(turn);
         if (h!=null)
         {
             Debug.Log("Lanzo un Hazard ("+turn+")  Tipo: "+ h.GetType().ToString());
@@ -63,9 +66,9 @@ public class HazardEventsManager : MonoBehaviour
         }
     }
 
-    public Hazard GetHazardByTurn(int turn)
+    public HazardOLD GetHazardByTurn(int turn)
     {
-        Hazard h = null;
+        HazardOLD h = null;
         foreach (EventHazard kvp in hazardDictionary.Values)
         {
             if (kvp.Turn ==turn)

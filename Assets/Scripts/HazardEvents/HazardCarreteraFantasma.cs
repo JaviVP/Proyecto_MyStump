@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class HazardCarreteraFantasma : Hazard
+public class HazardCarreteraFantasma : HazardOLD
 {
     /*Efecto: Hasta 4 casillas al azar de la zona interior se convierten en territorio del jugador con menos casillas pintadas.
     (Si hay menos de 4 casillas pintadas en la zona exterior y este evento se lanza mirará el número de casillas pintadas actuales e irá borrando casillas[Mínimo de casillas pintadas = 1, Máximo de casillas pintadas = 4]) 
