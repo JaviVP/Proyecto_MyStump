@@ -225,7 +225,7 @@ public class UnitPanchulina : Unit
         }
 
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
-        float speed = 10.0f;
+        //float speed = 10.0f;
 
         // Establecemos la rotación de la unidad hacia la posición final
         enemyUnit.transform.LookAt(this.gameObject.transform.position);
@@ -264,10 +264,7 @@ public class UnitPanchulina : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(1.5f);
-        if (GetComponent<Animator>())
-        {
-            PoseTransition("Idle");
-        }
+       
         GameManager.Instance.LockTiles = false;
         
     }

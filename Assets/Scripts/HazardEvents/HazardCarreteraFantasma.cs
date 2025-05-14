@@ -21,7 +21,7 @@ public class HazardCarreteraFantasma : Hazard
     public override void Apply()
     {
         int affectedTiles = 4;
-        int affectedTurns = 1;
+       // int affectedTurns = 1; //No se usa de momento lo comento
 
 
         //Debug.Log(" 4 casillas del que más tiene se vuelve a las ");
