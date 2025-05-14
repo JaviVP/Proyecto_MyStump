@@ -143,7 +143,7 @@ public class UnitTerraFormer : Unit
             Vector3 endPos = hexGrid.AxialToWorld(way[counter].axialCoords.x, way[counter].axialCoords.y);
 
             // Mantenemos la componente Y fija en 1.1
-            endPos.y = 0.1f; // Offset en Y durante toda la animación
+            endPos.y = 0.2f; // Offset en Y durante toda la animación
 
             // Hacemos que la unidad mire hacia la nueva posición
             transform.LookAt(endPos);
@@ -172,11 +172,11 @@ public class UnitTerraFormer : Unit
         AxialCoords = targetPos;
 
         // Esperamos un poco después de la animación
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
        
         GameManager.Instance.LockTiles = false;
        
-        SetCooldownVisual(true);
+       
     }
 
 

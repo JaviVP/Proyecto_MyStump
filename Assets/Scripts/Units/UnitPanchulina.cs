@@ -138,7 +138,7 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
-                SetCooldownVisual(true);
+            
             }
             
         }
@@ -226,7 +226,7 @@ public class UnitPanchulina : Unit
 
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
         //float speed = 10.0f;
-
+        endPos.y = 0.2f;
         // Establecemos la rotación de la unidad hacia la posición final
         enemyUnit.transform.LookAt(this.gameObject.transform.position);
 
@@ -237,7 +237,7 @@ public class UnitPanchulina : Unit
             Vector3 currentPos = Vector3.MoveTowards(enemyUnit.transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
 
             // Fijamos la componente Y a 1.1
-            currentPos.y = 0.1f;
+            currentPos.y = 0.2f;
 
             // Actualizamos la posición de la unidad
             enemyUnit.transform.position = currentPos;
