@@ -104,13 +104,7 @@ public class UnitRunner : Unit
 
         Vector2Int currentPos = AxialCoords;
 
-        if (currentPos != targetPosition)
-        {
-            if (GetComponent<Animator>())
-            {
-                PoseTransition("Move");
-            }
-        }
+       
         // ✅ Paint only the path traveled
         while (currentPos != targetPosition)
         {
@@ -130,17 +124,21 @@ public class UnitRunner : Unit
         ClearHighlights(); // ✅ Remove movement highlights
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
-        if (GetComponent<Animator>())
+        if (currentPos != targetPosition)
         {
-            PoseTransition("Idle");
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Move");
+            }
         }
+       
         return true; // ✅ Movement successful
     }
 
     IEnumerator Animation(Vector2Int targetPos)
     {
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
-        float speed = 10.0f;
+        //float speed = 10.0f;
 
         // Establecemos la rotación de la unidad hacia la posición final
         transform.LookAt(endPos);
@@ -168,11 +166,8 @@ public class UnitRunner : Unit
         }
 
         // Esperamos un poco después de la animación si es necesario
-        yield return new WaitForSeconds(0.1f);
-        if (GetComponent<Animator>())
-        {
-            PoseTransition("Idle");
-        }
+        yield return new WaitForSeconds(1.0f);
+        
         GameManager.Instance.LockTiles = false;
         SetCooldownVisual(true);
     }

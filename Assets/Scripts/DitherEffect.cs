@@ -23,7 +23,7 @@ public class DitherEffect : MonoBehaviour
 
         if (gameManager == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindAnyObjectByType<GameManager>();
         }
     }
 

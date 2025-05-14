@@ -91,13 +91,7 @@ public class UnitTerraFormer : Unit
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         Vector2Int currentPos = AxialCoords;
 
-        if (currentPos != targetPosition)
-        {
-            if (GetComponent<Animator>())
-            {
-                PoseTransition("Long");
-            }
-        }
+        
         // ✅ 1️⃣ Ensure target tile is valid for movement
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
@@ -118,7 +112,13 @@ public class UnitTerraFormer : Unit
 
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
-       
+        if (currentPos != targetPosition)
+        {
+            if (GetComponent<Animator>())
+            {
+                PoseTransition("Long");
+            }
+        }
         return true;
     }
 
@@ -134,7 +134,7 @@ public class UnitTerraFormer : Unit
             }
         }
 
-        float speed = 10.0f;
+        //float speed = 10.0f;
         int counter = 0;
 
         while (true)
@@ -172,11 +172,8 @@ public class UnitTerraFormer : Unit
         AxialCoords = targetPos;
 
         // Esperamos un poco después de la animación
-        yield return new WaitForSeconds(0.1f);
-        if (GetComponent<Animator>())
-        {
-            PoseTransition("Idle");
-        }
+        yield return new WaitForSeconds(1.0f);
+       
         GameManager.Instance.LockTiles = false;
        
         SetCooldownVisual(true);
@@ -188,7 +185,7 @@ public class UnitTerraFormer : Unit
         
 
 
-        if (hexGrid.GetHexTile(start) == null || !hexGrid.GetHexTile(target) == null)
+        if (hexGrid.GetHexTile(start) == null || hexGrid.GetHexTile(target) == null)
         {
             return new List<HexTile>(); // Return empty if start or target is invalid
         }

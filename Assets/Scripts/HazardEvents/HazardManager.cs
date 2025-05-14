@@ -81,8 +81,8 @@ public class HazardEventsManager : MonoBehaviour
     public void TurnAssignation()
     {
         /// Write those out ffrom here
-        int maxTurns = 40;
-        int basicProbability = 25;
+       // int maxTurns = 40; //No se usa de momento lo comento
+       // int basicProbability = 25; //No se usa de momento lo comento
         int currentProbability = 25;
         int maxProbability = 70;
         int basicAdditive = 5;
