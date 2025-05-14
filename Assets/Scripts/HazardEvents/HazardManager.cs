@@ -8,48 +8,32 @@ public class HazardEventsManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Dictionary<int, EventHazard> hazardDictionary = new Dictionary<int, EventHazard>();
 
-   
+    [SerializeField]
+    private List<Hazard> hazardPool = new List<Hazard>();
+
+    private Dictionary<int, List<Hazard>> HazardByTurn = new Dictionary<int, List<Hazard>>();
+
+
 
     private void Start()
     {
-        //ShuffleHazards();
+        ShuffleHazardPool();
     }
-    public void ShuffleHazards()
+    public void ShuffleHazardPool()
     {
-        List<Hazard> hazardList = new List<Hazard>
-        {
-            new HazardCarreteraFantasma(),
-            new HazardCarreteraFantasma()
-            /*new HazardSequiaExtrema(),
-            new HazardDerramePetroleo(),
-            new HazardDisputaPorElCaucho(),
-            new HazardElPulsoDelRio(),
-            new HazardExpansionUrbana(),
-            new HazardMineriaMercurio(),
-            new HazardTormentaDelTropico()*/
-        };
-
-        // Mezclar la lista de hazards
         System.Random rng = new System.Random();
-        List<Hazard> shuffledHazards = hazardList.OrderBy(h => rng.Next()).ToList();
-        int turnCounter = 2;
-        int key = 0;
-        foreach (Hazard h in shuffledHazards)
-        {
-            EventHazard eh = new EventHazard();
-            eh.Hazard = h;
-            eh.Turn = turnCounter;
-            turnCounter+=2;
-            key++;
-            hazardDictionary.Add(key, eh);
 
-        }
-        // Mostrar el diccionario
-        foreach (var kvp in hazardDictionary.Values)
+        int n = hazardPool.Count;
+        while (n > 1)
         {
-            Console.WriteLine("Value:"+ kvp.Hazard.Description);
+            n--;
+            int k = rng.Next(n + 1);
+            Hazard temp = hazardPool[k];
+            hazardPool[k] = hazardPool[n];
+            hazardPool[n] = temp;
         }
     }
+
 
     public void CheckHazardEvents(int turn)
     {
@@ -96,7 +80,7 @@ public class HazardEventsManager : MonoBehaviour
         int rnd = Random.Range(1, 101);
         if (rnd <= currentProbability)
         {
-            //launch event code here
+            //save event turn position
             currentAdditive = basicAdditive;
         }
         else
