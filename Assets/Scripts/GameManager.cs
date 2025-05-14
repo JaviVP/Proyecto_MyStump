@@ -454,6 +454,7 @@ public class GameManager : MonoBehaviour
                                 else
                                 {
                                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                  
                                 }
                             }
                             else
@@ -463,6 +464,7 @@ public class GameManager : MonoBehaviour
                                 if (clickedTile != null)
                                 {
                                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                    
                                 }
 
                             }
@@ -500,13 +502,14 @@ public class GameManager : MonoBehaviour
         if (selectedUnit.Move(targetPosition))
         {
             movedUnits.Add(selectedUnit); // ✅ Mark unit as moved
-
+            
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
                 selectedUnit.MarkAsUsed(); // ✅ Apply cooldown
                 //movedUnits.Add(selectedUnit);
                 CheckTurnEnd();
+                
                 selectedUnit = null;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static GameManager;
 using static HexGrid;
@@ -123,16 +124,12 @@ public class UnitRunner : Unit
 
         ClearHighlights(); // ✅ Remove movement highlights
         GameManager.Instance.LockTiles = true;
-        StartCoroutine(Animation(targetPosition));
-        if (currentPos != targetPosition)
-        {
-            if (GetComponent<Animator>())
-            {
-                PoseTransition("Move");
-            }
-        }
        
+        StartCoroutine(Animation(targetPosition));
+        
+
         return true; // ✅ Movement successful
+       
     }
 
     IEnumerator Animation(Vector2Int targetPos)
@@ -143,18 +140,26 @@ public class UnitRunner : Unit
         // Establecemos la rotación de la unidad hacia la posición final
         transform.LookAt(endPos);
 
+        endPos.y = 0.2f;
         // Mantenemos la componente Y fija en 1.1 durante el movimiento
         while (true)
         {
+          
             // Movemos la unidad en dirección al objetivo, manteniendo la Y fija
             Vector3 currentPos = Vector3.MoveTowards(transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
 
             // Fijamos la componente Y a 1.1
-            currentPos.y = 0.1f;
-
+            currentPos.y = 0.2f;
+           
             // Actualizamos la posición de la unidad
             transform.position = currentPos;
-
+            if (currentPos != endPos)
+            {
+                if (GetComponent<Animator>())
+                {
+                    PoseTransition("Move");
+                }
+            }
             // Esperamos un pequeño intervalo antes de continuar
             yield return new WaitForSeconds(0.05f);
 
@@ -166,10 +171,10 @@ public class UnitRunner : Unit
         }
 
         // Esperamos un poco después de la animación si es necesario
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
         
         GameManager.Instance.LockTiles = false;
-        SetCooldownVisual(true);
+       
     }
 
 
