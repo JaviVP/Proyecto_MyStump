@@ -173,7 +173,10 @@ public class UnitTerraFormer : Unit
 
         // Esperamos un poco después de la animación
         yield return new WaitForSeconds(0.2f);
-       
+        if (GetComponent<Animator>() && !UsedPreviusTurn)
+        {
+            PoseTransition("Die");
+        }
         GameManager.Instance.LockTiles = false;
        
        
