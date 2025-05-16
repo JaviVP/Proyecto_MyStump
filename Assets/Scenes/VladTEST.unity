@@ -284,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 182931774}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9548569, y: -5.0769587, z: 1.157495}
+  m_LocalPosition: {x: -1.63, y: -5.0769587, z: 1.157495}
   m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803f4e6bf8821cd46892bf40d2e88b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hazardPool: []
 --- !u!114 &477943199
 MonoBehaviour:
   m_ObjectHideFlags: 0
