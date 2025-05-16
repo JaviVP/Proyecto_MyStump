@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
 
     //Limit of turns
-    [SerializeField] private float limitTurns;
+    [SerializeField] private int limitTurns;
     private float numericCurrentTurn=1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     private string winner = "";
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
-    public float LimitTurns { get => limitTurns; set => limitTurns = value; }
+    public int LimitTurns { get => limitTurns; set => limitTurns = value; }
     public Team CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public bool DisableTouchInputDuringTransition { get => disableTouchInputDuringTransition; set => disableTouchInputDuringTransition = value; }
     public bool LockTiles { get => lockTiles; set => lockTiles = value; }
