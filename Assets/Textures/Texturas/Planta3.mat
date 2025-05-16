@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Piedras 2
+  m_Name: Planta3
   m_Shader: {fileID: -6465566751694194690, guid: 4e8b60b37976f5a4e9055082eab611d1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: f8d961fbd47044f4ea6e45b820f66eee, type: 3}
+        m_Texture: {fileID: 2800000, guid: ad9fbb913f37a7b429dc27519aaf1690, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,7 +55,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brigthness: 0.5
+    - _Brigthness: 0.09
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Range: 0.4
