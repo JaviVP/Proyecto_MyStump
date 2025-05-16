@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HazardElPulsoDelRio : Hazard
+public class HazardElPulsoDelRio : HazardOLD
 {
     public override void Apply()
     {

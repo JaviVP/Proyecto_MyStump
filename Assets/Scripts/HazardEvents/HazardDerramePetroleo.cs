@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HazardDerramePetroleo : Hazard
+public class HazardDerramePetroleo : HazardOLD
 {
     public override void Apply()
     {

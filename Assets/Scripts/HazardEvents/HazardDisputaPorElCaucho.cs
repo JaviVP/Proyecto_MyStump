@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HazardDisputaPorElCaucho : Hazard
+public class HazardDisputaPorElCaucho : HazardOLD
 {
     public override void Apply()
     {

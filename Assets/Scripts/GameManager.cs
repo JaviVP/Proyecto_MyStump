@@ -601,7 +601,7 @@ public class GameManager : MonoBehaviour
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
             Debug.Log("Current: " + currentTurn);
-            this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
+            //this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
             RefreshUnitsForTeam(CurrentTurn);
 
             hexGrid.SelectTeam(CurrentTurn);

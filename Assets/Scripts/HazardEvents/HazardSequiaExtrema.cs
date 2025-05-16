@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HazardSequiaExtrema : Hazard
+public class HazardSequiaExtrema : HazardOLD
 {
     public override void Apply()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HazardExpansionUrbana : Hazard
+public class HazardExpansionUrbana : HazardOLD
 {
     public override void Apply()
     {
