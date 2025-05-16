@@ -58,7 +58,7 @@ Material:
     - _Brigthness: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 0.4
+    - _Range: 0.19
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
