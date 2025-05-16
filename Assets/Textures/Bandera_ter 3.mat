@@ -55,7 +55,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brigthness: 0.09
+    - _Brigthness: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Range: 0.19
