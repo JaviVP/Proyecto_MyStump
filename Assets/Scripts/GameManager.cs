@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
         
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
         GenerateUnitDraftList();
-        FindObjectOfType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
+        FindAnyObjectByType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
 
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
@@ -454,6 +454,7 @@ public class GameManager : MonoBehaviour
                                 else
                                 {
                                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                  
                                 }
                             }
                             else
@@ -463,6 +464,7 @@ public class GameManager : MonoBehaviour
                                 if (clickedTile != null)
                                 {
                                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                                    
                                 }
 
                             }
@@ -500,13 +502,14 @@ public class GameManager : MonoBehaviour
         if (selectedUnit.Move(targetPosition))
         {
             movedUnits.Add(selectedUnit); // ✅ Mark unit as moved
-
+            
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
                 selectedUnit.MarkAsUsed(); // ✅ Apply cooldown
                 //movedUnits.Add(selectedUnit);
                 CheckTurnEnd();
+                
                 selectedUnit = null;
             }
         }
@@ -859,24 +862,41 @@ public class GameManager : MonoBehaviour
     {
         if (winner == "Termites" || winner == "Ants" || winner == "Draw")
         {
-            //Player 1
+            // === PLAYER 1 ===
+            // Parcela conquistada esta ronda
             actualTermTiles1 = numberTermitesTiles;
-            totalTermTiles1 = PlayerPrefs.GetInt($"ActualTermTiles_{player1}");
+
+            // Cargar total anterior y sumar lo nuevo
+            totalTermTiles1 = PlayerPrefs.GetInt($"ActualTermTiles_{player1}", 0);
             totalTermTiles1 += actualTermTiles1;
             PlayerPrefs.SetInt($"ActualTermTiles_{player1}", totalTermTiles1);
-            PlayerPrefs.SetInt(($"ParcelasTermitas_{player1}"), PlayerPrefs.GetInt($"ParcelasTermitas_{player1}") + PlayerPrefs.GetInt($"ActualTermTiles_{player1}"));
-            actualAntsKilled1 = PlayerPrefs.GetInt("AntsKilled");
+
+            // Sumar al total de parcelas conquistadas
+            int parcelasTermitas = PlayerPrefs.GetInt($"ParcelasTermitas_{player1}", 0);
+            parcelasTermitas += actualTermTiles1;
+            PlayerPrefs.SetInt($"ParcelasTermitas_{player1}", parcelasTermitas);
+
+            // Hormigas eliminadas esta ronda
+            actualAntsKilled1 = PlayerPrefs.GetInt("AntsKilled", 0);
+            totalAntsKilled1 = PlayerPrefs.GetInt($"HormigasEliminadas_{player1}", 0);
             totalAntsKilled1 += actualAntsKilled1;
-            PlayerPrefs.SetInt($"HormigasEliminadas_{player1}", PlayerPrefs.GetInt($"HormigasEliminadas_{player1}") + PlayerPrefs.GetInt("AntsKilled"));
-            //Player 2
+            PlayerPrefs.SetInt($"HormigasEliminadas_{player1}", totalAntsKilled1);
+
+            // === PLAYER 2 ===
             actualAntTiles2 = numberAntsTiles;
-            totalAntTiles2 = PlayerPrefs.GetInt($"ActualAntTiles_{player2}");
+
+            totalAntTiles2 = PlayerPrefs.GetInt($"ActualAntTiles_{player2}", 0);
             totalAntTiles2 += actualAntTiles2;
             PlayerPrefs.SetInt($"ActualAntTiles_{player2}", totalAntTiles2);
-            PlayerPrefs.SetInt($"ParcelasHormigas_{player2}", PlayerPrefs.GetInt($"ParcelasHormigas_{player2}") + PlayerPrefs.GetInt($"ActualAntTiles_{player2}"));
-            actualTermsKilled2 = PlayerPrefs.GetInt("TermsKilled");
+
+            int parcelasHormigas = PlayerPrefs.GetInt($"ParcelasHormigas_{player2}", 0);
+            parcelasHormigas += actualAntTiles2;
+            PlayerPrefs.SetInt($"ParcelasHormigas_{player2}", parcelasHormigas);
+
+            actualTermsKilled2 = PlayerPrefs.GetInt("TermsKilled", 0);
+            totalTermsKilled2 = PlayerPrefs.GetInt($"TermitasEliminadas_{player2}", 0);
             totalTermsKilled2 += actualTermsKilled2;
-            PlayerPrefs.SetInt($"TermitasEliminadas_{player2}", PlayerPrefs.GetInt($"TermitasEliminadas_{player2}") + PlayerPrefs.GetInt("TermsKilled"));
+            PlayerPrefs.SetInt($"TermitasEliminadas_{player2}", totalTermsKilled2);
 
         }
 

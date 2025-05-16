@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Termita_shader 2
-  m_Shader: {fileID: -6465566751694194690, guid: 4e8b60b37976f5a4e9055082eab611d1, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: af9bc2059f18a2e4f8736385e80a08b5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,6 +41,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 32a174460f9deb447b96ae1089add400, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_db4ce7a8349f4e3caa68229fecb1e53f_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,10 +59,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brigthness: -4.01
+    - _Brigthness: 0.5
+    - _Dithering: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 0.08
-    m_Colors: []
+    - _Range: 0.4
+    m_Colors:
+    - _Color: {r: 0.38712457, g: 0.5660378, b: 0.35510862, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

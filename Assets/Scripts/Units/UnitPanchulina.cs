@@ -102,7 +102,7 @@ public class UnitPanchulina : Unit
             // ✅ First Move: Move normally
             hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
             AxialCoords = targetPosition;
-            transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+            //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
             targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
             ClearHighlights();
@@ -132,13 +132,13 @@ public class UnitPanchulina : Unit
                 // ✅ First Move: Move normally
                 hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
                 AxialCoords = targetPosition;
-                transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+                //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
                 targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
                 ClearHighlights();
                 firstMove = false;
-                SetCooldownVisual(true);
+            
             }
             
         }
@@ -146,10 +146,55 @@ public class UnitPanchulina : Unit
         {
             PoseTransition("Idle");
         }
+        StartCoroutine(Animation(targetPosition));
         return true;
         
     }
 
+    IEnumerator Animation(Vector2Int targetPos)
+    {
+        Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
+        //float speed = 10.0f;
+
+        // Establecemos la rotación de la unidad hacia la posición final
+        transform.LookAt(new Vector3(endPos.x, this.gameObject.transform.position.y, endPos.z));
+
+        endPos.y = 0.2f;
+        // Mantenemos la componente Y fija en 1.1 durante el movimiento
+        while (true)
+        {
+
+            // Movemos la unidad en dirección al objetivo, manteniendo la Y fija
+            Vector3 currentPos = Vector3.MoveTowards(transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
+
+            // Fijamos la componente Y a 1.1
+            currentPos.y = 0.2f;
+
+            // Actualizamos la posición de la unidad
+            transform.position = currentPos;
+            if (currentPos != endPos)
+            {
+                if (GetComponent<Animator>())
+                {
+                    PoseTransition("Move");
+                }
+            }
+            // Esperamos un pequeño intervalo antes de continuar
+            yield return new WaitForSeconds(0.05f);
+
+            // Verificamos si hemos llegado a la posición final
+            if (Vector3.Distance(transform.position, endPos) < 0.2f)
+            {
+                break;
+            }
+        }
+
+        // Esperamos un poco después de la animación si es necesario
+        yield return new WaitForSeconds(0.2f);
+
+        GameManager.Instance.LockTiles = false;
+
+    }
 
     private void PushEnemy(Unit enemy, Vector2Int enemyPosition)
     {
@@ -225,8 +270,8 @@ public class UnitPanchulina : Unit
         }
 
         Vector3 endPos = hexGrid.AxialToWorld(targetPos.x, targetPos.y);
-        float speed = 10.0f;
-
+        //float speed = 10.0f;
+        endPos.y = 0.2f;
         // Establecemos la rotación de la unidad hacia la posición final
         enemyUnit.transform.LookAt(this.gameObject.transform.position);
 
@@ -237,7 +282,7 @@ public class UnitPanchulina : Unit
             Vector3 currentPos = Vector3.MoveTowards(enemyUnit.transform.position, endPos, GameManager.Instance.AnimationSpeed * Time.deltaTime);
 
             // Fijamos la componente Y a 1.1
-            currentPos.y = 0.1f;
+            currentPos.y = 0.2f;
 
             // Actualizamos la posición de la unidad
             enemyUnit.transform.position = currentPos;
@@ -264,10 +309,7 @@ public class UnitPanchulina : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(1.5f);
-        if (GetComponent<Animator>())
-        {
-            PoseTransition("Idle");
-        }
+       
         GameManager.Instance.LockTiles = false;
         
     }

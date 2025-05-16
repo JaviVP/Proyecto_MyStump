@@ -409,7 +409,7 @@ public class HexGrid : MonoBehaviour
         }
 
         Vector3 worldPosition = AxialToWorld(position.x, position.y);
-        worldPosition.y += 0.1f;
+        worldPosition.y += 0.2f;
 
         Quaternion rotation = team == GameManager.Team.Termites
             ? Quaternion.Euler(0, 90, 0)

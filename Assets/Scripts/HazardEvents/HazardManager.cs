@@ -10,15 +10,21 @@ public class HazardEventsManager : MonoBehaviour
 
     [SerializeField]
     private List<Hazard> hazardPool = new List<Hazard>();
+
     Dictionary<int, List<Hazard>> hazardByTurn = new Dictionary<int, List<Hazard>>();
+
+
+    private Dictionary<int, List<Hazard>> HazardByTurn = new Dictionary<int, List<Hazard>>();
+
 
 
     private void Start()
     {
-        //ShuffleHazards();
+        ShuffleHazardPool();
     }
-    public void ShuffleHazards()
+    public void ShuffleHazardPool()
     {
+
         List<HazardOLD> hazardList = new List<HazardOLD>
         {
             new HazardCarreteraFantasma(),
@@ -46,13 +52,20 @@ public class HazardEventsManager : MonoBehaviour
             key++;
             hazardDictionary.Add(key, eh);
 
-        }
-        // Mostrar el diccionario
-        foreach (var kvp in hazardDictionary.Values)
+        System.Random rng = new System.Random();
+
+
+        int n = hazardPool.Count;
+        while (n > 1)
         {
-            Console.WriteLine("Value:"+ kvp.Hazard.Description);
+            n--;
+            int k = rng.Next(n + 1);
+            Hazard temp = hazardPool[k];
+            hazardPool[k] = hazardPool[n];
+            hazardPool[n] = temp;
         }
     }
+
 
     public void CheckHazardEvents(int turn)
     {
@@ -84,8 +97,8 @@ public class HazardEventsManager : MonoBehaviour
     public void TurnAssignation()
     {
         /// Write those out ffrom here
-        int maxTurns = 40;
-        int basicProbability = 25;
+       // int maxTurns = 40; //No se usa de momento lo comento
+       // int basicProbability = 25; //No se usa de momento lo comento
         int currentProbability = 25;
         int maxProbability = 70;
         int basicAdditive = 5;
@@ -99,7 +112,7 @@ public class HazardEventsManager : MonoBehaviour
         int rnd = Random.Range(1, 101);
         if (rnd <= currentProbability)
         {
-            //launch event code here
+            //save event turn position
             currentAdditive = basicAdditive;
         }
         else

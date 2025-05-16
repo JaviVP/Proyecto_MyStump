@@ -14,6 +14,9 @@ public class DitherEffect : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private GameManager gameManager; // Asignado en Inspector o encontrado automáticamente
 
+    [Header("Exclusiones")]
+    [SerializeField] private Renderer[] excludedRenderers; // Renderers a ignorar
+
     private Renderer[] renderers;
     private float time;
 
@@ -23,7 +26,7 @@ public class DitherEffect : MonoBehaviour
 
         if (gameManager == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindAnyObjectByType<GameManager>();
         }
     }
 
@@ -53,6 +56,8 @@ public class DitherEffect : MonoBehaviour
     {
         foreach (Renderer rend in renderers)
         {
+            if (IsExcluded(rend)) continue;
+
             foreach (Material mat in rend.materials)
             {
                 if (mat.HasProperty(shaderProperty))
@@ -67,6 +72,8 @@ public class DitherEffect : MonoBehaviour
     {
         foreach (Renderer rend in renderers)
         {
+            if (IsExcluded(rend)) continue;
+
             foreach (Material mat in rend.materials)
             {
                 if (mat.HasProperty(shaderProperty2))
@@ -75,5 +82,14 @@ public class DitherEffect : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool IsExcluded(Renderer rend)
+    {
+        foreach (Renderer excluded in excludedRenderers)
+        {
+            if (rend == excluded) return true;
+        }
+        return false;
     }
 }
