@@ -138,7 +138,7 @@ public class UnitRunner : Unit
         //float speed = 10.0f;
 
         // Establecemos la rotación de la unidad hacia la posición final
-        transform.LookAt(endPos);
+        transform.LookAt(new Vector3(endPos.x, this.gameObject.transform.position.y, endPos.z));
 
         endPos.y = 0.2f;
         // Mantenemos la componente Y fija en 1.1 durante el movimiento
