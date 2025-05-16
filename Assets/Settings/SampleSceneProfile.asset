@@ -113,7 +113,11 @@ MonoBehaviour:
   - {fileID: -3357603926938260329}
   - {fileID: -8851462257235457999}
   - {fileID: 7553086534003024834}
+<<<<<<< Updated upstream
   - {fileID: 7087719762709646680}
+=======
+  - {fileID: 4649114924009549634}
+>>>>>>> Stashed changes
 --- !u!114 &849379129802519247
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -154,7 +158,11 @@ MonoBehaviour:
   maxNits:
     m_OverrideState: 1
     m_Value: 647
+<<<<<<< Updated upstream
 --- !u!114 &7087719762709646680
+=======
+--- !u!114 &4649114924009549634
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}

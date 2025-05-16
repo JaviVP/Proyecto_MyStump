@@ -48,7 +48,7 @@ public class DitherEffect : MonoBehaviour
         else
         {
             // Valor fijo cuando es su turno
-            ApplyBrigthnessValue(0.09f); // Default value activo
+            ApplyBrigthnessValue(0.5f); // Default value activo
         }
     }
 
