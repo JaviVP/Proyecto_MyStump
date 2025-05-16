@@ -3037,6 +3037,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
@@ -3045,12 +3057,36 @@ PrefabInstance:
       value: _Brigthness
       objectReference: {fileID: 0}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
     - target: {fileID: 2629838432514000974, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: shaderProperty
       value: _Brigthness
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3029270587374555024, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
@@ -3105,6 +3141,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948183284709692609, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
@@ -3113,12 +3161,36 @@ PrefabInstance:
       value: _Brigthness
       objectReference: {fileID: 0}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
     - target: {fileID: 8080672537915274018, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: shaderProperty
       value: _Brigthness
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: maxValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: minValue
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: gameManager
