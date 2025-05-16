@@ -65,24 +65,17 @@ public abstract class Unit : MonoBehaviour
         if (GetComponent<Animator>() && !isOnCooldown)
         {
             PoseTransition("Idle");
-
         }
-        if (isOnCooldown)
-        {
-            var visual = GetComponent<DitherEffect>();
-            if (visual != null)
-            {
-               // visual.ApplyDitherValue(isOnCooldown ? 0.5f : 0.19f);
-            }
-        }
+       
 
-        /*
         // Aplicar o resetear dithering solo a esta unidad
-       
-       
-       
-        */
-
+       // DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
+       /*
+        foreach (var dither in ditherEffects)
+        {
+            dither.ApplyDitherValue(isOnCooldown ? 1.2f : 2.0f);
+        }
+       */
     }
 
    
