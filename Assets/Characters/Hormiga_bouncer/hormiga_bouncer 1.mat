@@ -57,9 +57,10 @@ Material:
     m_Floats:
     - _Brigthness: 0.09
     - _DitherSize: 1
+    - _Dithering: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 0.19
+    - _Range: 0.4
     - _Transparency: 0
     - _Value: 100
     m_Colors:
