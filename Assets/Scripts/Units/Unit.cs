@@ -62,10 +62,11 @@ public abstract class Unit : MonoBehaviour
     {
         if (UnitRenderer == null) return;
 
-        if (GetComponent<Animator>())
+        if (GetComponent<Animator>() && !isOnCooldown)
         {
-            PoseTransition("Die");
+            PoseTransition("Idle");
         }
+       
 
         // Aplicar o resetear dithering solo a esta unidad
        // DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
