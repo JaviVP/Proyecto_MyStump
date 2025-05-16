@@ -13,6 +13,7 @@ public class Hazard : ScriptableObject
     public Volume posprocessing;
     public GameObject tileChangeVFX;
     public GameObject ScreenVFX;
+    public int duration;
 
     // --- Enums ---
     public enum TierEffect
@@ -55,7 +56,7 @@ public class Hazard : ScriptableObject
 
     // --- Static Tiers (Fixed) ---
     [Header("Tier Settings (if false will use T2 data as Default)")]
-    public bool useTierSystem;
+    //public bool useTierSystem;
 
     public TierData tier1;
     public TierData tier2;
