@@ -118,10 +118,10 @@ MonoBehaviour:
   - title: FLASH
     position:
       serializedVersion: 2
-      x: 0
-      y: 0
-      width: 100
-      height: 100
+      x: -28
+      y: 281
+      width: 656
+      height: 1644
     contents:
     - model: {fileID: 114350483966674978}
       id: 0
@@ -217,10 +217,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 61
-    y: 247
-    width: 3351
-    height: 2237
+    x: -28
+    y: 266
+    width: 3440
+    height: 2218
 --- !u!114 &114350483966674978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 114350483966674980}
-  m_UIPosition: {x: 268, y: 306}
+  m_UIPosition: {x: 179, y: 340}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 114350483966674999}
-  m_UIPosition: {x: 267, y: 597}
+  m_UIPosition: {x: 178, y: 631}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 267, y: 943}
+  m_UIPosition: {x: 178, y: 977}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   - {fileID: 114350483966675015}
   - {fileID: 114350483966675021}
   - {fileID: 114350483966675018}
-  m_UIPosition: {x: 263, y: 1087}
+  m_UIPosition: {x: 174, y: 1121}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1792,7 +1792,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 114350483966675028}
       inputSlot: {fileID: 114350483966675022}
-    position: {x: 86, y: 1586}
+    position: {x: -3, y: 1620}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0

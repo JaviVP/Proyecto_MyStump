@@ -491,6 +491,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803f4e6bf8821cd46892bf40d2e88b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useTierSystem: 0
+  maxProbability: 70
+  basicAdditive: 5
+  maxAdditive: 10
+  additiveAdditive: 2
+  startingEventHazardTurn: 2
+  cooldownBetweenHazards: 3
   hazardPool: []
 --- !u!114 &477943199
 MonoBehaviour:

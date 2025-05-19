@@ -271,9 +271,6 @@ MonoBehaviour:
     - model: {fileID: 114350483966674978}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 114350483966675041}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 114350483966674995}
       id: 0
       isStickyNote: 0
@@ -286,28 +283,7 @@ MonoBehaviour:
     - model: {fileID: 114350483966674980}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 114350483966675011}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675016}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675085}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 114350483966675044}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675065}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675067}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675070}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675094}
       id: 0
       isStickyNote: 0
     - model: {fileID: 114350483966675111}
@@ -362,9 +338,6 @@ MonoBehaviour:
     - model: {fileID: 114350483966675130}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 114350483966675132}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 114350483966675135}
       id: 0
       isStickyNote: 0
@@ -378,18 +351,6 @@ MonoBehaviour:
       id: 1
       isStickyNote: 0
     - model: {fileID: 114350483966675172}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675184}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675187}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675190}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675193}
       id: 0
       isStickyNote: 0
     - model: {fileID: 114350483966675221}
@@ -408,18 +369,6 @@ MonoBehaviour:
       id: 0
       isStickyNote: 0
     - model: {fileID: 114350483966675137}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675152}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675156}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675168}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 114350483966675367}
       id: 0
       isStickyNote: 0
     - model: {fileID: 114350483966675233}
@@ -1310,7 +1259,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -3235,7 +3184,7 @@ MonoBehaviour:
   - {fileID: 114350483966675122}
   m_ExposedName: FlameLifetime
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 5
   m_Category: 
   m_Min:
     m_Type:
@@ -6670,7 +6619,7 @@ MonoBehaviour:
   - {fileID: 114350483966675232}
   m_ExposedName: SmokeRate
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 6
   m_Category: 
   m_Min:
     m_Type:
@@ -6751,7 +6700,7 @@ MonoBehaviour:
   - {fileID: 114350483966675234}
   m_ExposedName: SmokeLifetime
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 7
   m_Category: 
   m_Min:
     m_Type:
@@ -6835,7 +6784,7 @@ MonoBehaviour:
   - {fileID: 114350483966675236}
   m_ExposedName: SmokeSize
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 8
   m_Category: 
   m_Min:
     m_Type:
@@ -7112,7 +7061,7 @@ MonoBehaviour:
   - {fileID: 114350483966675245}
   m_ExposedName: SmokeVelocity
   m_Exposed: 1
-  m_Order: 10
+  m_Order: 9
   m_Category: 
   m_Min:
     m_Type:
