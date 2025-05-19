@@ -5,6 +5,7 @@ using System;
 using static GameManager;
 using System.Linq;
 using NUnit.Framework;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject inputPanel;
+    [SerializeField] private List<TextMeshProUGUI> player1Texts;
+    [SerializeField] private List<TextMeshProUGUI> player2Texts;
+    [SerializeField] private GameObject roundsText;
     [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
 
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         PlayerPrefs.SetInt("TermsKilled", 0);
         PlayerPrefs.SetInt("AntsKilled", 0);
+        UpdateRoundsWonText();
        // Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
         //Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
 
@@ -161,7 +166,7 @@ public class GameManager : MonoBehaviour
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
         GenerateUnitDraftList();
         FindAnyObjectByType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
-
+        
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
     }
@@ -651,7 +656,16 @@ public class GameManager : MonoBehaviour
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
                         CheckRounds();
+                      
                         if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
+                        if (inputPanel.activeSelf || endPanel.activeSelf)
+                        {
+                            roundsText.SetActive(false);
+                        }
+                        else
+                        {
+                            roundsText.SetActive(true);
+                        }
                     }
                     else
                     {
@@ -662,7 +676,16 @@ public class GameManager : MonoBehaviour
                         AddWins();
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
                         CheckRounds();
+                        
                         if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
+                        if (inputPanel.activeSelf || endPanel.activeSelf)
+                        {
+                            roundsText.SetActive(false);
+                        }
+                        else
+                        {
+                            roundsText.SetActive(true);
+                        }
                     }
 
                     //FIN DE PARTIDA
@@ -750,6 +773,7 @@ public class GameManager : MonoBehaviour
         endPanel.SetActive(true);
         UiManager.Instance.UpdateUiTurn($"Result: {winner} won");
         UiManager.Instance.TouchEnabled = false;
+       
     }
 
 
@@ -821,6 +845,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player1}", PlayerPrefs.GetInt($"PartidasGanadas_{player1}") + 1);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
+            foreach (var txt in player1Texts) txt.text = player1RoundsWon.ToString();
 
         }
         else if (winner == "Ants" || PlayerPrefs.GetInt("TermCount") == 1)
@@ -830,10 +855,11 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player2}", PlayerPrefs.GetInt($"PartidasGanadas_{player2}") + 1);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
+            foreach (var txt in player2Texts) txt.text = player2RoundsWon.ToString();
         }
         else
         {
-
+            
         }
 
     }
@@ -848,6 +874,7 @@ public class GameManager : MonoBehaviour
             if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
+          
             return;
         }
     }
@@ -920,6 +947,18 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+   private void UpdateRoundsWonText()
+    {
+        player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");
+        player2RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player2}");
+
+        foreach (var txt in player1Texts) txt.text = player1RoundsWon.ToString();
+        foreach (var txt in player2Texts) txt.text = player2RoundsWon.ToString();
+
+
+    }
+   
 
 }
 

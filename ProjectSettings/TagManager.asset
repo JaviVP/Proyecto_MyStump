@@ -7,6 +7,8 @@ TagManager:
   - EndTrigger
   - CreditsPanel
   - SettingsPanel
+  - Player1Text
+  - Player2Text
   layers:
   - Default
   - TransparentFX

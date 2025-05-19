@@ -17,6 +17,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject turnScrollGeneral;
     [SerializeField] private TextMeshProUGUI turnText;
 
+
     private bool touchEnabled = true;
 
     private Button[] buttons;
@@ -185,7 +186,7 @@ public class UiManager : MonoBehaviour
     {
         turnUI.GetComponent<TMP_Text>().text = content;
     }
-
+ 
 
 
 }
