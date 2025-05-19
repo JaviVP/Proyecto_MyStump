@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
+  m_Name: SequiaExtrema
+  m_EditorClassIdentifier: 
+  eventName: 
+  description: 
+  eventImage: {fileID: 0}
+  tileToChangePrefab: {fileID: 0}
+  posprocessing: {fileID: 0}
+  tileChangeVFX: {fileID: 0}
+  ScreenVFX: {fileID: 0}
+  duration: 0
+  effect: 0
+  area: 0
+  tier1:
+    amountOfTiles: 0
+    duration: 0
+  tier2:
+    amountOfTiles: 0
+    duration: 0
+  tier3:
+    amountOfTiles: 0
+    duration: 0

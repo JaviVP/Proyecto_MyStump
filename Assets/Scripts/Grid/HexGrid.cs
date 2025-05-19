@@ -664,6 +664,14 @@ public class HexGrid : MonoBehaviour
         return lineTiles;
     }
 
+
+    public List<HexTile> GetAllHexTiles()
+    {
+        return new List<HexTile>(hexMap.Values);
+    }
+
+
+
     public List<HexTile> GetTilesWithinRange(Vector2Int start, int rangeA, int rangeB)
     {
         List<HexTile> inRange = new List<HexTile>();

@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Random = UnityEngine.Random;
-public class HazardEventsManager : MonoBehaviour
+public class HazardManager : MonoBehaviour
 {
     /// Write those out ffrom here
     private int maxTurns;
@@ -32,7 +32,23 @@ public class HazardEventsManager : MonoBehaviour
 
     private Dictionary<int, Hazard> HazardByTurn = new Dictionary<int, Hazard>();
 
+    public object Instance { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+
+        }
+
+        // DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -107,5 +123,19 @@ public class HazardEventsManager : MonoBehaviour
         }
 
     }
+
+    public void LaunchHazard(int currentTurn)
+    {
+        if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
+        {
+            Debug.Log($"<color=red><b>Turn {currentTurn}</b></color>: Launching <color=cyan>{hazard.name}</color> hazard.");
+            hazard.ExecuteHazard(useTierSystem, 2);
+        }
+        else
+        {
+            Debug.Log($"<color=grey>No hazard assigned for turn {currentTurn}.</color>");
+        }
+    }
+
 
 }

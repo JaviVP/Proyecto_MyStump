@@ -10,11 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
-  m_Name: NewTierEffectConfig
+  m_Name: ExpansionUrbana
   m_EditorClassIdentifier: 
   eventName: 
   description: 
   eventImage: {fileID: 0}
+  tileToChangePrefab: {fileID: 0}
+  posprocessing: {fileID: 0}
+  tileChangeVFX: {fileID: 0}
+  ScreenVFX: {fileID: 0}
+  duration: 0
   effect: 0
   area: 0
   tier1:

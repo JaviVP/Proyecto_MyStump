@@ -640,6 +640,10 @@ public class GameManager : MonoBehaviour
             */
             numericCurrentTurn++;
             limitTurns--;
+
+            //HazardManager.Instance.LaunchHazard();
+
+
             UiManager.Instance.UpdateScroll();
             if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
             {
