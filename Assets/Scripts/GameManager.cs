@@ -786,9 +786,6 @@ public class GameManager : MonoBehaviour
        
     }
 
-
-
-
     public string Winner()
     {
 
@@ -855,6 +852,14 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player1}", PlayerPrefs.GetInt($"PartidasGanadas_{player1}") + 1);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
+            if (inputPanel.activeSelf || endPanel.activeSelf)
+            {
+                roundsText.SetActive(false);
+            }
+            else
+            {
+                roundsText.SetActive(true);
+            }
             foreach (var txt in player1Texts) txt.text = player1RoundsWon.ToString();
 
         }
@@ -865,6 +870,14 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player2}", PlayerPrefs.GetInt($"PartidasGanadas_{player2}") + 1);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
+            if (inputPanel.activeSelf || endPanel.activeSelf)
+            {
+                roundsText.SetActive(false);
+            }
+            else
+            {
+                roundsText.SetActive(true);
+            }
             foreach (var txt in player2Texts) txt.text = player2RoundsWon.ToString();
         }
         else
@@ -875,8 +888,26 @@ public class GameManager : MonoBehaviour
     }
     private void WinCondition()
     {
-        if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; AddWins(); CheckRounds(); }
-        else if (PlayerPrefs.GetInt("TermCount") == 1) { winner = "Ants"; AddWins(); CheckRounds(); }
+        if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; AddWins(); CheckRounds();
+            if (inputPanel.activeSelf || endPanel.activeSelf)
+            {
+                roundsText.SetActive(false);
+            }
+            else
+            {
+                roundsText.SetActive(true);
+            }
+        }
+        else if (PlayerPrefs.GetInt("TermCount") == 1) { winner = "Ants"; AddWins(); CheckRounds();
+            if (inputPanel.activeSelf || endPanel.activeSelf)
+            {
+                roundsText.SetActive(false);
+            }
+            else
+            {
+                roundsText.SetActive(true);
+            }
+        }
         if (!string.IsNullOrEmpty(winner))
         {
            
