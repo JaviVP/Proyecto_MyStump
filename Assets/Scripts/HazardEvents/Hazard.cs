@@ -108,9 +108,10 @@ public class Hazard : ScriptableObject
         int appliedCount = 0;
         foreach (HexTile tile in affectedTiles)
         {
+            
             if (appliedCount >= selectedTier.amountOfTiles)
                 break;
-
+            
             ApplyEffectToTile(tile);
             appliedCount++;
         }
@@ -122,6 +123,8 @@ public class Hazard : ScriptableObject
 
     private List<HexTile> GetAffectedTiles(AreaAffected areaType)
     {
+        hexGrid = FindAnyObjectByType<HexGrid>();
+
         List<HexTile> result = new List<HexTile>();
 
         Vector2Int center = new Vector2Int(0, 0); // or pass this dynamically if needed
@@ -195,7 +198,7 @@ public class Hazard : ScriptableObject
 
             case TierEffect.ChangeToOppositeTeam:
                 var currentTeam = HexGrid.EnumHelper.ConvertToTeam(tile.state);
-                if (currentTeam.HasValue)
+                if (currentTeam.HasValue && tile.state != HexState.Neutral)
                 {
                     HexState newState = (currentTeam == Team.Ants) ? HexState.Termites : HexState.Ants;
                     tile.SetState(newState);
@@ -204,6 +207,16 @@ public class Hazard : ScriptableObject
 
             case TierEffect.DestroyObstacle:
                 // If you have a way to mark obstacles — e.g. state == Obstacle or something
+                if (duration == 0)
+                {
+                    hexGrid.RemoveTile(tile.axialCoords);
+                }
+                else
+                {
+                    
+                    hexGrid.TemporaryInactiveTiles.Add(tile);
+                    hexGrid.RemoveTile(tile.axialCoords);
+                }
                 break;
         }
 
@@ -211,6 +224,9 @@ public class Hazard : ScriptableObject
         if (tileChangeVFX)
             Instantiate(tileChangeVFX, tile.transform.position, Quaternion.identity);
     }
+
+
+
 
 
 

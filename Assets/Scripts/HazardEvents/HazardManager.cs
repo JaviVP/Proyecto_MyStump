@@ -32,7 +32,8 @@ public class HazardManager : MonoBehaviour
 
     private Dictionary<int, Hazard> HazardByTurn = new Dictionary<int, Hazard>();
 
-    public object Instance { get; private set; }
+    public static HazardManager Instance { get; private set; }
+    private HexGrid hexGrid;
 
     private void Awake()
     {
@@ -55,6 +56,7 @@ public class HazardManager : MonoBehaviour
         ShuffleHazardPool();
         maxTurns = GameManager.Instance.LimitTurns;
         TurnAssignation();
+        hexGrid = FindAnyObjectByType<HexGrid>();
     }
     public void ShuffleHazardPool()
     {
@@ -91,9 +93,9 @@ public class HazardManager : MonoBehaviour
                 var hazard = hazardPool[hazardPoolIndex];
                 HazardByTurn.Add(turn, hazard);
                 currentAdditive = basicAdditive;
+                Debug.Log($"<color=orange><b>On turn {turn}</b></color>, event <color=cyan><b>{hazard.name}</b></color> has been assigned.");
                 turn += cooldownBetweenHazards + hazard.duration; // look into duration
                 hazardPoolIndex++;
-                Debug.Log($"<color=orange><b>On turn {turn}</b></color>, event <color=cyan><b>{hazard.name}</b></color> has been assigned.");
 
             }
             else
@@ -121,15 +123,22 @@ public class HazardManager : MonoBehaviour
             }
 
         }
+        foreach (int key in HazardByTurn.Keys)
+        {
+            print(key + ".-"+ HazardByTurn[key]);
+            
+        }
 
     }
 
     public void LaunchHazard(int currentTurn)
     {
+
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
         {
             Debug.Log($"<color=red><b>Turn {currentTurn}</b></color>: Launching <color=cyan>{hazard.name}</color> hazard.");
             hazard.ExecuteHazard(useTierSystem, 2);
+            GameManager.Instance.hazardDurationLeft = hazard.duration;
         }
         else
         {
@@ -137,5 +146,19 @@ public class HazardManager : MonoBehaviour
         }
     }
 
+    public void ResetTemporaryTiles()
+    {
+        if (hexGrid.TemporaryInactiveTiles != null)
+        {
+            foreach (HexTile tile in hexGrid.TemporaryInactiveTiles)
+            {
+                tile.TileRenderer.gameObject.SetActive(true);
+                hexGrid.hexMap.Add(tile.axialCoords, tile);
+                tile.SetState(HexState.Neutral);
+            }
+            hexGrid.TemporaryInactiveTiles.Clear();
+        }
+        
+    }
 
 }

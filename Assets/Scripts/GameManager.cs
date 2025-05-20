@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     //Limit of turns
     [SerializeField] private int limitTurns;
-    private float numericCurrentTurn=1;
+    private int numericCurrentTurn = 1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     bool selected = false;
     HexTile previousClickTile;
+    public int hazardDurationLeft = 0;
 
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
@@ -641,7 +642,12 @@ public class GameManager : MonoBehaviour
             numericCurrentTurn++;
             limitTurns--;
 
-            //HazardManager.Instance.LaunchHazard();
+            HazardManager.Instance.LaunchHazard(numericCurrentTurn);
+            hazardDurationLeft--;
+            if (hazardDurationLeft < 0)
+            {
+                HazardManager.Instance.ResetTemporaryTiles();
+            }
 
 
             UiManager.Instance.UpdateScroll();
