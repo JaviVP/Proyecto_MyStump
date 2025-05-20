@@ -13,8 +13,10 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private float hexSpacing = 1f;
     [SerializeField] private int gridRadius = 3; // Set in Inspector
     [SerializeField] private GameObject hexPrefab;
-    private Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
+    public Dictionary<Vector2Int, HexTile> hexMap = new Dictionary<Vector2Int, HexTile>();
     private List<HexTile> InactiveTiles= new List<HexTile>();
+    public List<HexTile> TemporaryInactiveTiles = new List<HexTile>();
+
     private Dictionary<Vector2Int, Unit> units = new Dictionary<Vector2Int, Unit>();
     public List<HexTile> antDraftTiles = new List<HexTile>();
     public List<HexTile> termiteDraftTiles = new List<HexTile>();

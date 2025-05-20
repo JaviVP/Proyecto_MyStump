@@ -419,6 +419,7 @@ MonoBehaviour:
   hexSpacing: 1.05
   gridRadius: 4
   hexPrefab: {fileID: 4367521761334727852, guid: 7b350b87015e4ea49a6dfecf6d6d7b78, type: 3}
+  TemporaryInactiveTiles: []
   antDraftTiles: []
   termiteDraftTiles: []
   unitsTermitePrefabs:
@@ -456,6 +457,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPanel: {fileID: 1213203145}
   inputPanel: {fileID: 1917223922}
+  player1Texts: []
+  player2Texts: []
+  roundsText: {fileID: 0}
   logoController: {fileID: 598267197}
   animationSpeed: 20
   limitTurns: 40
@@ -464,6 +468,7 @@ MonoBehaviour:
   numPanchulinas: 1
   unitDraftList: 
   isDraftPhase: 0
+  hazardDurationLeft: 0
 --- !u!4 &477943197
 Transform:
   m_ObjectHideFlags: 0
@@ -498,7 +503,15 @@ MonoBehaviour:
   additiveAdditive: 2
   startingEventHazardTurn: 2
   cooldownBetweenHazards: 3
-  hazardPool: []
+  hazardPool:
+  - {fileID: 11400000, guid: a228432d515345647b2ecfd25949bb3a, type: 2}
+  - {fileID: 11400000, guid: 30416bd6d1a12c548a5c1a9c6bf648a5, type: 2}
+  - {fileID: 11400000, guid: 321a5430c51eb2241a02fdb3e5a0e09f, type: 2}
+  - {fileID: 11400000, guid: f92729e521b21e64090cbcc0e0c7ad68, type: 2}
+  - {fileID: 11400000, guid: bf9515986a818214cafedbc596f86106, type: 2}
+  - {fileID: 11400000, guid: 57271fd33c22a7f4ab653acad9ae92e9, type: 2}
+  - {fileID: 11400000, guid: 81195d3a2867b3245abf71feefbb74bb, type: 2}
+  - {fileID: 11400000, guid: 6bd2909500c1dd749ac5bed433498d01, type: 2}
 --- !u!114 &477943199
 MonoBehaviour:
   m_ObjectHideFlags: 0

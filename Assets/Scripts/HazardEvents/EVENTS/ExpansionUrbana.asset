@@ -19,14 +19,14 @@ MonoBehaviour:
   posprocessing: {fileID: 0}
   tileChangeVFX: {fileID: 0}
   ScreenVFX: {fileID: 0}
-  duration: 0
-  effect: 0
-  area: 0
+  duration: 3
+  effect: 2
+  area: 3
   tier1:
     amountOfTiles: 0
     duration: 0
   tier2:
-    amountOfTiles: 0
+    amountOfTiles: 8
     duration: 0
   tier3:
     amountOfTiles: 0
