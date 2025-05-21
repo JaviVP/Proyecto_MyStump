@@ -135,13 +135,13 @@ public class Hazard : ScriptableObject
         {
             case AreaAffected.Interior:
                 candidateTiles.Add(hexGrid.GetHexTile(center));
-                candidateTiles.AddRange(hexGrid.GetTilesWithinRange(center, 1));
+                candidateTiles.AddRange(hexGrid.GetTilesWithinRange(center, 2));
                 break;
 
             case AreaAffected.Exterior:
                 List<HexTile> interior = new List<HexTile>();
                 interior.Add(hexGrid.GetHexTile(center));
-                interior.AddRange(hexGrid.GetTilesWithinRange(center, 1));
+                interior.AddRange(hexGrid.GetTilesWithinRange(center, 2));
 
                 foreach (var tile in hexGrid.GetAllHexTiles())
                 {
@@ -206,7 +206,6 @@ public class Hazard : ScriptableObject
                 break;
 
             case TierEffect.DestroyObstacle:
-                // If you have a way to mark obstacles — e.g. state == Obstacle or something
                 if (duration == 0)
                 {
                     hexGrid.RemoveTile(tile.axialCoords);
