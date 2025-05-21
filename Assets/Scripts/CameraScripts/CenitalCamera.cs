@@ -19,7 +19,10 @@ public class CamaraCenital : MonoBehaviour
 
     void Update()
     {
-        //ZoomCameraPC();
+#if UNITY_WEBGL || UNITY_STANDALONE
+        ZoomCameraPC(); // Solo PC/WebGL
+#endif
+
         // Comprobamos si está en transición (si es true, desactivamos las entradas táctiles)
         if (brain.IsBlending)
         {
@@ -34,13 +37,16 @@ public class CamaraCenital : MonoBehaviour
         if (disableTouchInputDuringTransition)
             return;
 
-        if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera && UiManager.Instance.TouchesEnabled() == true)
-        {
-            ZoomCamera();
-           
-        }
-
+#if UNITY_ANDROID
+    // Solo móviles Android
+    if (FindAnyObjectByType<CamerasController>().GetActiveCamera() == TopcinemachineCamera &&
+        UiManager.Instance.TouchesEnabled())
+    {
+        ZoomCamera(); // Zoom por gesto de pinza
     }
+#endif
+    }
+
 
     private void ZoomCameraPC()
     {
@@ -59,9 +65,6 @@ public class CamaraCenital : MonoBehaviour
     void ZoomCamera()
     {
         if (TopcinemachineCamera == null) return;
-
-        
-       
 
         if (Input.touchCount == 2)
         {

@@ -18,7 +18,10 @@ public class MainCamera : MonoBehaviour
     private CinemachineCamera virtualCamera;
     private Vector2 lastTouchPosition;
     private bool isTouching = false;
-
+    private float touchDragThreshold = 5f;
+    private Vector3 mouseStart;
+    private bool mousePressed = false;
+    private float dragThreshold = 1f; // píxeles
     // Nueva variable para bloquear las entradas táctiles durante la transición
     private bool disableTouchInputDuringTransition = false;
 
@@ -58,46 +61,61 @@ public class MainCamera : MonoBehaviour
             return;
 
         // Movimiento con mouse
-       // ZoomCamera();
-       // MoveCameraPC();
+       
 
         // Movimiento con táctil solo si está habilitado
-        if (UiManager.Instance.TouchesEnabled() == true)
-        {
-            MoveCameraTouch();
-            ZoomCameraTouch();
-        }
+        HandlePlatformInputs();
+    }
+    void HandlePlatformInputs()
+    {
+#if UNITY_WEBGL || UNITY_STANDALONE
+        ZoomCamera();
+        MoveCameraPC();
+#elif UNITY_ANDROID
+    if (UiManager.Instance.TouchesEnabled())
+    {
+        MoveCameraTouch();
+        ZoomCameraTouch();
+    }
+#endif
     }
 
     void MoveCameraPC()
     {
-        Vector3 newPosition = transform.position;
-
-        // Movimiento en el eje X (derecha e izquierda)
-        if (Input.GetMouseButton(1)) // Botón derecho del ratón
+        if (Input.GetMouseButtonDown(0))
         {
-            float mouseX = Input.GetAxis("Mouse X") * moveSpeed;
-            newPosition.x += -mouseX; // Invertir movimiento en el eje X
+            mouseStart = Input.mousePosition;
+            mousePressed = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            mousePressed = false;
         }
 
-        // Movimiento en el eje Z (arriba y abajo)
-        if (Input.GetMouseButton(0)) // Botón izquierdo del ratón
+        if (Input.GetMouseButton(0) && mousePressed)
         {
-            float mouseY = Input.GetAxis("Mouse Y") * moveSpeed;
-            newPosition.z += -mouseY; // Invertir movimiento en el eje Z
+            if (Vector3.Distance(Input.mousePosition, mouseStart) > dragThreshold)
+            {
+                Vector3 newPosition = transform.position;
+
+                float mouseX = Input.GetAxis("Mouse X") * moveSpeed;
+                float mouseY = Input.GetAxis("Mouse Y") * moveSpeed;
+
+                newPosition.x -= mouseX;
+                newPosition.z -= mouseY;
+
+                newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+                newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
+
+                transform.position = newPosition;
+            }
         }
-
-        // Aplicar los límites a la posición
-        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-        newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
-
-        // Actualizar la posición de la cámara
-        transform.position = newPosition;
     }
+
 
     void MoveCameraTouch()
     {
-        if (Input.touchCount == 1) // Solo un dedo en pantalla
+        if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -108,19 +126,20 @@ public class MainCamera : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Moved && isTouching)
             {
-                Vector2 delta = touch.deltaPosition * moveSpeed;
+                if ((touch.position - lastTouchPosition).magnitude > touchDragThreshold)
+                {
+                    Vector2 delta = touch.deltaPosition * moveSpeed;
+                    Vector3 newPosition = transform.position;
+                    newPosition.x -= delta.x * 0.01f;
+                    newPosition.z -= delta.y * 0.01f;
 
-                Vector3 newPosition = transform.position;
-                newPosition.x -= delta.x * 0.01f;
-                newPosition.z -= delta.y * 0.01f;
+                    newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+                    newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
 
-                // Aplicar límites
-                newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-                newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
+                    transform.position = newPosition;
 
-                transform.position = newPosition;
-
-                lastTouchPosition = touch.position;
+                    lastTouchPosition = touch.position;
+                }
             }
             else if (touch.phase == TouchPhase.Ended)
             {

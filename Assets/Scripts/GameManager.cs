@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
         //Tablet
         if (UiManager.Instance.TouchesEnabled() == true)
         {
-            RaycastTablet();
+            HandleInput();
         }
 
         UiManager.Instance.UpdateTiles();
@@ -211,275 +211,204 @@ public class GameManager : MonoBehaviour
 
 
 
-    /*
-        private void RaycastPC()
+    private Vector2 startPos;
+    private bool isDragging = false;
+    private bool gameOver;
+
+    private void HandleInput()
+    {
+        // ---- PC (Mouse) ----
+        if (Input.mousePresent)
         {
             if (Input.GetMouseButtonDown(0))
             {
+                startPos = Input.mousePosition;
+                isDragging = false;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                if (Vector2.Distance(Input.mousePosition, startPos) > 10f)
+                    isDragging = true;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (isDragging) return;
+
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     HexTile clickedTile = hit.collider.GetComponent<HexTile>();
-                    if (clickedTile != null)
+
+                    if (clickedTile == null)
                     {
-                        ClearHighlights(); // Clear previous highlights
-                        ShowHexLines(clickedTile);
+                        Unit clickedUnit = hit.collider.GetComponentInParent<Unit>();
+                        if (clickedUnit != null)
+                            clickedTile = hexGrid.GetHexTile(clickedUnit.AxialCoords);
                     }
+
+                    if (clickedTile != null)
+                        ProcessTileClick(clickedTile);
                 }
             }
-
         }
-    */
-
-
-    /// 
-    /// PASAR AL HEXGRID
-    /// 
-
-
-
-
-    /// 
-    /// HASTA AQUI
-    /// 
-
-
-    private Vector2 touchStartPos; // Stores where the touch began
-    private bool isDragging = false; // Detects if the player is dragging
-    private bool gameOver;
-
-    private void RaycastTablet()
-    {
-        
-
-        if (Input.touchCount > 0 && !lockTiles)
+        // ---- Tablet (Touch) ----
+        else if (Input.touchCount > 0 && !lockTiles)
         {
             Touch touch = Input.GetTouch(0);
 
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    touchStartPos = touch.position;
-                    isDragging = false; // Reset dragging flag
+                    startPos = touch.position;
+                    isDragging = false;
                     break;
 
                 case TouchPhase.Moved:
-                    if (Vector2.Distance(touch.position, touchStartPos) > 10f) // 10 pixels threshold
-                    {
-                        isDragging = true; // Set dragging flag if moved significantly
-                    }
+                    if (Vector2.Distance(touch.position, startPos) > 10f)
+                        isDragging = true;
                     break;
 
                 case TouchPhase.Ended:
-                    if (isDragging) return; // If dragging occurred, ignore selection
-
-
-
+                    if (isDragging) return;
 
                     Ray ray = mainCamera.ScreenPointToRay(touch.position);
                     if (Physics.Raycast(ray, out RaycastHit hit))
                     {
                         HexTile clickedTile = hit.collider.GetComponent<HexTile>();
 
-
-                        // If no tile was clicked, check if a unit was clicked
                         if (clickedTile == null)
                         {
                             Unit clickedUnit = hit.collider.GetComponentInParent<Unit>();
                             if (clickedUnit != null)
-                            {
                                 clickedTile = hexGrid.GetHexTile(clickedUnit.AxialCoords);
-                            }
                         }
 
-                        if (clickedTile == null) return;
-
-
-                        /*
-
-                        ///DRAFTING
-                        if (isDraftPhase)
-                        {
-                            HexTile previousClickTile = clickedTile;
-                            Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
-                            if (currentTurn == Team.Ants)
-                            {
-                                
-                                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
-                                {
-
-                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-                                    draftUnitIndex++;
-                                }
-                            }
-                            if (currentTurn == Team.Termites)
-                            {
-                                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
-                                {
-                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-                                    
-                                }
-                            }
-                            //hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[0], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                            if (draftUnitIndex >= unitDraftList.Count)
-                            {
-                                isDraftPhase = false;
-                            }
-                            hexGrid.RemoveAllHighlights();
-                            hexGrid.ResetTeamHalfHighlights();
-                        }
-                        */
-                        
-
-                        if (isDraftPhase)
-                        {
-                            //Debug.Log("Drafting");
-                            //Debug.Log("Tile: " + clickedTile);
-                            //Debug.Log("Tile Coord: " + clickedTile.axialCoords);
-
-                            Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
-                            if (currentTurn == Team.Ants)
-                            {
-
-                                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile) && !selected)
-                                {
-                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.HighlightOne(clickedTile);
-                                    selected = true;
-                                    previousClickTile = clickedTile;
-                                    return;
-                                }
-
-                                if (selected && unitOnTile != null && hexGrid.antDraftTiles.Contains(clickedTile))
-                                {
-                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-                                    selected = false;
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                    previousClickTile = null;
-                                    draftUnitIndex++;
-                                    logoController.ColocarPieza();
-                                   
-                                }
-                                if (draftUnitIndex >= unitDraftList.Count)
-                                {
-                                    isDraftPhase = false;
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                }
-
-
-                                else
-                                {
-                                    if (previousClickTile != null)
-                                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
-
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                    selected = false;
-                                    previousClickTile = null;
-                                    return;
-                                }
-                            }
-                            if (currentTurn == Team.Termites)
-                            {
-                                
-                                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile) && !selected)
-                                {
-                                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.HighlightOne(clickedTile);
-                                    selected = true;
-                                    previousClickTile = clickedTile;
-                                    return;
-                                }
-                                
-                                if (selected && unitOnTile != null && hexGrid.termiteDraftTiles.Contains(clickedTile))
-                                {
-                                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-                                    selected = false;
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                    previousClickTile = null;
-                                    logoController.ColocarPieza();
-
-                                }
-                                if (draftUnitIndex >= unitDraftList.Count)
-                                {
-                                    isDraftPhase = false;
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                }
-
-                                else
-                                {
-                                    if (previousClickTile != null)
-                                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
-
-                                    hexGrid.RemoveAllHighlights();
-                                    hexGrid.ResetTeamHalfHighlights();
-                                    selected = false;
-                                    previousClickTile = null;
-                                    return;
-                                }
-                                
-                            }
-                            /*
-                            //hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[0], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                            if (draftUnitIndex >= unitDraftList.Count)
-                            {
-                                isDraftPhase = false;
-                            }
-                            //hexGrid.ResetTeamHalfHighlights();
-                            */
-                        }
-
-                        
-
-                        /// NORMAL GAMEPLAY
-                        else
-                        {
-                            Unit clickedUnitOnTile = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
-
-                            if (selectedUnit == null)
-                            {
-                                GameManager.Instance.SelectUnit(clickedUnitOnTile);
-                            }
-                            else if (selectedUnit is UnitPanchulina panchulinas)
-                            {
-                                if (!panchulinas.FirstMove)
-                                {
-                                    if (!selectedUnit.Move(clickedTile.axialCoords))
-                                    {
-                                        selectedUnit = null;
-                                    }
-                                }
-                                else
-                                {
-                                    GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
-                                  
-                                }
-                            }
-                            else
-                            {
-                                //Error code
-
-                                if (clickedTile != null)
-                                {
-                                    GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
-                                    
-                                }
-
-                            }
-                        }
-
-
-                        
+                        if (clickedTile != null)
+                            ProcessTileClick(clickedTile);
                     }
                     break;
+            }
+        }
+    }
+
+   
+    
+
+    private void ProcessTileClick(HexTile clickedTile)
+    {
+        if (isDraftPhase)
+        {
+            Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
+
+            if (currentTurn == Team.Ants)
+            {
+                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile) && !selected)
+                {
+                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.HighlightOne(clickedTile);
+                    selected = true;
+                    previousClickTile = clickedTile;
+                    return;
+                }
+
+                if (selected && unitOnTile != null && hexGrid.antDraftTiles.Contains(clickedTile))
+                {
+                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                    selected = false;
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                    previousClickTile = null;
+                    draftUnitIndex++;
+                    logoController.ColocarPieza();
+                }
+
+                if (draftUnitIndex >= unitDraftList.Count)
+                {
+                    isDraftPhase = false;
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                }
+                else
+                {
+                    if (previousClickTile != null)
+                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
+
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                    selected = false;
+                    previousClickTile = null;
+                    return;
+                }
+            }
+            else if (currentTurn == Team.Termites)
+            {
+                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile) && !selected)
+                {
+                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.HighlightOne(clickedTile);
+                    selected = true;
+                    previousClickTile = clickedTile;
+                    return;
+                }
+
+                if (selected && unitOnTile != null && hexGrid.termiteDraftTiles.Contains(clickedTile))
+                {
+                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                    selected = false;
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                    previousClickTile = null;
+                    logoController.ColocarPieza();
+                }
+
+                if (draftUnitIndex >= unitDraftList.Count)
+                {
+                    isDraftPhase = false;
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                }
+                else
+                {
+                    if (previousClickTile != null)
+                        hexGrid.RemoveUnit(previousClickTile.axialCoords);
+
+                    hexGrid.RemoveAllHighlights();
+                    hexGrid.ResetTeamHalfHighlights();
+                    selected = false;
+                    previousClickTile = null;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            Unit clickedUnitOnTile = GameManager.Instance.HexGrid.GetUnitInTile(clickedTile.axialCoords);
+
+            if (selectedUnit == null)
+            {
+                GameManager.Instance.SelectUnit(clickedUnitOnTile);
+            }
+            else if (selectedUnit is UnitPanchulina panchulinas)
+            {
+                if (!panchulinas.FirstMove)
+                {
+                    if (!selectedUnit.Move(clickedTile.axialCoords))
+                    {
+                        selectedUnit = null;
+                    }
+                }
+                else
+                {
+                    GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
+                }
+            }
+            else
+            {
+                GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
             }
         }
     }
