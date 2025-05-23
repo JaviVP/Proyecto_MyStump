@@ -21,10 +21,41 @@ public class UnitRunner : Unit
         }
     }
 
+    private HexTile FindLastValidTileInDirection(Vector2Int startPos, Vector2Int direction, int range)
+    {
+        Vector2Int currentPos = startPos;
+        HexTile lastValidTile = null;
+
+        for (int i = 0; i < range; i++)
+        {
+            currentPos += direction;
+            HexTile tile = hexGrid.GetHexTile(currentPos);
+            if (tile == null) break;
+
+            Team? tileTeam = EnumHelper.ConvertToTeam(tile.state);
+            bool isOccupied = hexGrid.GetUnitInTile(tile.axialCoords) != null;
+
+            if (tile.state == HexState.Neutral)
+            {
+                lastValidTile = tile;
+            }
+            else if (tileTeam.HasValue && tileTeam.Value == this.Team && !isOccupied)
+            {
+                lastValidTile = tile;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return lastValidTile;
+    }
+
 
     public override void OnSelected()
     {
-        validMoveTiles.Clear(); // Clear previous selections
+        validMoveTiles.Clear();
         Vector2Int[] directions = {
         new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
         new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
@@ -32,45 +63,19 @@ public class UnitRunner : Unit
 
         foreach (Vector2Int direction in directions)
         {
-            Vector2Int currentPos = AxialCoords;
-            HexTile lastValidTile = null;
-
-            for (int i = 0; i < 3; i++) // ✅ Max range of 3
-            {
-                currentPos += direction;
-                //if (!hexGrid.HasTile(currentPos)) break; // ✅ Out of grid = obstacle
-
-                HexTile tile = hexGrid.GetHexTile(currentPos);
-                if (tile == null) break;
-
-                Team? tileTeam = EnumHelper.ConvertToTeam(tile.state);
-                bool isOccupied = hexGrid.GetUnitInTile(tile.axialCoords) != null;
-
-                if (tile.state == HexState.Neutral) // ✅ Can pass through neutral
-                {
-                    lastValidTile = tile;
-                }
-                else if (tileTeam.HasValue && tileTeam.Value == this.Team && !isOccupied) // ✅ Can pass through team-owned tiles
-                {
-                    lastValidTile = tile;
-                }
-                else // ❌ Obstacle (enemy tile or occupied)
-                {
-                    break;
-                }
-            }
-
+            HexTile lastValidTile = FindLastValidTileInDirection(AxialCoords, direction, 3);
             if (lastValidTile != null)
             {
-                validMoveTiles.Add(lastValidTile); // ✅ Add only the last valid tile
+                validMoveTiles.Add(lastValidTile);
             }
         }
 
         foreach (HexTile tile in validMoveTiles)
         {
-            tile.HighlightTile(); // ✅ Highlight final movement options
+            tile.HighlightTile();
         }
     }
+
 
 
     public override void ClearHighlights()
@@ -131,6 +136,28 @@ public class UnitRunner : Unit
         return true; // ✅ Movement successful
        
     }
+
+
+    public bool CanMove()
+    {
+        Vector2Int[] directions = {
+        new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
+        new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
+    };
+
+        foreach (Vector2Int direction in directions)
+        {
+            HexTile lastValidTile = FindLastValidTileInDirection(AxialCoords, direction, 3);
+            if (lastValidTile != null)
+            {
+                return true; // Found at least one valid move
+            }
+        }
+
+        return false; // No possible moves
+    }
+
+
 
     IEnumerator Animation(Vector2Int targetPos)
     {

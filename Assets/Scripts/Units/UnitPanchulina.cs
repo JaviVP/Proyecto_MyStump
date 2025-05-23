@@ -151,11 +151,34 @@ public class UnitPanchulina : Unit
         {
             PoseTransition("Idle");
         }
+        GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
        
         return true;
         
     }
+
+
+    public bool CanMove()
+    {
+        List<HexTile> firstMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
+
+        foreach (HexTile tile in firstMoveOptions)
+        {
+            Unit unitOnTile = hexGrid.GetUnitInTile(tile.axialCoords);
+
+            bool isFriendlyOrNeutral = (tile.state == HexState.Neutral || tile.state == EnumHelper.ConvertToHexState(this.Team));
+
+            if (!firstMove && isFriendlyOrNeutral && unitOnTile == null)
+            {
+                return true; // Found a valid move spot
+            }
+        }
+
+        return false; // No available moves
+    }
+
+
 
     IEnumerator Animation(Vector2Int targetPos)
     {
