@@ -151,6 +151,7 @@ public class UnitPanchulina : Unit
         {
             PoseTransition("Idle");
         }
+        GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
        
         return true;

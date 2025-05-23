@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
     private void HandleInput()
     {
         // ---- PC (Mouse) ----
-        if (Input.mousePresent)
+        if (Input.mousePresent && !lockTiles)
         {
             if (Input.GetMouseButtonDown(0))
             {
