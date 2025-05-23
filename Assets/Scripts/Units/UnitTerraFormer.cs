@@ -122,6 +122,25 @@ public class UnitTerraFormer : Unit
         return true;
     }
 
+    public bool CanMove()
+    {
+        List<HexTile> adjacentTiles = hexGrid.GetTilesWithinRange(AxialCoords, 1);
+
+        foreach (HexTile tile in adjacentTiles)
+        {
+            bool isOccupied = hexGrid.GetUnitInTile(tile.axialCoords) != null;
+
+            if (!isOccupied)
+            {
+                return true; // ✅ Found a free adjacent tile
+            }
+        }
+
+        return false; // ❌ No free adjacent tiles
+    }
+
+
+
     IEnumerator Animation(Vector2Int targetPos)
     {
         List<HexTile> way = FindPath(AxialCoords, targetPos);
