@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
         draftUnitIndex = 0;
         isDraftPhase = true;
         totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
+        SoundManager.instance.PlaySoundFromCategory("Ambient");
         if (!PlayerPrefs.HasKey("NumeroRondasCampeonato"))
         {
             partidasSeleccionadas = totalPartidasCampeonato;
@@ -322,7 +323,9 @@ public class GameManager : MonoBehaviour
                     hexGrid.ResetTeamHalfHighlights();
                     previousClickTile = null;
                     draftUnitIndex++;
+                    SoundManager.instance.PlaySound("PlaceUnit");
                     logoController.ColocarPieza();
+                   
                 }
 
                 if (draftUnitIndex >= unitDraftList.Count)
@@ -362,7 +365,9 @@ public class GameManager : MonoBehaviour
                     hexGrid.RemoveAllHighlights();
                     hexGrid.ResetTeamHalfHighlights();
                     previousClickTile = null;
+                    SoundManager.instance.PlaySound("PlaceUnit");
                     logoController.ColocarPieza();
+                    
                 }
 
                 if (draftUnitIndex >= unitDraftList.Count)

@@ -4291,6 +4291,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4885400848708051933, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
+      propertyPath: soundName
+      value: BotonBack
+      objectReference: {fileID: 0}
     - target: {fileID: 5113804544827475837, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
       propertyPath: m_IsActive
       value: 1

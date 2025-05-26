@@ -630,14 +630,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fe63b472e1d4c43a95b277650a60a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSource: {fileID: 513656833}
   musicSource: {fileID: 513656832}
+  sfxSource: {fileID: 513656833}
   introMusic: {fileID: 0}
   menuMusic: {fileID: 0}
   inGameMusic: {fileID: 0}
   sfxClips: []
   soundCategories: []
   teamSounds: []
+  fadeDuration: 1
 --- !u!4 &513656831
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,6 +1043,7 @@ GameObject:
   - component: {fileID: 664600638}
   - component: {fileID: 664600637}
   - component: {fileID: 664600639}
+  - component: {fileID: 664600640}
   m_Layer: 5
   m_Name: ReturnMenu
   m_TagString: Untagged
@@ -1162,6 +1164,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &664600640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664600635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134ff3561c6049e41a23a656cbf06d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName: BotonBack
 --- !u!1 &670611842
 GameObject:
   m_ObjectHideFlags: 0
