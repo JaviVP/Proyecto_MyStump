@@ -141,9 +141,9 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 457
+    x: 481
     y: 209
-    width: 688
+    width: 664
     height: 1856
 --- !u!114 &114350483966674978
 MonoBehaviour:
@@ -2353,7 +2353,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":1.8243192434310914,"g":1.7587543725967408,"b":1.7383564710617066,"a":1.0}'
+      m_SerializableObject: '{"r":0.34318119287490847,"g":0.34318119287490847,"b":0.34318119287490847,"a":1.0}'
     m_Space: -1
   m_Property:
     name: _BaseColor
@@ -2523,7 +2523,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.3684999942779541,"g":1.9730000495910645,"b":3.0309998989105226,"a":1.0}'
+      m_SerializableObject: '{"r":0.5676256418228149,"g":0.5676256418228149,"b":0.5676256418228149,"a":1.0}'
     m_Space: -1
   m_Property:
     name: _MainTexColor
@@ -2935,8 +2935,7 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 114350483966675425}
+  m_LinkedSlots: []
 --- !u!114 &114350483966675424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2974,15 +2973,7 @@ MonoBehaviour:
   m_EnumValues: []
   m_ValueFilter: 0
   m_Tooltip: 
-  m_Nodes:
-  - m_Id: 3
-    linkedSlots:
-    - outputSlot: {fileID: 114350483966675425}
-      inputSlot: {fileID: 114350483966675423}
-    position: {x: 457, y: 1609}
-    expandedSlots: []
-    expanded: 1
-    supecollapsed: 0
+  m_Nodes: []
 --- !u!114 &114350483966675425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3016,5 +3007,4 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 1
-  m_LinkedSlots:
-  - {fileID: 114350483966675423}
+  m_LinkedSlots: []
