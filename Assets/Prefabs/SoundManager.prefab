@@ -341,8 +341,8 @@ MonoBehaviour:
   musicSource: {fileID: 6178456753527594074}
   sfxSource: {fileID: 6310536439438217476}
   ambienceSource: {fileID: 4773550699541373951}
-  introMusic: {fileID: 8300000, guid: 7e89d822ef4b5724e853392051dcfc78, type: 3}
-  menuMusic: {fileID: 8300000, guid: a97f8574cb16c0a488e115ddc9538d5f, type: 3}
+  introMusic: {fileID: 8300000, guid: 1b26c9e7cd518dd4ba2d17d2000827b6, type: 3}
+  menuMusic: {fileID: 8300000, guid: 473663636dc44ca4a81d8a9699328443, type: 3}
   inGameMusic: {fileID: 8300000, guid: 390db3e690985024ca49d6dbd8acabba, type: 3}
   sfxClips:
   - name: PlaceUnit

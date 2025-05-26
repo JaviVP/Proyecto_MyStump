@@ -584,7 +584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d118d48d1489454596620dbc86e7f29, type: 2}
   m_sharedMaterial: {fileID: 80673657865945763, guid: 6d118d48d1489454596620dbc86e7f29, type: 2}
@@ -672,15 +672,15 @@ RectTransform:
   m_GameObject: {fileID: 400257930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6893778, y: 0.22416049, z: 0.5599333}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1542612470}
+  m_Father: {fileID: 1874707542830810438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038146973, y: -0.0000019073486}
-  m_SizeDelta: {x: 260.8, y: 88.9}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.00000333786, y: -148.7}
+  m_SizeDelta: {x: 260.8, y: 88.900024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &425488398
 GameObject:
@@ -2838,7 +2838,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1597403598}
-  - {fileID: 400257933}
   m_Father: {fileID: 393812515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.006250024, y: 0.25}
@@ -4509,9 +4508,12 @@ PrefabInstance:
       addedObject: {fileID: 1479374584}
     - targetCorrespondingSourceObject: {fileID: 1384747612858805989, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 2050319744}
+      addedObject: {fileID: 400257933}
     - targetCorrespondingSourceObject: {fileID: 1384747612858805989, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
       insertIndex: 3
+      addedObject: {fileID: 2050319744}
+    - targetCorrespondingSourceObject: {fileID: 1384747612858805989, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
+      insertIndex: 4
       addedObject: {fileID: 1350015339}
     - targetCorrespondingSourceObject: {fileID: 1384747612858805989, guid: 70bfc20d14eb3b2408a233e7daffb435, type: 3}
       insertIndex: -1
