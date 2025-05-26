@@ -2038,6 +2038,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: a97f8574cb16c0a488e115ddc9538d5f, type: 3}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: inGameMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 390db3e690985024ca49d6dbd8acabba, type: 3}
     - target: {fileID: 8732090890894322273, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
       propertyPath: m_Name
       value: SoundManager
