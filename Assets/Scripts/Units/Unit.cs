@@ -78,6 +78,10 @@ public abstract class Unit : MonoBehaviour
        
     }
 
+    public void SelectedSound()
+    {
+        SoundManager.instance.PlaySound("PlaceUnit");
+    }
    
     public void Update()
     {

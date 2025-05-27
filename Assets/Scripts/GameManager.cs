@@ -395,6 +395,11 @@ public class GameManager : MonoBehaviour
 
             if (selectedUnit == null)
             {
+
+                if (clickedUnitOnTile!=null && clickedUnitOnTile.Team == CurrentTurn)
+                {
+                    clickedUnitOnTile.SelectedSound();
+                }
                 GameManager.Instance.SelectUnit(clickedUnitOnTile);
             }
             else if (selectedUnit is UnitPanchulina panchulinas)
@@ -404,15 +409,18 @@ public class GameManager : MonoBehaviour
                     if (!selectedUnit.Move(clickedTile.axialCoords))
                     {
                         selectedUnit = null;
+                        SoundManager.instance.PlaySound("UnSelectedUnit");
                     }
                 }
                 else
                 {
+                    SoundManager.instance.PlaySound("PlaceUnit");
                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                 }
             }
             else
             {
+                SoundManager.instance.PlaySound("UnSelectedUnit");
                 GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
             }
         }
