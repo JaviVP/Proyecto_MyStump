@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Components;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +11,8 @@ public class LanguageManager : MonoBehaviour
     private List<string> customOrder = new List<string> { "en", "es", "cat" };
     private int currentLanguageIndex = 0;
     private const string LANGUAGE_KEY = "selected_language";
+
+    
 
     void Start()
     {

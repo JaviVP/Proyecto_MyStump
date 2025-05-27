@@ -3,38 +3,40 @@ using UnityEngine.UI;
 
 public class ButtonSounds : MonoBehaviour
 {
-    [Tooltip("Nombre del sonido que se reproducirá al pulsar este botón")]
     [SerializeField] private string soundName = "BotonNormal";
+    private bool listenerAdded = false;
 
-    void Awake()
+    public void SetSoundName(string newName)
     {
-        // Solo ejecuta esta lógica una vez (en un objeto centralizador)
-        if (gameObject.name != "ButtonSoundInitializer") return;
+        soundName = newName;
+    }
 
-        // Encuentra todos los botones activos en la escena
-        Button[] botones = Object.FindObjectsByType<Button>(FindObjectsSortMode.None);
-
-        foreach (Button boton in botones)
-        {
-            // Si no tienen el script, se lo añade
-            if (boton.GetComponent<ButtonSounds>() == null)
-            {
-                var nuevo = boton.gameObject.AddComponent<ButtonSounds>();
-                nuevo.soundName = boton.name.ToLower().Contains("back") ? "BotonBack" : "BotonNormal";
-            }
-        }
+    void OnEnable()
+    {
+        TryAddListener();
     }
 
     void Start()
     {
-        // Añade el listener al botón
+        TryAddListener();
+    }
+
+    private void TryAddListener()
+    {
+        if (listenerAdded) return;
+
         Button boton = GetComponent<Button>();
         if (boton != null)
         {
             boton.onClick.AddListener(() =>
             {
-                SoundManager.instance.PlaySound(soundName);
+                if (SoundManager.instance != null)
+                    SoundManager.instance.PlaySound(soundName);
+                else
+                    Debug.LogWarning("SoundManager no está inicializado.");
             });
+
+            listenerAdded = true;
         }
     }
 }

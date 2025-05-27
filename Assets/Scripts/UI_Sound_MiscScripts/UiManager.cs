@@ -145,16 +145,16 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
         PlayerPrefs.Save();
-        wonText.SetActive(true);
-        StartCoroutine(DeactivateTextAfterDelay(2f));
+        //wonText.SetActive(true);
+        //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
 
     public void ResetGamePref()
     {
         PlayerPrefs.SetInt("FINISHGAME", 1);
         PlayerPrefs.Save();
-        resetText.SetActive(true);
-        StartCoroutine(DeactivateTextAfterDelay(2f));
+        //resetText.SetActive(true);
+        //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
 
     private IEnumerator DeactivateTextAfterDelay(float delay)

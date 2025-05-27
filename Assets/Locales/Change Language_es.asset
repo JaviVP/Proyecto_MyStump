@@ -50,6 +50,34 @@ MonoBehaviour:
     m_Localized: "Partida R\xE1pida"
     m_Metadata:
       m_Items: []
+  - m_Id: 34399753642438656
+    m_Localized: "R\xE9cords"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34422879864483840
+    m_Localized: "Selecci\xF3n de partidas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423580548132864
+    m_Localized: Partidas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423802238070784
+    m_Localized: Escoge nombre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426558277480448
+    m_Localized: "Nombre inv\xE1lido para Jugador {0}. Revisa la longitud o caracteres"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426562090102784
+    m_Localized: Los nombres no pueden ser iguales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426563667161088
+    m_Localized: "\xA1Nombre de Jugador {0} guardado!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
