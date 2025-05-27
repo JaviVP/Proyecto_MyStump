@@ -351,6 +351,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9cadb3b492bd5ed44ace0ad0a9b7e47c, type: 3}
   - name: BotonBack
     clip: {fileID: 8300000, guid: e104d15d417848c4fafa7b52aa056921, type: 3}
+  - name: UnSelectedUnit
+    clip: {fileID: 8300000, guid: e104d15d417848c4fafa7b52aa056921, type: 3}
   soundCategories:
   - name: Ambient
     clips:
