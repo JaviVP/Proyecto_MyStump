@@ -20,8 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject roundsText;
     [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
-
-    public enum Team { Ants, Termites }
+    [SerializeField] private Animator TurnRotationUi;
+    
+        
+public enum Team { Ants, Termites }
     
     private CinemachineBrain brain;
     private Camera mainCamera;
@@ -196,8 +198,17 @@ public class GameManager : MonoBehaviour
         {
             HandleInput();
         }
+        if (currentTurn == Team.Ants)
+        {
+            TurnRotationUi.SetInteger("Turn", 0);
+        }
+        else
+        {
+            TurnRotationUi.SetInteger("Turn", 1);
+        }
 
         UiManager.Instance.UpdateTiles();
+
     }
 
 

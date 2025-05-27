@@ -4,7 +4,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Components;
 
 public class NameSelector2P : MonoBehaviour
 {
@@ -24,6 +26,10 @@ public class NameSelector2P : MonoBehaviour
     [Header("Mensajes")]
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private float messageDuration = 2f;
+
+    [SerializeField] private LocalizedString invalidNameMessage;
+    [SerializeField] private LocalizedString namesCannotBeEqualMessage;
+    [SerializeField] private LocalizedString nameSavedMessage;
 
     private const string NameListKey = "AllPlayerNames";
     private const int MaxNameLength = 12;
@@ -69,7 +75,10 @@ public class NameSelector2P : MonoBehaviour
 
         if (!IsNameValid(newName))
         {
-            ShowMessage($"Nombre inválido para Jugador {playerNumber}. Revisa la longitud o caracteres.");
+            invalidNameMessage.Arguments = new object[] { playerNumber };
+            invalidNameMessage.GetLocalizedStringAsync().Completed += (handle) => {
+                ShowMessage(handle.Result);
+            };
             return;
         }
 
@@ -77,7 +86,9 @@ public class NameSelector2P : MonoBehaviour
 
         if (newName == otherPlayerName)
         {
-            ShowMessage("Los nombres no pueden ser iguales.");
+            namesCannotBeEqualMessage.GetLocalizedStringAsync().Completed += (handle) => {
+                ShowMessage(handle.Result);
+            };
             return;
         }
 
@@ -94,7 +105,10 @@ public class NameSelector2P : MonoBehaviour
         else
             text2.text = newName;
 
-        ShowMessage($"¡Nombre de Jugador {playerNumber} guardado!");
+        nameSavedMessage.Arguments = new object[] { playerNumber };
+        nameSavedMessage.GetLocalizedStringAsync().Completed += (handle) => {
+            ShowMessage(handle.Result);
+        };
     }
 
     private bool IsNameValid(string name)
