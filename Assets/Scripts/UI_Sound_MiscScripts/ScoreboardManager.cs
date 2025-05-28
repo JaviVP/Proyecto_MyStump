@@ -84,8 +84,17 @@ public class ScoreboardManager : MonoBehaviour
             }
 
             // Ahora incluye el número de ranking
-            entryUI.SetupEntry(rank, stats.Nombre, stats.PartidasGanadas, stats.HormigasEliminadas, stats.TermitasEliminadas, stats.ParcelasHormigas, stats.ParcelasTermitas);
+            int score = CalcularScore(stats);
+            entryUI.SetupEntry(rank, stats.Nombre, stats.PartidasGanadas, score);
         }
+    }
+    private int CalcularScore(PlayerStats stats)
+    {
+        int puntosPartidas = stats.PartidasGanadas * 100;
+        int puntosParcelas = (stats.ParcelasHormigas + stats.ParcelasTermitas) * 5;
+        int puntosUnidades = (stats.HormigasEliminadas + stats.TermitasEliminadas) * 10;
+
+        return puntosPartidas + puntosParcelas + puntosUnidades;
     }
 
     private List<string> GetAllSavedNames()

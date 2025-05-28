@@ -19,7 +19,7 @@ public class ButtonPressEffect : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (buttonText != null)
         {
             // Establecer el color inicial del texto
-            buttonText.color = normalColor;        
+            buttonText.color = normalColor;
         }
     }
 
@@ -41,4 +41,3 @@ public class ButtonPressEffect : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
     }
 }
-

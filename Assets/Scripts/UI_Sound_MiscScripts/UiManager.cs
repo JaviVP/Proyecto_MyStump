@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI antTiles;
     [SerializeField] private TextMeshProUGUI termTiles;
     [SerializeField] private GameObject turnScrollGeneral;
+    [SerializeField] private GameObject lockUi;
     [SerializeField] private TextMeshProUGUI turnText;
 
 
@@ -51,10 +52,11 @@ public class UiManager : MonoBehaviour
         TouchEnabled = true;
         // Corrección de método obsoleto
         buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-       
+
         foreach (Button button in buttons)
         {
-            // Verificar si el botón ya tiene el script, si no, añadirlo
+            if (button.name == "Championship") continue; // Saltar este botón
+
             if (button.GetComponent<ButtonPressEffect>() == null)
             {
                 button.gameObject.AddComponent<ButtonPressEffect>();
@@ -145,6 +147,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
         PlayerPrefs.Save();
+        
         //wonText.SetActive(true);
         //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
@@ -153,6 +156,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 1);
         PlayerPrefs.Save();
+        
         //resetText.SetActive(true);
         //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
