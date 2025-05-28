@@ -71,4 +71,9 @@ public class UnitBase : Unit
         }
         validTargets.Clear();
     }
+
+    public override bool CanMove()
+    {
+        return false;
+    }
 }

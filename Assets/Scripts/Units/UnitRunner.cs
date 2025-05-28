@@ -138,12 +138,18 @@ public class UnitRunner : Unit
     }
 
 
-    public bool CanMove()
+    public override bool CanMove()
     {
+        if (TurnsUntilAvailable < 0)
+        {
+            return false;
+        }
+
         Vector2Int[] directions = {
         new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, 1),
         new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1)
     };
+        
 
         foreach (Vector2Int direction in directions)
         {

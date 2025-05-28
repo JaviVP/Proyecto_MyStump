@@ -159,8 +159,13 @@ public class UnitPanchulina : Unit
     }
 
 
-    public bool CanMove()
+    public override bool CanMove()
     {
+        if (TurnsUntilAvailable < 0)
+        {
+            return false;
+        }
+
         List<HexTile> firstMoveOptions = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
         foreach (HexTile tile in firstMoveOptions)

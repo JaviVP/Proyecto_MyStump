@@ -122,8 +122,13 @@ public class UnitTerraFormer : Unit
         return true;
     }
 
-    public bool CanMove()
+    public override bool CanMove()
     {
+        if (TurnsUntilAvailable < 0)
+        {
+            return false;
+        }
+
         List<HexTile> adjacentTiles = hexGrid.GetTilesWithinRange(AxialCoords, 1);
 
         foreach (HexTile tile in adjacentTiles)
