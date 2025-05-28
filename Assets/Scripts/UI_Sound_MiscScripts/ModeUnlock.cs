@@ -9,8 +9,16 @@ public class ModeUnlock : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.GetInt("FINISHGAME") == 0)
+        //PlayerPrefs.DeleteAll();
+        if (!PlayerPrefs.HasKey("FINISHGAME"))
         {
+
+            PlayerPrefs.SetInt("FINISHGAME", 1);
+        }
+
+        if (PlayerPrefs.GetInt("FINISHGAME") == 0)
+        {
+
             panelUnlock.SetActive(false);
         }
     }

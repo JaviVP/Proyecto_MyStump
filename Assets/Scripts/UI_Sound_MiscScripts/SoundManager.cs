@@ -1,24 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Sound
 {
-    public string name;
+    public string name;    // clave para PlaySound("name")
     public AudioClip clip;
 }
 
 [System.Serializable]
 public class SoundCategory
 {
-    public string name;
+    public string name;          // clave para PlaySoundFromCategory("name")
     public List<AudioClip> clips;
 }
 
 [System.Serializable]
 public class TeamSoundGroup
 {
-    public string actionName;
+    public string actionName;    // "Mover", "Colocar", "Eliminar", etc.
     public AudioClip hormigaClip;
     public AudioClip termitaClip;
 }
@@ -34,169 +36,237 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     [Header("Fuentes de Audio")]
-    public AudioSource sfxSource;
-    public AudioSource musicSource;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource ambienceSource;
 
     [Header("Música")]
-    public AudioClip introMusic;
-    public AudioClip menuMusic;
-    public AudioClip inGameMusic;
+    [SerializeField] private AudioClip introMusic;
+    [SerializeField] private AudioClip menuMusic;
+    [SerializeField] private AudioClip inGameMusic;
 
-    [Header("Efectos de Sonido (Individuales)")]
-    public List<Sound> sfxClips;
+    [Header("SFX Individuales")]
+    [SerializeField] private List<Sound> sfxClips;
 
-    [Header("Categorías de Sonido (Variantes)")]
-    public List<SoundCategory> soundCategories;
+    [Header("Categorías de SFX")]
+    [SerializeField] private List<SoundCategory> soundCategories;
 
     [Header("Sonidos de Tropas por Equipo")]
-    public List<TeamSoundGroup> teamSounds;
+    [SerializeField] private List<TeamSoundGroup> teamSounds;
 
-    private Dictionary<string, AudioClip> sfxDict;
-    private Dictionary<string, List<AudioClip>> categoryDict;
-    private Dictionary<string, TeamSoundGroup> teamSoundDict;
+    [Header("Ajustes de Fade")]
+    [SerializeField] private float fadeDuration = 1.0f;
 
+    [SerializeField] private Dictionary<string, AudioClip> sfxDict;
+    [SerializeField] private Dictionary<string, List<AudioClip>> categoryDict;
+    [SerializeField] private Dictionary<string, TeamSoundGroup> teamSoundDict;
+
+    private Coroutine fadeCoroutine;
     private AudioClip currentMusic;
 
     void Awake()
     {
+        // Singleton  
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Inicializaciones
             InitSFXDict();
             InitCategoryDict();
             InitTeamSounds();
+
+            // Escucha cambio de escena
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
     void Start()
     {
+        // Carga preferencias
         bool isMusicOn = PlayerPrefs.GetInt("MusicOn", 1) == 1;
         bool isSfxOn = PlayerPrefs.GetInt("SFXOn", 1) == 1;
 
         musicSource.mute = !isMusicOn;
         sfxSource.mute = !isSfxOn;
+
+        // Música según escena inicial
+        PlayMusicForScene();
     }
 
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Inicializa diccionario de SFX individuales
     void InitSFXDict()
     {
         sfxDict = new Dictionary<string, AudioClip>();
-        foreach (Sound s in sfxClips)
-        {
+        foreach (var s in sfxClips)
             if (!sfxDict.ContainsKey(s.name))
                 sfxDict.Add(s.name, s.clip);
-        }
     }
 
+    // Inicializa diccionario de categorías
     void InitCategoryDict()
     {
         categoryDict = new Dictionary<string, List<AudioClip>>();
-        foreach (SoundCategory cat in soundCategories)
-        {
+        foreach (var cat in soundCategories)
             if (!categoryDict.ContainsKey(cat.name))
                 categoryDict.Add(cat.name, cat.clips);
-        }
     }
 
+    // Inicializa diccionario de sonidos de equipo
     void InitTeamSounds()
     {
         teamSoundDict = new Dictionary<string, TeamSoundGroup>();
-        foreach (TeamSoundGroup group in teamSounds)
-        {
-            if (!teamSoundDict.ContainsKey(group.actionName))
-                teamSoundDict.Add(group.actionName, group);
-        }
+        foreach (var grp in teamSounds)
+            if (!teamSoundDict.ContainsKey(grp.actionName))
+                teamSoundDict.Add(grp.actionName, grp);
     }
 
+    // --------------------
+    //  SFX Methods
+    // --------------------
+
+    /// <summary>Reproduce un SFX individual por nombre.</summary>
     public void PlaySound(string soundName)
     {
         if (sfxSource.mute) return;
 
-        if (sfxDict.TryGetValue(soundName, out AudioClip clip))
-        {
+        if (sfxDict.TryGetValue(soundName, out var clip))
             sfxSource.PlayOneShot(clip);
-        }
         else
-        {
-            Debug.LogWarning($"[SoundManager] No existe SFX con nombre '{soundName}'");
-        }
+            Debug.LogWarning($"[SoundManager] SFX '{soundName}' no encontrado");
     }
 
+    /// <summary>Reproduce un clip aleatorio de una categoría.</summary>
     public void PlaySoundFromCategory(string categoryName)
     {
-        if (sfxSource.mute) return;
-
-        if (categoryDict.TryGetValue(categoryName, out List<AudioClip> clips) && clips.Count > 0)
+        if (categoryDict.TryGetValue(categoryName, out var clips) && clips.Count > 0)
         {
             int idx = Random.Range(0, clips.Count);
-            sfxSource.PlayOneShot(clips[idx]);
+            AudioClip selectedClip = clips[idx];
+
+            if (categoryName == "Ambient")
+            {
+                if (!ambienceSource.mute)
+                {
+                    ambienceSource.volume = 0.1f; // ajusta según necesites
+                    ambienceSource.PlayOneShot(selectedClip);
+                }
+            }
+            else
+            {
+                if (!sfxSource.mute)
+                    sfxSource.PlayOneShot(selectedClip);
+            }
         }
         else
         {
-            Debug.LogWarning($"[SoundManager] Categoría '{categoryName}' vacía o inexistente");
+            Debug.LogWarning($"[SoundManager] Categoría '{categoryName}' vacía o no existe");
         }
     }
 
+    /// <summary>Reproduce el SFX de tropa adecuado según acción y equipo.</summary>
     public void PlayTeamSound(string actionName, Equipo equipo)
     {
         if (sfxSource.mute) return;
 
-        if (teamSoundDict.TryGetValue(actionName, out TeamSoundGroup group))
+        if (teamSoundDict.TryGetValue(actionName, out var group))
         {
             AudioClip clip = equipo == Equipo.Hormiga ? group.hormigaClip : group.termitaClip;
             if (clip != null)
                 sfxSource.PlayOneShot(clip);
             else
-                Debug.LogWarning($"[SoundManager] Clip vacío para {equipo} en acción {actionName}");
+                Debug.LogWarning($"[SoundManager] Clip de '{actionName}' para {equipo} no asignado");
         }
         else
-        {
-            Debug.LogWarning($"[SoundManager] Acción '{actionName}' no encontrada en sonidos de equipo");
-        }
+            Debug.LogWarning($"[SoundManager] Acción de tropa '{actionName}' no encontrada");
     }
 
-    public void PlayMusic(string musicType)
+    // --------------------
+    //  Music Methods
+    // --------------------
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        switch (musicType)
-        {
-            case "Intro":
-                currentMusic = introMusic;
-                break;
-            case "Menu":
-                currentMusic = menuMusic;
-                break;
-            case "InGame":
-                currentMusic = inGameMusic;
-                break;
-            default:
-                Debug.LogWarning($"[SoundManager] Música '{musicType}' no reconocida");
-                return;
-        }
+        PlayMusicForScene();
+    }
 
-        if (!musicSource.mute && currentMusic != null)
+    /// <summary>
+    /// Selecciona Intro/Menu/InGame según el nombre de la escena.
+    /// </summary>
+    void PlayMusicForScene()
+    {
+        if (musicSource.mute) return;
+
+        string name = SceneManager.GetActiveScene().name;
+        AudioClip target = null;
+
+        if (name == "MainMenu")
+            target = introMusic;
+        else if (name == "Hub" || name == "Settings" || name == "NameSelector" || name == "ScoreBoard")
+            target = menuMusic;
+        else if (name == "Championship" || name == "VladTEST")
+            target = inGameMusic;
+
+        if (target != null)
         {
-            musicSource.clip = currentMusic;
-            musicSource.loop = true;
-            musicSource.Play();
+            if (target != currentMusic || !musicSource.isPlaying)
+            {
+                currentMusic = target;
+                if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+                fadeCoroutine = StartCoroutine(FadeToNewTrack(target));
+            }
         }
     }
 
+    /// <summary>Fade out/in hacia la nueva pista.</summary>
+    IEnumerator FadeToNewTrack(AudioClip newClip)
+    {
+        float startVol = musicSource.volume;
+
+        // Fade out
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            musicSource.volume = Mathf.Lerp(startVol, 0, t / fadeDuration);
+            yield return null;
+        }
+
+        musicSource.Stop();
+        musicSource.clip = newClip;
+        musicSource.Play();
+
+        // Fade in
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            musicSource.volume = Mathf.Lerp(0, startVol, t / fadeDuration);
+            yield return null;
+        }
+
+        musicSource.volume = startVol;
+    }
+
+    /// <summary>Activa/desactiva música y guarda opción.</summary>
     public void ToggleMusic(bool isOn)
     {
         musicSource.mute = !isOn;
-        if (isOn && currentMusic != null)
-            musicSource.Play();
-        else
-            musicSource.Stop();
+        if (!isOn) musicSource.Stop();
+        else PlayMusicForScene();
 
         PlayerPrefs.SetInt("MusicOn", isOn ? 1 : 0);
         PlayerPrefs.Save();
     }
 
+    /// <summary>Activa/desactiva SFX y guarda opción.</summary>
     public void ToggleSFX(bool isOn)
     {
         sfxSource.mute = !isOn;

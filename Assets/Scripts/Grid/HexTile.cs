@@ -10,19 +10,24 @@ public class HexTile : MonoBehaviour
     private Renderer tileRenderer;
 
     [SerializeField] private Material highlightMaterial; // Assign in Inspector
-    [SerializeField] private Material baseMaterial;
+    [SerializeField] private Material[] baseMaterial;
     [SerializeField] private Material antTiles;
     [SerializeField] private Material termTiles;
 
     public Renderer TileRenderer { get => tileRenderer; set => tileRenderer = value; }
-
+    private int pos;
 
 
     //private static readonly int ColorProperty = Shader.PropertyToID("_Color");
 
     private void Awake()
     {
-       TileRenderer = GetComponent<Renderer>();         
+        float[] rotaciones = { 0f, 60f, 120f, 180f, 240f, 300f };
+        int posRot = Random.Range(0, rotaciones.Length);
+        this.gameObject.transform.rotation = Quaternion.Euler(0.0f, rotaciones[posRot], 0.0f);
+
+        pos = Random.Range(0, baseMaterial.Length);
+        TileRenderer = GetComponent<Renderer>();         
        UpdateTileAppearance();
         //baseMaterial = GetComponent<Material>();
     }
@@ -50,7 +55,8 @@ public class HexTile : MonoBehaviour
                 TileRenderer.material = termTiles;
                 break;
             default:
-                TileRenderer.material = baseMaterial;
+               
+                TileRenderer.material = baseMaterial[pos];
                 break;
         }
         

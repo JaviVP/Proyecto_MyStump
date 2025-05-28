@@ -29,6 +29,8 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
+      
+  
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -41,7 +43,6 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        
         player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
         if (turnScrollGeneral!=null && turnScrollGeneral.GetComponent<Slider>()) scrollSliderGeneral = turnScrollGeneral.GetComponent<Slider>();
@@ -50,7 +51,7 @@ public class UiManager : MonoBehaviour
         TouchEnabled = true;
         // Corrección de método obsoleto
         buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
+       
         foreach (Button button in buttons)
         {
             // Verificar si el botón ya tiene el script, si no, añadirlo
@@ -74,6 +75,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(3);
+       
     }
 
     public void NameSelector()
@@ -93,6 +95,7 @@ public class UiManager : MonoBehaviour
         int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3); 
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
         SceneManager.LoadScene(4);
+      
     }
    
     public void ScoreBoardScene()
@@ -118,8 +121,10 @@ public class UiManager : MonoBehaviour
 
     public void LoadHub()
     {
+        
         PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(1);
+       
     }
 
     public void OpenSettings()
@@ -140,16 +145,16 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
         PlayerPrefs.Save();
-        wonText.SetActive(true);
-        StartCoroutine(DeactivateTextAfterDelay(2f));
+        //wonText.SetActive(true);
+        //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
 
     public void ResetGamePref()
     {
         PlayerPrefs.SetInt("FINISHGAME", 1);
         PlayerPrefs.Save();
-        resetText.SetActive(true);
-        StartCoroutine(DeactivateTextAfterDelay(2f));
+        //resetText.SetActive(true);
+        //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
 
     private IEnumerator DeactivateTextAfterDelay(float delay)

@@ -18,7 +18,7 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private float fastScrollMultiplier = 2f;
 
     private Vector2 startPosition;
-    private bool isScrolling = false;
+    
 
     public void ShowCredits()
     {
@@ -39,7 +39,7 @@ public class CreditsManager : MonoBehaviour
 
     private IEnumerator ScrollCredits(float contentHeight, float viewportHeight)
     {
-        isScrolling = true;
+      
 
         while (contentTransform.anchoredPosition.y < contentHeight + viewportHeight)
         {
@@ -55,7 +55,7 @@ public class CreditsManager : MonoBehaviour
             yield return null;
         }
 
-        isScrolling = false;
+      
         EndCredits();
     }
 

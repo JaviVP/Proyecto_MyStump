@@ -47,6 +47,34 @@ MonoBehaviour:
     m_Key: 1v1
     m_Metadata:
       m_Items: []
+  - m_Id: 34399753642438656
+    m_Key: HighScores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34422879864483840
+    m_Key: GameSelection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423580548132864
+    m_Key: Games
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423802238070784
+    m_Key: ChooseName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426558277480448
+    m_Key: InvalidName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426562090102784
+    m_Key: NamesEqual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426563667161088
+    m_Key: NameSaved
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

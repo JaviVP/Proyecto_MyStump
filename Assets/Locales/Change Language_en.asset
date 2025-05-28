@@ -50,6 +50,34 @@ MonoBehaviour:
     m_Localized: Quick Game
     m_Metadata:
       m_Items: []
+  - m_Id: 34399753642438656
+    m_Localized: High Scores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34422879864483840
+    m_Localized: Game Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423580548132864
+    m_Localized: Games
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34423802238070784
+    m_Localized: Choose name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426558277480448
+    m_Localized: Invalid name for Player {0}. Check length or characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426562090102784
+    m_Localized: Names cannot be the same
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34426563667161088
+    m_Localized: Player {0} name saved!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
