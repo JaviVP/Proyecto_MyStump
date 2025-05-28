@@ -8,8 +8,7 @@ public class HazardManager : MonoBehaviour
     /// Write those out ffrom here
     private int maxTurns;
     // int basicProbability = 25; //No se usa de momento lo comento
-    [SerializeField]
-    private bool useTierSystem;
+    
     private int currentProbability = 25;
     [SerializeField]
     private int maxProbability = 70;
@@ -26,9 +25,26 @@ public class HazardManager : MonoBehaviour
     [SerializeField]
     private int cooldownBetweenHazards  = 3;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField]
     private List<Hazard> hazardPool = new List<Hazard>();
+
+    [Header("Tier Related")]
+    [SerializeField]
+    private bool useTierSystem;
+
+    [SerializeField]
+    [Tooltip("Max probability for T1 and T3. T1 happens at the beginning of the game, T3 happens at the end of the game")]
+    private float tier1And3MaxProbability = 0.75f;
+    [SerializeField]
+    [Tooltip("Max probability for T2 Happens in the middle of the game")]
+    private float tier2MaxProbability = 0.6f;
+    [SerializeField]
+    [Tooltip("Min probability for T2. Happens in the beggining and end of the game")]
+    private float tier2MinProbability = 0.2f;
+
 
     private Dictionary<int, Hazard> HazardByTurn = new Dictionary<int, Hazard>();
 
@@ -133,11 +149,18 @@ public class HazardManager : MonoBehaviour
 
     public void LaunchHazard(int currentTurn)
     {
+        int tier = GetWeightedRandomNumber(
+            currentTurn,
+            maxTurns, // max number
+            tier2MaxProbability, // max prob for 2
+            tier2MinProbability, // min prob for 2
+            tier1And3MaxProbability // max prob for 1 and 3
+        );
 
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
         {
             Debug.Log($"<color=red><b>Turn {currentTurn}</b></color>: Launching <color=cyan>{hazard.name}</color> hazard.");
-            hazard.ExecuteHazard(useTierSystem, 2);
+            hazard.ExecuteHazard(useTierSystem, tier);
             GameManager.Instance.hazardDurationLeft = hazard.duration;
         }
         else
@@ -159,6 +182,47 @@ public class HazardManager : MonoBehaviour
             hexGrid.TemporaryInactiveTiles.Clear();
         }
         
+    }
+
+
+    public static int GetWeightedRandomNumber(
+        float currentNumber,
+        float maxNumber,
+        float maxProbFor2,
+        float minProbFor2,
+        float maxProbFor1And3)
+    {
+        // Clamp values to avoid accidental overshooting
+        currentNumber = Mathf.Clamp(currentNumber, 0f, maxNumber);
+
+        // Normalize current number to a 0-1 range
+        float t = currentNumber / maxNumber;
+
+        // Interpolate probability for number 2 (peaks at middle)
+        float prob2 = Mathf.Lerp(minProbFor2, maxProbFor2, 1f - Mathf.Abs(t - 0.5f) * 2f);
+
+        // Remaining probability to split between 1 and 3
+        float remaining = 1f - prob2;
+
+        // Interpolate max possible values for 1 and 3 based on position
+        float prob1Max = Mathf.Lerp(maxProbFor1And3, 0f, t);
+        float prob3Max = Mathf.Lerp(0f, maxProbFor1And3, t);
+
+        float totalMax = prob1Max + prob3Max;
+
+        // Actual probabilities for 1 and 3 scaled from remaining probability
+        float prob1 = (prob1Max / totalMax) * remaining;
+        float prob3 = (prob3Max / totalMax) * remaining;
+
+        // Random roll
+        float rand = Random.value;
+
+        if (rand < prob1)
+            return 1;
+        else if (rand < prob1 + prob2)
+            return 2;
+        else
+            return 3;
     }
 
 }

@@ -7,7 +7,6 @@ using static GameManager;
 public class Hazard : ScriptableObject
 {
     [Header("General Settings")]
-    // --- General Event Info ---
     public string eventName;
     public string description;
     public Sprite eventImage;
@@ -17,15 +16,14 @@ public class Hazard : ScriptableObject
     public GameObject ScreenVFX;
     public int duration;
 
-
     private HexGrid hexGrid;
 
-    // --- Enums ---
     public enum TierEffect
     {
         TransformToNeutral,
         ChangeToOppositeTeam,
-        DestroyObstacle
+        DestroyObstacle,
+        ChangeToLosingTeam
     }
 
     public enum AreaAffected
@@ -43,134 +41,101 @@ public class Hazard : ScriptableObject
         LeastTilesOwner
     }
 
-    // --- Tier Data Class  ---
     [System.Serializable]
     public class TierData
     {
-        [Tooltip("Amount of tiles affected for this tier")]
         public int amountOfTiles;
-
-        [Tooltip("Effect duration in seconds for this tier")]
-        public int duration;
+        
     }
 
-    // --- Effect and Area (Global settings for the hazard) ---
     [Header("Effect Settings")]
-    public TierEffect effect;   // Global Effect for the Hazard
-    public AreaAffected area;   // Global Area for the Hazard
+    public TierEffect effect;
+    public AreaAffected area;
+    public WhoIsAffected whoIsAffected;
 
-    // --- Static Tiers (Fixed) ---
-    [Header("Tier Settings (if false will use T2 data as Default)")]
-    //public bool useTierSystem;
+    [Header("Tile Targeting Restrictions")]
+    public bool affectNeutralTiles = true;
+    public bool affectAntTiles = true;
+    public bool affectTermiteTiles = true;
 
+    [Header("Tier Settings")]
     public TierData tier1;
     public TierData tier2;
     public TierData tier3;
 
-
-
-
-
     public void ExecuteHazard(bool usingTiers, int tier)
     {
-        // Choose TierData based on input
-        TierData selectedTier = tier2; // default fallback
+        hexGrid = FindAnyObjectByType<HexGrid>();
 
+        TierData selectedTier = tier2;
         if (usingTiers)
         {
             switch (tier)
             {
-                case 1:
-                    selectedTier = tier1;
-                    break;
-                case 2:
-                    selectedTier = tier2;
-                    break;
-                case 3:
-                    selectedTier = tier3;
-                    break;
-                default:
-                    Debug.LogWarning("Invalid tier passed to ExecuteHazard(). Using Tier 2.");
-                    selectedTier = tier2;
-                    break;
+                case 1: selectedTier = tier1; break;
+                case 2: selectedTier = tier2; break;
+                case 3: selectedTier = tier3; break;
+                default: Debug.LogWarning("Invalid tier, using Tier 2."); break;
             }
         }
 
-        Debug.Log($"[Hazard] Executing: {eventName} | Tier {tier} | Affecting {selectedTier.amountOfTiles} tiles for {selectedTier.duration} seconds.");
+        Debug.Log($"[Hazard] Executing {eventName} | Tier {tier} | Affecting {selectedTier.amountOfTiles} tiles");
 
-        // ✅ Get affected tiles
-        List<HexTile> affectedTiles = GetAffectedTiles(area);
+        List<HexTile> candidateTiles = GetAffectedTiles(area, whoIsAffected);
+        candidateTiles.Shuffle();
 
-        // ✅ Shuffle them so it's not always the same spots
-        affectedTiles.Shuffle(); // extension method or you can implement a local shuffle
-
-        // ✅ Apply to selected number of tiles
-        int appliedCount = 0;
-        foreach (HexTile tile in affectedTiles)
+        int applied = 0;
+        foreach (HexTile tile in candidateTiles)
         {
-            
-            if (appliedCount >= selectedTier.amountOfTiles)
-                break;
-            
+            if (applied >= selectedTier.amountOfTiles) break;
+
+            if (!IsTileAllowedForEffect(tile)) continue;
+
             ApplyEffectToTile(tile);
-            appliedCount++;
+            applied++;
         }
+
+        if (applied < selectedTier.amountOfTiles)
+            Debug.Log($"Hazard '{eventName}' applied to {applied} out of {selectedTier.amountOfTiles} requested tiles.");
     }
 
-
-
-
-
-    private List<HexTile> GetAffectedTiles(AreaAffected areaType)
+    private List<HexTile> GetAffectedTiles(AreaAffected areaType, WhoIsAffected targeting)
     {
-        hexGrid = FindAnyObjectByType<HexGrid>();
-
         List<HexTile> result = new List<HexTile>();
-
-        Vector2Int center = new Vector2Int(0, 0); // or pass this dynamically if needed
+        Vector2Int center = new Vector2Int(0, 0);
 
         List<HexTile> candidateTiles = new List<HexTile>();
 
         switch (areaType)
         {
             case AreaAffected.Interior:
-                candidateTiles.Add(hexGrid.GetHexTile(center));
                 candidateTiles.AddRange(hexGrid.GetTilesWithinRange(center, 2));
                 break;
 
             case AreaAffected.Exterior:
-                List<HexTile> interior = new List<HexTile>();
-                interior.Add(hexGrid.GetHexTile(center));
+                var interior = new List<HexTile>();
                 interior.AddRange(hexGrid.GetTilesWithinRange(center, 2));
-
                 foreach (var tile in hexGrid.GetAllHexTiles())
-                {
                     if (!interior.Contains(tile))
                         candidateTiles.Add(tile);
-                }
                 break;
 
             case AreaAffected.Random:
-                AreaAffected randomChoice = (Random.value > 0.5f) ? AreaAffected.Interior : AreaAffected.Exterior;
-                candidateTiles = GetAffectedTiles(randomChoice);
-                break;
+                AreaAffected randomArea = (Random.value > 0.5f) ? AreaAffected.Interior : AreaAffected.Exterior;
+                return GetAffectedTiles(randomArea, targeting);
 
             case AreaAffected.Both:
                 candidateTiles.AddRange(hexGrid.GetAllHexTiles());
                 break;
         }
 
-        //  Filter out occupied tiles or those adjacent to an occupied tile
         foreach (HexTile tile in candidateTiles)
         {
-            bool isOccupied = hexGrid.GetUnitInTile(tile.axialCoords) != null;
-
-            if (isOccupied)
+            if (hexGrid.GetUnitInTile(tile.axialCoords) != null)
                 continue;
 
-            List<HexTile> neighbors = hexGrid.GetTilesWithinRange(tile.axialCoords, 1);
+            var neighbors = hexGrid.GetTilesWithinRange(tile.axialCoords, 1);
             bool neighborOccupied = false;
-
             foreach (HexTile neighbor in neighbors)
             {
                 if (hexGrid.GetUnitInTile(neighbor.axialCoords) != null)
@@ -184,21 +149,38 @@ public class Hazard : ScriptableObject
                 result.Add(tile);
         }
 
+        // Apply WhoIsAffected filtering  
+        switch (targeting)
+        {
+            case WhoIsAffected.MostTilesOwner:
+                Team mostOwner = hexGrid.GetTeamWithMostTiles();
+                result.RemoveAll(t => HexGrid.EnumHelper.ConvertToTeam(t.state) != mostOwner);
+                break;
+
+            case WhoIsAffected.LeastTilesOwner:
+                Team leastOwner = hexGrid.GetTeamWithLeastTiles();
+                result.RemoveAll(t => HexGrid.EnumHelper.ConvertToTeam(t.state) != leastOwner);
+                break;
+
+            case WhoIsAffected.Random:
+                break;
+        }
+
         return result;
     }
-
 
     private void ApplyEffectToTile(HexTile tile)
     {
         switch (effect)
         {
             case TierEffect.TransformToNeutral:
-                tile.SetState(HexState.Neutral);
+                if (tile.state != HexState.Neutral)
+                    tile.SetState(HexState.Neutral);
                 break;
 
             case TierEffect.ChangeToOppositeTeam:
                 var currentTeam = HexGrid.EnumHelper.ConvertToTeam(tile.state);
-                if (currentTeam.HasValue && tile.state != HexState.Neutral)
+                if (currentTeam.HasValue)
                 {
                     HexState newState = (currentTeam == Team.Ants) ? HexState.Termites : HexState.Ants;
                     tile.SetState(newState);
@@ -212,21 +194,35 @@ public class Hazard : ScriptableObject
                 }
                 else
                 {
-                    
                     hexGrid.TemporaryInactiveTiles.Add(tile);
                     hexGrid.RemoveTile(tile.axialCoords);
                 }
                 break;
+
+            case TierEffect.ChangeToLosingTeam:
+                Team losingTeam = hexGrid.GetTeamWithLeastTiles();
+                if (HexGrid.EnumHelper.ConvertToTeam(tile.state) != losingTeam)
+                {
+                    tile.SetState(HexGrid.EnumHelper.ConvertToHexState(losingTeam));
+                }
+                break;
         }
 
-        // Optional: VFX / Feedback  
         if (tileChangeVFX)
             Instantiate(tileChangeVFX, tile.transform.position, Quaternion.identity);
+
+        if (ScreenVFX)
+            Instantiate(ScreenVFX, Vector3.zero, Quaternion.identity);
     }
 
-
-
-
-
-
+    private bool IsTileAllowedForEffect(HexTile tile)
+    {
+        switch (tile.state)
+        {
+            case HexState.Neutral: return affectNeutralTiles;
+            case HexState.Ants: return affectAntTiles;
+            case HexState.Termites: return affectTermiteTiles;
+            default: return false;
+        }
+    }
 }

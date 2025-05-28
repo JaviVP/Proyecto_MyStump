@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using static GameManager;
 
 
+
 public enum UnitType { Runner, Terraformer, Panchulina, Base }
 
 public class HexGrid : MonoBehaviour
@@ -720,6 +721,47 @@ public class HexGrid : MonoBehaviour
 
         return inRange;
     }
+
+    public Team GetTeamWithLeastTiles()
+    {
+        int antsCount = 0;
+        int termitesCount = 0;
+
+        foreach (var tile in hexMap.Values)
+        {
+            if (tile.state == HexState.Ants) antsCount++;
+            else if (tile.state == HexState.Termites) termitesCount++;
+        }
+
+        if (antsCount == termitesCount)
+        {
+            // If tied, pick randomly
+            return (UnityEngine.Random.value > 0.5f) ? Team.Ants : Team.Termites;
+        }
+
+        return (antsCount < termitesCount) ? Team.Ants : Team.Termites;
+    }
+
+    public Team GetTeamWithMostTiles()
+    {
+        int antsCount = 0;
+        int termitesCount = 0;
+
+        foreach (var tile in hexMap.Values)
+        {
+            if (tile.state == HexState.Ants) antsCount++;
+            else if (tile.state == HexState.Termites) termitesCount++;
+        }
+
+        if (antsCount == termitesCount)
+        {
+            // If tied, pick randomly
+            return (UnityEngine.Random.value > 0.5f) ? Team.Ants : Team.Termites;
+        }
+
+        return (antsCount > termitesCount) ? Team.Ants : Team.Termites;
+    }
+
 
     //Eliminate unit after movement
     public void UpdateUnitPosition(Vector2Int oldPos, Vector2Int newPos, Unit unit)
