@@ -11,6 +11,7 @@ public class Hazard : ScriptableObject
     public string description;
     public string lore;
     public Sprite eventImage;
+    public GameObject extraPropPrefab;
     public Material tileToChangeMaterial;
     public Volume posprocessing;
     public GameObject tileChangeVFX;
@@ -214,6 +215,9 @@ public class Hazard : ScriptableObject
 
         if (ScreenVFX)
             Instantiate(ScreenVFX, Vector3.zero, Quaternion.identity);
+
+        if (extraPropPrefab)
+            Instantiate(extraPropPrefab, tile.transform.position, Quaternion.identity);
     }
 
     private bool IsTileAllowedForEffect(HexTile tile)
