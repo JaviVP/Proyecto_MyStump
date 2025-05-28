@@ -12,22 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: PulsoDelRio
   m_EditorClassIdentifier: 
-  eventName: 
-  description: 
+  eventName: "El Pulso del R\xEDo:  "
+  description: 'Se borran hasta 4/6/8 casillas dominadas durante 2 turnos '
+  lore: "Inspiraci\xF3n: El pulso de inundaci\xF3n del Amazonas, aumenta el nivel
+    del agua alterando los paisajes y ecosistemas.    "
   eventImage: {fileID: 0}
-  tileToChangePrefab: {fileID: 0}
+  extraPropPrefab: {fileID: 0}
+  tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}
   tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
   ScreenVFX: {fileID: 0}
   duration: 3
   effect: 2
   area: 3
+  whoIsAffected: 0
+  affectNeutralTiles: 1
+  affectAntTiles: 1
+  affectTermiteTiles: 1
   tier1:
-    amountOfTiles: 0
-    duration: 0
+    amountOfTiles: 4
   tier2:
-    amountOfTiles: 8
-    duration: 0
+    amountOfTiles: 6
   tier3:
-    amountOfTiles: 0
-    duration: 0
+    amountOfTiles: 8

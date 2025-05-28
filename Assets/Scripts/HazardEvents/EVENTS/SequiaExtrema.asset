@@ -12,22 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: SequiaExtrema
   m_EditorClassIdentifier: 
-  eventName: 
-  description: 
+  eventName: "Sequ\xEDa Extrema "
+  description: 'Efecto: 2/3/5 casillas quedan bloqueadas por 2 turnos '
+  lore: "Inspiraci\xF3n: Debido a las sequ\xEDas extremas sufridas en 2023, varios
+    r\xEDos desaparecieron y muchas comunidades quedaron aisladas. "
   eventImage: {fileID: 0}
-  tileToChangePrefab: {fileID: 0}
+  extraPropPrefab: {fileID: 0}
+  tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}
   tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
   ScreenVFX: {fileID: 0}
-  duration: 3
+  duration: 4
   effect: 2
   area: 3
+  whoIsAffected: 0
+  affectNeutralTiles: 1
+  affectAntTiles: 1
+  affectTermiteTiles: 1
   tier1:
-    amountOfTiles: 0
-    duration: 0
+    amountOfTiles: 2
   tier2:
-    amountOfTiles: 8
-    duration: 0
+    amountOfTiles: 3
   tier3:
-    amountOfTiles: 0
-    duration: 0
+    amountOfTiles: 5

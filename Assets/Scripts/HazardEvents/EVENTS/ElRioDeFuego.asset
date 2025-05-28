@@ -10,29 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
-  m_Name: ExpansionUrbana
+  m_Name: ElRioDeFuego
   m_EditorClassIdentifier: 
-  eventName: "Expansi\xF3n Urbana "
-  description: "Efecto: Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas
-    dominadas.  "
-  lore: "Inspiraci\xF3n: Ciudades como Manaos y Bel\xE9m crecieron r\xE1pidamente
-    con la explotaci\xF3n del Amazonas, afectando a la selva amaz\xF3nica. "
+  eventName: 'El rio de fuego '
+  description: 'Efecto: 3/5/7 casillas quedan bloqueadas por 2 turnos '
+  lore: "Los incendios provocados para despejar tierras y crear terrenos agr\xEDcolas
+    han destruido miles de hect\xE1reas. "
   eventImage: {fileID: 0}
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}
-  tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
+  tileChangeVFX: {fileID: 0}
   ScreenVFX: {fileID: 0}
-  duration: 3
-  effect: 2
-  area: 3
+  duration: 2
+  effect: 0
+  area: 0
   whoIsAffected: 0
   affectNeutralTiles: 1
   affectAntTiles: 1
   affectTermiteTiles: 1
   tier1:
-    amountOfTiles: 2
+    amountOfTiles: 3
   tier2:
-    amountOfTiles: 4
+    amountOfTiles: 5
   tier3:
-    amountOfTiles: 6
+    amountOfTiles: 7
