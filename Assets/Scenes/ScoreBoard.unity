@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 1824341059}
   - component: {fileID: 1824341058}
   m_Layer: 5
-  m_Name: SocreText
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
