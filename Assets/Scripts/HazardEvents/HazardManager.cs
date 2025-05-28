@@ -175,7 +175,7 @@ public class HazardManager : MonoBehaviour
         {
             foreach (HexTile tile in hexGrid.TemporaryInactiveTiles)
             {
-                tile.TileRenderer.gameObject.SetActive(true);
+                //tile.TileRenderer.gameObject.SetActive(true);
                 hexGrid.hexMap.Add(tile.axialCoords, tile);
                 tile.SetState(HexState.Neutral);
             }

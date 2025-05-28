@@ -9,8 +9,10 @@ public class Hazard : ScriptableObject
     [Header("General Settings")]
     public string eventName;
     public string description;
+    public string lore;
     public Sprite eventImage;
-    public GameObject tileToChangePrefab;
+    public GameObject extraPropPrefab;
+    public Material tileToChangeMaterial;
     public Volume posprocessing;
     public GameObject tileChangeVFX;
     public GameObject ScreenVFX;
@@ -18,11 +20,11 @@ public class Hazard : ScriptableObject
 
     private HexGrid hexGrid;
 
-    public enum TierEffect
+    public enum HazardEffect
     {
         TransformToNeutral,
         ChangeToOppositeTeam,
-        DestroyObstacle,
+        DestroyOrTransformIntoObstacle,
         ChangeToLosingTeam
     }
 
@@ -49,7 +51,7 @@ public class Hazard : ScriptableObject
     }
 
     [Header("Effect Settings")]
-    public TierEffect effect;
+    public HazardEffect effect;
     public AreaAffected area;
     public WhoIsAffected whoIsAffected;
 
@@ -173,12 +175,12 @@ public class Hazard : ScriptableObject
     {
         switch (effect)
         {
-            case TierEffect.TransformToNeutral:
+            case HazardEffect.TransformToNeutral:
                 if (tile.state != HexState.Neutral)
                     tile.SetState(HexState.Neutral);
                 break;
 
-            case TierEffect.ChangeToOppositeTeam:
+            case HazardEffect.ChangeToOppositeTeam:
                 var currentTeam = HexGrid.EnumHelper.ConvertToTeam(tile.state);
                 if (currentTeam.HasValue)
                 {
@@ -187,19 +189,19 @@ public class Hazard : ScriptableObject
                 }
                 break;
 
-            case TierEffect.DestroyObstacle:
+            case HazardEffect.DestroyOrTransformIntoObstacle:
                 if (duration == 0)
                 {
-                    hexGrid.RemoveTile(tile.axialCoords);
+                    hexGrid.RemoveTile(tile.axialCoords, tileToChangeMaterial);
                 }
                 else
                 {
                     hexGrid.TemporaryInactiveTiles.Add(tile);
-                    hexGrid.RemoveTile(tile.axialCoords);
+                    hexGrid.RemoveTile(tile.axialCoords, tileToChangeMaterial);
                 }
                 break;
 
-            case TierEffect.ChangeToLosingTeam:
+            case HazardEffect.ChangeToLosingTeam:
                 Team losingTeam = hexGrid.GetTeamWithLeastTiles();
                 if (HexGrid.EnumHelper.ConvertToTeam(tile.state) != losingTeam)
                 {
@@ -213,6 +215,9 @@ public class Hazard : ScriptableObject
 
         if (ScreenVFX)
             Instantiate(ScreenVFX, Vector3.zero, Quaternion.identity);
+
+        if (extraPropPrefab)
+            Instantiate(extraPropPrefab, tile.transform.position, Quaternion.identity);
     }
 
     private bool IsTileAllowedForEffect(HexTile tile)

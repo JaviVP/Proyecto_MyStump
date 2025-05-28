@@ -559,12 +559,19 @@ public enum Team { Ants, Termites }
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
+            if (!AnyUnitCanMove(currentTurn))
+            {
+                DeclareWinner((CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants);
+            }
+
+
             Debug.Log("Current: " + currentTurn);
             //this.GetComponent<HazardEventsManager>().CheckHazardEvents((int) numericCurrentTurn);
             RefreshUnitsForTeam(CurrentTurn);
 
             hexGrid.SelectTeam(CurrentTurn);
             hexGrid.CheckDestroyUnity(CurrentTurn);
+
             /// Lo de arriba es lo mismo
             /// que lo de abajo pero
             /// mas organizado. Si algo
@@ -724,6 +731,20 @@ public enum Team { Ants, Termites }
 
         }
     }
+
+    public bool AnyUnitCanMove(Team team)
+    {
+        List<Unit> units = hexGrid.GetUnitsByTeam(team);
+        foreach (var unit in units)
+        {
+            if (unit.CanMove())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /// Actualizar para mas tarde
     /// Declarar Victoria

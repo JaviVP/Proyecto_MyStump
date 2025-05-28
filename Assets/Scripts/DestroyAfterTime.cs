@@ -17,7 +17,7 @@ public class DestroyAfterTime : MonoBehaviour
         float delay = Random.Range(minTime, maxTime);
         yield return new WaitForSeconds(delay);
         GetComponent<VisualEffect>().Stop();
-        yield return new WaitForSeconds(delay+3);
+        yield return new WaitForSeconds(delay+.5f);
         Destroy(gameObject);
     }
 }

@@ -28,7 +28,8 @@ public abstract class Unit : MonoBehaviour
 
     public abstract void ClearHighlights();
 
-    
+    public abstract bool CanMove();
+
     public bool IsAvailableThisTurn()
     {
         return TurnsUntilAvailable <= 0;

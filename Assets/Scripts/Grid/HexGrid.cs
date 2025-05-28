@@ -82,10 +82,14 @@ public class HexGrid : MonoBehaviour
        // TerraFormerTilesProves();
     }
 
-    public void RemoveTile(Vector2Int pos)
+    public void RemoveTile(Vector2Int pos, Material material)
     {
         HexTile tile = GetHexTile(pos);
-        tile.TileRenderer.gameObject.SetActive(false);
+        //tile.TileRenderer.gameObject.SetActive(false);
+        if (material)
+        {
+            tile.TileRenderer.material = material;
+        }
         hexMap.Remove(pos);
         InactiveTiles.Add(tile);
     }
@@ -112,6 +116,19 @@ public class HexGrid : MonoBehaviour
         return i;
 
        
+    }
+
+    public List<Unit> GetUnitsByTeam(Team team)
+    {
+        List<Unit> unitsToPass = new List<Unit>();
+        foreach (Unit unit in units.Values)
+        {
+            if (unit != null && unit.Team == team)
+            {
+                unitsToPass.Add(unit);
+            }
+        }
+        return unitsToPass;
     }
 
     public List<Unit> GetAllUnits()
