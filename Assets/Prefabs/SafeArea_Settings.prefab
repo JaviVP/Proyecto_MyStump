@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5229369751080642803}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -81,8 +81,8 @@ RectTransform:
   m_GameObject: {fileID: 8393505871941004718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5641506, y: 1.5641506, z: 1.5641506}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.0940294, y: 1.0940294, z: 1.0940294}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5360626966012060405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b070380ab33394a409d3539b5c470dbc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90cddf214fd46ac4e8f16d6f3684746c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 09c19cae329c5894fbb47387aef11204, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 22a9fa0f704cfa043a01541d72f7d660, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
