@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static GameManager;
@@ -6,13 +7,12 @@ using static GameManager;
 [CreateAssetMenu(fileName = "NewHazard", menuName = "Hazard")]
 public class Hazard : ScriptableObject
 {
-    [Header("UI Settings")]
-    public GameObject UI_Panel;
+    [Header("Content Data")]
+    public Sprite eventBackground;
+    public Sprite eventMainImage;
     public string eventName;
     public string description;
     public string lore;
-    public Sprite eventBackground;
-    public Sprite eventImage;
 
     [Header("General Settings")]
     public GameObject extraPropPrefab;
@@ -23,6 +23,8 @@ public class Hazard : ScriptableObject
     public int duration;
 
     private HexGrid hexGrid;
+
+
 
     public enum HazardEffect
     {

@@ -18,5 +18,6 @@ public class HazardUI_Manager : MonoBehaviour
     public void LaunchHazard()
     {
         HazardManager.Instance.LaunchHazard(GameManager.Instance.numericCurrentTurn);
+        HazardManager.Instance.hazardPanel.SetActive(false);
     }
 }

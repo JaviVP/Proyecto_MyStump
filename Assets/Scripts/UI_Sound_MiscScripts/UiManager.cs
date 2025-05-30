@@ -55,7 +55,7 @@ public class UiManager : MonoBehaviour
 
         foreach (Button button in buttons)
         {
-            if (button.name == "Championship") continue; // Saltar este botón
+            if (button.name == "Championship"||button.name == "HazardPanel") continue; // Saltar este botón
 
             if (button.GetComponent<ButtonPressEffect>() == null)
             {

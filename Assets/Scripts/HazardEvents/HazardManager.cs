@@ -3,6 +3,9 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Random = UnityEngine.Random;
+using TMPro;
+using UnityEngine.UI;
+using System.Collections;
 public class HazardManager : MonoBehaviour
 {
     /// Write those out ffrom here
@@ -45,6 +48,19 @@ public class HazardManager : MonoBehaviour
     [Tooltip("Min probability for T2. Happens in the beggining and end of the game")]
     private float tier2MinProbability = 0.2f;
 
+
+
+    [Header("UI References")]
+    public GameObject hazardPanel;
+    public Image eventImage;
+    public Image eventBackgroundImage;
+    public TextMeshProUGUI eventNameText;
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI loreText;
+    public Animator panelAnimator;
+
+    private bool skipRequested = false;
+    private bool sequenceCompleted = false;
 
     private Dictionary<int, Hazard> HazardByTurn = new Dictionary<int, Hazard>();
 
@@ -152,13 +168,138 @@ public class HazardManager : MonoBehaviour
 
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
         {
-            hazard.LaunchUIHazard();
+            Debug.Log("THERE SHOULD HAVE BEEN AN EVENT");
+            hazardPanel.SetActive(true);
+
+            // Assign content from eventData
+            eventImage.sprite = hazard.eventMainImage;
+            eventBackgroundImage.sprite = hazard.eventBackground;
+            eventNameText.text = hazard.eventName;
+            descriptionText.text = hazard.description;
+            loreText.text = hazard.lore;
+
+            // Reset alphas
+            SetAlpha(eventBackgroundImage, 0f);
+            SetAlpha(eventNameText, 0f);
+            SetAlpha(descriptionText, 0f);
+            SetAlpha(loreText, 0f);
+
+            // Assign tap handler
+            hazardPanel.GetComponent<Button>().onClick.RemoveAllListeners();
+            hazardPanel.GetComponent<Button>().onClick.AddListener(OnTap);
+
+            // Start coroutine
+            StartCoroutine(EventSequence());
         }
         else
         {
             Debug.Log($"<color=grey>No hazard assigned for turn {currentTurn}.</color>");
         }
+
+
+
     }
+
+    private IEnumerator EventSequence()
+    {
+        skipRequested = false;
+        sequenceCompleted = false;
+
+        // Show main image instantly
+        SetAlpha(eventImage, 1f);
+
+        // Wait for panel entry + 1 sec delay
+        yield return new WaitForSeconds(3f);
+
+        // Fade background in
+        yield return StartCoroutine(FadeImage(eventBackgroundImage, 0.5f));
+
+        if (skipRequested) { ShowAll(); yield break; }
+
+        // Wait 0.5s then fade in event name
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(FadeText(eventNameText, 0.3f));
+
+        if (skipRequested) { ShowAll(); yield break; }
+
+        // Wait 0.3s then fade in description
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeText(descriptionText, 0.3f));
+
+        if (skipRequested) { ShowAll(); yield break; }
+
+        // Wait 0.3s then fade in lore
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeText(loreText, 0.3f));
+
+        if (skipRequested) { ShowAll(); yield break; }
+
+        // Sequence completed
+        sequenceCompleted = true;
+    }
+
+    private void OnTap()
+    {
+        if (!sequenceCompleted)
+        {
+            skipRequested = true;
+        }
+        else
+        {
+            panelAnimator.SetBool("Exit", true);
+        }
+    }
+
+    // Helpers
+
+    private void ShowAll()
+    {
+        SetAlpha(eventBackgroundImage, 1f);
+        SetAlpha(eventNameText, 1f);
+        SetAlpha(descriptionText, 1f);
+        SetAlpha(loreText, 1f);
+
+        sequenceCompleted = true;
+    }
+
+    private IEnumerator FadeImage(Image img, float duration)
+    {
+        float timer = 0f;
+        Color c = img.color;
+        while (timer < duration)
+        {
+            if (skipRequested) { SetAlpha(img, 1f); yield break; }
+            timer += Time.deltaTime;
+            c.a = Mathf.Lerp(0f, 1f, timer / duration);
+            img.color = c;
+            yield return null;
+        }
+        SetAlpha(img, 1f);
+    }
+
+    private IEnumerator FadeText(TextMeshProUGUI txt, float duration)
+    {
+        float timer = 0f;
+        Color c = txt.color;
+        while (timer < duration)
+        {
+            if (skipRequested) { SetAlpha(txt, 1f); yield break; }
+            timer += Time.deltaTime;
+            c.a = Mathf.Lerp(0f, 1f, timer / duration);
+            txt.color = c;
+            yield return null;
+        }
+        SetAlpha(txt, 1f);
+    }
+
+    private void SetAlpha(Graphic graphic, float alpha)
+    {
+        Color c = graphic.color;
+        c.a = alpha;
+        graphic.color = c;
+    }
+
+
     public void LaunchHazard(int currentTurn)
     {
 
