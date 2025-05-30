@@ -9,7 +9,8 @@ public class ScoreboardManager : MonoBehaviour
 {
     [SerializeField] private Transform scoreboardContainer; // Contenedor para los elementos
     [SerializeField] private GameObject scoreEntryPrefab;   // Prefab para cada entrada
-    [SerializeField] private int maxEntries = 10;           // Top 10
+    [SerializeField] private int maxEntries = 10;
+    [SerializeField] private List<ScoreEntryUI> fixedEntries = new List<ScoreEntryUI>();
 
     private void Start()
     {
@@ -63,13 +64,23 @@ public class ScoreboardManager : MonoBehaviour
         allStats = allStats.OrderByDescending(stat => stat.PartidasGanadas).Take(maxEntries).ToList();
 
         // Limpiar el contenedor de scoreboard
-        foreach (Transform child in scoreboardContainer)
+        for (int i = 0; i < fixedEntries.Count; i++)
         {
-            Destroy(child.gameObject);
+            if (i < allStats.Count)
+            {
+                PlayerStats stats = allStats[i];
+                int score = CalcularScore(stats);
+                fixedEntries[i].gameObject.SetActive(true);
+                fixedEntries[i].SetupEntry(i + 1, stats.Nombre, stats.PartidasGanadas, score);
+            }
+            else
+            {
+                fixedEntries[i].gameObject.SetActive(false); // Ocultar si no hay tantos jugadores
+            }
         }
 
         // Instanciar las entradas con número de ranking
-        for (int i = 0; i < allStats.Count; i++)
+       /* for (int i = 0; i < allStats.Count; i++)
         {
             PlayerStats stats = allStats[i];
             int rank = i + 1; // Top 1, Top 2...
@@ -86,7 +97,7 @@ public class ScoreboardManager : MonoBehaviour
             // Ahora incluye el número de ranking
             int score = CalcularScore(stats);
             entryUI.SetupEntry(rank, stats.Nombre, stats.PartidasGanadas, score);
-        }
+        }*/
     }
     private int CalcularScore(PlayerStats stats)
     {
