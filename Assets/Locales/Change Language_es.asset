@@ -78,6 +78,10 @@ MonoBehaviour:
     m_Localized: "\xA1Nombre de Jugador {0} guardado!"
     m_Metadata:
       m_Items: []
+  - m_Id: 35554062300082176
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
