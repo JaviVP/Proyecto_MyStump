@@ -146,9 +146,24 @@ public class HazardManager : MonoBehaviour
         }
 
     }
+    public void LaunchHazardUI()
+    {
+        int currentTurn = GameManager.Instance.numericCurrentTurn;
 
+        if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
+        {
+            hazard.LaunchUIHazard();
+        }
+        else
+        {
+            Debug.Log($"<color=grey>No hazard assigned for turn {currentTurn}.</color>");
+        }
+    }
     public void LaunchHazard(int currentTurn)
     {
+
+
+
         int tier = GetWeightedRandomNumber(
             currentTurn,
             maxTurns, // max number
@@ -160,6 +175,7 @@ public class HazardManager : MonoBehaviour
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
         {
             Debug.Log($"<color=red><b>Turn {currentTurn}</b></color>: Launching <color=cyan>{hazard.name}</color> hazard.");
+
             hazard.ExecuteHazard(useTierSystem, tier);
             GameManager.Instance.hazardDurationLeft = hazard.duration;
         }

@@ -6,11 +6,15 @@ using static GameManager;
 [CreateAssetMenu(fileName = "NewHazard", menuName = "Hazard")]
 public class Hazard : ScriptableObject
 {
-    [Header("General Settings")]
+    [Header("UI Settings")]
+    public GameObject UI_Panel;
     public string eventName;
     public string description;
     public string lore;
+    public Sprite eventBackground;
     public Sprite eventImage;
+
+    [Header("General Settings")]
     public GameObject extraPropPrefab;
     public Material tileToChangeMaterial;
     public Volume posprocessing;
@@ -230,4 +234,10 @@ public class Hazard : ScriptableObject
             default: return false;
         }
     }
+
+    public void LaunchUIHazard()
+    {
+
+    }
+
 }

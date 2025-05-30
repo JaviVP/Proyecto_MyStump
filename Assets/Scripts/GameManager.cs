@@ -75,7 +75,7 @@ public enum Team { Ants, Termites }
 
     //Limit of turns
     [SerializeField] private int limitTurns;
-    private int numericCurrentTurn = 1;
+    public int numericCurrentTurn = 1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
@@ -602,7 +602,8 @@ public enum Team { Ants, Termites }
             numericCurrentTurn++;
             limitTurns--;
 
-            HazardManager.Instance.LaunchHazard(numericCurrentTurn);
+            //HazardManager.Instance.LaunchHazard(numericCurrentTurn);
+            HazardManager.Instance.LaunchHazardUI();
             hazardDurationLeft--;
             if (hazardDurationLeft < 0)
             {
