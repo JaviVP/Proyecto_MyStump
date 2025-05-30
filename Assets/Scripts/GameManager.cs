@@ -312,10 +312,15 @@ public enum Team { Ants, Termites }
     {
         if (isDraftPhase)
         {
+            
+            
+
             Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
 
             if (currentTurn == Team.Ants)
             {
+                /*
+                
                 if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile) && !selected)
                 {
                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
@@ -356,9 +361,34 @@ public enum Team { Ants, Termites }
                     previousClickTile = null;
                     return;
                 }
+
+                */
+
+                
+
+                if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
+                {
+                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                    hexGrid.RemoveAllHighlights();
+                    //hexGrid.HighlightOne(clickedTile);
+                    //selected = true;
+                    //previousClickTile = clickedTile;
+                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                    selected = false;
+                    hexGrid.ResetTeamHalfHighlights();
+                    draftUnitIndex++;
+                    SoundManager.instance.PlaySound("PlaceUnit");
+                    logoController.ColocarPieza();
+                    //return;
+                }
+                
+
+
             }
             else if (currentTurn == Team.Termites)
             {
+                /*
+                
                 if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile) && !selected)
                 {
                     hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
@@ -398,7 +428,36 @@ public enum Team { Ants, Termites }
                     previousClickTile = null;
                     return;
                 }
+                */
+
+
+                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
+                {
+                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                    hexGrid.RemoveAllHighlights();
+                    //hexGrid.HighlightOne(clickedTile);
+                    //selected = true;
+                    //previousClickTile = clickedTile;
+                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                    selected = false;
+                    hexGrid.ResetTeamHalfHighlights();
+                    //draftUnitIndex++;
+                    SoundManager.instance.PlaySound("PlaceUnit");
+                    logoController.ColocarPieza();
+                    //return;
+                }
+                
+
             }
+
+            if (draftUnitIndex >= unitDraftList.Count)
+            {
+                isDraftPhase = false;
+                hexGrid.RemoveAllHighlights();
+                //hexGrid.ResetTeamHalfHighlights();
+            }
+            return;
+
         }
         else
         {
