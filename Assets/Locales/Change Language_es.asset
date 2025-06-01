@@ -82,6 +82,10 @@ MonoBehaviour:
     m_Localized: Volver
     m_Metadata:
       m_Items: []
+  - m_Id: 35629536689614848
+    m_Localized: Siguiente Ronda
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

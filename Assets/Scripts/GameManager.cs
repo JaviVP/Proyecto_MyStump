@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inputPanel;
     [SerializeField] private List<TextMeshProUGUI> player1Texts;
     [SerializeField] private List<TextMeshProUGUI> player2Texts;
+    [SerializeField] private TextMeshProUGUI winnerName;
     [SerializeField] private GameObject roundsText;
     [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
@@ -851,7 +852,7 @@ public enum Team { Ants, Termites }
         if (player1RoundsWon >= neededWins)
         {
             Debug.Log(player1 + " has won championship");
-
+            winnerName.text = player1.ToString();
             PlayerPrefs.SetInt("ModoCampeonato", 0);
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
@@ -860,7 +861,7 @@ public enum Team { Ants, Termites }
         else if (player2RoundsWon >= neededWins)
         {
             Debug.Log(player2 + " has won championship");
-
+            winnerName.text = player2.ToString();
             PlayerPrefs.SetInt("ModoCampeonato", 0);
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;

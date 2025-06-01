@@ -179,7 +179,7 @@ public class UiManager : MonoBehaviour
         antTiles.text = GameManager.Instance.NumberOfAntTiles().ToString();
         termTiles.text = GameManager.Instance.NumberOfTermTiles().ToString();
 
-        if (GameManager.Instance.CurrentTurn == GameManager.Team.Ants)
+        /*if (GameManager.Instance.CurrentTurn == GameManager.Team.Ants)
         {
             antHighlight.GetComponent<Image>().enabled = true;
             termHighlight.GetComponent<Image>().enabled = false;
@@ -188,7 +188,7 @@ public class UiManager : MonoBehaviour
         {
             antHighlight.GetComponent<Image>().enabled = false;
             termHighlight.GetComponent<Image>().enabled = true;
-        }
+        }*/
     }
 
     public void UpdateUiTurn(string content)
