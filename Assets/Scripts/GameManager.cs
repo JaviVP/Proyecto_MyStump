@@ -641,7 +641,7 @@ public enum Team { Ants, Termites }
             /// 
 
 
-            /*
+            
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
@@ -658,11 +658,11 @@ public enum Team { Ants, Termites }
 
             }
             
-            */
+            
             numericCurrentTurn++;
             limitTurns--;
 
-            //HazardManager.Instance.LaunchHazard(numericCurrentTurn);
+            HazardManager.Instance.LaunchHazard(numericCurrentTurn);
             HazardManager.Instance.LaunchHazardUI();
             hazardDurationLeft--;
             if (hazardDurationLeft < 0)
