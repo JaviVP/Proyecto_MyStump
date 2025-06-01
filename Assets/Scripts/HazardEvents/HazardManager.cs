@@ -209,7 +209,7 @@ public class HazardManager : MonoBehaviour
         SetAlpha(eventImage, 1f);
 
         // Wait for panel entry + 1 sec delay
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         // Fade background in
         yield return StartCoroutine(FadeImage(eventBackgroundImage, 0.5f));
