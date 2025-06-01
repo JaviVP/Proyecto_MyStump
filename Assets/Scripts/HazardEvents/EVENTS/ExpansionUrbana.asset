@@ -25,9 +25,9 @@ MonoBehaviour:
   tileChangeVFX: {fileID: 0}
   ScreenVFX: {fileID: 0}
   duration: 3
-  effect: 2
+  effect: 3
   area: 3
-  whoIsAffected: 0
+  whoIsAffected: 1
   affectNeutralTiles: 1
   affectAntTiles: 1
   affectTermiteTiles: 1

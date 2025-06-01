@@ -21,7 +21,7 @@ MonoBehaviour:
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 2100000, guid: d0ba2ba66ad9f434b91da2c3dad803f1, type: 2}
   posprocessing: {fileID: 0}
-  tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
+  tileChangeVFX: {fileID: 6765502455025489998, guid: e8fa0c7ef823be74ba83a4b5b0e89033, type: 3}
   ScreenVFX: {fileID: 0}
   duration: 0
   effect: 2

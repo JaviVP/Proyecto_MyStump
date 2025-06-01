@@ -18,12 +18,12 @@ MonoBehaviour:
   description: 'Efecto: 2/3/5 casillas quedan bloqueadas permanentemente '
   lore: "Inspiraci\xF3n: Las tormentas el\xE9ctricas del Amazonas transforman el
     paisaje en cuesti\xF3n de horas "
-  extraPropPrefab: {fileID: 0}
-  tileToChangeMaterial: {fileID: 0}
+  extraPropPrefab: {fileID: 6680070067368166306, guid: d9b4aaeebf27c3141be8ee2c33108671, type: 3}
+  tileToChangeMaterial: {fileID: 2100000, guid: ea7cdfcb982d15d488a05d3c186a8c09, type: 2}
   posprocessing: {fileID: 0}
-  tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
-  ScreenVFX: {fileID: 0}
-  duration: 3
+  tileChangeVFX: {fileID: 0}
+  ScreenVFX: {fileID: 6765502455025489998, guid: d15ab7c84a2e452428880056a7c3dd44, type: 3}
+  duration: 0
   effect: 2
   area: 3
   whoIsAffected: 0

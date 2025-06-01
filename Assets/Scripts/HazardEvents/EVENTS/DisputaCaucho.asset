@@ -24,7 +24,7 @@ MonoBehaviour:
   tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
   ScreenVFX: {fileID: 0}
   duration: 3
-  effect: 2
+  effect: 1
   area: 3
   whoIsAffected: 0
   affectNeutralTiles: 1

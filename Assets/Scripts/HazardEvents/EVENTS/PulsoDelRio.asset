@@ -19,10 +19,10 @@ MonoBehaviour:
   lore: "Inspiraci\xF3n: El pulso de inundaci\xF3n del Amazonas, aumenta el nivel
     del agua alterando los paisajes y ecosistemas.    "
   extraPropPrefab: {fileID: 0}
-  tileToChangeMaterial: {fileID: 0}
+  tileToChangeMaterial: {fileID: 2100000, guid: ea7cdfcb982d15d488a05d3c186a8c09, type: 2}
   posprocessing: {fileID: 0}
-  tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
-  ScreenVFX: {fileID: 0}
+  tileChangeVFX: {fileID: 0}
+  ScreenVFX: {fileID: 6765502455025489998, guid: d15ab7c84a2e452428880056a7c3dd44, type: 3}
   duration: 3
   effect: 2
   area: 3

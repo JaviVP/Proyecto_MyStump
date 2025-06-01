@@ -19,15 +19,15 @@ MonoBehaviour:
     quedan bloqueadas permanentemente. "
   lore: "Inspiraci\xF3n: La miner\xEDa ilegal ha dejado tierras contaminadas con
     mercurio, haciendo que muchas zonas sean inhabitables. "
-  extraPropPrefab: {fileID: 0}
-  tileToChangeMaterial: {fileID: 0}
+  extraPropPrefab: {fileID: 2418655669915398152, guid: d19be18247ecc2e49abeec1b2fd475d5, type: 3}
+  tileToChangeMaterial: {fileID: 2100000, guid: a627ac0590a63c7478be17641edfdda8, type: 2}
   posprocessing: {fileID: 0}
   tileChangeVFX: {fileID: 6765502455025489998, guid: fcc17516a5879b74f8ce02b66cedae99, type: 3}
   ScreenVFX: {fileID: 0}
   duration: 3
   effect: 2
   area: 3
-  whoIsAffected: 0
+  whoIsAffected: 1
   affectNeutralTiles: 1
   affectAntTiles: 1
   affectTermiteTiles: 1

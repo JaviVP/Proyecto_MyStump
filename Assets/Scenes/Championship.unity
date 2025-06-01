@@ -3348,6 +3348,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 6496716997124364955, guid: 3fad9b8fafe058e4f87b2a529dfef48b, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7594766591451512265, guid: 3fad9b8fafe058e4f87b2a529dfef48b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 248
