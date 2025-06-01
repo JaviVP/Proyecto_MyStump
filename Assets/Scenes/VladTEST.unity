@@ -513,7 +513,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477943194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 803f4e6bf8821cd46892bf40d2e88b16, type: 3}
   m_Name: 
@@ -533,7 +533,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57271fd33c22a7f4ab653acad9ae92e9, type: 2}
   - {fileID: 11400000, guid: 81195d3a2867b3245abf71feefbb74bb, type: 2}
   - {fileID: 11400000, guid: 6bd2909500c1dd749ac5bed433498d01, type: 2}
-  useTierSystem: 0
+  useTierSystem: 1
   tier1And3MaxProbability: 0.75
   tier2MaxProbability: 0.6
   tier2MinProbability: 0.2

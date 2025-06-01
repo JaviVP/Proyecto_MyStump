@@ -31,8 +31,8 @@ MonoBehaviour:
   affectAntTiles: 1
   affectTermiteTiles: 1
   tier1:
-    amountOfTiles: 0
+    amountOfTiles: 2
   tier2:
-    amountOfTiles: 8
+    amountOfTiles: 4
   tier3:
-    amountOfTiles: 0
+    amountOfTiles: 6
