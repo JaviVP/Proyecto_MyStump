@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: CarreteraFanatasma
   m_EditorClassIdentifier: 
-  UI_Panel: {fileID: 0}
+  eventBackground: {fileID: 21300000, guid: 4e0dadca37250ce4bbecf7fd7d45e457, type: 3}
+  eventMainImage: {fileID: 21300000, guid: a8b98a97201ac8f4fa28f6995b3ca1b8, type: 3}
   eventName: Carretera Fantasma
   description: "Efecto: Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas
     dominadas.  "
   lore: "Inspiraci\xF3n: Carreteras como la Transamaz\xF3nica han facilitado la colonizaci\xF3n
     y deforestaci\xF3n, modificando el ecosistema."
-  eventBackground: {fileID: 0}
-  eventImage: {fileID: 0}
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}

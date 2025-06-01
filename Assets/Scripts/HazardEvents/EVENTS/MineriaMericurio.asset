@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: MineriaMericurio
   m_EditorClassIdentifier: 
+  eventBackground: {fileID: 21300000, guid: 17d104792ee21994ea158f585e063e13, type: 3}
+  eventMainImage: {fileID: 21300000, guid: 80aabf7ef8eae314cbf809bbf51af61a, type: 3}
   eventName: "Miner\xEDa de Mercurio "
   description: "Efecto: 1/2/4 casillas en el territorio con m\xE1s casillas dominadas
     quedan bloqueadas permanentemente. "
   lore: "Inspiraci\xF3n: La miner\xEDa ilegal ha dejado tierras contaminadas con
     mercurio, haciendo que muchas zonas sean inhabitables. "
-  eventImage: {fileID: 0}
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}

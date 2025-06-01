@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: TormentaTropico
   m_EditorClassIdentifier: 
+  eventBackground: {fileID: 21300000, guid: db2859ad2c7a4494f92b4cb3723884de, type: 3}
+  eventMainImage: {fileID: 21300000, guid: 5c196a1f02555dd42a4063947d855e51, type: 3}
   eventName: "Tormenta del Tr\xF3pico "
   description: 'Efecto: 2/3/5 casillas quedan bloqueadas permanentemente '
   lore: "Inspiraci\xF3n: Las tormentas el\xE9ctricas del Amazonas transforman el
     paisaje en cuesti\xF3n de horas "
-  eventImage: {fileID: 0}
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}

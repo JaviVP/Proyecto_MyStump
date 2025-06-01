@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34efe73928f939a40b4be76b36ffa4db, type: 3}
   m_Name: DerramePetrolero
   m_EditorClassIdentifier: 
+  eventBackground: {fileID: 21300000, guid: f7daa416659481849a178a0a3c0d5b80, type: 3}
+  eventMainImage: {fileID: 21300000, guid: 0f1c71b92ddd7284397eb9f93bf2ca06, type: 3}
   eventName: Derrame Petrolero
   description: 'Efecto: 1/2/4 casillas quedan bloqueadas permanentemente '
   lore: "Inspiraci\xF3n: Derrames de vertidos provocado por empresas han causado
     desastres ecol\xF3gicos masivos. "
-  eventImage: {fileID: 0}
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 2100000, guid: d0ba2ba66ad9f434b91da2c3dad803f1, type: 2}
   posprocessing: {fileID: 0}
