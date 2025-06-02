@@ -2833,16 +2833,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fondos:
   - {fileID: 21300000, guid: 8176d944b42df6f48b74f291ec6df1b9, type: 3}
-  - {fileID: 21300000, guid: b5e336863822af444b6d37fd214bc4f5, type: 3}
   - {fileID: 21300000, guid: 6c138d99373ce214fbc6aacb1302cb76, type: 3}
-  - {fileID: 21300000, guid: 65518c891f9ab1945a8743f2d7719289, type: 3}
-  - {fileID: 21300000, guid: f11f9170f81673241b26faed531fcd4d, type: 3}
   - {fileID: 21300000, guid: f7b1475d9fa54bd46a0e8ee0e19fc0d0, type: 3}
-  - {fileID: 21300000, guid: 4c0b60fcf11ddc14ca667ea3e2e995cb, type: 3}
   - {fileID: 21300000, guid: f3a933ed36ec48546bc91f02a17726b7, type: 3}
   - {fileID: 21300000, guid: ed33b3ba36e3c9742a69f0e050b8da5f, type: 3}
-  - {fileID: 21300000, guid: 3694e3fad0c74674a83dd8ec43230d9b, type: 3}
-  - {fileID: 21300000, guid: 6cf6e3bf7101ea64ba47e4f74cf75a9a, type: 3}
   - {fileID: 21300000, guid: ba6ed09cb15b5a1489c6e518cd12edd2, type: 3}
   fondoPantallaUI: {fileID: 1725180497}
 --- !u!1001 &2065713441
