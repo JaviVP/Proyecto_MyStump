@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5483140c02a0ad042835f8411440e1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTime: 5
-  maxTime: 10
+  minTime: 3
+  maxTime: 4

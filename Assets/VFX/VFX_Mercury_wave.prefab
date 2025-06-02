@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minTime: 5
-  maxTime: 10
+  maxTime: 6
 --- !u!1 &6935614994518190995
 GameObject:
   m_ObjectHideFlags: 0
