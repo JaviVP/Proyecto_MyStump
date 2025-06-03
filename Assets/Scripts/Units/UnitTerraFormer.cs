@@ -105,6 +105,10 @@ public class UnitTerraFormer : Unit
         //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
         // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
+        if (Team == Team.Ants || Team == Team.Termites)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
         targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
         // ✅ 4️⃣ Clear highlights after moving

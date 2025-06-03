@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8885343378927256385}
-  - component: {fileID: 4874645265549704672}
+  - component: {fileID: 9057180410757317657}
   m_Layer: 1
   m_Name: VFX_Mercury_wave
   m_TagString: Untagged
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 6765502455025489998}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13, y: 0, z: 0}
+  m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3875546795124723525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4874645265549704672
+--- !u!114 &9057180410757317657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 3875546795124723525}
   - component: {fileID: 7472712312625301633}
   - component: {fileID: 5190142246625243452}
-  - component: {fileID: 8472209427953226128}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -132,7 +131,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6935614994518190995}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 0ec637b94c24175479a3f5b1c80d7b5f, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 5c475bc329598f34688b725431ec0ad9, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -162,17 +161,3 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &8472209427953226128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6935614994518190995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5483140c02a0ad042835f8411440e1af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTime: 5
-  maxTime: 10

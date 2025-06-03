@@ -12,8 +12,8 @@ public class ModeUnlock : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private GameObject lockIcon;              // Icono de candado con animación
 
     [Header("Colores")]
-    [SerializeField] private Color normalColor = Color.white;
-    [SerializeField] private Color pressedColor = new Color(231f / 255f, 203f / 255f, 51f / 255f);
+    [SerializeField] private Color normalColor = new Color32(227, 255, 209, 255);
+    [SerializeField] private Color pressedColor = new Color32(254, 209, 255, 255);
     [SerializeField] private Color blockedPressedColor = Color.gray;
 
     private Animator lockAnimator;

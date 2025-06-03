@@ -356,10 +356,11 @@ MonoBehaviour:
   soundCategories:
   - name: Ambient
     clips:
-    - {fileID: 8300000, guid: 92144f1461fce7041ba8db006dabbd98, type: 3}
-    - {fileID: 8300000, guid: c8d856e9363976f4cbc627120f53c839, type: 3}
-    - {fileID: 8300000, guid: 4b2504b540f80be4986d7a6e5ff16a28, type: 3}
-    - {fileID: 8300000, guid: 62d9a268cc72cd847824217410aea997, type: 3}
-    - {fileID: 8300000, guid: 0c8f1d4d51f928b408e6ebc540e882ca, type: 3}
+    - {fileID: 8300000, guid: 919fac83c92ead64491c85f3e5a07e9a, type: 3}
+    - {fileID: 8300000, guid: a274800956c47fd4ba77c159153d1faf, type: 3}
+    - {fileID: 8300000, guid: c223a0305ccdbb749a4c972f47b52bb2, type: 3}
+    - {fileID: 8300000, guid: bbcfd93cd16b35948b67f1b6e51e839d, type: 3}
+    - {fileID: 8300000, guid: 38030f79d9d16ec40a54ed3b89a78e82, type: 3}
+    - {fileID: 8300000, guid: 4074d605da8d656418b201308d3a4149, type: 3}
   teamSounds: []
   fadeDuration: 0.1

@@ -18,6 +18,7 @@ public class LogoController : MonoBehaviour
     [SerializeField] private Sprite terraformerTermita;
     [SerializeField] private Sprite panchulinaTermita;
 
+    private bool procesandoLogo = false;  // Para evitar que se inicien varias corrutinas
     private enum Turno { Termita, Hormiga }
     private Turno turnoActual = Turno.Termita;
 
@@ -26,8 +27,11 @@ public class LogoController : MonoBehaviour
         InicializarLogos();
     }
 
+
     public void ColocarPieza()
     {
+        if (procesandoLogo) return;  // Si ya estamos procesando, no hacer nada más
+
         if (turnoActual == Turno.Termita)
         {
             StartCoroutine(ProcesarLogo(logosTermitas, logosHormigas)); // Hormigas serán las siguientes
@@ -42,7 +46,9 @@ public class LogoController : MonoBehaviour
 
     IEnumerator ProcesarLogo(List<GameObject> logos, List<GameObject> siguienteTurnoLogos)
     {
-        // 1. Poner todos los logos activos en modo apagado
+        procesandoLogo = true;  // Marcamos que estamos procesando una corrutina
+
+        // 1. Poner todos los logos activos en modo apagado (al final de la animación)
         ApagarLogos(logosTermitas);
         ApagarLogos(logosHormigas);
 
@@ -61,7 +67,11 @@ public class LogoController : MonoBehaviour
             }
         }
 
-        if (logoCercano == null) yield break;
+        if (logoCercano == null)
+        {
+            procesandoLogo = false;
+            yield break;  // Si no se encuentra ningún logo activo, terminamos la corrutina
+        }
 
         // 3. Encender el logo que va a animarse
         EncenderLogo(logoCercano);
@@ -69,18 +79,19 @@ public class LogoController : MonoBehaviour
         // 4. Ejecutar animación
         Animator anim = logoCercano.GetComponent<Animator>();
         anim.SetTrigger("Scale");
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.2f);  // Esperamos que termine la animación
 
         // 5. Desactivar logo
         logoCercano.SetActive(false);
 
-        // 6. Reorganizar
+        // 6. Reorganizar los logos
         Vector3[] posiciones = new Vector3[logos.Count];
         for (int i = 0; i < logos.Count; i++)
         {
             posiciones[i] = logos[i].transform.position;
         }
 
+        // Esperamos que cada logo se mueva antes de pasar al siguiente
         for (int i = 0; i < logos.Count - 1; i++)
         {
             if (!logos[i].activeSelf)
@@ -89,7 +100,10 @@ public class LogoController : MonoBehaviour
                 {
                     if (logos[j].activeSelf)
                     {
-                        StartCoroutine(MoverLogo(logos[j].transform, posiciones[i], moveDuration));
+                        // Esperamos que el logo termine de moverse antes de continuar
+                        yield return StartCoroutine(MoverLogo(logos[j].transform, posiciones[i], moveDuration));
+
+                        // Intercambiamos las posiciones de los logos en la lista
                         var temp = logos[i];
                         logos[i] = logos[j];
                         logos[j] = temp;
@@ -105,6 +119,8 @@ public class LogoController : MonoBehaviour
 
         // 8. Encender el primero del siguiente turno
         EncenderPrimeroActivo(siguienteTurnoLogos);
+
+        procesandoLogo = false;  // Ya terminamos, ahora se puede iniciar otra corrutina si es necesario
     }
 
     IEnumerator MoverLogo(Transform logo, Vector3 targetPos, float duration)
