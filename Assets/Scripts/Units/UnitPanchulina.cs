@@ -80,7 +80,6 @@ public class UnitPanchulina : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-       
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         Vector2Int currentPos = AxialCoords;
 
@@ -122,6 +121,7 @@ public class UnitPanchulina : Unit
                 enemyUnit = hexGrid.GetUnitInTile(targetTile.axialCoords);
                 if (enemyUnit != null && enemyUnit.Team != this.Team)
                 {
+                    
                     if (GetComponent<Animator>())
                     {
                         PoseTransition("Push");
@@ -143,9 +143,12 @@ public class UnitPanchulina : Unit
 
                 ClearHighlights();
                 firstMove = false;
-            
+                Debug.Log("--1");
+               
+                Debug.Log("--2");
+
             }
-            
+
         }
         if (GetComponent<Animator>())
         {
@@ -153,7 +156,9 @@ public class UnitPanchulina : Unit
         }
         GameManager.Instance.LockTiles = true;
         StartCoroutine(Animation(targetPosition));
-       
+        Debug.Log(firstMove + " --" + enemyUnit);
+        
+
         return true;
         
     }
@@ -221,10 +226,16 @@ public class UnitPanchulina : Unit
             {
                 break;
             }
+            
         }
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(0.2f);
+        if (!FirstMove && !enemyUnit)
+        {
+            GameManager.Instance.movedUnits.Add(this);
+            GameManager.Instance.CheckTurnEnd();
+        }
         if (GetComponent<Animator>() && !UsedPreviusTurn && !FirstMove)
         {
             PoseTransition("Die");
@@ -352,10 +363,11 @@ public class UnitPanchulina : Unit
 
         // Esperamos un poco después de la animación si es necesario
         yield return new WaitForSeconds(1.5f);
-        VfxManager.Instance.Vfxs[0].transform.position = new Vector3(1000, 1000, 1000);
+        VfxManager.Instance.Vfxs[0].transform.position = new Vector3(0, -50, 0);
         VfxManager.Instance.Vfxs[0].SetActive(false);
-        VfxManager.Instance.Vfxs[1].transform.position = new Vector3(1000, 1000, 1000);
+        VfxManager.Instance.Vfxs[1].transform.position = new Vector3(0, -50, 0);
         VfxManager.Instance.Vfxs[1].SetActive(false);
+        GameManager.Instance.CheckTurnEnd();
         GameManager.Instance.LockTiles = false;
         
     }

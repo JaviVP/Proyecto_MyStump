@@ -116,7 +116,7 @@ public enum Team { Ants, Termites }
     ///
     /// Para que es lo de abajo???
     ///
-    private HashSet<Unit> movedUnits = new HashSet<Unit>(); // Track units that have moved
+    public HashSet<Unit> movedUnits = new HashSet<Unit>(); // Track units that have moved
     ///
     /// Comptobar mas tarde
     ///
@@ -527,7 +527,7 @@ public enum Team { Ants, Termites }
             {
                 selectedUnit.MarkAsUsed(); // ✅ Apply cooldown
                 //movedUnits.Add(selectedUnit);
-                CheckTurnEnd();
+                //CheckTurnEnd();
                 
                 selectedUnit = null;
             }
@@ -611,11 +611,14 @@ public enum Team { Ants, Termites }
 
 
     }
-    private void CheckTurnEnd()
+    public void CheckTurnEnd()
     {
         // If all units have moved, switch turn
+        Debug.Log("--3---"+ movedUnits.Count);
+
         if (movedUnits.Count >= 1) // Since each team has 1 units
         {
+            Debug.Log("--4");
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 

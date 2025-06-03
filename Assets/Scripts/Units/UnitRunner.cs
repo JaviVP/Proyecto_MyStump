@@ -210,7 +210,7 @@ public class UnitRunner : Unit
             PoseTransition("Die");
         } 
         GameManager.Instance.LockTiles = false;
-       
+        GameManager.Instance.CheckTurnEnd();
     }
 
 

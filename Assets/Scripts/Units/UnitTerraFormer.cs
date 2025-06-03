@@ -202,8 +202,8 @@ public class UnitTerraFormer : Unit
             PoseTransition("Die");
         }
         GameManager.Instance.LockTiles = false;
-       
-       
+        GameManager.Instance.CheckTurnEnd();
+
     }
 
 
