@@ -435,7 +435,10 @@ public class HexGrid : MonoBehaviour
             ? Quaternion.Euler(0, 90, 0)
             : Quaternion.Euler(0, -90, 0);
 
-        GameObject unitObj = Instantiate(prefab, worldPosition, rotation);
+        //GameObject unitObj = Instantiate(prefab, worldPosition, rotation);
+        GameObject unitObj = prefab;
+        unitObj.transform.position = worldPosition;
+        unitObj.transform.rotation = rotation;
 
         /// Para no instanciar
         /*
