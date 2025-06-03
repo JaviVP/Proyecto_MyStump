@@ -297,8 +297,10 @@ public class UnitPanchulina : Unit
     
     IEnumerator EnemyDisplacement(Vector2Int targetPos)
     {
+
         if (GetComponent<Animator>())
         {
+            SoundManager.instance.PlaySound("PushUnit");
             PoseTransition("Punch");
         }
         if (enemyUnit.GetComponent<Animator>())
@@ -343,7 +345,7 @@ public class UnitPanchulina : Unit
                     }
                     
                 }
-                
+                SoundManager.instance.PlaySound("EndHitUnit");
                 break;
             }
         }
