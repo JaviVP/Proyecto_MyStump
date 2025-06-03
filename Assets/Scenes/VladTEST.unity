@@ -1495,6 +1495,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: sfxClips.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: sfxClips.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f69cafe3fc8f650419fc5b5779f94095, type: 3}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: sfxClips.Array.data[4].name
+      value: EndHitUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: sfxClips.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 12609ea2644e04d42b917a72393e2b92, type: 3}
+    - target: {fileID: 6452325971193184751, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
+      propertyPath: sfxClips.Array.data[5].name
+      value: PushUnit
+      objectReference: {fileID: 0}
     - target: {fileID: 8732090890894322273, guid: 08ba375f08e4fa145b0145dfdf4ae135, type: 3}
       propertyPath: m_Name
       value: SoundManager
