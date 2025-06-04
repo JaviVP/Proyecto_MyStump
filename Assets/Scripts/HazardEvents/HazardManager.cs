@@ -320,6 +320,8 @@ public class HazardManager : MonoBehaviour
             Debug.Log($"<color=red><b>Turn {currentTurn}</b></color>: Launching <color=cyan>{hazard.name}</color> hazard.");
 
             hazard.ExecuteHazard(useTierSystem, tier);
+            if (hazard.ScreenVFX)
+                Instantiate(hazard.ScreenVFX, Vector3.zero, Quaternion.identity);
             GameManager.Instance.hazardDurationLeft = hazard.duration;
         }
         else

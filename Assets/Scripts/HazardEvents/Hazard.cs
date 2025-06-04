@@ -219,8 +219,7 @@ public class Hazard : ScriptableObject
         if (tileChangeVFX)
             Instantiate(tileChangeVFX, tile.transform.position, Quaternion.identity);
 
-        if (ScreenVFX)
-            Instantiate(ScreenVFX, Vector3.zero, Quaternion.identity);
+        
 
         if (extraPropPrefab)
             Instantiate(extraPropPrefab, tile.transform.position, Quaternion.identity);
