@@ -296,7 +296,7 @@ public class HazardManager : MonoBehaviour
         Color c = img.color;
         while (timer < duration)
         {
-            if (skipRequested) { SetAlpha(img, 1f); yield break; }
+            //if (skipRequested) { SetAlpha(img, 1f); yield break; }
             timer += Time.deltaTime;
             c.a = Mathf.Lerp(1f, 0f, timer / duration);
             img.color = c;
