@@ -388,9 +388,23 @@ public enum Team { Ants, Termites }
                         selectedUnit = null;
                         SoundManager.instance.PlaySound("UnSelectedUnit");
                     }
+                    hexGrid.CheckDestroyUnity((CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants);
+
+                    Debug.Log("Primer turno de Panchulina");
+                    /*
+                    if (currentTurn == Team.Ants)
+                    {
+                        hexGrid.CheckDestroyUnity(Team.Termites);
+                    }
+                    else
+                    {
+                        hexGrid.CheckDestroyUnity(Team.Ants);
+                    }
+                    */
                 }
                 else
                 {
+                    
                     SoundManager.instance.PlaySound("PlaceUnit");
                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                 }
@@ -540,14 +554,6 @@ public enum Team { Ants, Termites }
 
             hexGrid.SelectTeam(CurrentTurn);
             hexGrid.CheckDestroyUnity(CurrentTurn);
-
-            /// Lo de arriba es lo mismo
-            /// que lo de abajo pero
-            /// mas organizado. Si algo
-            /// no funciona comentar lo 
-            /// de arriba y descomentar
-            /// lo de abajo
-            /// 
 
 
             
