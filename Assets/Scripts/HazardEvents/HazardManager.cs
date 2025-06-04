@@ -164,10 +164,12 @@ public class HazardManager : MonoBehaviour
     }
     public void LaunchHazardUI()
     {
+        
         int currentTurn = GameManager.Instance.numericCurrentTurn;
 
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
         {
+            UiManager.Instance.TouchEnabled = false;
             Debug.Log("THERE SHOULD HAVE BEEN AN EVENT");
             hazardPanel.SetActive(true);
 
