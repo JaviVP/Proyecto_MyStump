@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material_OutlinePeanas
+  m_Name: Material_OutlinePeanas 1
   m_Shader: {fileID: -6465566751694194690, guid: 5294c283908ebe0488387c83140ea7fa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -87,8 +87,8 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.2766535, g: 1, b: 0.06132078, a: 0}
+    - _Color: {r: 0.5567923, g: 0.062745094, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _emissionColor: {r: 0.33986926, g: 1, b: 0, a: 1}
+    - _emissionColor: {r: 1, g: 0, b: 0.16531086, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

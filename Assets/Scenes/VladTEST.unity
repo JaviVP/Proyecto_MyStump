@@ -2291,6 +2291,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 897279833127850428, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 897279833127850428, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
       value: 1.5
@@ -2347,6 +2355,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3940815573481739696, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940815573481739696, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01e47ddce04b1fc40b0da31280dd01e0, type: 2}
     - target: {fileID: 5123090012514246104, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2359,6 +2375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Units
       objectReference: {fileID: 0}
+    - target: {fileID: 6998704389768579043, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01e47ddce04b1fc40b0da31280dd01e0, type: 2}
     - target: {fileID: 7125394028044780942, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.287
@@ -2431,6 +2451,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 8126081059729648631, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126081059729648631, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
       value: 1.5
@@ -2447,6 +2475,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 9070972749497998475, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070972749497998475, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
