@@ -34,13 +34,18 @@ public class LogoController : MonoBehaviour
 
         if (turnoActual == Turno.Termita)
         {
+
             StartCoroutine(ProcesarLogo(logosTermitas, logosHormigas)); // Hormigas serán las siguientes
-            turnoActual = Turno.Hormiga;
+            turnoActual = Turno.Hormiga;           
+   
         }
         else
         {
+
             StartCoroutine(ProcesarLogo(logosHormigas, logosTermitas)); // Termitas serán las siguientes
             turnoActual = Turno.Termita;
+
+            
         }
     }
 

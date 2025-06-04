@@ -81,6 +81,8 @@ public enum Team { Ants, Termites }
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
     private int totalTiles;  //total number of tiles in the grid
     private string winner = "";
+    private bool isAntPhase = false;
+    private bool isTermitePhase = true;
     public static GameManager Instance { get; private set; }
     public HexGrid HexGrid { get => hexGrid; set => hexGrid = value; }
     public int LimitTurns { get => limitTurns; set => limitTurns = value; }
@@ -88,6 +90,8 @@ public enum Team { Ants, Termites }
     public bool DisableTouchInputDuringTransition { get => disableTouchInputDuringTransition; set => disableTouchInputDuringTransition = value; }
     public bool LockTiles { get => lockTiles; set => lockTiles = value; }
     public float AnimationSpeed { get => animationSpeed; set => animationSpeed = value; }
+    public bool IsAntPhase { get => isAntPhase; set => isAntPhase = value; }
+    public bool IsTermitePhase { get => isTermitePhase; set => isTermitePhase = value; }
 
     private Unit selectedUnit = null;
 
