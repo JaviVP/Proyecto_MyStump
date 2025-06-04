@@ -70,13 +70,14 @@ public abstract class Unit : MonoBehaviour
        
 
         // Aplicar o resetear dithering solo a esta unidad
-        DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
+        //DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
         DitheringPeanas[] ditherEffectsInd = GetComponentsInChildren<DitheringPeanas>();
-        foreach (var dither in ditherEffects)
+        /*foreach (var dither in ditherEffects)
         {
             dither.ApplyDitherValue(isOnCooldown ? 1.0f : 2.0f);
            
         }
+        */
         foreach (var dither in ditherEffectsInd)
         {
             dither.ApplyDitherValueInd(isOnCooldown ? 2.0f : 0.0f);
