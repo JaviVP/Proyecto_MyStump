@@ -13,7 +13,6 @@ public class UnitTerraFormer : Unit
     private HashSet<HexTile> validMoveTiles = new HashSet<HexTile>(); // Store valid move tiles
     private HashSet<HexTile> validMoveTilesAnimation = new HashSet<HexTile>(); // Store valid move tiles
 
-
     private void Start()
     {
         hexGrid = FindAnyObjectByType<HexGrid>(); // Get reference to HexGrid
@@ -21,7 +20,8 @@ public class UnitTerraFormer : Unit
         {
             PoseTransition("Idle");
         }
-
+        
+       
 
     }
 
@@ -105,7 +105,7 @@ public class UnitTerraFormer : Unit
         //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
 
         // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
-        if (Team == Team.Ants || Team == Team.Termites)
+        if ((Team == Team.Ants && targetTile.state == HexState.Termites) || (Team == Team.Termites && targetTile.state == HexState.Ants))
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -123,6 +123,7 @@ public class UnitTerraFormer : Unit
                 PoseTransition("Long");
             }
         }
+       
         return true;
     }
 
@@ -207,6 +208,7 @@ public class UnitTerraFormer : Unit
         }
         GameManager.Instance.LockTiles = false;
         GameManager.Instance.CheckTurnEnd();
+       
 
     }
 
@@ -319,6 +321,7 @@ public class UnitTerraFormer : Unit
         {
             PoseTransition("Idle");
         }
+        
         return totalPath;
     }
 }

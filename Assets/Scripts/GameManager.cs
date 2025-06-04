@@ -43,7 +43,7 @@ public enum Team { Ants, Termites }
     private int player1RoundsWon;
     private int player2RoundsWon;
     private int neededWins;
-    private bool puedeColocarPieza = true;
+    
     //Update Stats variables
     //======================================
     //- Hacer get del Pref actual
@@ -105,7 +105,7 @@ public enum Team { Ants, Termites }
     private int draftUnitIndex;
     public bool isDraftPhase;
 
-    bool selected = false;
+    private bool selected = false;
     HexTile previousClickTile;
     public int hazardDurationLeft = 0;
 
@@ -267,6 +267,7 @@ public enum Team { Ants, Termites }
 
                     if (clickedTile != null)
                         ProcessTileClick(clickedTile);
+                        logoController.ColocarPieza();
                 }
             }
         }
@@ -304,6 +305,7 @@ public enum Team { Ants, Termites }
 
                         if (clickedTile != null)
                             ProcessTileClick(clickedTile);
+                            logoController.ColocarPieza();
                     }
                     break;
             }
@@ -320,7 +322,28 @@ public enum Team { Ants, Termites }
 
             Unit unitOnTile = hexGrid.GetUnitInTile(clickedTile.axialCoords);
 
-            if (currentTurn == Team.Ants)
+            if (currentTurn == Team.Termites)
+            {
+
+                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
+                {
+                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
+                    hexGrid.RemoveAllHighlights();
+                    //hexGrid.HighlightOne(clickedTile);
+                    //selected = true;
+                    //previousClickTile = clickedTile;
+                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
+                    selected = false;
+                    hexGrid.ResetTeamHalfHighlights();
+                    //draftUnitIndex++;
+                    SoundManager.instance.PlaySound("PlaceUnit");
+                   
+                    //return;
+                }
+
+
+            }
+           else if (currentTurn == Team.Ants)
             {
 
                 if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
@@ -335,36 +358,17 @@ public enum Team { Ants, Termites }
                     hexGrid.ResetTeamHalfHighlights();
                     draftUnitIndex++;
                     SoundManager.instance.PlaySound("PlaceUnit");
-                    logoController.ColocarPieza();
+                    
                     //return;
                 }
             }
-            else if (currentTurn == Team.Termites)
-            {
-              
-                if (unitOnTile == null && hexGrid.termiteDraftTiles.Contains(clickedTile))
-                {
-                    hexGrid.SpawnUnit(clickedTile.axialCoords, unitDraftList[draftUnitIndex], CurrentTurn, HexGrid.EnumHelper.ConvertToHexState(currentTurn));
-                    hexGrid.RemoveAllHighlights();
-                    //hexGrid.HighlightOne(clickedTile);
-                    //selected = true;
-                    //previousClickTile = clickedTile;
-                    CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
-                    selected = false;
-                    hexGrid.ResetTeamHalfHighlights();
-                    //draftUnitIndex++;
-                    SoundManager.instance.PlaySound("PlaceUnit");
-                    logoController.ColocarPieza();
-                    //return;
-                }
-
-
-            }
+           
 
             if (draftUnitIndex >= unitDraftList.Count)
             {
                 isDraftPhase = false;
                 hexGrid.RemoveAllHighlights();
+                logoController.ProcesarLogosRestantes();
                 //hexGrid.ResetTeamHalfHighlights();
             }
             return;
@@ -942,14 +946,7 @@ public enum Team { Ants, Termites }
 
 
     }
-    private IEnumerator EsperarUIYDevolverControl()
-    {
-        // Aquí deberías esperar el tiempo que tarda la animación de la UI, por ejemplo:
-        float tiempoEsperar = 1.5f;  // O el tiempo que dure la animación de la UI y la colocación física
-        yield return new WaitForSeconds(tiempoEsperar);
-
-        puedeColocarPieza = true;  // Rehabilitamos el clic después de esperar
-    }
+   
 
     private void UpdateRoundsWonText()
     {

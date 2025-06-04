@@ -8,7 +8,7 @@ public class LogoController : MonoBehaviour
     [SerializeField] private List<GameObject> logosTermitas; // De izquierda a derecha
     [SerializeField] private List<GameObject> logosHormigas; // De derecha a izquierda
     [SerializeField] private Transform centroPantalla;
-    [SerializeField] private float moveDuration = 0.3f;
+    [SerializeField] private float moveDuration = 0.1f;
 
     [SerializeField] private Sprite runnerHormiga;
     [SerializeField] private Sprite terraformerHormiga;
@@ -47,6 +47,57 @@ public class LogoController : MonoBehaviour
 
             
         }
+    }
+
+    public void ProcesarLogosRestantes()
+    {
+        StartCoroutine(ProcesarLogosHastaTerminar());
+    }
+
+    private IEnumerator ProcesarLogosHastaTerminar()
+    {
+        while (HayLogosActivos())
+        {
+            if (procesandoLogo)
+            {
+                yield return null; // Espera a que termine el logo actual
+                continue;
+            }
+
+            // Lógica alterna entre turnos
+            if (turnoActual == Turno.Termita && HayLogosActivosEn(logosTermitas))
+            {
+                yield return StartCoroutine(ProcesarLogo(logosTermitas, logosHormigas));
+                turnoActual = Turno.Hormiga;
+            }
+            else if (turnoActual == Turno.Hormiga && HayLogosActivosEn(logosHormigas))
+            {
+                yield return StartCoroutine(ProcesarLogo(logosHormigas, logosTermitas));
+                turnoActual = Turno.Termita;
+            }
+            else
+            {
+                // Si el turno actual no tiene logos, salta al otro
+                turnoActual = (turnoActual == Turno.Termita) ? Turno.Hormiga : Turno.Termita;
+                yield return null;
+            }
+        }
+
+       
+    }
+
+    private bool HayLogosActivos()
+    {
+        return HayLogosActivosEn(logosTermitas) || HayLogosActivosEn(logosHormigas);
+    }
+
+    private bool HayLogosActivosEn(List<GameObject> logos)
+    {
+        foreach (var logo in logos)
+        {
+            if (logo.activeSelf) return true;
+        }
+        return false;
     }
 
     IEnumerator ProcesarLogo(List<GameObject> logos, List<GameObject> siguienteTurnoLogos)
@@ -106,7 +157,7 @@ public class LogoController : MonoBehaviour
                     if (logos[j].activeSelf)
                     {
                         // Esperamos que el logo termine de moverse antes de continuar
-                        yield return StartCoroutine(MoverLogo(logos[j].transform, posiciones[i], moveDuration));
+                        yield return StartCoroutine(MoverLogo(logos[j].transform, posiciones[i], moveDuration/2));
 
                         // Intercambiamos las posiciones de los logos en la lista
                         var temp = logos[i];

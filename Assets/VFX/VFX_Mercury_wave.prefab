@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8885343378927256385}
-  - component: {fileID: 9057180410757317657}
+  - component: {fileID: -1642204438174508749}
   m_Layer: 1
   m_Name: VFX_Mercury_wave
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 3875546795124723525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9057180410757317657
+--- !u!114 &-1642204438174508749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6765502455025489998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5483140c02a0ad042835f8411440e1af, type: 3}
+  m_Script: {fileID: 11500000, guid: 68f7a2b1a6d09814cb9c1a38f3f5b840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minTime: 5

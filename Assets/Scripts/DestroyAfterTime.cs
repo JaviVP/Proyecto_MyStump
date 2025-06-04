@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.VFX;
-
+using System.Collections;
 public class DestroyAfterTime : MonoBehaviour
 {
     public float minTime = 5f;
@@ -15,11 +15,15 @@ public class DestroyAfterTime : MonoBehaviour
         {
             vfx = transform.GetChild(0).GetComponent<VisualEffect>();
         }
-
         StartCoroutine(DestroyAfterDelay());
     }
 
-    private System.Collections.IEnumerator DestroyAfterDelay()
+    private void Update()
+    {
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    private IEnumerator DestroyAfterDelay()
     {
         float delay = Random.Range(minTime, maxTime);
         yield return new WaitForSeconds(delay);
@@ -31,10 +35,10 @@ public class DestroyAfterTime : MonoBehaviour
         }
 
         // Desactiva solo si todo fue bien
-        gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);
     }
+
+  
+
 }

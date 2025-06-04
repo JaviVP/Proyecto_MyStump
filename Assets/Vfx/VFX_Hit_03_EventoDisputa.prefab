@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8177338369442205785}
-  - component: {fileID: 9030713020656057785}
+  - component: {fileID: 8003873987856090089}
   m_Layer: 0
   m_Name: VFX_Hit_03_EventoDisputa
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7613427367328467071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9030713020656057785
+--- !u!114 &8003873987856090089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1031402828870515293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5483140c02a0ad042835f8411440e1af, type: 3}
+  m_Script: {fileID: 11500000, guid: 68f7a2b1a6d09814cb9c1a38f3f5b840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minTime: 3

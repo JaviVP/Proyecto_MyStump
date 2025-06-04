@@ -362,7 +362,7 @@ public class UnitPanchulina : Unit
         }
 
         // Esperamos un poco después de la animación si es necesario
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         VfxManager.Instance.Vfxs[0].transform.position = new Vector3(0, -50, 0);
         VfxManager.Instance.Vfxs[0].SetActive(false);
         VfxManager.Instance.Vfxs[1].transform.position = new Vector3(0, -50, 0);

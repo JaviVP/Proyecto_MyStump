@@ -1806,7 +1806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1307685036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,6 +2182,10 @@ PrefabInstance:
     - target: {fileID: 6126967380168648261, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: moveDuration
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: runnerHormiga
