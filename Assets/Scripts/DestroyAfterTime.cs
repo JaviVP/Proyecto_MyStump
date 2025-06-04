@@ -32,5 +32,9 @@ public class DestroyAfterTime : MonoBehaviour
 
         // Desactiva solo si todo fue bien
         gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
     }
 }

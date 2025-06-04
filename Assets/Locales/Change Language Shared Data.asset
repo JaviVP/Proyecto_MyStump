@@ -83,6 +83,10 @@ MonoBehaviour:
     m_Key: NextRound
     m_Metadata:
       m_Items: []
+  - m_Id: 37348708009066496
+    m_Key: Associations
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

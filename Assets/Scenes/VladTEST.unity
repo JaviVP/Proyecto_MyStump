@@ -2093,6 +2093,30 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: runnerHormiga
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b722ceb98728ab4a98f5cce8685f921, type: 3}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: runnerTermita
+      value: 
+      objectReference: {fileID: 21300000, guid: 01eeb8c33c1ed5a4ba569d36f515420b, type: 3}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: panchulinaHormiga
+      value: 
+      objectReference: {fileID: 21300000, guid: 60f415b5fc008db4f9d2c4ebaef56a4f, type: 3}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: panchulinaTermita
+      value: 
+      objectReference: {fileID: 21300000, guid: f91506106ba3b7642858da66d311f49e, type: 3}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: terraformerHormiga
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f2b8aeeb92b4ed4993806fd54f5cfc1, type: 3}
+    - target: {fileID: 6195704899488189080, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: terraformerTermita
+      value: 
+      objectReference: {fileID: 21300000, guid: df01378e90ff02342912073dffb22d8a, type: 3}
     - target: {fileID: 6313007944091534167, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 341
@@ -2398,6 +2422,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 897279833127850428, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 897279833127850428, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     - target: {fileID: 2466712596935336010, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
       value: 1.5
@@ -2454,6 +2486,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3940815573481739696, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940815573481739696, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01e47ddce04b1fc40b0da31280dd01e0, type: 2}
     - target: {fileID: 5123090012514246104, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2466,6 +2506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Units
       objectReference: {fileID: 0}
+    - target: {fileID: 6998704389768579043, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01e47ddce04b1fc40b0da31280dd01e0, type: 2}
     - target: {fileID: 7125394028044780942, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.287
@@ -2538,6 +2582,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 8126081059729648631, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126081059729648631, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     - target: {fileID: 8831498275321433139, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
       propertyPath: speed
       value: 1.5
@@ -2554,6 +2606,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 477943196}
+    - target: {fileID: 9070972749497998475, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070972749497998475, guid: 5ced6438d03cf4041b7a0ea0481677c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b954ed8f2887a3448bb448689ffc87cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
