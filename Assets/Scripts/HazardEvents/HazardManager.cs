@@ -52,6 +52,7 @@ public class HazardManager : MonoBehaviour
 
     [Header("UI References")]
     public GameObject hazardPanel;
+    public Image BlackFade;
     public Image eventImage;
     public Image eventBackgroundImage;
     public TextMeshProUGUI eventNameText;
@@ -155,11 +156,13 @@ public class HazardManager : MonoBehaviour
             }
 
         }
+        /*
         foreach (int key in HazardByTurn.Keys)
         {
             print(key + ".-"+ HazardByTurn[key]);
             
         }
+        */
 
     }
     public void LaunchHazardUI()
@@ -181,6 +184,7 @@ public class HazardManager : MonoBehaviour
             loreText.text = hazard.lore;
 
             // Reset alphas
+            SetAlpha(BlackFade, 0f);
             SetAlpha(eventBackgroundImage, 0f);
             SetAlpha(eventNameText, 0f);
             SetAlpha(descriptionText, 0f);
@@ -206,15 +210,19 @@ public class HazardManager : MonoBehaviour
     {
         skipRequested = false;
         sequenceCompleted = false;
-
+        
         // Show main image instantly
         SetAlpha(eventImage, 1f);
 
         // Wait for panel entry + 1 sec delay
-        yield return new WaitForSeconds(1.5f);
+
 
         // Fade background in
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(FadeImage(BlackFade, 0.5f));
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(FadeImage(eventBackgroundImage, 0.5f));
+        
 
         if (skipRequested) { ShowAll(); yield break; }
 
@@ -238,6 +246,8 @@ public class HazardManager : MonoBehaviour
 
         // Sequence completed
         sequenceCompleted = true;
+        
+
     }
 
     private void OnTap()
@@ -248,6 +258,7 @@ public class HazardManager : MonoBehaviour
         }
         else
         {
+            StartCoroutine(FadeImageOut(BlackFade, 0.2f));
             panelAnimator.SetBool("Exit", true);
         }
     }
@@ -277,6 +288,21 @@ public class HazardManager : MonoBehaviour
             yield return null;
         }
         SetAlpha(img, 1f);
+    }
+
+    private IEnumerator FadeImageOut(Image img, float duration)
+    {
+        float timer = 0f;
+        Color c = img.color;
+        while (timer < duration)
+        {
+            if (skipRequested) { SetAlpha(img, 1f); yield break; }
+            timer += Time.deltaTime;
+            c.a = Mathf.Lerp(1f, 0f, timer / duration);
+            img.color = c;
+            yield return null;
+        }
+        SetAlpha(img, 0f);
     }
 
     private IEnumerator FadeText(TextMeshProUGUI txt, float duration)
