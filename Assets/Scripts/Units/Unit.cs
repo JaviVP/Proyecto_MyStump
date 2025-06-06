@@ -81,8 +81,15 @@ public abstract class Unit : MonoBehaviour
         if (GameManager.Instance.DraftActive() != true) {
             foreach (var dither in ditherEffectsInd)
             {
-            
-                dither.ApplyDitherValueInd((GameManager.Instance.CurrentTurn != Team || isOnCooldown) ? 2.0f : 0.0f);
+                if (dither != null && GameManager.Instance.CurrentTurn != Team && !isOnCooldown)
+                {
+                    dither.ApplyDitherValueInd(0.0f);
+                }
+                else
+                {
+                    dither.ApplyDitherValueInd(2.0f);
+                }
+                //dither.ApplyDitherValueInd((GameManager.Instance.CurrentTurn != Team || isOnCooldown) ? 2.0f : 0.0f);
 
             }
         }

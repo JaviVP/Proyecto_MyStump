@@ -582,13 +582,13 @@ public enum Team { Ants, Termites }
                 hexGrid.CheckDestroyUnity(Team.Termites);
 
             }
-            /*
+            
             DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
             foreach (DitheringPeanas peana in todas)
             {
                 peana.ApplyDitherValueInd(0.0f);
             }
-            */
+            
             numericCurrentTurn++;
             limitTurns--;
 
