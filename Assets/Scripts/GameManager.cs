@@ -76,6 +76,8 @@ public enum Team { Ants, Termites }
 
     //Limit of turns
     [SerializeField] private int limitTurns;
+    [SerializeField] private GameObject AntImg;
+    [SerializeField] private GameObject TermImg;
     public int numericCurrentTurn = 1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
@@ -175,6 +177,7 @@ public enum Team { Ants, Termites }
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
         GenerateUnitDraftList();
         FindAnyObjectByType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
+        
         
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
@@ -541,6 +544,7 @@ public enum Team { Ants, Termites }
     }
     public void CheckTurnEnd()
     {
+      
         // If all units have moved, switch turn
         Debug.Log("--3---"+ movedUnits.Count);
 
@@ -571,12 +575,24 @@ public enum Team { Ants, Termites }
                
 
                 hexGrid.CheckDestroyUnity(Team.Ants);
+                DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
+
+                foreach (DitheringPeanas peana in todas)
+                {
+                    peana.ApplyDitherValueInd(0.0f);
+                }
             }
             else if (CurrentTurn == Team.Termites)
             {
 
                 hexGrid.SelectTeam(Team.Termites);
                 hexGrid.CheckDestroyUnity(Team.Termites);
+                DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
+
+                foreach (DitheringPeanas peana in todas)
+                {
+                    peana.ApplyDitherValueInd(0.0f);
+                }
 
 
             }
@@ -697,6 +713,14 @@ public enum Team { Ants, Termites }
                     else
                     {
                         winner = result.ToString();
+                        if (winner == "Ants")
+                        {
+                            AntImg.SetActive(true);
+                        }
+                        else if (winner == "Termites")
+                        {
+                            TermImg.SetActive(true);
+                        }
                         UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
                         inputPanel.SetActive(true);
 

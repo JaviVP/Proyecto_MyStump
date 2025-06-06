@@ -78,12 +78,16 @@ public abstract class Unit : MonoBehaviour
            
         }
         */
-        foreach (var dither in ditherEffectsInd)
-        {
-            dither.ApplyDitherValueInd(isOnCooldown ? 2.0f : 0.0f);
+        if (GameManager.Instance.DraftActive() != true) {
+            foreach (var dither in ditherEffectsInd)
+            {
+            
+                dither.ApplyDitherValueInd((GameManager.Instance.CurrentTurn != Team || isOnCooldown) ? 2.0f : 0.0f);
 
+            }
         }
-
+     
+       
     }
 
     public void SelectedSound()

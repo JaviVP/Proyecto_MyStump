@@ -32,24 +32,9 @@ public class DitherEffect : MonoBehaviour
 
     void Update()
     {
-        if (gameManager == null) return;
+       
 
-        if (gameManager.CurrentTurn != myTeam && GameManager.Instance.DraftActive() != true)
-        {
-            // Breath effect solo cuando NO es su turno
-            time += Time.deltaTime * speed;
-
-            float range = (maxValue - minValue) / 2f;
-            float midpoint = (maxValue + minValue) / 2f;
-            float value = Mathf.Sin(time) * range + midpoint;
-
-            ApplyBrigthnessValue(value);
-        }
-        else
-        {
-            // Valor fijo cuando es su turno
-            ApplyBrigthnessValue(0.5f); // Default value activo
-        }
+       
     }
 
     private void ApplyBrigthnessValue(float value)
@@ -68,7 +53,7 @@ public class DitherEffect : MonoBehaviour
         }
     }
 
-    public void ApplyDitherValue(float value)
+    private void ApplyDitherValue(float value)
     {
         foreach (Renderer rend in renderers)
         {

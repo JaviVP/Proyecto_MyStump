@@ -19,7 +19,6 @@ public class NameSelector : MonoBehaviour
     [SerializeField] private Button changeNameButton1;
 
     [Header("Mensajes")]
-    [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private float messageDuration = 1f;
 
     private const string NameListKey = "AllPlayerNames";
@@ -71,7 +70,7 @@ public class NameSelector : MonoBehaviour
 
         if (!IsNameValid(newName))
         {
-            ShowMessage("Nombre inválido: revisa la longitud o caracteres.");
+           
             return;
         }
 
@@ -115,7 +114,7 @@ public class NameSelector : MonoBehaviour
         Debug.Log(PlayerPrefs.GetInt($"ParcelasHormigas_{newName}"));
         Debug.Log(PlayerPrefs.GetInt($"ParcelasTermitas_{newName}"));
         Debug.Log(PlayerPrefs.GetInt($"TermitasEliminadas_{newName}"));
-        ShowMessage("¡Nombre asignado!");
+       
         inputPanel.SetActive(false);
         text1.enabled = true;
         StartCoroutine(CloseKeyboard());
@@ -136,30 +135,8 @@ public class NameSelector : MonoBehaviour
         return true;
     }
 
-    private void ShowMessage(string message)
-    {
-        StopAllCoroutines();
-        messageText.text = message;
-        messageText.alpha = 1;
-        StartCoroutine(FadeOutMessage());
-    }
 
-    private IEnumerator FadeOutMessage()
-    {
-        yield return new WaitForSeconds(messageDuration);
-
-        float fadeDuration = 1f;
-        float elapsed = 0f;
-
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-            messageText.alpha = Mathf.Lerp(1, 0, elapsed / fadeDuration);
-            yield return null;
-        }
-
-        messageText.alpha = 0;
-    }
+ 
 
     private List<string> GetAllSavedNames()
     {
@@ -177,13 +154,6 @@ public class NameSelector : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void ClearAllNames()
-    {
-        PlayerPrefs.DeleteKey(NameListKey);
-        text1.text = "";
-        inputField1.text = "";
-        ShowMessage("Nombres borrados.");
-    }
 
     public void EnterKeyboard()
     {

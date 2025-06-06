@@ -21,7 +21,7 @@ public class DitheringPeanas : MonoBehaviour
         // Asegurarse de instanciar los materiales si están compartidos
         if (targetRenderer != null)
         {
-            Material[] materials = targetRenderer.materials; // esto ya instancia una copia local
+            Material[] materials = targetRenderer.sharedMaterials; // esto ya instancia una copia local
             targetRenderer.materials = materials; // aseguramos que esté desvinculado del sharedMaterial
         }
     }
@@ -30,7 +30,7 @@ public class DitheringPeanas : MonoBehaviour
     {
         if (targetRenderer == null) return;
 
-        Material[] materials = targetRenderer.materials;
+        Material[] materials = targetRenderer.sharedMaterials;
 
         if (materialIndex >= 0 && materialIndex < materials.Length)
         {

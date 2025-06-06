@@ -73,7 +73,7 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 0
     - _Cull: 0
-    - _DitherSize: 0
+    - _DitherSize: 2
     - _DstBlend: 10
     - _Emission_scale: 1
     - _QueueControl: 0
