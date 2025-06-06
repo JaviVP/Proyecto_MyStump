@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using System;
@@ -18,14 +18,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> player1Texts;
     [SerializeField] private List<TextMeshProUGUI> player2Texts;
     [SerializeField] private TextMeshProUGUI winnerName;
+    [SerializeField] private TextMeshProUGUI roundWinnerName;
     [SerializeField] private GameObject roundsText;
     [SerializeField] private LogoController logoController;
     [SerializeField] private float animationSpeed;
     [SerializeField] private Animator TurnRotationUi;
-    
-        
-public enum Team { Ants, Termites }
-    
+
+
+    public enum Team { Ants, Termites }
+
     private CinemachineBrain brain;
     private Camera mainCamera;
     private HexGrid hexGrid;
@@ -43,7 +44,7 @@ public enum Team { Ants, Termites }
     private int player1RoundsWon;
     private int player2RoundsWon;
     private int neededWins;
-    
+
     //Update Stats variables
     //======================================
     //- Hacer get del Pref actual
@@ -78,6 +79,8 @@ public enum Team { Ants, Termites }
     [SerializeField] private int limitTurns;
     [SerializeField] private GameObject AntImg;
     [SerializeField] private GameObject TermImg;
+    [SerializeField] private GameObject ChampTermImg;
+    [SerializeField] private GameObject ChampAntImg;
     public int numericCurrentTurn = 1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
@@ -137,7 +140,7 @@ public enum Team { Ants, Termites }
         {
             Destroy(gameObject);
             return;
-            
+
         }
 
         // DontDestroyOnLoad(gameObject);
@@ -161,7 +164,7 @@ public enum Team { Ants, Termites }
         PlayerPrefs.SetInt("TermsKilled", 0);
         PlayerPrefs.SetInt("AntsKilled", 0);
         UpdateRoundsWonText();
-       // Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
+        // Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player1}"));
         //Debug.Log(PlayerPrefs.GetInt($"RondasGanadas_{player2}"));
 
 
@@ -172,13 +175,13 @@ public enum Team { Ants, Termites }
         HexState result = CheckMoreColorTiles();
         hexGrid.SelectTeam(Team.Ants);
         //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-        
-        
+
+
         //hexGrid.RemoveTile(new Vector2Int(0, 0));
         GenerateUnitDraftList();
         FindAnyObjectByType<LogoController>().AsignarSpritesPorTipo(unitDraftList);
-        
-        
+
+
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
     }
@@ -270,7 +273,7 @@ public enum Team { Ants, Termites }
 
                     if (clickedTile != null)
                         ProcessTileClick(clickedTile);
-                        logoController.ColocarPieza();
+                    logoController.ColocarPieza();
                 }
             }
         }
@@ -308,15 +311,15 @@ public enum Team { Ants, Termites }
 
                         if (clickedTile != null)
                             ProcessTileClick(clickedTile);
-                            logoController.ColocarPieza();
+                        logoController.ColocarPieza();
                     }
                     break;
             }
         }
     }
 
-   
-    
+
+
 
     private void ProcessTileClick(HexTile clickedTile)
     {
@@ -340,13 +343,13 @@ public enum Team { Ants, Termites }
                     hexGrid.ResetTeamHalfHighlights();
                     //draftUnitIndex++;
                     SoundManager.instance.PlaySound("PlaceUnit");
-                   
+
                     //return;
                 }
 
 
             }
-           else if (currentTurn == Team.Ants)
+            else if (currentTurn == Team.Ants)
             {
 
                 if (unitOnTile == null && hexGrid.antDraftTiles.Contains(clickedTile))
@@ -361,11 +364,11 @@ public enum Team { Ants, Termites }
                     hexGrid.ResetTeamHalfHighlights();
                     draftUnitIndex++;
                     SoundManager.instance.PlaySound("PlaceUnit");
-                    
+
                     //return;
                 }
             }
-           
+
 
             if (draftUnitIndex >= unitDraftList.Count)
             {
@@ -384,7 +387,7 @@ public enum Team { Ants, Termites }
             if (selectedUnit == null)
             {
 
-                if (clickedUnitOnTile!=null && clickedUnitOnTile.Team == CurrentTurn)
+                if (clickedUnitOnTile != null && clickedUnitOnTile.Team == CurrentTurn)
                 {
                     clickedUnitOnTile.SelectedSound();
                 }
@@ -415,7 +418,7 @@ public enum Team { Ants, Termites }
                 }
                 else
                 {
-                    
+
                     SoundManager.instance.PlaySound("PlaceUnit");
                     GameManager.Instance.MoveSelectedUnit(clickedTile.axialCoords);
                 }
@@ -452,14 +455,14 @@ public enum Team { Ants, Termites }
         if (selectedUnit.Move(targetPosition))
         {
             movedUnits.Add(selectedUnit); // ✅ Mark unit as moved
-            
+
             // ✅ Only clear selection if it's NOT a Panchulinas OR if it has finished both moves
             if (!(selectedUnit is UnitPanchulina) || !((UnitPanchulina)selectedUnit).FirstMove)
             {
                 selectedUnit.MarkAsUsed(); // ✅ Apply cooldown
-                //movedUnits.Add(selectedUnit);
-                //CheckTurnEnd();
-                
+                                           //movedUnits.Add(selectedUnit);
+                                           //CheckTurnEnd();
+
                 selectedUnit = null;
             }
         }
@@ -483,7 +486,7 @@ public enum Team { Ants, Termites }
 
     public void GenerateUnitDraftList()
     {
-        
+
         for (int i = 0; i < numRunners; i++)
             unitDraftList.Add(UnitType.Runner);
 
@@ -519,7 +522,7 @@ public enum Team { Ants, Termites }
         }
     }
 
-    
+
 
 
     private HexState CheckMoreColorTiles()
@@ -544,9 +547,9 @@ public enum Team { Ants, Termites }
     }
     public void CheckTurnEnd()
     {
-      
+
         // If all units have moved, switch turn
-        Debug.Log("--3---"+ movedUnits.Count);
+        Debug.Log("--3---" + movedUnits.Count);
 
         if (movedUnits.Count >= 1) // Since each team has 1 units
         {
@@ -568,12 +571,12 @@ public enum Team { Ants, Termites }
             hexGrid.CheckDestroyUnity(CurrentTurn);
 
 
-            
+
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
                 hexGrid.CheckDestroyUnity(Team.Ants);
-                
+
             }
             else if (CurrentTurn == Team.Termites)
             {
@@ -582,20 +585,20 @@ public enum Team { Ants, Termites }
                 hexGrid.CheckDestroyUnity(Team.Termites);
 
             }
-            
+            /*
             DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
             foreach (DitheringPeanas peana in todas)
             {
                 peana.ApplyDitherValueInd(0.0f);
             }
-            
+            */
             numericCurrentTurn++;
             limitTurns--;
 
             //HazardManager.Instance.LaunchHazard(numericCurrentTurn);
             CheckMoreColorTiles();
             HazardManager.Instance.LaunchHazardUI();
-            
+
             hazardDurationLeft--;
             if (hazardDurationLeft < 0)
             {
@@ -610,16 +613,16 @@ public enum Team { Ants, Termites }
                 WinCondition();
                 if (limitTurns <= 0 && partidasSeleccionadas != 0)
                 {
-                  
+
                     HexState result = CheckMoreColorTiles();
                     if (result == HexState.Neutral)
                     {
                         winner = "Draw";
-                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString());
+                        UiManager.Instance.UpdateUiTurn(winner.ToString());
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
                         CheckRounds();
-                      
+
                         if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
                         if (inputPanel.activeSelf || endPanel.activeSelf)
                         {
@@ -633,13 +636,21 @@ public enum Team { Ants, Termites }
                     else
                     {
                         winner = result.ToString();
-                        UiManager.Instance.UpdateUiTurn("Result: " + winner.ToString() + " won");
+
                         partidasSeleccionadas--;
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         AddWins();
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
                         CheckRounds();
-                        
+                        if (winner == "Ants")
+                        {
+                            AntImg.SetActive(true);
+                        }
+                        else if (winner == "Termites")
+                        {
+                            TermImg.SetActive(true);
+                        }
+
                         if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
                         if (inputPanel.activeSelf || endPanel.activeSelf)
                         {
@@ -684,7 +695,7 @@ public enum Team { Ants, Termites }
                 if (!string.IsNullOrEmpty(winner))
                 {
                     inputPanel.SetActive(true);
-                   
+
                     endPanel.SetActive(true);
                     UiManager.Instance.TouchEnabled = false;
                     gameOver = true;
@@ -712,7 +723,7 @@ public enum Team { Ants, Termites }
                         {
                             TermImg.SetActive(true);
                         }
-                       
+
                         inputPanel.SetActive(true);
 
                     }
@@ -758,7 +769,7 @@ public enum Team { Ants, Termites }
         endPanel.SetActive(true);
         UiManager.Instance.UpdateUiTurn($"Result: {winner} won");
         UiManager.Instance.TouchEnabled = false;
-       
+
     }
 
     public string Winner()
@@ -794,6 +805,7 @@ public enum Team { Ants, Termites }
             Debug.Log(player1 + " has won championship");
             winnerName.text = player1.ToString();
             PlayerPrefs.SetInt("ModoCampeonato", 0);
+            ChampTermImg.SetActive(true);
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
@@ -802,6 +814,7 @@ public enum Team { Ants, Termites }
         {
             Debug.Log(player2 + " has won championship");
             winnerName.text = player2.ToString();
+            ChampAntImg.SetActive(true);
             PlayerPrefs.SetInt("ModoCampeonato", 0);
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
@@ -824,6 +837,7 @@ public enum Team { Ants, Termites }
         {
             player1RoundsWon = PlayerPrefs.GetInt($"RondasGanadas_{player1}");
             player1RoundsWon++;
+            roundWinnerName.text = player1.ToString();
             PlayerPrefs.SetInt($"RondasGanadas_{player1}", player1RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player1}", PlayerPrefs.GetInt($"PartidasGanadas_{player1}") + 1);
             Debug.Log(player1 + " Won " + player1RoundsWon + " Rounds");
@@ -845,6 +859,7 @@ public enum Team { Ants, Termites }
             PlayerPrefs.SetInt($"RondasGanadas_{player2}", player2RoundsWon);
             PlayerPrefs.SetInt($"PartidasGanadas_{player2}", PlayerPrefs.GetInt($"PartidasGanadas_{player2}") + 1);
             Debug.Log(player2 + " Won " + player2RoundsWon + " Rounds");
+            roundWinnerName.text = player2.ToString();
             if (inputPanel.activeSelf || endPanel.activeSelf)
             {
                 roundsText.SetActive(false);
@@ -857,13 +872,15 @@ public enum Team { Ants, Termites }
         }
         else
         {
-            
+
         }
 
     }
     private void WinCondition()
     {
-        if (PlayerPrefs.GetInt("AntCount") == 1) { winner = "Termites"; AddWins(); CheckRounds();
+        if (PlayerPrefs.GetInt("AntCount") == 1)
+        {
+            winner = "Termites"; AddWins(); CheckRounds();
             if (inputPanel.activeSelf || endPanel.activeSelf)
             {
                 roundsText.SetActive(false);
@@ -873,7 +890,9 @@ public enum Team { Ants, Termites }
                 roundsText.SetActive(true);
             }
         }
-        else if (PlayerPrefs.GetInt("TermCount") == 1) { winner = "Ants"; AddWins(); CheckRounds();
+        else if (PlayerPrefs.GetInt("TermCount") == 1)
+        {
+            winner = "Ants"; AddWins(); CheckRounds();
             if (inputPanel.activeSelf || endPanel.activeSelf)
             {
                 roundsText.SetActive(false);
@@ -885,17 +904,17 @@ public enum Team { Ants, Termites }
         }
         if (!string.IsNullOrEmpty(winner))
         {
-           
+
             UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
             if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
-          
+
             return;
         }
     }
 
-   
+
     public void UpdatePlayerStats()
     {
         TilesAndKills();
@@ -963,7 +982,7 @@ public enum Team { Ants, Termites }
 
 
     }
-   
+
 
     private void UpdateRoundsWonText()
     {
@@ -975,7 +994,7 @@ public enum Team { Ants, Termites }
 
 
     }
-   
+
 
 }
 
