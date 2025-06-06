@@ -783,7 +783,7 @@ MonoBehaviour:
   logoController: {fileID: 1236470893}
   animationSpeed: 25
   TurnRotationUi: {fileID: 1152638832}
-  limitTurns: 2
+  limitTurns: 40
   AntImg: {fileID: 546581970}
   TermImg: {fileID: 1644055537}
   numericCurrentTurn: 1

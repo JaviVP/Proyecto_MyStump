@@ -572,32 +572,23 @@ public enum Team { Ants, Termites }
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
-               
-
                 hexGrid.CheckDestroyUnity(Team.Ants);
-                DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
-
-                foreach (DitheringPeanas peana in todas)
-                {
-                    peana.ApplyDitherValueInd(0.0f);
-                }
+                
             }
             else if (CurrentTurn == Team.Termites)
             {
 
                 hexGrid.SelectTeam(Team.Termites);
                 hexGrid.CheckDestroyUnity(Team.Termites);
-                DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
-
-                foreach (DitheringPeanas peana in todas)
-                {
-                    peana.ApplyDitherValueInd(0.0f);
-                }
-
 
             }
-            
-            
+            /*
+            DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
+            foreach (DitheringPeanas peana in todas)
+            {
+                peana.ApplyDitherValueInd(0.0f);
+            }
+            */
             numericCurrentTurn++;
             limitTurns--;
 
