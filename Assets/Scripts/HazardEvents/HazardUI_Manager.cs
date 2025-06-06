@@ -20,5 +20,7 @@ public class HazardUI_Manager : MonoBehaviour
         HazardManager.Instance.LaunchHazard(GameManager.Instance.numericCurrentTurn);
         HazardManager.Instance.hazardPanel.SetActive(false);
         UiManager.Instance.TouchEnabled = true;
+        //UiManager.Instance.UpdateTiles();
+
     }
 }

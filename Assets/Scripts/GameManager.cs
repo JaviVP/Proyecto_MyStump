@@ -586,7 +586,9 @@ public enum Team { Ants, Termites }
             limitTurns--;
 
             //HazardManager.Instance.LaunchHazard(numericCurrentTurn);
+            CheckMoreColorTiles();
             HazardManager.Instance.LaunchHazardUI();
+            
             hazardDurationLeft--;
             if (hazardDurationLeft < 0)
             {
@@ -751,7 +753,7 @@ public enum Team { Ants, Termites }
     }
     public int NumberOfAntTiles()
     {
-
+        CheckMoreColorTiles();
         return numberAntsTiles;
 
     }
@@ -765,7 +767,7 @@ public enum Team { Ants, Termites }
 
     public int NumberOfTermTiles()
     {
-
+        CheckMoreColorTiles();
         return numberTermitesTiles;
 
     }
