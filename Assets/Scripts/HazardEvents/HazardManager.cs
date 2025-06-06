@@ -68,6 +68,8 @@ public class HazardManager : MonoBehaviour
     public static HazardManager Instance { get; private set; }
     private HexGrid hexGrid;
 
+    [SerializeField] public GameObject vfxs;
+
     private void Awake()
     {
         if (Instance == null)
@@ -347,7 +349,24 @@ public class HazardManager : MonoBehaviour
 
             hazard.ExecuteHazard(useTierSystem, tier);
             if (hazard.ScreenVFX)
-                Instantiate(hazard.ScreenVFX, Vector3.zero, Quaternion.Euler(0,30,0));
+            {
+                //Instancia
+                //Instantiate(hazard.ScreenVFX, Vector3.zero, Quaternion.Euler(0,30,0));
+                for(int i =0; i < vfxs.transform.childCount; i++)
+                {
+                   
+                    if (vfxs.transform.GetChild(i).gameObject.name == hazard.ScreenVFX.name)
+                    {
+                     
+                        vfxs.transform.GetChild(i).gameObject.SetActive(true);
+                        vfxs.transform.GetChild(i).transform.position = Vector3.zero;
+                        vfxs.transform.GetChild(i).transform.rotation = Quaternion.Euler(0, 30, 0);
+                        break;
+                    }
+                }
+
+
+            }
             GameManager.Instance.hazardDurationLeft = hazard.duration;
         }
         else

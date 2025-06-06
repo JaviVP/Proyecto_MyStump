@@ -9,6 +9,8 @@ TagManager:
   - SettingsPanel
   - Player1Text
   - Player2Text
+  - VFX_Mercury_wave
+  - VFX_Water_wave
   layers:
   - Default
   - TransparentFX

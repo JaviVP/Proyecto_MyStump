@@ -217,12 +217,44 @@ public class Hazard : ScriptableObject
         }
 
         if (tileChangeVFX)
-            Instantiate(tileChangeVFX, tile.transform.position, Quaternion.identity);
+        {
+            //Instantiate(tileChangeVFX, tile.transform.position, Quaternion.identity);
+            for (int i = 0; i < HazardManager.Instance.vfxs.transform.childCount; i++)
+            {
+          
+                if (HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.name == tileChangeVFX.name && !HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.activeSelf)
+                {
 
-        
+                    HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.SetActive(true);
+                    HazardManager.Instance.vfxs.transform.GetChild(i).transform.position = tile.transform.position;
+                    HazardManager.Instance.vfxs.transform.GetChild(i).transform.rotation = Quaternion.identity;
+                    break;
+                }
+            }
+        }
+
+
 
         if (extraPropPrefab)
-            Instantiate(extraPropPrefab, tile.transform.position, Quaternion.identity);
+        {
+            
+            //Instantiate(extraPropPrefab, tile.transform.position, Quaternion.identity);
+            for (int i = 0; i < HazardManager.Instance.vfxs.transform.childCount; i++)
+            {
+
+                if (HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.name == extraPropPrefab.name && !HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.activeSelf)
+                {
+
+                    HazardManager.Instance.vfxs.transform.GetChild(i).gameObject.SetActive(true);
+                    HazardManager.Instance.vfxs.transform.GetChild(i).transform.position = tile.transform.position;
+                    HazardManager.Instance.vfxs.transform.GetChild(i).transform.rotation = Quaternion.identity;
+                    break;
+                }
+            }
+        }
+
+
+            
     }
 
     private bool IsTileAllowedForEffect(HexTile tile)

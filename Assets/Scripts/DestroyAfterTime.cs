@@ -38,7 +38,7 @@ public class DestroyAfterTime : MonoBehaviour
 
         // Desactiva solo si todo fue bien
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
   
