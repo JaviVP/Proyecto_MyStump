@@ -693,7 +693,7 @@ public enum Team { Ants, Termites }
                 if (!string.IsNullOrEmpty(winner))
                 {
                     inputPanel.SetActive(true);
-                    UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
+                   
                     endPanel.SetActive(true);
                     UiManager.Instance.TouchEnabled = false;
                     gameOver = true;
@@ -708,7 +708,7 @@ public enum Team { Ants, Termites }
                     if (result == HexState.Neutral)
                     {
                         winner = "Draw";
-                        UiManager.Instance.UpdateUiTurn("Result: Draw");
+                        UiManager.Instance.UpdateUiTurn("Draw");
                     }
                     else
                     {
@@ -721,7 +721,7 @@ public enum Team { Ants, Termites }
                         {
                             TermImg.SetActive(true);
                         }
-                        UiManager.Instance.UpdateUiTurn("Result: " + winner + " won");
+                       
                         inputPanel.SetActive(true);
 
                     }
