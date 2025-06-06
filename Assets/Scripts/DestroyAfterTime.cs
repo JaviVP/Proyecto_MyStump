@@ -10,11 +10,13 @@ public class DestroyAfterTime : MonoBehaviour
 
     void Start()
     {
+
         // Validación anticipada para evitar GetChild cada vez
         if (transform.childCount > 0)
         {
             vfx = transform.GetChild(0).GetComponent<VisualEffect>();
         }
+        vfx.Play();
         StartCoroutine(DestroyAfterDelay());
     }
 

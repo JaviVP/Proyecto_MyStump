@@ -1920,6 +1920,10 @@ PrefabInstance:
       value: 539.6
       objectReference: {fileID: 0}
     - target: {fileID: 1165408861522903794, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_RendererIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165408861522903794, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
@@ -2374,6 +2378,14 @@ PrefabInstance:
     - target: {fileID: 8348224973421393486, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: field of view
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348224973421393486, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348224973421393486, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: far clip plane
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 8594143312633402030, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -347,7 +347,7 @@ public class HazardManager : MonoBehaviour
 
             hazard.ExecuteHazard(useTierSystem, tier);
             if (hazard.ScreenVFX)
-                Instantiate(hazard.ScreenVFX, Vector3.zero, Quaternion.identity);
+                Instantiate(hazard.ScreenVFX, Vector3.zero, Quaternion.Euler(0,30,0));
             GameManager.Instance.hazardDurationLeft = hazard.duration;
         }
         else
