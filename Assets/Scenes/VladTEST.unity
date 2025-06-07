@@ -779,6 +779,7 @@ MonoBehaviour:
   player1Texts: []
   player2Texts: []
   winnerName: {fileID: 0}
+  roundWinnerName: {fileID: 0}
   roundsText: {fileID: 0}
   logoController: {fileID: 1236470893}
   animationSpeed: 25
@@ -786,6 +787,8 @@ MonoBehaviour:
   limitTurns: 40
   AntImg: {fileID: 546581970}
   TermImg: {fileID: 1644055537}
+  ChampTermImg: {fileID: 0}
+  ChampAntImg: {fileID: 0}
   numericCurrentTurn: 1
   numRunners: 1
   numTerraformers: 1
