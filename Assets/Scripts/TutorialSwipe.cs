@@ -20,7 +20,7 @@ public class TutorialSwipeBasicoConBotones : MonoBehaviour, IDragHandler, IBegin
     void Start()
     {
         rt = GetComponent<RectTransform>();
-        totalPaginas = rt.childCount - 2; // Restamos los dos botones
+        totalPaginas = rt.childCount; 
         destino = rt.anchoredPosition;
 
         PosicionarPaginas();
