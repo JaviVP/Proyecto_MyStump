@@ -15,9 +15,9 @@ MonoBehaviour:
   eventBackground: {fileID: 21300000, guid: f7daa416659481849a178a0a3c0d5b80, type: 3}
   eventMainImage: {fileID: 21300000, guid: 25ec66802b9a53a4b9f6b32f99de42e5, type: 3}
   eventName: Derrame Petrolero
-  description: 'Efecto: 1/2/4 casillas quedan bloqueadas permanentemente '
-  lore: "Inspiraci\xF3n: Derrames de vertidos provocado por empresas han causado
-    desastres ecol\xF3gicos masivos. "
+  description: 1/2/4 casillas quedan bloqueadas permanentemente.
+  lore: "Derrames de vertidos provocado por empresas han causado desastres ecol\xF3gicos
+    masivos."
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 2100000, guid: d0ba2ba66ad9f434b91da2c3dad803f1, type: 2}
   posprocessing: {fileID: 0}
@@ -27,7 +27,7 @@ MonoBehaviour:
   effect: 2
   area: 3
   whoIsAffected: 0
-  affectNeutralTiles: 1
+  affectNeutralTiles: 0
   affectAntTiles: 1
   affectTermiteTiles: 1
   tier1:

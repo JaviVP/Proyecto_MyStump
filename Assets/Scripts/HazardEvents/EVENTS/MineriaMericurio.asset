@@ -15,10 +15,10 @@ MonoBehaviour:
   eventBackground: {fileID: 21300000, guid: 17d104792ee21994ea158f585e063e13, type: 3}
   eventMainImage: {fileID: 21300000, guid: 80aabf7ef8eae314cbf809bbf51af61a, type: 3}
   eventName: "Miner\xEDa de Mercurio "
-  description: "Efecto: 1/2/4 casillas en el territorio con m\xE1s casillas dominadas
-    quedan bloqueadas permanentemente. "
-  lore: "Inspiraci\xF3n: La miner\xEDa ilegal ha dejado tierras contaminadas con
-    mercurio, haciendo que muchas zonas sean inhabitables. "
+  description: "1/2/4 casillas en el territorio con m\xE1s casillas dominadas quedan
+    bloqueadas permanentemente."
+  lore: "La miner\xEDa ilegal ha dejado tierras contaminadas con mercurio, haciendo
+    que muchas zonas sean inhabitables."
   extraPropPrefab: {fileID: 2418655669915398152, guid: d19be18247ecc2e49abeec1b2fd475d5, type: 3}
   tileToChangeMaterial: {fileID: 2100000, guid: a627ac0590a63c7478be17641edfdda8, type: 2}
   posprocessing: {fileID: 0}

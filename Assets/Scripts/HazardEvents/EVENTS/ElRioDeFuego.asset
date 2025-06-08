@@ -15,9 +15,9 @@ MonoBehaviour:
   eventBackground: {fileID: 21300000, guid: 246a337405cc90a4fa2d8306f263285c, type: 3}
   eventMainImage: {fileID: 21300000, guid: f507aed872b964248a9f2d53fcdf7610, type: 3}
   eventName: 'El rio de fuego '
-  description: 'Efecto: 3/5/7 casillas quedan bloqueadas por 2 turnos '
+  description: 'Efecto: 3/5/7 casillas quedan bloqueadas por 2 turnos.'
   lore: "Los incendios provocados para despejar tierras y crear terrenos agr\xEDcolas
-    han destruido miles de hect\xE1reas. "
+    han destruido miles de hect\xE1reas."
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 2100000, guid: 78bf3d126446eda40a2151438a6d82c6, type: 2}
   posprocessing: {fileID: 0}
