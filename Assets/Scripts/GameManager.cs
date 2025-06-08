@@ -79,8 +79,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int limitTurns;
     [SerializeField] private GameObject AntImg;
     [SerializeField] private GameObject TermImg;
+    [SerializeField] private GameObject DrawImg;
     [SerializeField] private GameObject ChampTermImg;
     [SerializeField] private GameObject ChampAntImg;
+    [SerializeField] private GameObject ChampDrawImg;
     public int numericCurrentTurn = 1;
     private int numberAntsTiles; //At the end of the match, number of ants tiles
     private int numberTermitesTiles; //At the end of the match, number of termites tiles
@@ -619,6 +621,7 @@ public class GameManager : MonoBehaviour
                     {
                         winner = "Draw";
                         UiManager.Instance.UpdateUiTurn(winner.ToString());
+                        DrawImg.SetActive(true);
                         PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
                         Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
                         CheckRounds();
@@ -650,6 +653,9 @@ public class GameManager : MonoBehaviour
                         {
                             TermImg.SetActive(true);
                         }
+                         
+                      
+                        
 
                         if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
                         if (inputPanel.activeSelf || endPanel.activeSelf)
@@ -685,10 +691,13 @@ public class GameManager : MonoBehaviour
                 if (PlayerPrefs.GetInt("AntCount") == 1)
                 {
                     winner = "Termites";
+                    TermImg.SetActive(true);
+                    
                 }
                 else if (PlayerPrefs.GetInt("TermCount") == 1)
                 {
                     winner = "Ants";
+                    AntImg.SetActive(true);
                 }
 
                 // ✅ If a winner was found through base kill, stop here
@@ -711,6 +720,7 @@ public class GameManager : MonoBehaviour
                     {
                         winner = "Draw";
                         UiManager.Instance.UpdateUiTurn("Draw");
+                        DrawImg.SetActive(true);
                     }
                     else
                     {
@@ -824,6 +834,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Result = Draw");
             PlayerPrefs.SetInt("ModoCampeonato", 0);
+            ChampDrawImg.SetActive(true);
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
