@@ -30,8 +30,8 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
-      
-  
+
+
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -44,10 +44,16 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+       
+        if (!PlayerPrefs.HasKey("Tutorial"))
+        {
+            PlayerPrefs.SetInt("Tutorial", 0);
+        }
         player1 = PlayerPrefs.GetString("PlayerName1", "Jugador 1");
         player2 = PlayerPrefs.GetString("PlayerName2", "Jugador 2");
-        if (turnScrollGeneral!=null && turnScrollGeneral.GetComponent<Slider>()) scrollSliderGeneral = turnScrollGeneral.GetComponent<Slider>();
-        if (turnText!=null) turnText.text = scrollSliderGeneral.value.ToString();
+        PlayerPrefs.GetInt("Tutorial");
+        if (turnScrollGeneral != null && turnScrollGeneral.GetComponent<Slider>()) scrollSliderGeneral = turnScrollGeneral.GetComponent<Slider>();
+        if (turnText != null) turnText.text = scrollSliderGeneral.value.ToString();
         Time.timeScale = 1.0f;
         TouchEnabled = true;
         // Corrección de método obsoleto
@@ -55,7 +61,7 @@ public class UiManager : MonoBehaviour
 
         foreach (Button button in buttons)
         {
-            if (button.name == "Championship"||button.name == "HazardPanel") continue; // Saltar este botón
+            if (button.name == "Championship" || button.name == "HazardPanel") continue; // Saltar este botón
 
             if (button.GetComponent<ButtonPressEffect>() == null)
             {
@@ -76,8 +82,15 @@ public class UiManager : MonoBehaviour
     public void PlayButton()
     {
         PlayerPrefs.SetInt("ModoCampeonato", 0);
-        SceneManager.LoadScene(3);
-       
+
+        if (PlayerPrefs.GetInt("Tutorial") == 0)
+        {
+            SceneManager.LoadScene(7);
+        }
+        else if (PlayerPrefs.GetInt("Tutorial") == 1)
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void NameSelector()
@@ -94,12 +107,12 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt($"ActualTermTiles_{player1}", 0);
         PlayerPrefs.SetInt($"ActualTermTiles_{player2}", 0);
         PlayerPrefs.DeleteKey("NumeroRondasCampeonato");
-        int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3); 
+        int partidasSeleccionadas = PlayerPrefs.GetInt("NumeroPartidasCampeonato", 3);
         Debug.Log("Número de partidas seleccionadas: " + partidasSeleccionadas);
         SceneManager.LoadScene(4);
-      
+
     }
-   
+
     public void ScoreBoardScene()
     {
         SceneManager.LoadScene(5);
@@ -107,7 +120,7 @@ public class UiManager : MonoBehaviour
     public void TutorialScene()
     {
         PlayerPrefs.SetInt("ModoCampeonato", 0);
-       // SceneManager.LoadScene(3);
+        SceneManager.LoadScene(7);
     }
 
     public void SettingsButton()
@@ -123,10 +136,10 @@ public class UiManager : MonoBehaviour
 
     public void LoadHub()
     {
-        
+
         PlayerPrefs.SetInt("ModoCampeonato", 0);
         SceneManager.LoadScene(1);
-       
+
     }
 
     public void OpenSettings()
@@ -147,7 +160,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 0);
         PlayerPrefs.Save();
-        
+
         //wonText.SetActive(true);
         //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
@@ -156,7 +169,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("FINISHGAME", 1);
         PlayerPrefs.Save();
-        
+
         //resetText.SetActive(true);
         //StartCoroutine(DeactivateTextAfterDelay(2f));
     }
@@ -195,7 +208,7 @@ public class UiManager : MonoBehaviour
     {
         turnUI.GetComponent<TMP_Text>().text = content;
     }
- 
+
 
 
 }

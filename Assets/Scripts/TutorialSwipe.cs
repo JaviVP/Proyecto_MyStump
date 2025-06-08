@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialSwipeBasicoConBotones : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -20,7 +21,7 @@ public class TutorialSwipeBasicoConBotones : MonoBehaviour, IDragHandler, IBegin
     void Start()
     {
         rt = GetComponent<RectTransform>();
-        totalPaginas = rt.childCount; 
+        totalPaginas = rt.childCount;
         destino = rt.anchoredPosition;
 
         PosicionarPaginas();
@@ -87,11 +88,24 @@ public class TutorialSwipeBasicoConBotones : MonoBehaviour, IDragHandler, IBegin
     {
         int nuevaPagina = paginaActual + direccion;
 
+        // SI ESTÁS EN LA ÚLTIMA PÁGINA Y LE DAS A LA DERECHA
+        if (paginaActual == totalPaginas - 1 && direccion > 0)
+        {
+            FinalizarTutorial();
+            return;
+        }
+
         if (nuevaPagina >= 0 && nuevaPagina < totalPaginas)
         {
             paginaActual = nuevaPagina;
             destino = -Vector2.right * (paginaActual * anchoPagina);
             moviendo = true;
         }
+    }
+
+    public void FinalizarTutorial()
+    {
+        PlayerPrefs.SetInt("Tutorial", 1);
+        SceneManager.LoadScene(3);
     }
 }
