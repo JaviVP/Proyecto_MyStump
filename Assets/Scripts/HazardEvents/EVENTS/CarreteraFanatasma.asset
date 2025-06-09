@@ -14,10 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventBackground: {fileID: 21300000, guid: 4e0dadca37250ce4bbecf7fd7d45e457, type: 3}
   eventMainImage: {fileID: 21300000, guid: a8b98a97201ac8f4fa28f6995b3ca1b8, type: 3}
-  eventName: Carretera Fantasma
-  description: "Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas dominadas."
-  lore: "Carreteras como la Transamaz\xF3nica han facilitado la colonizaci\xF3n y
-    deforestaci\xF3n, modificando el ecosistema."
+  eventNameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173031912108032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  descriptionLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173037515698176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  loreLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173041290571776
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}
@@ -36,3 +59,6 @@ MonoBehaviour:
     amountOfTiles: 4
   tier3:
     amountOfTiles: 6
+  references:
+    version: 2
+    RefIds: []

@@ -167,6 +167,119 @@ MonoBehaviour:
       can move, you win the match. '
     m_Metadata:
       m_Items: []
+  - m_Id: 39173041290571776
+    m_Localized: Roads like the Trans-Amazonian have enabled colonization and deforestation,
+      altering the ecosystem.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173037515698176
+    m_Localized: Up to 2/4/6 tiles will be claimed by the player with fewer controlled
+      tiles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173031912108032
+    m_Localized: Ghost Road
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173043794571264
+    m_Localized: Oil Spill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045191274496
+    m_Localized: Up to 1/2/4 tiles are permanently blocked.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045967220736
+    m_Localized: Spills caused by corporations have led to massive ecological disasters.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173046692835328
+    m_Localized: Rubber Dispute
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173047422644224
+    m_Localized: Up to 2/4/6 tiles are altered, affecting both players.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048206979072
+    m_Localized: Land conflicts in Amazonian history have displaced communities and
+      disrupted territorial balance.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048924205056
+    m_Localized: The River of Fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173049670791168
+    m_Localized: Up to 3/5/7 tiles are blocked for 2 turns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173050429960192
+    m_Localized: Fires set to clear land have destroyed thousands of hectares.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173051876995072
+    m_Localized: Urban Expansion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173052631969792
+    m_Localized: Up to 2/4/6 tiles will be claimed by the player with fewer controlled
+      tiles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173053382750208
+    m_Localized: "Cities like Manaus and Bel\xE9m expanded rapidly, impacting the
+      Amazon rainforest."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054116753408
+    m_Localized: Mercury Mining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054888505344
+    m_Localized: Up to 1/2/4 tiles in the leading territory are permanently blocked.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173063268724736
+    m_Localized: Illegal mining has poisoned lands, rendering them uninhabitable.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173071485366272
+    m_Localized: "The River\u2019s Pulse"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173074232635392
+    m_Localized: Up to 4/6/8 controlled tiles are wiped for 2 turns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173076652748800
+    m_Localized: The Amazon's flood pulse reshapes landscapes and ecosystems.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173079957860352
+    m_Localized: Extreme Drought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173082436694016
+    m_Localized: Up to 2/3/5 tiles are blocked for 2 turns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173084621926400
+    m_Localized: In 2023, severe droughts dried up rivers, isolating communities.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173086815547392
+    m_Localized: Tropical Storm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173088807841792
+    m_Localized: Up to 2/3/5 tiles are permanently blocked.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173091408310272
+    m_Localized: Amazonian lightning storms reshape the land within hours.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

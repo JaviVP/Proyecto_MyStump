@@ -147,6 +147,114 @@ MonoBehaviour:
     m_Key: InfoWin3
     m_Metadata:
       m_Items: []
+  - m_Id: 39173031912108032
+    m_Key: Hazard_RoadGhost_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173037515698176
+    m_Key: Hazard_RoadGhost_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173041290571776
+    m_Key: Hazard_RoadGhost_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173043794571264
+    m_Key: Hazard_OilSpill_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045191274496
+    m_Key: Hazard_OilSpill_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045967220736
+    m_Key: Hazard_OilSpill_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173046692835328
+    m_Key: Hazard_RubberDispute_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173047422644224
+    m_Key: Hazard_RubberDispute_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048206979072
+    m_Key: Hazard_RubberDispute_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048924205056
+    m_Key: Hazard_RiverOfFire_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173049670791168
+    m_Key: Hazard_RiverOfFire_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173050429960192
+    m_Key: Hazard_RiverOfFire_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173051876995072
+    m_Key: Hazard_UrbanExpansion_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173052631969792
+    m_Key: Hazard_UrbanExpansion_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173053382750208
+    m_Key: Hazard_UrbanExpansion_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054116753408
+    m_Key: Hazard_MercuryMining_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054888505344
+    m_Key: Hazard_MercuryMining_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173063268724736
+    m_Key: Hazard_MercuryMining_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173071485366272
+    m_Key: Hazard_RiversPulse_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173074232635392
+    m_Key: Hazard_RiversPulse_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173076652748800
+    m_Key: Hazard_RiversPulse_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173079957860352
+    m_Key: Hazard_ExtremeDrought_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173082436694016
+    m_Key: Hazard_ExtremeDrought_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173084621926400
+    m_Key: Hazard_ExtremeDrought_Lore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173086815547392
+    m_Key: Hazard_TropicalStorm_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173088807841792
+    m_Key: Hazard_TropicalStorm_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173091408310272
+    m_Key: Hazard_TropicalStorm_Lore
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

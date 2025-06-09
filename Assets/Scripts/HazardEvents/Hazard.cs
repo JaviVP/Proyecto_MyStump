@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Rendering;
 using static GameManager;
 
@@ -10,9 +11,9 @@ public class Hazard : ScriptableObject
     [Header("Content Data")]
     public Sprite eventBackground;
     public Sprite eventMainImage;
-    public string eventName;
-    public string description;
-    public string lore;
+    public LocalizedString eventNameLocalized;
+    public LocalizedString descriptionLocalized;
+    public LocalizedString loreLocalized;
 
     [Header("General Settings")]
     public GameObject extraPropPrefab;
@@ -87,7 +88,7 @@ public class Hazard : ScriptableObject
             }
         }
 
-        Debug.Log($"[Hazard] Executing {eventName} | Tier {tier} | Affecting {selectedTier.amountOfTiles} tiles");
+        Debug.Log($"[Hazard] Executing {eventNameLocalized} | Tier {tier} | Affecting {selectedTier.amountOfTiles} tiles");
 
         List<HexTile> candidateTiles = GetAffectedTiles(area, whoIsAffected);
         candidateTiles.Shuffle();
@@ -104,7 +105,7 @@ public class Hazard : ScriptableObject
         }
 
         if (applied < selectedTier.amountOfTiles)
-            Debug.Log($"Hazard '{eventName}' applied to {applied} out of {selectedTier.amountOfTiles} requested tiles.");
+            Debug.Log($"Hazard '{eventNameLocalized}' applied to {applied} out of {selectedTier.amountOfTiles} requested tiles.");
     }
 
     private List<HexTile> GetAffectedTiles(AreaAffected areaType, WhoIsAffected targeting)

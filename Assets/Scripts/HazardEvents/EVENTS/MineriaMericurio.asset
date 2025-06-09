@@ -14,11 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventBackground: {fileID: 21300000, guid: 17d104792ee21994ea158f585e063e13, type: 3}
   eventMainImage: {fileID: 21300000, guid: 80aabf7ef8eae314cbf809bbf51af61a, type: 3}
-  eventName: "Miner\xEDa de Mercurio "
-  description: "1/2/4 casillas en el territorio con m\xE1s casillas dominadas quedan
-    bloqueadas permanentemente."
-  lore: "La miner\xEDa ilegal ha dejado tierras contaminadas con mercurio, haciendo
-    que muchas zonas sean inhabitables."
+  eventNameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173054116753408
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  descriptionLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173054888505344
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  loreLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173063268724736
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   extraPropPrefab: {fileID: 2418655669915398152, guid: d19be18247ecc2e49abeec1b2fd475d5, type: 3}
   tileToChangeMaterial: {fileID: 2100000, guid: a627ac0590a63c7478be17641edfdda8, type: 2}
   posprocessing: {fileID: 0}
@@ -37,3 +59,6 @@ MonoBehaviour:
     amountOfTiles: 2
   tier3:
     amountOfTiles: 4
+  references:
+    version: 2
+    RefIds: []

@@ -169,7 +169,6 @@ public class HazardManager : MonoBehaviour
     }
     public void LaunchHazardUI()
     {
-        
         int currentTurn = GameManager.Instance.numericCurrentTurn;
 
         if (HazardByTurn.TryGetValue(currentTurn, out Hazard hazard))
@@ -178,12 +177,9 @@ public class HazardManager : MonoBehaviour
             Debug.Log("THERE SHOULD HAVE BEEN AN EVENT");
             hazardPanel.SetActive(true);
 
-            // Assign content from eventData
+            // Sprites
             eventImage.sprite = hazard.eventMainImage;
             eventBackgroundImage.sprite = hazard.eventBackground;
-            eventNameText.text = hazard.eventName;
-            descriptionText.text = hazard.description;
-            loreText.text = hazard.lore;
 
             // Reset alphas
             SetAlpha(BlackFade, 0f);
@@ -192,22 +188,41 @@ public class HazardManager : MonoBehaviour
             SetAlpha(descriptionText, 0f);
             SetAlpha(loreText, 0f);
 
-            // Assign tap handler
+            // Limpiar textos mientras cargan
+            eventNameText.text = "";
+            descriptionText.text = "";
+            loreText.text = "";
+
+            // Cargar textos localizados
+            hazard.eventNameLocalized.GetLocalizedStringAsync().Completed += handle =>
+            {
+                if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+                    eventNameText.text = handle.Result;
+            };
+
+            hazard.descriptionLocalized.GetLocalizedStringAsync().Completed += handle =>
+            {
+                if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+                    descriptionText.text = handle.Result;
+            };
+
+            hazard.loreLocalized.GetLocalizedStringAsync().Completed += handle =>
+            {
+                if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+                    loreText.text = handle.Result;
+            };
+
+            // Tap para continuar
             hazardPanel.GetComponent<Button>().onClick.RemoveAllListeners();
             hazardPanel.GetComponent<Button>().onClick.AddListener(OnTap);
 
-            // Start coroutine
             StartCoroutine(EventSequence());
         }
         else
         {
             Debug.Log($"<color=grey>No hazard assigned for turn {currentTurn}.</color>");
         }
-
-
-
     }
-
     private IEnumerator EventSequence()
     {
         skipRequested = false;

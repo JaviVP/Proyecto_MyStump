@@ -14,10 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventBackground: {fileID: 21300000, guid: 6067ab6c95663954fb6c0eaeb0fbb217, type: 3}
   eventMainImage: {fileID: 21300000, guid: 5ae6cea171a0dab4294820e73fe8ea6c, type: 3}
-  eventName: 'Disputa del caucho '
-  description: Hasta 2/4/6 casillas son modificadas, afectando a ambos jugadores.
-  lore: En la historia del Amazonas, los conflictos por tierras han desplazado comunidades
-    y alterando el equilibrio del territorio.
+  eventNameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173046692835328
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  descriptionLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173047422644224
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  loreLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173048206979072
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 0}
   posprocessing: {fileID: 0}
@@ -36,3 +59,6 @@ MonoBehaviour:
     amountOfTiles: 4
   tier3:
     amountOfTiles: 6
+  references:
+    version: 2
+    RefIds: []

@@ -170,6 +170,123 @@ MonoBehaviour:
       pot moure\u2019s, guanyes la partida. "
     m_Metadata:
       m_Items: []
+  - m_Id: 39173037515698176
+    m_Localized: Fins a 2/4/6 caselles seran del jugador amb menys caselles controlades.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173031912108032
+    m_Localized: Carretera fantasma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173041290571776
+    m_Localized: "Carreteres com la Transamaz\xF2nica han facilitat la colonitzaci\xF3
+      i la desforestaci\xF3, modificant l\u2019ecosistema."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173043794571264
+    m_Localized: Abocament de petroli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045191274496
+    m_Localized: Fins a 1/2/4 caselles queden bloquejades permanentment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045967220736
+    m_Localized: "Els abocaments provocats per empreses han causat desastres ecol\xF2gics
+      massius."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173046692835328
+    m_Localized: "Disputa del cautx\xFA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173047422644224
+    m_Localized: "Fins a 2/4/6 caselles s\xF3n modificades, afectant tots dos jugadors."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048206979072
+    m_Localized: "Els conflictes per terres a l\u2019Amaz\xF2nia han despla\xE7at
+      comunitats i trencat l\u2019equilibri territorial."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048924205056
+    m_Localized: El riu de foc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173049670791168
+    m_Localized: Fins a 3/5/7 caselles queden bloquejades durant 2 torns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173050429960192
+    m_Localized: "Els incendis provocats per desbrossar terres han destru\xEFt milers
+      d\u2019hect\xE0rees."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173051876995072
+    m_Localized: "Expansi\xF3 urbana"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173052631969792
+    m_Localized: Fins a 2/4/6 caselles seran del jugador amb menys caselles controlades.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173053382750208
+    m_Localized: "Ciutats com Manaus i Bel\xE9m van cr\xE9ixer r\xE0pidament, afectant
+      la selva amaz\xF2nica."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054116753408
+    m_Localized: Mineria de mercuri
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054888505344
+    m_Localized: "Fins a 1/2/4 caselles al territori amb m\xE9s control queden bloquejades
+      permanentment."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173063268724736
+    m_Localized: "La mineria il\xB7legal ha contaminat terres, fent-les inhabitables."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173071485366272
+    m_Localized: El pols del riu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173074232635392
+    m_Localized: Fins a 4/6/8 caselles controlades desapareixen durant 2 torns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173076652748800
+    m_Localized: "El pols d\u2019inundaci\xF3 de l\u2019Amaz\xF2nia transforma paisatges
+      i ecosistemes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173079957860352
+    m_Localized: Sequera extrema
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173082436694016
+    m_Localized: Fins a 2/3/5 caselles queden bloquejades durant 2 torns.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173084621926400
+    m_Localized: "El 2023, la sequera extrema va fer desapar\xE8ixer rius i a\xEFllar
+      comunitats."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173086815547392
+    m_Localized: Tempesta tropical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173088807841792
+    m_Localized: Fins a 2/3/5 caselles queden bloquejades permanentment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173091408310272
+    m_Localized: "Les tempestes el\xE8ctriques amaz\xF2niques transformen el paisatge
+      en q\xFCesti\xF3 d\u2019hores."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

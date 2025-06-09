@@ -14,10 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventBackground: {fileID: 21300000, guid: 4637a75263740c147bfa3154078730dc, type: 3}
   eventMainImage: {fileID: 21300000, guid: 8a74ab4f29e5fbe4c96b39617414eb3e, type: 3}
-  eventName: "El Pulso del R\xEDo:  "
-  description: 'Se borran hasta 4/6/8 casillas dominadas durante 2 turnos '
-  lore: "Inspiraci\xF3n: El pulso de inundaci\xF3n del Amazonas, aumenta el nivel
-    del agua alterando los paisajes y ecosistemas.    "
+  eventNameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173071485366272
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  descriptionLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173074232635392
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  loreLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:07e3614aeec5fa241a8172b043bfb7b8
+    m_TableEntryReference:
+      m_KeyId: 39173076652748800
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   extraPropPrefab: {fileID: 0}
   tileToChangeMaterial: {fileID: 2100000, guid: ea7cdfcb982d15d488a05d3c186a8c09, type: 2}
   posprocessing: {fileID: 0}
@@ -36,3 +59,6 @@ MonoBehaviour:
     amountOfTiles: 6
   tier3:
     amountOfTiles: 8
+  references:
+    version: 2
+    RefIds: []

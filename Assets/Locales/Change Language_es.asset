@@ -168,6 +168,122 @@ MonoBehaviour:
       ellas puede moverse, ganas la partida. '
     m_Metadata:
       m_Items: []
+  - m_Id: 39173041290571776
+    m_Localized: "Carreteras como la Transamaz\xF3nica han facilitado la colonizaci\xF3n
+      y deforestaci\xF3n, modificando el ecosistema."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173037515698176
+    m_Localized: "Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas dominadas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173031912108032
+    m_Localized: Carretera fantasma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173043794571264
+    m_Localized: Derrame Petrolero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045191274496
+    m_Localized: Hasta 1/2/4 casillas quedan bloqueadas permanentemente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173045967220736
+    m_Localized: "Derrames de vertidos provocados por empresas han causado desastres
+      ecol\xF3gicos masivos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173046692835328
+    m_Localized: Disputa del caucho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173047422644224
+    m_Localized: Hasta 2/4/6 casillas son modificadas, afectando a ambos jugadores.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048206979072
+    m_Localized: En la historia del Amazonas, los conflictos por tierras han desplazado
+      comunidades y alterado el equilibrio del territorio.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173048924205056
+    m_Localized: "El r\xEDo de fuego"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173049670791168
+    m_Localized: Hasta 3/5/7 casillas quedan bloqueadas por 2 turnos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173050429960192
+    m_Localized: "Los incendios provocados para despejar tierras han destruido miles
+      de hect\xE1reas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173051876995072
+    m_Localized: "Expansi\xF3n Urbana"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173052631969792
+    m_Localized: "Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas dominadas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173053382750208
+    m_Localized: "Ciudades como Manaos y Bel\xE9m crecieron r\xE1pidamente, afectando
+      a la selva amaz\xF3nica."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054116753408
+    m_Localized: "Miner\xEDa de Mercurio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173054888505344
+    m_Localized: "Hasta 1/2/4 casillas en el territorio con m\xE1s casillas dominadas
+      quedan bloqueadas permanentemente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173063268724736
+    m_Localized: "La miner\xEDa ilegal ha contaminado tierras, volvi\xE9ndolas inhabitables."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173071485366272
+    m_Localized: "El Pulso del R\xEDo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173074232635392
+    m_Localized: Se borran hasta 4/6/8 casillas dominadas durante 2 turnos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173076652748800
+    m_Localized: El pulso del Amazonas altera paisajes y ecosistemas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173079957860352
+    m_Localized: "Sequ\xEDa Extrema"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173082436694016
+    m_Localized: Hasta 2/3/5 casillas quedan bloqueadas por 2 turnos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173084621926400
+    m_Localized: "En 2023, varios r\xEDos desaparecieron por las sequ\xEDas, aislando
+      comunidades."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173086815547392
+    m_Localized: "Tormenta del Tr\xF3pico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173088807841792
+    m_Localized: Hasta 2/3/5 casillas quedan bloqueadas permanentemente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39173091408310272
+    m_Localized: "Las tormentas el\xE9ctricas del Amazonas transforman el paisaje
+      en cuesti\xF3n de horas."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
