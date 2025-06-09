@@ -249,7 +249,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173074232635392
-    m_Localized: Up to 4/6/8 controlled tiles are wiped for 2 turns.
+    m_Localized: Up to 4/6/8 controlled tiles are wiped.
     m_Metadata:
       m_Items: []
   - m_Id: 39173076652748800

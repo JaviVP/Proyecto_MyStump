@@ -251,7 +251,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173074232635392
-    m_Localized: Se borran hasta 4/6/8 casillas dominadas durante 2 turnos.
+    m_Localized: Se borran hasta 4/6/8 casillas dominadas.
     m_Metadata:
       m_Items: []
   - m_Id: 39173076652748800
