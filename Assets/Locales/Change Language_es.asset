@@ -284,6 +284,61 @@ MonoBehaviour:
       en cuesti\xF3n de horas."
     m_Metadata:
       m_Items: []
+  - m_Id: 39189924135923712
+    m_Localized: Partidas Ganadas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39190130055278592
+    m_Localized: "Puntuaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39191816186458112
+    m_Localized: "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n                     
+      BugZonia\r\n              Un juego creado por MossByte\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      EQUIPO DE DISE\xD1O DE JUEGO\r\n         Iv\xE1n Berlanga \u2013 Director de
+      Arte, Game Design  \r\n         Vladislav Skorokhodov \u2013 Programaci\xF3n,
+      Game Design  \r\n         Javier Valencia \u2013 Direcci\xF3n, Game Design,
+      VFX  \r\n         Victor Bosch \u2013 Lead Programmer, Game Design, Producci\xF3n 
+      \r\n\r\n                   EQUIPO DE DESARROLLO\r\n         Victor Bosch \u2013
+      Lead Programmer, Build/Test  \r\n         Vladislav Skorokhodov \u2013 Programador
+      de Gameplay y UI  \r\n         Victor Bosch \u2013 Programador de Gr\xE1ficos
+      y Sistemas  \r\n\r\n                   ARTE Y ANIMACI\xD3N\r\n         Iv\xE1n
+      Berlanga \u2013 Director de Arte  \r\n         Guillem Rovira \u2013 Artista
+      3D, Dise\xF1ador UI/UX  \r\n         Javier Valencia \u2013 Animaciones, VFX 
+      \r\n\r\n                      EQUIPO DE AUDIO\r\n         DJP Music School
+      \u2013 M\xFAsica y Sonido Original  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      AGRADECIMIENTOS ESPECIALES\r\n         A nuestras familias y amigos por su
+      apoyo  \r\n         A los profesores que nos guiaron  \r\n         A los testers
+      que encontraron lo oculto  \r\n         Y a la comunidad indie que inspira
+      d\xEDa a d\xEDa  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n        
+      M\xDASICA POR: DJP Music School  \r\n         EFECTOS DE SONIDO POR: DJP Music
+      School  \r\n\r\n         RECURSOS ADICIONALES:\r\n           \u2022 Unity Engine 
+      \u2022 Ilustrator\r\n           \u2022 Photoshop     \u2022 Z-Brush\r\n          
+      \u2022 Maya              \u2022 Designer\r\n           \u2022 Substance    
+      \u2022 Fmod\r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n           
+      \xA1GRACIAS POR JUGAR A BUGZONIA!\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39194227806400512
+    m_Localized: 'Calidad:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39198956347289600
+    m_Localized: Alta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199139701288960
+    m_Localized: Media
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199215114874880
+    m_Localized: Baja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199271628926976
+    m_Localized: Muy Baja
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

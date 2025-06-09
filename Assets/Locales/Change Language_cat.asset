@@ -287,6 +287,61 @@ MonoBehaviour:
       en q\xFCesti\xF3 d\u2019hores."
     m_Metadata:
       m_Items: []
+  - m_Id: 39189924135923712
+    m_Localized: Partides Guanyades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39190130055278592
+    m_Localized: "Puntuaci\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39191816186458112
+    m_Localized: "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n                     
+      BugZonia\r\n               Un joc creat per MossByte\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      EQUIP DE DISSENY DE JOC\r\n         Iv\xE1n Berlanga \u2013 Director d\u2019Art,
+      Game Design  \r\n         Vladislav Skorokhodov \u2013 Programaci\xF3, Game
+      Design  \r\n         Javier Valencia \u2013 Direcci\xF3, Game Design, VFX 
+      \r\n         Victor Bosch \u2013 Lead Programmer, Game Design, Producci\xF3 
+      \r\n\r\n                   EQUIP DE DESENVOLUPAMENT\r\n         Victor Bosch
+      \u2013 Lead Programmer, Build/Test  \r\n         Vladislav Skorokhodov \u2013
+      Programador de Gameplay i UI  \r\n         Victor Bosch \u2013 Programador
+      de Gr\xE0fics i Sistemes  \r\n\r\n                   ART I ANIMACI\xD3\r\n        
+      Iv\xE1n Berlanga \u2013 Director d\u2019Art  \r\n         Guillem Rovira \u2013
+      Artista 3D, Dissenyador UI/UX  \r\n         Javier Valencia \u2013 Animacions,
+      VFX  \r\n\r\n                      EQUIP DE SO\r\n         DJP Music School
+      \u2013 M\xFAsica i so original  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      AGRA\xCFMENTS ESPECIALS\r\n         A les nostres fam\xEDlies i amics pel seu
+      suport  \r\n         Als professors que ens van guiar  \r\n         Als testers
+      que van trobar all\xF2 ocult  \r\n         I a la comunitat indie que ens inspira
+      cada dia  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n        
+      M\xDASICA PER: DJP Music School  \r\n         EFECTES DE SO PER: DJP Music
+      School  \r\n\r\n         RECURSOS ADDICIONALS:\r\n           \u2022 Unity Engine 
+      \u2022 Ilustrator\r\n           \u2022 Photoshop     \u2022 Z-Brush\r\n          
+      \u2022 Maya              \u2022 Designer\r\n           \u2022 Substance    
+      \u2022 Fmod\r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n           
+      GR\xC0CIES PER JUGAR A BUGZONIA\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39194227806400512
+    m_Localized: 'Qualitat:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39198956347289600
+    m_Localized: Alta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199139701288960
+    m_Localized: Mitja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199215114874880
+    m_Localized: Baixa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199271628926976
+    m_Localized: Molt Baixa
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

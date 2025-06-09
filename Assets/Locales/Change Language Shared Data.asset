@@ -255,6 +255,38 @@ MonoBehaviour:
     m_Key: Hazard_TropicalStorm_Lore
     m_Metadata:
       m_Items: []
+  - m_Id: 39189924135923712
+    m_Key: GamesWonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39190130055278592
+    m_Key: ScoreText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39191816186458112
+    m_Key: CreditsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39194227806400512
+    m_Key: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39198956347289600
+    m_Key: PerformanceTier.High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199139701288960
+    m_Key: PerformanceTier.Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199215114874880
+    m_Key: PerformanceTier.Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199271628926976
+    m_Key: PerformanceTier.UltraLow
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

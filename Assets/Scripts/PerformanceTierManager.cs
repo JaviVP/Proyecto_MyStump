@@ -9,7 +9,7 @@ public enum PerformanceTier
 public class PerformanceTierManager : MonoBehaviour
 {
     public static PerformanceTierManager Instance;
-    public static PerformanceTier CurrentTier = PerformanceTier.Medium;
+    public static PerformanceTier CurrentTier = PerformanceTier.High;
 
     void Awake()
     {

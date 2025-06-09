@@ -280,6 +280,59 @@ MonoBehaviour:
     m_Localized: Amazonian lightning storms reshape the land within hours.
     m_Metadata:
       m_Items: []
+  - m_Id: 39189924135923712
+    m_Localized: Games Won
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39190130055278592
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39191816186458112
+    m_Localized: "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n                     
+      BugZonia\r\n              A Game Crafted by MossByte\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      GAME DESIGN TEAM\r\n         Iv\xE1n Berlanga \u2013 Art Director, Game Design 
+      \r\n         Vladislav Skorokhodov \u2013 Programming, Game Design  \r\n        
+      Javier Valencia \u2013 Direction, Game Design, VFX  \r\n         Victor Bosch
+      \u2013 Lead Programmer, Game Design, Production  \r\n\r\n                  
+      DEVELOPMENT TEAM\r\n         Victor Bosch \u2013 Lead Programmer, Build/Test 
+      \r\n         Vladislav Skorokhodov \u2013 Gameplay & UI Programmer  \r\n        
+      Victor Bosch \u2013 Graphics & System Programmer  \r\n\r\n                  
+      ART & ANIMATION\r\n         Iv\xE1n Berlanga \u2013 Art Director  \r\n        
+      Guillem Rovira \u2013 3D Artist, UI/UX Designer  \r\n         Javier Valencia
+      \u2013 Animations, VFX  \r\n\r\n                      AUDIO TEAM\r\n        
+      DJP Music School \u2013 Original Music & Sound  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n                  
+      SPECIAL THANKS TO\r\n         Our families and friends for their support  \r\n        
+      The teachers who guided us  \r\n         The testers who uncovered the hidden 
+      \r\n         And the indie community that inspires us every day  \r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n        
+      MUSIC BY: DJP Music School  \r\n         SOUND EFFECTS BY: DJP Music School 
+      \r\n\r\n         ADDITIONAL ASSETS:\r\n           \u2022 Unity Engine  \u2022
+      Illustrator\r\n           \u2022 Photoshop     \u2022 Z-Brush\r\n          
+      \u2022 Maya              \u2022 Designer\r\n           \u2022 Substance    
+      \u2022 Fmod\r\n\r\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\r\n\r\n           
+      THANK YOU FOR PLAYING BUGZONIA\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39194227806400512
+    m_Localized: 'Quality:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39198956347289600
+    m_Localized: High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199139701288960
+    m_Localized: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199215114874880
+    m_Localized: Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39199271628926976
+    m_Localized: Ultra Low
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
