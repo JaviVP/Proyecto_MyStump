@@ -90,6 +90,84 @@ MonoBehaviour:
     m_Localized: Asociaciones
     m_Metadata:
       m_Items: []
+  - m_Id: 39145605035290624
+    m_Localized: "Colocaci\xF3n de piezas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39145779602223104
+    m_Localized: "Al comenzar la partida, cada jugador deber\xE1 colocar sus piezas
+      en su mitad del campo. \r\nSiempre empiezan colocando las termitas y despu\xE9s
+      las hormigas. \r\nEn cada partida, las piezas se colocan en un orden sorpresa.
+      \r\nEl orden se indicar\xE1 mediante los s\xEDmbolos de las bandas. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146027116490752
+    m_Localized: "C\xF3mo se mueven las piezas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146332751228928
+    m_Localized: "Cada jugador tiene tres piezas diferentes, y cada una se mueve
+      de forma especial. \r\nCuando una pieza se mueve, las casillas por las que
+      pasa cambian de color."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146944188477440
+    m_Localized: "Se mueve exactamente 3 casillas. \r\nSe detendr\xE1 si encuentra
+      una casilla del color del equipo contrario o una casilla bloqueada por eventos. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146964480520192
+    m_Localized: "Es la \xFAnica que puede caminar por casillas del color del oponente.
+      \r\nSe mueve casilla a casilla, pero si est\xE1 conectada con casillas de su
+      color, puede moverse libremente dentro de esa zona. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146990233546752
+    m_Localized: "Puede hacer dos movimientos seguidos. \r\nSi despu\xE9s del primer
+      movimiento est\xE1 al lado de una pieza enemiga, podr\xE1 empujarla hasta que
+      choque con el borde del campo o con una casilla bloqueada. \r\nTodas las casillas
+      por las que pasa cambian a tu color. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147465288806400
+    m_Localized: Eventos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147594028773376
+    m_Localized: "Durante la partida ocurrir\xE1n eventos que atravesar\xE1n la Amazonia.
+      \r\nEstos eventos afectar\xE1n el campo bloqueando casillas o transform\xE1ndolas
+      en otros colores. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147813009190912
+    m_Localized: Capturar piezas enemigas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147837709447168
+    m_Localized: "Si rodeas una pieza rival con casillas de tu color, la pieza quedar\xE1
+      capturada y no se podr\xE1 usar durante el resto de la partida. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148011777257472
+    m_Localized: "C\xF3mo ganar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148288362246144
+    m_Localized: "La partida dura 40 turnos. Puedes ganar de distintas maneras: \r\nPor
+      dominio: Si se acaban los turnos o todas las casillas est\xE1n pintadas, gana
+      quien tenga m\xE1s casillas de su color. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148529127878656
+    m_Localized: "Captura de bandera: Cada jugador tiene una bandera. Si rodeas la
+      bandera del oponente con tus colores, ganas autom\xE1ticamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148643183587328
+    m_Localized: 'Captura total: Si capturas dos piezas del enemigo o ninguna de
+      ellas puede moverse, ganas la partida. '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

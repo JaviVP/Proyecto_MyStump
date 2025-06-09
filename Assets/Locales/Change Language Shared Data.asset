@@ -87,6 +87,66 @@ MonoBehaviour:
     m_Key: Associations
     m_Metadata:
       m_Items: []
+  - m_Id: 39145605035290624
+    m_Key: Placement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39145779602223104
+    m_Key: InfoPlacement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146027116490752
+    m_Key: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146332751228928
+    m_Key: InfoMovement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146944188477440
+    m_Key: Runner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146964480520192
+    m_Key: Terraformer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146990233546752
+    m_Key: Bouncer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147465288806400
+    m_Key: Events
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147594028773376
+    m_Key: InfoEvents
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147813009190912
+    m_Key: Capture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147837709447168
+    m_Key: InfoCapture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148011777257472
+    m_Key: WinCondt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148288362246144
+    m_Key: InfoWin1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148529127878656
+    m_Key: InfoWin2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148643183587328
+    m_Key: InfoWin3
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

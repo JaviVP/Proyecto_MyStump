@@ -90,6 +90,86 @@ MonoBehaviour:
     m_Localized: Associacions
     m_Metadata:
       m_Items: []
+  - m_Id: 39145605035290624
+    m_Localized: "Col\xB7locaci\xF3 de peces"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39145779602223104
+    m_Localized: "En comen\xE7ar la partida, cada jugador haur\xE0 de col\xB7locar
+      les seves peces a la seva meitat del camp. \r\nSempre comencen col\xB7locant
+      les termites i despr\xE9s les formigues. \r\nA cada partida, les peces es col\xB7loquen
+      en un ordre sorpresa. \r\nL\u2019ordre es veur\xE0 indicat pels s\xEDmbols
+      de les bandes. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146027116490752
+    m_Localized: Com es mouen les peces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146332751228928
+    m_Localized: "Cada jugador t\xE9 tres peces diferents, i cadascuna es mou de
+      manera especial. \r\nQuan una pe\xE7a es mou, les caselles per on passa canvien
+      de color."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146944188477440
+    m_Localized: "Es mou 3 caselles. \r\nS\u2019aturar\xE0 davant de caselles del
+      color de l\u2019equip contrari o davant de caselles bloquejades per esdeveniments."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146964480520192
+    m_Localized: "\xC9s l\u2019\xFAnica que pot caminar per caselles del color de
+      l\u2019oponent. \r\nEs mou de casella en casella, per\xF2 si est\xE0 connectada
+      amb caselles del seu color, es pot moure lliurement dins d\u2019aquesta zona. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146990233546752
+    m_Localized: "Pot fer dos moviments seguits. \r\nSi despr\xE9s del primer moviment
+      es troba al costat d\u2019una pe\xE7a enemiga, la podr\xE0 emp\xE8nyer fins
+      que xoci amb el l\xEDmit del camp o amb una casella bloquejada.\nTotes les
+      caselles per on passa canviaran al teu color."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147465288806400
+    m_Localized: Esdeveniments
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147594028773376
+    m_Localized: "Durant la partida, ocorreran esdeveniments que travessaran l\u2019Amaz\xF2nia.
+      \r\nAquests esdeveniments afectaran el camp, bloquejant caselles o transformant-les
+      en altres colors. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147813009190912
+    m_Localized: Capturar peces enemigues
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147837709447168
+    m_Localized: "Si encercles una pe\xE7a del rival amb caselles del teu color,
+      la pe\xE7a quedar\xE0 capturada i ja no es podr\xE0 utilitzar durant la resta
+      de la partida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148011777257472
+    m_Localized: Com guanyar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148288362246144
+    m_Localized: "La partida dura 40 torns. Pots guanyar de diferents maneres: \r\nPer
+      domini: Si s\u2019acaben els torns o totes les caselles estan pintades, guanya
+      qui tingui m\xE9s caselles del seu color. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148529127878656
+    m_Localized: "Captura de bandera: Cada jugador t\xE9 una bandera. Si envoltes
+      la bandera de l\u2019oponent amb els teus colors, guanyes autom\xE0ticament. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148643183587328
+    m_Localized: "Captura total: Si captures dues peces de l\u2019enemic, o cap d\u2019elles
+      pot moure\u2019s, guanyes la partida. "
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

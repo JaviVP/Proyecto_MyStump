@@ -90,6 +90,83 @@ MonoBehaviour:
     m_Localized: Associations
     m_Metadata:
       m_Items: []
+  - m_Id: 39145605035290624
+    m_Localized: Piece Placement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39145779602223104
+    m_Localized: "At the start of the match, each player must place their pieces
+      on their side of the field. \r\nTermites always place first, followed by the
+      ants. \r\nIn each game, the pieces are placed in a surprise order. \r\nThe
+      order is indicated by the symbols on the bands. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146027116490752
+    m_Localized: How Pieces Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146332751228928
+    m_Localized: "Each player has three different pieces, and each one moves in a
+      unique way. \r\nWhen a piece moves, the tiles it passes over change to the
+      team\u2019s color."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146944188477440
+    m_Localized: "Moves exactly 3 tiles. \r\nIt will stop if it encounters a tile
+      of the opposing team\u2019s color or a tile blocked by an event. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146964480520192
+    m_Localized: "The only piece that can walk over tiles of the opponent\u2019s
+      color. \r\nMoves one tile at a time, but if it\u2019s connected to tiles of
+      its own color, it can move freely within that zone. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39146990233546752
+    m_Localized: "Can perform two consecutive movements. \r\nIf after the first move
+      it is next to an enemy piece, it can push it until it hits the edge of the
+      field or a blocked tile. \r\nAll tiles it passes through change to your team\u2019s
+      color. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147465288806400
+    m_Localized: Events
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147594028773376
+    m_Localized: "During the match, events will occur across the Amazon. \r\nThese
+      events affect the field by blocking tiles or transforming them into other colors. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147813009190912
+    m_Localized: Capturing Enemy Pieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39147837709447168
+    m_Localized: If you surround an enemy piece with tiles of your color, it becomes
+      captured and can no longer be used for the rest of the match.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148011777257472
+    m_Localized: How to Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148288362246144
+    m_Localized: "The match lasts 40 turns. You can win in several ways: \r\nBy dominance:
+      If all turns end or the board is fully painted, the player with the most tiles
+      in their color wins."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148529127878656
+    m_Localized: "Flag capture: Each player has a flag. If you surround the opponent\u2019s
+      flag with your colors, you win automatically. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39148643183587328
+    m_Localized: 'Total capture: If you capture two enemy pieces, or if none of them
+      can move, you win the match. '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
