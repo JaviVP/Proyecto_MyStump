@@ -342,6 +342,22 @@ MonoBehaviour:
     m_Localized: Molt Baixa
     m_Metadata:
       m_Items: []
+  - m_Id: 39522679524782080
+    m_Localized: Una altra?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39523314869563392
+    m_Localized: Final de Partida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39535162373271552
+    m_Localized: Ronda Acabada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39536091289972736
+    m_Localized: Fi del Campionat
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

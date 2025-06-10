@@ -333,6 +333,22 @@ MonoBehaviour:
     m_Localized: Ultra Low
     m_Metadata:
       m_Items: []
+  - m_Id: 39522679524782080
+    m_Localized: Another Go?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39523314869563392
+    m_Localized: Game Ended
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39535162373271552
+    m_Localized: Round Ended
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39536091289972736
+    m_Localized: Championship Finished
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
