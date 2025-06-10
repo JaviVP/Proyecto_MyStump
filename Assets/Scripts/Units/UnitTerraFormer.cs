@@ -87,44 +87,53 @@ public class UnitTerraFormer : Unit
 
     public override bool Move(Vector2Int targetPosition)
     {
-      
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         Vector2Int currentPos = AxialCoords;
 
-        
-        // ✅ 1️⃣ Ensure target tile is valid for movement
+        // 1️⃣ Verifica si la casilla objetivo es válida
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
             ClearHighlights();
             return false;
         }
 
-        // ✅ 2️⃣ Move the unit to the new position
-        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
-        //AxialCoords = targetPosition;
-        //transform.position = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+        // 2️⃣ Bloquea interacción y empieza la secuencia de movimiento
+        GameManager.Instance.LockTiles = true;
+        StartCoroutine(MoveWithConversion(targetTile, targetPosition, currentPos));
 
-        // ✅ 3️⃣ Convert **any stepped-on tile** to Terraformer's team
-        if ((Team == Team.Ants && targetTile.state == HexState.Termites) || (Team == Team.Termites && targetTile.state == HexState.Ants))
+        return true;
+    }
+
+    private IEnumerator MoveWithConversion(HexTile targetTile, Vector2Int targetPosition, Vector2Int currentPos)
+    {
+        //Ejecuta VFX y cambia el estado de la casilla antes de moverse
+        if ((Team == Team.Ants && targetTile.state == HexState.Termites) ||
+            (Team == Team.Termites && targetTile.state == HexState.Ants))
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
-        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
 
-        // ✅ 4️⃣ Clear highlights after moving
+        
+
+        //Espera breve para que el VFX se vea
+        yield return new WaitForSeconds(1.0f); // Ajusta el tiempo según tu VFX
+        targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
+        // Mueve la unidad a la nueva posición
+        hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
+
+        //5️⃣ Reproduce animación de movimiento si es necesario
+        if (currentPos != targetPosition && GetComponent<Animator>())
+        {
+            PoseTransition("Long");
+        }
+
+        //Limpia los highlights después del movimiento
         ClearHighlights();
 
-        GameManager.Instance.LockTiles = true;
-        StartCoroutine(Animation(targetPosition));
-        if (currentPos != targetPosition)
-        {
-            if (GetComponent<Animator>())
-            {
-                PoseTransition("Long");
-            }
-        }
-       
-        return true;
+        //Ejecuta la animación de desplazamiento visual
+        yield return StartCoroutine(Animation(targetPosition));
+
+        GameManager.Instance.LockTiles = false;
     }
 
     public override bool CanMove()
