@@ -90,14 +90,12 @@ public class UnitTerraFormer : Unit
         HexTile targetTile = hexGrid.GetHexTile(targetPosition);
         Vector2Int currentPos = AxialCoords;
 
-        // 1️⃣ Verifica si la casilla objetivo es válida
         if (targetTile == null || !validMoveTiles.Contains(targetTile))
         {
             ClearHighlights();
             return false;
         }
 
-        // 2️⃣ Bloquea interacción y empieza la secuencia de movimiento
         GameManager.Instance.LockTiles = true;
         StartCoroutine(MoveWithConversion(targetTile, targetPosition, currentPos));
 
@@ -106,22 +104,28 @@ public class UnitTerraFormer : Unit
 
     private IEnumerator MoveWithConversion(HexTile targetTile, Vector2Int targetPosition, Vector2Int currentPos)
     {
+        Vector3 lookAtPos = hexGrid.AxialToWorld(targetPosition.x, targetPosition.y);
+        lookAtPos.y = transform.position.y; // mantener la altura del personaje
+        transform.LookAt(lookAtPos);
         //Ejecuta VFX y cambia el estado de la casilla antes de moverse
         if ((Team == Team.Ants && targetTile.state == HexState.Termites) ||
             (Team == Team.Termites && targetTile.state == HexState.Ants))
         {
             transform.GetChild(0).gameObject.SetActive(true);
-        }
-
+            if (currentPos != targetPosition && GetComponent<Animator>())
+            {
+                PoseTransition("Short");
+            }
         
-
+       
         //Espera breve para que el VFX se vea
-        yield return new WaitForSeconds(1.0f); // Ajusta el tiempo según tu VFX
+                yield return new WaitForSeconds(1.0f);
+        } 
         targetTile.SetState(EnumHelper.ConvertToHexState(this.Team));
-        // Mueve la unidad a la nueva posición
+        //Mueve la unidad a la nueva posición
         hexGrid.UpdateUnitPosition(AxialCoords, targetPosition, this);
 
-        //5️⃣ Reproduce animación de movimiento si es necesario
+        //Reproduce animación de movimiento si es necesario
         if (currentPos != targetPosition && GetComponent<Animator>())
         {
             PoseTransition("Long");
