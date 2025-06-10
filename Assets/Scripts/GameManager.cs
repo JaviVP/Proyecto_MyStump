@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
 
                     if (clickedTile != null)
                         ProcessTileClick(clickedTile);
-                    logoController.ColocarPieza();
+                    
                 }
             }
         }
@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
 
                         if (clickedTile != null)
                             ProcessTileClick(clickedTile);
-                        logoController.ColocarPieza();
+                        
                     }
                     break;
             }
@@ -343,6 +343,7 @@ public class GameManager : MonoBehaviour
                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                     selected = false;
                     hexGrid.ResetTeamHalfHighlights();
+                    logoController.ColocarPieza();
                     //draftUnitIndex++;
                     SoundManager.instance.PlaySound("PlaceUnit");
 
@@ -364,6 +365,7 @@ public class GameManager : MonoBehaviour
                     CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
                     selected = false;
                     hexGrid.ResetTeamHalfHighlights();
+                    logoController.ColocarPieza();
                     draftUnitIndex++;
                     SoundManager.instance.PlaySound("PlaceUnit");
 

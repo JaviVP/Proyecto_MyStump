@@ -343,7 +343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9448a669bcc79d3499f80cb3476327d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4dfb1849e12c6e4cbf386826305fdad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9448a669bcc79d3499f80cb3476327d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4dfb1849e12c6e4cbf386826305fdad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4889,7 +4889,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 297174594}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: CloseSettings
         m_Mode: 1

@@ -2608,6 +2608,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6f2b8aeeb92b4ed4993806fd54f5cfc1, type: 3}
+    - target: {fileID: 5456284357284878052, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4dfb1849e12c6e4cbf386826305fdad, type: 3}
     - target: {fileID: 5994799967683403051, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_fontSize
       value: 48
@@ -2720,6 +2724,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 0.8901961
       objectReference: {fileID: 0}
+    - target: {fileID: 6849825692061975692, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4dfb1849e12c6e4cbf386826305fdad, type: 3}
     - target: {fileID: 6923199682900593567, guid: 81f63cc5ed5ae2d42946d71c2ddf1712, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -42
