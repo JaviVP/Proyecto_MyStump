@@ -23,6 +23,9 @@ public class Hazard : ScriptableObject
     public GameObject ScreenVFX;
     public int duration;
 
+    [Header("Audio Settings")]
+    public string hazardSFXName;
+
     private HexGrid hexGrid;
 
 
@@ -106,6 +109,11 @@ public class Hazard : ScriptableObject
 
         if (applied < selectedTier.amountOfTiles)
             Debug.Log($"Hazard '{eventNameLocalized}' applied to {applied} out of {selectedTier.amountOfTiles} requested tiles.");
+
+        if (!string.IsNullOrEmpty(hazardSFXName))
+        {
+            SoundManager.instance.PlaySound(hazardSFXName);
+        }
     }
 
     private List<HexTile> GetAffectedTiles(AreaAffected areaType, WhoIsAffected targeting)

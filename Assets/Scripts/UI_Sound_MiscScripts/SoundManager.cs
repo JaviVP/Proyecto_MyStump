@@ -157,9 +157,10 @@ public class SoundManager : MonoBehaviour
 
             if (categoryName == "Ambient")
             {
-                if (!ambienceSource.mute)
+                string currentScene = SceneManager.GetActiveScene().name;
+                if ((currentScene == "VladTEST" || currentScene == "Championship") && !ambienceSource.mute)
                 {
-                    ambienceSource.volume = 0.1f; // ajusta según necesites
+                    ambienceSource.volume = 0.1f;
                     ambienceSource.PlayOneShot(selectedClip);
                 }
             }
@@ -220,7 +221,12 @@ public class SoundManager : MonoBehaviour
 
         if (target != null)
         {
-            if (target != currentMusic || !musicSource.isPlaying)
+            if (Time.timeScale == 0)
+            {
+                musicSource.clip = target;
+                musicSource.Play();
+            }
+            else if (target != currentMusic)
             {
                 currentMusic = target;
                 if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
@@ -259,8 +265,24 @@ public class SoundManager : MonoBehaviour
     public void ToggleMusic(bool isOn)
     {
         musicSource.mute = !isOn;
-        if (!isOn) musicSource.Stop();
-        else PlayMusicForScene();
+
+        if (!isOn)
+        {
+            musicSource.Stop();
+            currentMusic = null;  // Reiniciar referencia para forzar recarga
+        }
+        else
+        {
+            // Si no está sonando música o el clip es null, forzamos que se reproduzca
+            if (!musicSource.isPlaying || musicSource.clip == null)
+            {
+                PlayMusicForScene();
+            }
+            else
+            {
+                musicSource.UnPause();
+            }
+        }
 
         PlayerPrefs.SetInt("MusicOn", isOn ? 1 : 0);
         PlayerPrefs.Save();
@@ -270,7 +292,15 @@ public class SoundManager : MonoBehaviour
     public void ToggleSFX(bool isOn)
     {
         sfxSource.mute = !isOn;
+        ambienceSource.mute = !isOn;
+
         PlayerPrefs.SetInt("SFXOn", isOn ? 1 : 0);
         PlayerPrefs.Save();
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+            musicSource.Stop();
     }
 }

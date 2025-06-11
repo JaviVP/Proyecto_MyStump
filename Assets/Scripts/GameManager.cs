@@ -649,11 +649,13 @@ public class GameManager : MonoBehaviour
                         CheckRounds();
                         if (winner == "Ants")
                         {
-                            AntImg.SetActive(true);
+                            AntImg.SetActive(true); 
+                          
                         }
                         else if (winner == "Termites")
                         {
                             TermImg.SetActive(true);
+                       
                         }
                          
                       
@@ -694,12 +696,20 @@ public class GameManager : MonoBehaviour
                 {
                     winner = "Termites";
                     TermImg.SetActive(true);
-                    
+                    SoundManager.instance.StopMusic();
+
+                    // Reproducir SFX de victoria
+                    SoundManager.instance.PlaySound("Victoria");
+
                 }
                 else if (PlayerPrefs.GetInt("TermCount") == 1)
                 {
                     winner = "Ants";
                     AntImg.SetActive(true);
+                    SoundManager.instance.StopMusic();
+
+                    // Reproducir SFX de victoria
+                    SoundManager.instance.PlaySound("Victoria");
                 }
 
                 // ✅ If a winner was found through base kill, stop here
@@ -723,6 +733,10 @@ public class GameManager : MonoBehaviour
                         winner = "Draw";
                         UiManager.Instance.UpdateUiTurn("Draw");
                         DrawImg.SetActive(true);
+                        SoundManager.instance.StopMusic();
+
+                        // Reproducir SFX de victoria
+                        SoundManager.instance.PlaySound("Victoria");
                     }
                     else
                     {
@@ -730,10 +744,18 @@ public class GameManager : MonoBehaviour
                         if (winner == "Ants")
                         {
                             AntImg.SetActive(true);
+                            SoundManager.instance.StopMusic();
+
+                            // Reproducir SFX de victoria
+                            SoundManager.instance.PlaySound("Victoria");
                         }
                         else if (winner == "Termites")
                         {
                             TermImg.SetActive(true);
+                            SoundManager.instance.StopMusic();
+
+                            // Reproducir SFX de victoria
+                            SoundManager.instance.PlaySound("Victoria");
                         }
 
                         inputPanel.SetActive(true);
@@ -821,6 +843,10 @@ public class GameManager : MonoBehaviour
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
+            SoundManager.instance.StopMusic();
+
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
         }
         else if (player2RoundsWon >= neededWins)
         {
@@ -831,6 +857,10 @@ public class GameManager : MonoBehaviour
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
+            SoundManager.instance.StopMusic();
+
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
         }
         else if (player1RoundsWon >= neededWins && player2RoundsWon >= neededWins)
         {
@@ -840,6 +870,10 @@ public class GameManager : MonoBehaviour
             inputPanel.SetActive(true);
             UiManager.Instance.TouchEnabled = false;
             gameOver = true;
+            SoundManager.instance.StopMusic();
+
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
         }
     }
 
@@ -863,6 +897,10 @@ public class GameManager : MonoBehaviour
                 roundsText.SetActive(true);
             }
             foreach (var txt in player1Texts) txt.text = player1RoundsWon.ToString();
+            SoundManager.instance.StopMusic();
+
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
 
         }
         else if (winner == "Ants" || PlayerPrefs.GetInt("TermCount") == 1)
@@ -882,10 +920,17 @@ public class GameManager : MonoBehaviour
                 roundsText.SetActive(true);
             }
             foreach (var txt in player2Texts) txt.text = player2RoundsWon.ToString();
+            SoundManager.instance.StopMusic();
+
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
         }
         else
         {
+            SoundManager.instance.StopMusic();
 
+            // Reproducir SFX de victoria
+            SoundManager.instance.PlaySound("Victoria");
         }
 
     }
