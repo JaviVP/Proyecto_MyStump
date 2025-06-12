@@ -68,16 +68,16 @@ public abstract class Unit : MonoBehaviour
             PoseTransition("Idle");
         }
        
-
+        /*
         // Aplicar o resetear dithering solo a esta unidad
         //DitherEffect[] ditherEffects = GetComponentsInChildren<DitherEffect>();
         DitheringPeanas[] ditherEffectsInd = GetComponentsInChildren<DitheringPeanas>();
-        /*foreach (var dither in ditherEffects)
+        foreach (var dither in ditherEffects)
         {
             dither.ApplyDitherValue(isOnCooldown ? 1.0f : 2.0f);
            
         }
-        */
+        
         if (GameManager.Instance.DraftActive() != true) {
             foreach (var dither in ditherEffectsInd)
             {
@@ -92,8 +92,9 @@ public abstract class Unit : MonoBehaviour
                 //dither.ApplyDitherValueInd((GameManager.Instance.CurrentTurn != Team || isOnCooldown) ? 2.0f : 0.0f);
 
             }
+        
         }
-     
+     */
        
     }
 
@@ -144,6 +145,22 @@ public abstract class Unit : MonoBehaviour
             GetComponent<Animator>().Play(transitionPose);
         }
 
+    }
+
+    public void ShowIndicator()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void HideIndicator()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void ToggleIndicator()
+    {
+        GameObject indicator = transform.GetChild(0).gameObject;
+        indicator.SetActive(!indicator.activeSelf);
     }
 
 

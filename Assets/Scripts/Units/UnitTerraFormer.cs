@@ -111,7 +111,7 @@ public class UnitTerraFormer : Unit
         if ((Team == Team.Ants && targetTile.state == HexState.Termites) ||
             (Team == Team.Termites && targetTile.state == HexState.Ants))
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
             if (currentPos != targetPosition && GetComponent<Animator>())
             {
                 PoseTransition("Short");

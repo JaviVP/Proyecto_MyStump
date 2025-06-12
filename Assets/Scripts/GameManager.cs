@@ -186,6 +186,12 @@ public class GameManager : MonoBehaviour
 
         /// Probablemente seria mejor hacer un metodo para iniciar DRAFT
         hexGrid.ResetTeamHalfHighlights();
+
+        List<Unit> units = hexGrid.GetAllUnits();
+        foreach (var unit in units)
+        {
+            unit.HideIndicator();
+        }
     }
 
     void Update()
@@ -380,6 +386,12 @@ public class GameManager : MonoBehaviour
                 hexGrid.RemoveAllHighlights();
                 logoController.ProcesarLogosRestantes();
                 //hexGrid.ResetTeamHalfHighlights();
+                List<Unit> units = hexGrid.GetUnitsByTeam(CurrentTurn);
+                foreach (var unit in units)
+                {
+                    if (unit.IsAvailableThisTurn())
+                        unit.ShowIndicator();
+                } 
             }
             return;
 
@@ -551,13 +563,19 @@ public class GameManager : MonoBehaviour
     }
     public void CheckTurnEnd()
     {
+        List<Unit> allUnits = hexGrid.GetUnitsByTeam(CurrentTurn);
+        foreach (var unit in allUnits)
+        {
+            unit.HideIndicator();
+        }
+
 
         // If all units have moved, switch turn
-        Debug.Log("--3---" + movedUnits.Count);
+
 
         if (movedUnits.Count >= 1) // Since each team has 1 units
         {
-            Debug.Log("--4");
+
             movedUnits.Clear();
             CurrentTurn = (CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants;
 
@@ -574,8 +592,15 @@ public class GameManager : MonoBehaviour
             hexGrid.SelectTeam(CurrentTurn);
             hexGrid.CheckDestroyUnity(CurrentTurn);
 
+            List<Unit> units = hexGrid.GetUnitsByTeam(CurrentTurn);
+            foreach (var unit in units)
+            {
+                if (unit.IsAvailableThisTurn())
+                    unit.ShowIndicator();
+            }
 
 
+            /*
             if (CurrentTurn == Team.Ants)
             {
                 hexGrid.SelectTeam(Team.Ants);
@@ -589,6 +614,7 @@ public class GameManager : MonoBehaviour
                 hexGrid.CheckDestroyUnity(Team.Termites);
 
             }
+            */
             /*
             DitheringPeanas[] todas = Resources.FindObjectsOfTypeAll<DitheringPeanas>();
             foreach (DitheringPeanas peana in todas)
@@ -596,6 +622,7 @@ public class GameManager : MonoBehaviour
                 peana.ApplyDitherValueInd(0.0f);
             }
             */
+
             numericCurrentTurn++;
             limitTurns--;
 
