@@ -17,6 +17,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject turnScrollGeneral;
     [SerializeField] private GameObject lockUi;
     [SerializeField] private TextMeshProUGUI turnText;
+    [SerializeField] private string url;
+    [SerializeField] private string url2;
 
 
     private bool touchEnabled = true;
@@ -44,7 +46,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-       
+
         if (!PlayerPrefs.HasKey("Tutorial"))
         {
             PlayerPrefs.SetInt("Tutorial", 0);
@@ -93,6 +95,19 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void AbrirWeb()
+    {
+
+        Application.OpenURL(url);    
+    
+    }
+
+    public void AbrirItchio()
+    {
+
+        Application.OpenURL(url2);
+
+    }
     public void NameSelector()
     {
         SceneManager.LoadScene(6);
