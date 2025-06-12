@@ -18,6 +18,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject lockUi;
     [SerializeField] private TextMeshProUGUI turnText;
     [SerializeField] private string url;
+    [SerializeField] private string url2;
 
 
     private bool touchEnabled = true;
@@ -94,11 +95,18 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public void AbrirWeb ()
+    public void AbrirWeb()
     {
 
         Application.OpenURL(url);    
     
+    }
+
+    public void AbrirItchio()
+    {
+
+        Application.OpenURL(url2);
+
     }
     public void NameSelector()
     {
