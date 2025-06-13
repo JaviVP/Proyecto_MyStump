@@ -419,7 +419,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySound("UnSelectedUnit");
                     }
                     hexGrid.CheckDestroyUnity((CurrentTurn == Team.Ants) ? Team.Termites : Team.Ants);
-
+                    IsItVictoryOrNot();
                     Debug.Log("Primer turno de Panchulina");
                     /*
                     if (currentTurn == Team.Ants)
@@ -628,6 +628,183 @@ public class GameManager : MonoBehaviour
 
             //HazardManager.Instance.LaunchHazard(numericCurrentTurn);
             CheckMoreColorTiles();
+            
+            IsItVictoryOrNot();
+
+
+
+        }
+    }
+
+    private void IsItVictoryOrNot()
+    {
+        UiManager.Instance.UpdateScroll();
+        if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
+        {
+
+            WinCondition();
+            if (limitTurns <= 0 && partidasSeleccionadas != 0)
+            {
+
+                HexState result = CheckMoreColorTiles();
+                if (result == HexState.Neutral)
+                {
+                    winner = "Draw";
+                    UiManager.Instance.UpdateUiTurn(winner.ToString());
+                    DrawImg.SetActive(true);
+                    PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
+                    Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
+                    CheckRounds();
+
+                    if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
+                    if (inputPanel.activeSelf || endPanel.activeSelf)
+                    {
+                        roundsText.SetActive(false);
+                    }
+                    else
+                    {
+                        roundsText.SetActive(true);
+                    }
+                }
+                else
+                {
+                    winner = result.ToString();
+
+                    partidasSeleccionadas--;
+                    PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
+                    AddWins();
+                    Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
+                    CheckRounds();
+                    if (winner == "Ants")
+                    {
+                        AntImg.SetActive(true);
+
+                    }
+                    else if (winner == "Termites")
+                    {
+                        TermImg.SetActive(true);
+
+                    }
+
+
+
+
+                    if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
+                    if (inputPanel.activeSelf || endPanel.activeSelf)
+                    {
+                        roundsText.SetActive(false);
+                    }
+                    else
+                    {
+                        roundsText.SetActive(true);
+                    }
+                }
+
+                //FIN DE PARTIDA
+                //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+
+            }
+            else
+            {
+
+                HexState result = CheckMoreColorTiles();
+                Debug.Log($"Turn switched to {CurrentTurn}");
+                //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
+
+            }
+
+        }
+        else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
+        {
+            if (gameOver) return; // Stop if already over
+
+            // ✅ FIRST: Check if base has been destroyed (Term or Ant count = 1)
+            if (PlayerPrefs.GetInt("AntCount") == 1)
+            {
+                winner = "Termites";
+                TermImg.SetActive(true);
+                SoundManager.instance.StopMusic();
+
+                // Reproducir SFX de victoria
+                SoundManager.instance.PlaySound("Victoria");
+
+            }
+            else if (PlayerPrefs.GetInt("TermCount") == 1)
+            {
+                winner = "Ants";
+                AntImg.SetActive(true);
+                SoundManager.instance.StopMusic();
+
+                // Reproducir SFX de victoria
+                SoundManager.instance.PlaySound("Victoria");
+            }
+
+            // ✅ If a winner was found through base kill, stop here
+            if (!string.IsNullOrEmpty(winner))
+            {
+                inputPanel.SetActive(true);
+
+                endPanel.SetActive(true);
+                UiManager.Instance.TouchEnabled = false;
+                gameOver = true;
+                return;
+            }
+
+            // ✅ SECOND: Check turn limit condition + tile control
+            if (limitTurns <= 0)
+            {
+                HexState result = CheckMoreColorTiles();
+
+                if (result == HexState.Neutral)
+                {
+                    winner = "Draw";
+                    UiManager.Instance.UpdateUiTurn("Draw");
+                    DrawImg.SetActive(true);
+                    SoundManager.instance.StopMusic();
+
+                    // Reproducir SFX de victoria
+                    SoundManager.instance.PlaySound("Victoria");
+                }
+                else
+                {
+                    winner = result.ToString();
+                    if (winner == "Ants")
+                    {
+                        AntImg.SetActive(true);
+                        SoundManager.instance.StopMusic();
+
+                        // Reproducir SFX de victoria
+                        SoundManager.instance.PlaySound("Victoria");
+                    }
+                    else if (winner == "Termites")
+                    {
+                        TermImg.SetActive(true);
+                        SoundManager.instance.StopMusic();
+
+                        // Reproducir SFX de victoria
+                        SoundManager.instance.PlaySound("Victoria");
+                    }
+
+                    inputPanel.SetActive(true);
+
+                }
+
+                endPanel.SetActive(true);
+                UiManager.Instance.TouchEnabled = false;
+                gameOver = true;
+            }
+            else
+            {
+                // Game continues – just update info or debug
+                HexState result = CheckMoreColorTiles();
+                Debug.Log($"Turn switched to {CurrentTurn}");
+                // Optional: Update turn info here
+            }
+        }
+
+        if (!gameOver)
+        {
             HazardManager.Instance.LaunchHazardUI();
 
             hazardDurationLeft--;
@@ -635,173 +812,6 @@ public class GameManager : MonoBehaviour
             {
                 HazardManager.Instance.ResetTemporaryTiles();
             }
-
-
-            UiManager.Instance.UpdateScroll();
-            if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
-            {
-
-                WinCondition();
-                if (limitTurns <= 0 && partidasSeleccionadas != 0)
-                {
-
-                    HexState result = CheckMoreColorTiles();
-                    if (result == HexState.Neutral)
-                    {
-                        winner = "Draw";
-                        UiManager.Instance.UpdateUiTurn(winner.ToString());
-                        DrawImg.SetActive(true);
-                        PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
-                        Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
-                        CheckRounds();
-
-                        if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
-                        if (inputPanel.activeSelf || endPanel.activeSelf)
-                        {
-                            roundsText.SetActive(false);
-                        }
-                        else
-                        {
-                            roundsText.SetActive(true);
-                        }
-                    }
-                    else
-                    {
-                        winner = result.ToString();
-
-                        partidasSeleccionadas--;
-                        PlayerPrefs.SetInt("NumeroRondasCampeonato", partidasSeleccionadas);
-                        AddWins();
-                        Debug.Log(PlayerPrefs.GetInt("NumeroRondasCampeonato"));
-                        CheckRounds();
-                        if (winner == "Ants")
-                        {
-                            AntImg.SetActive(true); 
-                          
-                        }
-                        else if (winner == "Termites")
-                        {
-                            TermImg.SetActive(true);
-                       
-                        }
-                         
-                      
-                        
-
-                        if (gameOver == false) { endPanel.SetActive(true); } else if (gameOver == true) { endPanel.SetActive(false); }
-                        if (inputPanel.activeSelf || endPanel.activeSelf)
-                        {
-                            roundsText.SetActive(false);
-                        }
-                        else
-                        {
-                            roundsText.SetActive(true);
-                        }
-                    }
-
-                    //FIN DE PARTIDA
-                    //UiManager.Instance.UpdateUiTurn("Fin de partida\nGanador:" + winner.ToString() + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
-
-                }
-                else
-                {
-
-                    HexState result = CheckMoreColorTiles();
-                    Debug.Log($"Turn switched to {CurrentTurn}");
-                    //UiManager.Instance.UpdateUiTurn("Current Turn: " + currentTurn + "\nLimitTurns:" + limitTurns + "\nAnts Tiles: " + numberAntsTiles + "\nTermites Tiles:" + numberTermitesTiles + "\nTotal Tiles: " + totalTiles);
-
-                }
-
-            }
-            else if (PlayerPrefs.GetInt("ModoCampeonato") == 0)
-            {
-                if (gameOver) return; // Stop if already over
-
-                // ✅ FIRST: Check if base has been destroyed (Term or Ant count = 1)
-                if (PlayerPrefs.GetInt("AntCount") == 1)
-                {
-                    winner = "Termites";
-                    TermImg.SetActive(true);
-                    SoundManager.instance.StopMusic();
-
-                    // Reproducir SFX de victoria
-                    SoundManager.instance.PlaySound("Victoria");
-
-                }
-                else if (PlayerPrefs.GetInt("TermCount") == 1)
-                {
-                    winner = "Ants";
-                    AntImg.SetActive(true);
-                    SoundManager.instance.StopMusic();
-
-                    // Reproducir SFX de victoria
-                    SoundManager.instance.PlaySound("Victoria");
-                }
-
-                // ✅ If a winner was found through base kill, stop here
-                if (!string.IsNullOrEmpty(winner))
-                {
-                    inputPanel.SetActive(true);
-
-                    endPanel.SetActive(true);
-                    UiManager.Instance.TouchEnabled = false;
-                    gameOver = true;
-                    return;
-                }
-
-                // ✅ SECOND: Check turn limit condition + tile control
-                if (limitTurns <= 0)
-                {
-                    HexState result = CheckMoreColorTiles();
-
-                    if (result == HexState.Neutral)
-                    {
-                        winner = "Draw";
-                        UiManager.Instance.UpdateUiTurn("Draw");
-                        DrawImg.SetActive(true);
-                        SoundManager.instance.StopMusic();
-
-                        // Reproducir SFX de victoria
-                        SoundManager.instance.PlaySound("Victoria");
-                    }
-                    else
-                    {
-                        winner = result.ToString();
-                        if (winner == "Ants")
-                        {
-                            AntImg.SetActive(true);
-                            SoundManager.instance.StopMusic();
-
-                            // Reproducir SFX de victoria
-                            SoundManager.instance.PlaySound("Victoria");
-                        }
-                        else if (winner == "Termites")
-                        {
-                            TermImg.SetActive(true);
-                            SoundManager.instance.StopMusic();
-
-                            // Reproducir SFX de victoria
-                            SoundManager.instance.PlaySound("Victoria");
-                        }
-
-                        inputPanel.SetActive(true);
-
-                    }
-
-                    endPanel.SetActive(true);
-                    UiManager.Instance.TouchEnabled = false;
-                    gameOver = true;
-                }
-                else
-                {
-                    // Game continues – just update info or debug
-                    HexState result = CheckMoreColorTiles();
-                    Debug.Log($"Turn switched to {CurrentTurn}");
-                    // Optional: Update turn info here
-                }
-            }
-
         }
     }
 
