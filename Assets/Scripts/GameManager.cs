@@ -631,7 +631,16 @@ public class GameManager : MonoBehaviour
             
             IsItVictoryOrNot();
 
+            if (!gameOver)
+            {
+                HazardManager.Instance.LaunchHazardUI();
 
+                hazardDurationLeft--;
+                if (hazardDurationLeft < 0)
+                {
+                    HazardManager.Instance.ResetTemporaryTiles();
+                }
+            }
 
         }
     }
@@ -803,16 +812,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (!gameOver)
-        {
-            HazardManager.Instance.LaunchHazardUI();
-
-            hazardDurationLeft--;
-            if (hazardDurationLeft < 0)
-            {
-                HazardManager.Instance.ResetTemporaryTiles();
-            }
-        }
+        
     }
 
     public bool AnyUnitCanMove(Team team)
