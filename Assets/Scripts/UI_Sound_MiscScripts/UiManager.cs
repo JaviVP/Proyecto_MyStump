@@ -46,7 +46,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-
+        
         if (!PlayerPrefs.HasKey("Tutorial"))
         {
             PlayerPrefs.SetInt("Tutorial", 0);
@@ -115,6 +115,7 @@ public class UiManager : MonoBehaviour
     public void ChampionshipButton()
     {
         PlayerPrefs.SetInt("ModoCampeonato", 1);
+        PlayerPrefs.SetInt("EventsOn", 1);
         PlayerPrefs.SetInt($"RondasGanadas_{player1}", 0);
         PlayerPrefs.SetInt($"RondasGanadas_{player2}", 0);
         PlayerPrefs.SetInt($"ActualAntTiles_{player1}", 0);

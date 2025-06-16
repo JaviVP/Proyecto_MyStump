@@ -174,7 +174,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173037515698176
-    m_Localized: "Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas dominadas."
+    m_Localized: "Varias casillas ser\xE1n del jugador con menos casillas dominadas."
     m_Metadata:
       m_Items: []
   - m_Id: 39173031912108032
@@ -186,7 +186,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173045191274496
-    m_Localized: Hasta 1/2/4 casillas quedan bloqueadas permanentemente.
+    m_Localized: Varias casillas quedan bloqueadas permanentemente.
     m_Metadata:
       m_Items: []
   - m_Id: 39173045967220736
@@ -199,7 +199,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173047422644224
-    m_Localized: Hasta 2/4/6 casillas son modificadas, afectando a ambos jugadores.
+    m_Localized: Varias casillas son modificadas, afectando a ambos jugadores.
     m_Metadata:
       m_Items: []
   - m_Id: 39173048206979072
@@ -212,7 +212,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173049670791168
-    m_Localized: Hasta 3/5/7 casillas quedan bloqueadas por 2 turnos.
+    m_Localized: Varias casillas quedan bloqueadas por 2 turnos.
     m_Metadata:
       m_Items: []
   - m_Id: 39173050429960192
@@ -225,7 +225,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173052631969792
-    m_Localized: "Hasta 2/4/6 casillas ser\xE1n del jugador con menos casillas dominadas."
+    m_Localized: "Varias casillas ser\xE1n del jugador con menos casillas dominadas."
     m_Metadata:
       m_Items: []
   - m_Id: 39173053382750208
@@ -238,7 +238,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173054888505344
-    m_Localized: "Hasta 1/2/4 casillas en el territorio con m\xE1s casillas dominadas
+    m_Localized: "Varias casillas en el territorio con m\xE1s casillas dominadas
       quedan bloqueadas permanentemente."
     m_Metadata:
       m_Items: []
@@ -251,7 +251,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173074232635392
-    m_Localized: Se borran hasta 4/6/8 casillas dominadas.
+    m_Localized: Varias casillas dominadas.
     m_Metadata:
       m_Items: []
   - m_Id: 39173076652748800
@@ -263,7 +263,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173082436694016
-    m_Localized: Hasta 2/3/5 casillas quedan bloqueadas por 2 turnos.
+    m_Localized: Varias casillas quedan bloqueadas por 2 turnos.
     m_Metadata:
       m_Items: []
   - m_Id: 39173084621926400
@@ -276,7 +276,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173088807841792
-    m_Localized: Hasta 2/3/5 casillas quedan bloqueadas permanentemente.
+    m_Localized: Varias casillas quedan bloqueadas permanentemente.
     m_Metadata:
       m_Items: []
   - m_Id: 39173091408310272

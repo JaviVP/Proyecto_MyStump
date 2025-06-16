@@ -173,8 +173,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173037515698176
-    m_Localized: Up to 2/4/6 tiles will be claimed by the player with fewer controlled
-      tiles.
+    m_Localized: Some tiles will be claimed by the player with fewer controlled tiles.
     m_Metadata:
       m_Items: []
   - m_Id: 39173031912108032
@@ -186,7 +185,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173045191274496
-    m_Localized: Up to 1/2/4 tiles are permanently blocked.
+    m_Localized: Some tiles are permanently blocked.
     m_Metadata:
       m_Items: []
   - m_Id: 39173045967220736
@@ -198,7 +197,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173047422644224
-    m_Localized: Up to 2/4/6 tiles are altered, affecting both players.
+    m_Localized: Some tiles are altered, affecting both players.
     m_Metadata:
       m_Items: []
   - m_Id: 39173048206979072
@@ -211,7 +210,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173049670791168
-    m_Localized: Up to 3/5/7 tiles are blocked for 2 turns.
+    m_Localized: Some tiles are blocked for 2 turns.
     m_Metadata:
       m_Items: []
   - m_Id: 39173050429960192
@@ -223,8 +222,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173052631969792
-    m_Localized: Up to 2/4/6 tiles will be claimed by the player with fewer controlled
-      tiles.
+    m_Localized: Some tiles will be claimed by the player with fewer controlled tiles.
     m_Metadata:
       m_Items: []
   - m_Id: 39173053382750208
@@ -237,7 +235,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173054888505344
-    m_Localized: Up to 1/2/4 tiles in the leading territory are permanently blocked.
+    m_Localized: Some tiles in the leading territory are permanently blocked.
     m_Metadata:
       m_Items: []
   - m_Id: 39173063268724736
@@ -249,7 +247,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173074232635392
-    m_Localized: Up to 4/6/8 controlled tiles are wiped.
+    m_Localized: Some controlled tiles are wiped.
     m_Metadata:
       m_Items: []
   - m_Id: 39173076652748800
@@ -261,7 +259,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173082436694016
-    m_Localized: Up to 2/3/5 tiles are blocked for 2 turns.
+    m_Localized: Some tiles are blocked for 2 turns.
     m_Metadata:
       m_Items: []
   - m_Id: 39173084621926400
@@ -273,7 +271,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 39173088807841792
-    m_Localized: Up to 2/3/5 tiles are permanently blocked.
+    m_Localized: Some tiles are permanently blocked.
     m_Metadata:
       m_Items: []
   - m_Id: 39173091408310272

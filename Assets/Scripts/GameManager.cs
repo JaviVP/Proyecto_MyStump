@@ -7,6 +7,7 @@ using System.Linq;
 using NUnit.Framework;
 using TMPro;
 using System.Collections;
+using static UnityEngine.UI.Toggle;
 
 public class GameManager : MonoBehaviour
 {
@@ -114,8 +115,11 @@ public class GameManager : MonoBehaviour
 
     private bool selected = false;
     HexTile previousClickTile;
+
+    public bool useHazards;
     public int hazardDurationLeft = 0;
 
+    private int toggleEvents;
     /// 
     /// CAMBIAR ESTO LO DE ABAJO. NO ES LA MEJOT MANERA
     /// 
@@ -152,6 +156,9 @@ public class GameManager : MonoBehaviour
     private bool disableTouchInputDuringTransition = false;
     void Start()
     {
+        toggleEvents = PlayerPrefs.GetInt("EventsOn");
+
+
         draftUnitIndex = 0;
         isDraftPhase = true;
         totalPartidasCampeonato = PlayerPrefs.GetInt("NumeroPartidasCampeonato");
@@ -539,6 +546,8 @@ public class GameManager : MonoBehaviour
     }
 
 
+    
+
 
 
     private HexState CheckMoreColorTiles()
@@ -631,7 +640,7 @@ public class GameManager : MonoBehaviour
             
             IsItVictoryOrNot();
 
-            if (!gameOver)
+            if (!gameOver && toggleEvents == 1)
             {
                 HazardManager.Instance.LaunchHazardUI();
 
@@ -647,10 +656,10 @@ public class GameManager : MonoBehaviour
 
     private void IsItVictoryOrNot()
     {
+        
         UiManager.Instance.UpdateScroll();
         if (PlayerPrefs.GetInt("ModoCampeonato") == 1)
         {
-
             WinCondition();
             if (limitTurns <= 0 && partidasSeleccionadas != 0)
             {
