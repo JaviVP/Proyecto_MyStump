@@ -47,6 +47,7 @@ MonoBehaviour:
   tileChangeVFX: {fileID: 6765502455025489998, guid: e8fa0c7ef823be74ba83a4b5b0e89033, type: 3}
   ScreenVFX: {fileID: 0}
   duration: 0
+  hazardSFXName: Petroleo
   effect: 2
   area: 3
   whoIsAffected: 0

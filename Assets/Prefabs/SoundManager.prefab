@@ -48,7 +48,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -145,7 +145,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -355,6 +355,34 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e104d15d417848c4fafa7b52aa056921, type: 3}
   - name: Victoria
     clip: {fileID: 8300000, guid: f65fded8f0aca9e47a80d7334c4dd719, type: 3}
+  - name: IntroHorm
+    clip: {fileID: 8300000, guid: 15ed689d451cacb4a80a5fd6323f4b9f, type: 3}
+  - name: IntroTerm
+    clip: {fileID: 8300000, guid: 4fff72985fbab034db0c022bc0930f5e, type: 3}
+  - name: PushUnit
+    clip: {fileID: 8300000, guid: 12609ea2644e04d42b917a72393e2b92, type: 3}
+  - name: EndHitUnit
+    clip: {fileID: 8300000, guid: f69cafe3fc8f650419fc5b5779f94095, type: 3}
+  - name: Flame
+    clip: {fileID: 8300000, guid: a56b7e2aff799b245be8bc003b1b3000, type: 3}
+  - name: WaterCanon
+    clip: {fileID: 8300000, guid: 9ee6430d89b39284abee8b4f572178b6, type: 3}
+  - name: Petroleo
+    clip: {fileID: 8300000, guid: 3e999d31bc033894b90ffaa2cad0dc7f, type: 3}
+  - name: Ola
+    clip: {fileID: 8300000, guid: 2aa7a0282a12ed84d99022eb0aa83df3, type: 3}
+  - name: Expansion
+    clip: {fileID: 8300000, guid: d675df985d72a0649a86d02dc16e9df6, type: 3}
+  - name: Fuego
+    clip: {fileID: 8300000, guid: 791474420302e3e4db7b8aa6931edc8b, type: 3}
+  - name: Tormenta
+    clip: {fileID: 8300000, guid: 8ae3d1f68f3b9c940a7af3b9dba40f5d, type: 3}
+  - name: Viento
+    clip: {fileID: 8300000, guid: a163687910b0bea4e86d2f0174cd39d8, type: 3}
+  - name: Rio
+    clip: {fileID: 8300000, guid: dc313124fd1e6f24189493c35f694143, type: 3}
+  - name: Combate
+    clip: {fileID: 8300000, guid: ee2f52c3668455849a417da69edaf4fa, type: 3}
   soundCategories:
   - name: Ambient
     clips:

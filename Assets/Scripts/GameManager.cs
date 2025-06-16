@@ -358,7 +358,7 @@ public class GameManager : MonoBehaviour
                     hexGrid.ResetTeamHalfHighlights();
                     logoController.ColocarPieza();
                     //draftUnitIndex++;
-                    SoundManager.instance.PlaySound("PlaceUnit");
+                    SoundManager.instance.PlaySound("IntroTerm");
 
                     //return;
                 }
@@ -380,7 +380,7 @@ public class GameManager : MonoBehaviour
                     hexGrid.ResetTeamHalfHighlights();
                     logoController.ColocarPieza();
                     draftUnitIndex++;
-                    SoundManager.instance.PlaySound("PlaceUnit");
+                    SoundManager.instance.PlaySound("IntroHorm");
 
                     //return;
                 }

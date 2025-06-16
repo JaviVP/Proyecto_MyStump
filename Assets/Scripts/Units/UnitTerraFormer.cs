@@ -115,6 +115,14 @@ public class UnitTerraFormer : Unit
             if (currentPos != targetPosition && GetComponent<Animator>())
             {
                 PoseTransition("Short");
+                if (Team == Team.Ants)
+                {
+                    SoundManager.instance.PlaySound("Flame");
+                }
+                else if (Team == Team.Termites)
+                {
+                    SoundManager.instance.PlaySound("WaterCanon");
+                }
             }
         
        

@@ -47,6 +47,7 @@ MonoBehaviour:
   tileChangeVFX: {fileID: 0}
   ScreenVFX: {fileID: 6765502455025489998, guid: ee3f8e07a795d8043b4b72966ff0165e, type: 3}
   duration: 0
+  hazardSFXName: Ola
   effect: 2
   area: 3
   whoIsAffected: 1
