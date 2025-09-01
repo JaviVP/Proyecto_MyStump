@@ -3327,6 +3327,7 @@ GameObject:
   - component: {fileID: 2043520952}
   - component: {fileID: 2043520955}
   - component: {fileID: 2043520956}
+  - component: {fileID: 2043520957}
   m_Layer: 0
   m_Name: Aumulador
   m_TagString: Untagged
@@ -3413,13 +3414,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043520949}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ea1559addb30ac428dcd2c070f6d18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   btnQuickMatch: {fileID: 655443178}
   waitingPanel: {fileID: 781774427}
+--- !u!114 &2043520957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043520949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5126631996a0440a714804baad8277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHost: 1
+  joinCodeInput: 
+  gameSceneName: OnlineScene
 --- !u!1 &2043529416
 GameObject:
   m_ObjectHideFlags: 0
