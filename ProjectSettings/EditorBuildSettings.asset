@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 4ac7a8b2b34767748b82368ebb267928
+  - enabled: 1
+    path: Assets/Scenes/OnlineScene.unity
+    guid: 16d450fa88d0e3a4f967f7f7edb0bc37
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 25bc867a0939e0143b67190a13ea99f9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
